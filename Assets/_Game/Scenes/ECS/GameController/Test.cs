@@ -1,9 +1,9 @@
-﻿using CoreServices;
+﻿//using CoreServices;
 
 namespace _Game.Scenes.ECS.GameController
 {
     public class Test
     {
-        private MyLogger logger = new MyLogger();
+        //private MyLogger logger = new MyLogger();
     }
 }
