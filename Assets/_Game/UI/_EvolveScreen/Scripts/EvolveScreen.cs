@@ -1,0 +1,125 @@
+using _Game.Core._FeatureUnlockSystem.Scripts;
+using _Game.Core.Configs.Repositories;
+using _Game.Core.Services._Camera;
+using _Game.Core.UserState._State;
+using _Game.UI._Shop._MiniShop.Scripts;
+using _Game.UI._Shop.Scripts._AmountView;
+using _Game.UI.Common.Scripts;
+using _Game.Utils.Extensions;
+using Sirenix.OdinInspector;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace _Game.UI._EvolveScreen.Scripts
+{
+    public class EvolveScreen : MonoBehaviour
+    {
+        [SerializeField, Required] private Canvas _canvas;
+        [SerializeField, Required] private TMP_Text _timelineLabel;
+        [SerializeField, Required] private Image _currentAgeImage;
+        [SerializeField, Required] private TMP_Text _currentAgeName;
+        [SerializeField, Required] private Image _nextAgeImage;
+        [SerializeField, Required] private TMP_Text _nextAgeName;
+        [SerializeField, Required] private TransactionButton _evolveButton;
+        [SerializeField, Required] private Button _timelineInfoButton;
+        [SerializeField, Required] private AmountView _rewardView;
+        
+        private IEvolveScreenPresenter _presenter;
+        private IMiniShopProvider _miniShopProvider;
+        private IFeatureUnlockSystem _featureUnlockSystem;
+        private IConfigRepository _config;
+
+        public void Construct(
+            IWorldCameraService cameraService,
+            IEvolveScreenPresenter evolveScreenPresenter,
+            IConfigRepository config,
+            IFeatureUnlockSystem featureUnlockSystem)
+        {
+            _featureUnlockSystem = featureUnlockSystem;
+            _config = config;
+            _canvas.worldCamera = cameraService.UICameraOverlay;
+            _presenter = evolveScreenPresenter;
+            _canvas.enabled = false;
+        }
+
+        public void Show()
+        {
+            Unsubscribe();
+            Subscribe();
+            _presenter.OnScreenOpen();
+            OnStateChanged();
+            
+            _canvas.enabled = true;
+        }
+
+        private void OnStateChanged()
+        {
+            _timelineLabel.text = _presenter.GetTimelineNumber();
+            
+            _currentAgeImage.sprite = _presenter.GetCurrentAgeIcon();
+            _nextAgeImage.sprite = _presenter.GetNextAgeIcon();
+
+            _currentAgeName.text = _presenter.GetCurrentAgeName();
+            _nextAgeName.text = _presenter.GetNextAgeName();
+
+            if (_featureUnlockSystem.IsFeatureUnlocked(Feature.Skills))
+            {
+                _rewardView.SetActive(true);
+                _rewardView.SetIcon(_config.IconConfigRepository.GetCurrencyIconFor(CurrencyType.SkillPotion));
+                _rewardView.SetAmount(_config.SkillConfigRepository.RewardPerEvolve.Amount.ToCompactFormat());
+            }
+            else
+            {
+                _rewardView.SetActive(false);
+            }
+
+            OnButtonStateChanged();
+        }
+        
+        private void Subscribe()
+        {
+            _evolveButton.ButtonClicked += _presenter.OnEvolveClicked;
+            _evolveButton.InactiveClicked += _presenter.OnInactiveEvolveClicked;
+            _presenter.StateChanged += OnStateChanged;
+            _presenter.ButtonStateChanged += OnButtonStateChanged;
+            _timelineInfoButton.onClick.AddListener(_presenter.OnInfoClicked);
+        }
+
+        private void OnButtonStateChanged()
+        {
+            _evolveButton.SetPrice(_presenter.GetEvolutionPrice().ToCompactFormat());    
+            _evolveButton.SetCurrencyIcon(_presenter.GetCurrencyIcon());
+            _evolveButton.SetMoneyPanelActive(_presenter.GetEvolutionPrice() > 0);
+            _evolveButton.SetInteractable(_presenter.CanEvolve());
+        }
+
+        private void Unsubscribe()
+        {
+            _evolveButton.ButtonClicked -= _presenter.OnEvolveClicked;
+            _evolveButton.InactiveClicked -= _presenter.OnInactiveEvolveClicked;
+            _presenter.StateChanged -= OnStateChanged;
+            _presenter.ButtonStateChanged -= OnButtonStateChanged;
+            _timelineInfoButton.onClick.RemoveListener(_presenter.OnInfoClicked);
+        }
+
+        public void Hide()
+        {
+            Unsubscribe();
+            _canvas.enabled = false;
+            _presenter.OnScreenClosed();
+        }
+        
+        public void Dispose()
+        {
+            Unsubscribe();
+            _presenter.OnScreenDisposed();
+        }
+
+        public void SetActive(bool isActive)
+        {
+            gameObject.SetActive(isActive);
+            _presenter.OnScreenActiveChanged(isActive);
+        }
+    }
+}

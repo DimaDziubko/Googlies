@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799d49cbf6144a05922d5451b741e486, type: 3}
+  m_Name: 10_Napoleonic Wars age
+  m_EditorClassIdentifier: 
+  Id: 10
+  Price: 1000000
+  GemsPerAge: 0
+  Economy:
+    Id: 3
+    CoinPerBattle: 0
+    InitialFoodAmount: 5
+    FoodProduction:
+      Id: 0
+      Price: 8
+      PriceExponential:
+        _id: 0
+        A: 8.0472
+        B: 0
+        C: 0.1653
+        D: -7.645
+      Value: 0.18
+      ValueStep: 0.02
+    BaseHealth:
+      Id: 0
+      Price: 30
+      PriceExponential:
+        _id: 1
+        A: 32.007225
+        B: 0
+        C: 0.17674902
+        D: -32.016148
+      Value: 2
+      ValueStep: 1
+  WarriorsId: 1c0000001d0000001e000000
+  Name: Napoleonic Wars age
+  AgeIconKey: AgeIcon_2[3]
+  AgeIconAtlas:
+    m_AssetGUID: 1c69a9dda87ac3d4dac03fabf268aac5
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  AgeIconName: 3
+  Description: Napoleon led disciplined armies across Europe, where muskets, cannons,
+    and cavalry shaped chaotic wars and shifting empires.
+  DateRange: 1799 - 1815
+  BasePrefab:
+    m_AssetGUID: de12fc14e3655dd459ed751cd2306806
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
+  Level: 4
+  Order: 2
+  FBConfigId: '-'

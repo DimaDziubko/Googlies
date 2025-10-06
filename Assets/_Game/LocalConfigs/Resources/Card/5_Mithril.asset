@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54599f83d19e4a10a94556b3b0914e85, type: 3}
+  m_Name: 5_Mithril
+  m_EditorClassIdentifier: 
+  Id: 5
+  Type: 2
+  ColorIdentifier: {r: 0.6509804, g: 0.19607843, b: 0.9529412, a: 1}
+  Icon: {fileID: -701894328, guid: 24e70c1703b0d674a900c8fe4751e01d, type: 3}
+  Name: Mithril
+  Derscription: A rare metal, shining like silver, light as a feather, yet stronger
+    than steel. Used for legendary weapons and armor.
+  MaterialIdentifier: {fileID: 2100000, guid: 541aada8e09bbf4439601315cee03932, type: 2}
+  Boosts:
+  - Type: 2
+    Name: All Unit Health
+    Exponential:
+      _id: 7
+      A: 1
+      B: 0.0255
+      C: 0.1397
+      D: 0
+  - Type: 4
+    Name: Base Health
+    Exponential:
+      _id: 8
+      A: 1
+      B: 0.8053
+      C: 0.2994
+      D: 0

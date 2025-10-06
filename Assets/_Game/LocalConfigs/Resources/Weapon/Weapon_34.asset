@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a0356522f3458ca0b685977ee5a96b, type: 3}
+  m_Name: Weapon_34
+  m_EditorClassIdentifier: 
+  Id: 34
+  WeaponType: 4
+  ProjectileKey: '-'
+  IsMuzzle: 0
+  MuzzleKey: '-'
+  IsExplosion: 0
+  ProjectileExplosionKey: '-'
+  Damage: 162
+  ProjectileSpeed: 0
+  TrajectoryWarpFactor: 0
+  SplashRadius: 0
+  SplashDamageRatio: 0
+  ProjectileMoveType: 0
+  ProjectileImpactType: 0
+  AttackSfx:
+    AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
+    Clip: {fileID: 8300000, guid: f272c51109e9c0741a636d12b8f8159c, type: 3}
+    Loop: 0
+    PlayOnAwake: 0
+    FrequentSound: 1
+    Mute: 0
+    BypassEffects: 0
+    BypassListenerEffects: 0
+    BypassReverbZones: 0
+    Priority: 128
+    Volume: 1
+    Pitch: 1
+    PanStereo: 0
+    SpatialBlend: 0
+    ReverbZoneMix: 1
+    DopplerLevel: 1
+    Spread: 0
+    MinDistance: 1
+    MaxDistance: 500
+    IgnoreListenerVolume: 0
+    IgnoreListenerPause: 0
+    RolloffMode: 0
+  ProjectileSfx:
+    AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
+    Clip: {fileID: 0}
+    Loop: 0
+    PlayOnAwake: 0
+    FrequentSound: 0
+    Mute: 0
+    BypassEffects: 0
+    BypassListenerEffects: 0
+    BypassReverbZones: 0
+    Priority: 128
+    Volume: 1
+    Pitch: 1
+    PanStereo: 0
+    SpatialBlend: 0
+    ReverbZoneMix: 1
+    DopplerLevel: 1
+    Spread: 0
+    MinDistance: 1
+    MaxDistance: 500
+    IgnoreListenerVolume: 0
+    IgnoreListenerPause: 0
+    RolloffMode: 0
+  PlayerDamageMultiplier: 1
+  EnemyDamageMultiplier: 1
+  FBConfigId: '-'
+  IsWeaponEnableSfx: 1
+  WeaponEnableSfx:
+    AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
+    Clip: {fileID: 8300000, guid: 79c12b71865151b4bb1fa99538149437, type: 3}
+    Loop: 0
+    PlayOnAwake: 0
+    FrequentSound: 1
+    Mute: 0
+    BypassEffects: 0
+    BypassListenerEffects: 0
+    BypassReverbZones: 0
+    Priority: 128
+    Volume: 1
+    Pitch: 1
+    PanStereo: 0
+    SpatialBlend: 0
+    ReverbZoneMix: 1
+    DopplerLevel: 1
+    Spread: 0
+    MinDistance: 1
+    MaxDistance: 500
+    IgnoreListenerVolume: 0
+    IgnoreListenerPause: 0
+    RolloffMode: 0
+  IsSpecialAttackSfx: 0
+  SpecialAttackSfx:
+    AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
+    Clip: {fileID: 0}
+    Loop: 0
+    PlayOnAwake: 0
+    FrequentSound: 0
+    Mute: 0
+    BypassEffects: 0
+    BypassListenerEffects: 0
+    BypassReverbZones: 0
+    Priority: 128
+    Volume: 1
+    Pitch: 1
+    PanStereo: 0
+    SpatialBlend: 0
+    ReverbZoneMix: 1
+    DopplerLevel: 1
+    Spread: 0
+    MinDistance: 1
+    MaxDistance: 500
+    IgnoreListenerVolume: 0
+    IgnoreListenerPause: 0
+    RolloffMode: 0
+  AllyLaserColors:
+  - {r: 0.36733186, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.937409, b: 0, a: 1}
+  - {r: 0, g: 0.95253086, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.83348227, a: 1}
+  - {r: 1, g: 0, b: 0.93226576, a: 1}
+  HostileLaserColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.5820619, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.2930913, a: 1}
+  - {r: 0.66946316, g: 0, b: 1, a: 1}

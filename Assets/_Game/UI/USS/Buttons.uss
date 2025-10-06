@@ -1,0 +1,90 @@
+.activate-btn {
+    padding-bottom: 55px;
+    background-image: url("project://database/Assets/_Game/Bundles/Shared/UIElements/1x/UI.png?fileID=-1701574657&guid=fd622819c05dbbe42883f3a9124accae&type=3#activate_btn_normal");
+    -unity-background-image-tint-color: rgb(0, 168, 255);
+}
+
+.activate-btn:active {
+    padding-bottom: 20px;
+    background-image: url("project://database/Assets/_Game/Bundles/Shared/UIElements/1x/UI.png?fileID=-1531307880&guid=fd622819c05dbbe42883f3a9124accae&type=3#activate_btn_pressed");
+    -unity-background-image-tint-color: rgb(0, 168, 255);
+}
+
+.activate-btn:inactive {
+    padding-bottom: 55px;
+    background-image: url("project://database/Assets/_Game/Bundles/Shared/UIElements/1x/UI.png?fileID=-1701574657&guid=fd622819c05dbbe42883f3a9124accae&type=3#activate_btn_normal");
+    -unity-background-image-tint-color: rgb(0, 168, 255);
+}
+
+.activate-btn:disabled {
+    padding-bottom: 55px;
+    opacity: 100%;
+    background-image: url("project://database/Assets/_Game/Bundles/Shared/UIElements/1x/UI.png?fileID=-1701574657&guid=fd622819c05dbbe42883f3a9124accae&type=3#activate_btn_normal");
+    -unity-background-image-tint-color: rgb(64, 100, 124);
+}
+
+.exit-btn {
+    padding-bottom: 20px;
+    background-image: url("project://database/Assets/_Game/Bundles/Shared/UIElements/1x/UI.png?fileID=-1248908789&guid=fd622819c05dbbe42883f3a9124accae&type=3#Common_btn_normal");
+    -unity-background-image-tint-color: rgb(212, 23, 23);
+}
+
+.exit-btn:active {
+    padding-bottom: 1px;
+    background-image: url("project://database/Assets/_Game/Bundles/Shared/UIElements/1x/UI.png?fileID=-633210460&guid=fd622819c05dbbe42883f3a9124accae&type=3#Common_btn_pressed");
+    -unity-background-image-tint-color: rgb(212, 23, 23);
+}
+
+.exit-btn:inactive {
+    padding-bottom: 20px;
+    background-image: url("project://database/Assets/_Game/Bundles/Shared/UIElements/1x/UI.png?fileID=-1248908789&guid=fd622819c05dbbe42883f3a9124accae&type=3#Common_btn_normal");
+    -unity-background-image-tint-color: rgb(212, 23, 23);
+}
+
+.common-purchase-btn {
+    padding-bottom: 20px;
+    background-image: url("project://database/Assets/_Game/Bundles/Shared/UIElements/1x/UI.png?fileID=-1248908789&guid=fd622819c05dbbe42883f3a9124accae&type=3#Common_btn_normal");
+    -unity-background-image-tint-color: rgb(0, 168, 255);
+}
+
+.common-purchase-btn:active {
+    padding-bottom: 1px;
+    background-image: url("project://database/Assets/_Game/Bundles/Shared/UIElements/1x/UI.png?fileID=-633210460&guid=fd622819c05dbbe42883f3a9124accae&type=3#Common_btn_pressed");
+    -unity-background-image-tint-color: rgb(0, 168, 255);
+}
+
+.common-purchase-btn:inactive {
+    padding-bottom: 20px;
+    background-image: url("project://database/Assets/_Game/Bundles/Shared/UIElements/1x/UI.png?fileID=-1248908789&guid=fd622819c05dbbe42883f3a9124accae&type=3#Common_btn_normal");
+    -unity-background-image-tint-color: rgb(0, 168, 255);
+}
+
+.common-purchase-btn:disabled {
+    padding-bottom: 20px;
+    opacity: 100%;
+    background-image: url("project://database/Assets/_Game/Bundles/Shared/UIElements/1x/UI.png?fileID=-1248908789&guid=fd622819c05dbbe42883f3a9124accae&type=3#Common_btn_normal");
+    -unity-background-image-tint-color: rgb(64, 100, 124);
+}
+
+.exit-btn-bg-opaque-blue {
+    opacity: 100%;
+    color: #41647F
+}
+
+.exit-btn-bg-opaque-blue:disabled {
+    opacity: 100%;
+    color: #41647F
+}
+
+.exit-btn-bg-opaque-blue:inactive {
+    opacity: 100%;
+    color: #41647F
+}
+
+.exit-btn-bg-opaque-blue:active {
+    opacity: 100%;
+    color: #41647F
+}
+
+.exit-btn-bg-opaque-blue {
+}

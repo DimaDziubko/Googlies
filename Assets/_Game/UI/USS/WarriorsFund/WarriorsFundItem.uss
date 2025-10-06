@@ -1,0 +1,266 @@
+.wf-control-point {
+    background-color: rgb(20, 34, 78);
+    border-width: 3px;
+    border-color: black;
+}
+
+.wf-control-point.active {
+    background-color: rgb(237, 195, 67);
+    border-width: 3px;
+    border-color: black;
+}
+
+.wf-free-reward-container {
+}
+
+
+.wf-free-reward-container .reward-outer-bg {
+    opacity: 100%;
+    background-color: rgb(174, 194, 255);
+    border-width: 3px;     
+    border-color: black;
+    border-radius: 22px;
+}
+
+.wf-free-reward-container .reward-inner-bg {
+    background-color: rgb(94, 119, 195);
+}
+
+.wf-free-reward-container .lock-icon {
+    visibility: hidden;
+}
+
+.wf-free-reward-container .checkmark-icon {
+    visibility: hidden;
+    -unity-background-image-tint-color: rgb(90, 200, 0);
+}
+
+.wf-free-reward-container .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.wf-free-reward-container .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+
+.wf-free-reward-container.active .reward-outer-bg {
+    opacity: 100%;
+    background-color: rgb(187, 243, 141);
+    border-width: 3px;   
+    border-color: black;
+    border-radius: 22px;
+}
+
+.wf-free-reward-container.active .reward-inner-bg {
+    background-color: rgb(90, 200, 0);
+    border-width: 3px;   
+    border-color: black;   
+}
+
+.wf-free-reward-container.active .lock-icon {
+    visibility: hidden;
+}
+
+.wf-free-reward-container.active .checkmark-icon {
+    visibility: hidden;
+    -unity-background-image-tint-color: rgb(90, 200, 0);
+}
+
+.wf-free-reward-container.active .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.wf-free-reward-container.active .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+
+.wf-free-reward-container.claimed .reward-outer-bg {
+    opacity: 100%;
+    background-color: rgb(94, 119, 195);
+    border-width: 3px;
+    border-color: black;
+    border-radius: 22px;
+}
+
+.wf-free-reward-container.claimed .reward-inner-bg {
+    background-color: rgb(20, 34, 78);
+    border-width: 3px;
+    border-color: black;
+}
+
+.wf-free-reward-container.claimed .lock-icon {
+    visibility: hidden;
+}
+
+.wf-free-reward-container.claimed .checkmark-icon {
+    visibility: visible;
+    -unity-background-image-tint-color: rgb(90, 200, 0);
+}
+
+.wf-free-reward-container.claimed .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.5);
+}
+
+.wf-free-reward-container.claimed .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+.wf-premium-reward-container {
+}
+
+.wf-premium-reward-container .reward-outer-bg {
+    opacity: 100%;
+    background-color: rgb(255, 236, 179);
+    border-width: 3px;
+    border-color: black;
+    border-radius: 22px;
+}
+
+.wf-premium-reward-container .reward-inner-bg {
+    background-color: rgb(237, 195, 67);
+}
+
+.wf-premium-reward-container .lock-icon {
+    visibility: hidden;
+}
+
+.wf-premium-reward-container .checkmark-icon {
+    visibility: hidden;
+    -unity-background-image-tint-color: rgb(90, 200, 0);
+}
+
+.wf-premium-reward-container .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.wf-premium-reward-container .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+
+.wf-premium-reward-container.active .reward-outer-bg {
+    opacity: 100%;
+    background-color: rgb(187, 243, 141);
+    border-width: 3px;
+    border-color: black;
+    border-radius: 22px;
+}
+
+.wf-premium-reward-container.active .reward-inner-bg {
+    background-color: rgb(90, 200, 0);
+    border-width: 3px;
+    border-color: black;
+}
+
+.wf-premium-reward-container.active .lock-icon {
+    visibility: hidden;
+}
+
+.wf-premium-reward-container.active .checkmark-icon {
+    visibility: hidden;
+    -unity-background-image-tint-color: rgb(90, 200, 0);
+}
+
+.wf-premium-reward-container.active .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.wf-premium-reward-container.active .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+
+.wf-premium-reward-container.claimed .reward-outer-bg {
+    opacity: 100%;
+    background-color: rgb(255, 236, 179);
+    border-width: 3px;
+    border-color: black;
+    border-radius: 22px;
+}
+
+.wf-premium-reward-container.claimed .reward-inner-bg {
+    background-color: rgb(237, 195, 67);
+    border-width: 3px;
+    border-color: black;
+}
+
+.wf-premium-reward-container.claimed .lock-icon {
+    visibility: hidden;
+}
+
+.wf-premium-reward-container.claimed .checkmark-icon {
+    visibility: visible;
+    -unity-background-image-tint-color: rgb(90, 200, 0);
+}
+
+.wf-premium-reward-container.claimed .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.5);
+}
+
+.wf-premium-reward-container.claimed .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+.wf-premium-reward-container.locked .reward-outer-bg {
+    opacity: 100%;
+    background-color: rgb(255, 236, 179);
+    border-width: 3px;
+    border-color: black;
+    border-radius: 22px;
+}
+
+.wf-premium-reward-container.locked .reward-inner-bg {
+    background-color: rgb(237, 195, 67);
+    border-width: 3px;
+    border-color: black;
+}
+
+.wf-premium-reward-container.locked .lock-icon {
+    visibility: visible;
+}
+
+.wf-premium-reward-container.locked .checkmark-icon {
+    visibility: hidden;
+    -unity-background-image-tint-color: rgb(90, 200, 0);
+}
+
+.wf-premium-reward-container.locked .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.wf-premium-reward-container.locked .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+
+.amount-label {
+}
+
+.reward-icon {
+}
+
+.checkmark-icon {
+}
+
+.lock-icon {
+}
+
+.reward-outer-bg {
+}
+
+.reward-inner-bg {
+}
+
+

@@ -1,0 +1,1029 @@
+{
+  "FoodBoostConfig": {
+    "Id": 0,
+    "FoodBoostCoefficient": 25,
+    "DailyFoodBoostCount": 2,
+    "RecoverTimeMinutes": 1440
+  },
+  "BattleSpeedConfigs": [
+    {
+      "Id": 0,
+      "SpeedFactor": 1.0,
+      "Duration": 0.0
+    },
+    {
+      "Id": 1,
+      "SpeedFactor": 1.5,
+      "Duration": 300.0
+    },
+    {
+      "Id": 2,
+      "SpeedFactor": 2.0,
+      "Duration": 0.0
+    }
+  ],
+  "ShopConfig": {
+    "GemsBundleConfigs": [
+      {
+        "Id": 1,
+        "MajorIconKey": "GemsPack_0",
+        "MinorIconKey": "Currencies[Gem]",
+        "Quantity": 1000.0,
+        "IAP_ID": "com.thearmyevolution.gemspack_1",
+        "MaxPurchaseCount": -1,
+        "ShopItemViewId": 100,
+        "ProductType": 0
+      },
+      {
+        "Id": 2,
+        "MajorIconKey": "GemsPack_1",
+        "MinorIconKey": "Currencies[Gem]",
+        "Quantity": 3050.0,
+        "IAP_ID": "com.thearmyevolution.gemspack_2",
+        "MaxPurchaseCount": -1,
+        "ShopItemViewId": 100,
+        "ProductType": 0
+      },
+      {
+        "Id": 3,
+        "MajorIconKey": "GemsPack_2",
+        "MinorIconKey": "Currencies[Gem]",
+        "Quantity": 9500.0,
+        "IAP_ID": "com.thearmyevolution.gemspack_3",
+        "MaxPurchaseCount": -1,
+        "ShopItemViewId": 100,
+        "ProductType": 0
+      }
+    ],
+    "CoinsBundleConfigs": [
+      {
+        "Id": 1,
+        "MajorIconKey": "GoldPack_0",
+        "MinorIconKey": "Currencies[Coin]",
+        "Price": 50,
+        "QuantityExponential": {
+          "Id": 2,
+          "A": 1.0,
+          "B": 4.5251,
+          "C": 0.0498,
+          "D": 0.0
+        },
+        "CurrencyIconKey": "Currencies[Gem]",
+        "IGP_ID": "coins_1",
+        "MaxPurchaseCount": -1,
+        "ShopItemViewId": 0,
+        "MinishopItemViewId": 1,
+        "LinearFunctions": [
+          {
+            "Id": 0,
+            "A": 8.0,
+            "B": 73.0
+          },
+          {
+            "Id": 2,
+            "A": 40.0,
+            "B": 353.0
+          },
+          {
+            "Id": 4,
+            "A": 200.0,
+            "B": 1760.0
+          },
+          {
+            "Id": 6,
+            "A": 1100.0,
+            "B": 10200.0
+          },
+          {
+            "Id": 8,
+            "A": 7150.0,
+            "B": 64400.0
+          },
+          {
+            "Id": 10,
+            "A": 50050.0,
+            "B": 451000.0
+          }
+        ]
+      },
+      {
+        "Id": 2,
+        "MajorIconKey": "GoldPack_1",
+        "MinorIconKey": "Currencies[Coin]",
+        "Price": 300,
+        "QuantityExponential": {
+          "Id": 3,
+          "A": 1.0,
+          "B": 6.4583,
+          "C": 0.047,
+          "D": 0.0
+        },
+        "CurrencyIconKey": "Currencies[Gem]",
+        "IGP_ID": "coins_2",
+        "MaxPurchaseCount": -1,
+        "ShopItemViewId": 0,
+        "MinishopItemViewId": 1,
+        "LinearFunctions": [
+          {
+            "Id": 1,
+            "A": 54.0,
+            "B": 488.0
+          },
+          {
+            "Id": 3,
+            "A": 270.0,
+            "B": 2360.0
+          },
+          {
+            "Id": 5,
+            "A": 1350.0,
+            "B": 11800.0
+          },
+          {
+            "Id": 7,
+            "A": 7425.0,
+            "B": 68700.0
+          },
+          {
+            "Id": 9,
+            "A": 48263.0,
+            "B": 431000.0
+          },
+          {
+            "Id": 11,
+            "A": 337838.0,
+            "B": 3020000.0
+          }
+        ]
+      }
+    ],
+    "SpeedBoostOfferConfigs": [
+      {
+        "Id": 1,
+        "MajorIconKey": "SpeedIcon",
+        "Description": "Game speed forever",
+        "BattleSpeed": {
+          "Id": 1,
+          "SpeedFactor": 1.5,
+          "Duration": 300.0
+        },
+        "IAP_ID": "speedx1",
+        "MaxPurchaseCount": 1,
+        "ShopItemViewId": 200,
+        "RequiredIdBought": "-",
+        "ProductType": 1
+      },
+      {
+        "Id": 2,
+        "MajorIconKey": "SpeedIcon",
+        "Description": "Game speed forever",
+        "BattleSpeed": {
+          "Id": 2,
+          "SpeedFactor": 2.0,
+          "Duration": 0.0
+        },
+        "IAP_ID": "speedx2",
+        "MaxPurchaseCount": 1,
+        "ShopItemViewId": 200,
+        "RequiredIdBought": "speedx1",
+        "ProductType": 1
+      }
+    ],
+    "ProfitOfferConfigs": [
+      {
+        "Id": 1,
+        "MajorIconKey": "ProfitIcon_1",
+        "MinorIconKey": "Currencies[Coin]",
+        "Name": "Gold Reserves Bundle",
+        "IAP_ID": "com.thearmyevolution.profit1",
+        "MaxPurchaseCount": 1,
+        "ShopItemViewId": 300,
+        "Description": "Coins Gained Forever!",
+        "CoinBoostFactor": 2,
+        "MoneyBoxes": [
+          {
+            "Id": 1,
+            "IconKey": "Currencies[Gem]",
+            "Quantity": 500.0,
+            "CurrencyType": 1
+          }
+        ],
+        "RequiredIdBought": 0,
+        "ProductType": 1
+      },
+      {
+        "Id": 2,
+        "MajorIconKey": "ProfitIcon_1",
+        "MinorIconKey": "Currencies[Coin]",
+        "Name": "Tactical Bundle",
+        "IAP_ID": "com.thearmyevolution.profit2",
+        "MaxPurchaseCount": 1,
+        "ShopItemViewId": 300,
+        "Description": "Coins Gained Forever!",
+        "CoinBoostFactor": 3,
+        "MoneyBoxes": [
+          {
+            "Id": 2,
+            "IconKey": "Currencies[Gem]",
+            "Quantity": 3500.0,
+            "CurrencyType": 1
+          }
+        ],
+        "RequiredIdBought": 0,
+        "ProductType": 1
+      }
+    ],
+    "FreeGemsPackConfigs": [],
+    "AdsGemsPackConfigs": [
+      {
+        "Id": 1,
+        "DailyGemsPackCount": 2,
+        "RecoverTimeMinutes": 1440.0,
+        "MajorIconKey": "GemsPack_3",
+        "MinorIconKey": "Currencies[Gem]",
+        "AdIconKey": "UI[AdsIcon]",
+        "ShopItemViewId": 400,
+        "Quantity": 100
+      }
+    ],
+    "Products": [
+      {
+        "Id": 1,
+        "IAP_ID": "com.thearmyevolution.gemspack_1",
+        "IAP_ID_IOS": "com.evolution.army.gemspack_1",
+        "ProductType": 0
+      },
+      {
+        "Id": 2,
+        "IAP_ID": "com.thearmyevolution.gemspack_2",
+        "IAP_ID_IOS": "com.evolution.army.gemspack_2",
+        "ProductType": 0
+      },
+      {
+        "Id": 3,
+        "IAP_ID": "com.thearmyevolution.gemspack_3",
+        "IAP_ID_IOS": "com.evolution.army.gemspack_3",
+        "ProductType": 0
+      },
+      {
+        "Id": 4,
+        "IAP_ID": "com.thearmyevolution.profit1",
+        "IAP_ID_IOS": "com.evolution.army.profit1",
+        "ProductType": 1
+      },
+      {
+        "Id": 5,
+        "IAP_ID": "com.thearmyevolution.profit2",
+        "IAP_ID_IOS": "com.evolution.army.profit2",
+        "ProductType": 1
+      }
+    ]
+  },
+  "AdsConfig": {
+    "Id": 0,
+    "IsInterstitialActive": false,
+    "InterstitialDelay": 60.0,
+    "RewardInterstitialDelay": 240.0,
+    "InterstitialBattleTreshold": 5
+  },
+  "GeneralDailyTaskConfig": {
+    "Id": 0,
+    "MaxCountPerDay": 5,
+    "RecoverTimeMinutes": 1440,
+    "DailyTaskConfigs": [
+      {
+        "Id": 0,
+        "DailyTaskType": 0,
+        "LinearFunctions": [
+          {
+            "Id": 13,
+            "A": 0.0,
+            "B": 5.0
+          }
+        ],
+        "DropChance": 9,
+        "Description": "Watch ads",
+        "Reward": 40
+      },
+      {
+        "Id": 1,
+        "DailyTaskType": 1,
+        "LinearFunctions": [
+          {
+            "Id": 42,
+            "A": 0.5,
+            "B": 2.0
+          }
+        ],
+        "DropChance": 9,
+        "Description": "Spawn warriors",
+        "Reward": 40
+      },
+      {
+        "Id": 2,
+        "DailyTaskType": 2,
+        "LinearFunctions": [
+          {
+            "Id": 15,
+            "A": 0.6,
+            "B": 4.0
+          }
+        ],
+        "DropChance": 9,
+        "Description": "Spawn",
+        "Reward": 40
+      },
+      {
+        "Id": 3,
+        "DailyTaskType": 3,
+        "LinearFunctions": [
+          {
+            "Id": 16,
+            "A": 0.15,
+            "B": 3.0
+          }
+        ],
+        "DropChance": 9,
+        "Description": "Spawn",
+        "Reward": 40
+      },
+      {
+        "Id": 4,
+        "DailyTaskType": 4,
+        "LinearFunctions": [
+          {
+            "Id": 17,
+            "A": 0.15,
+            "B": 1.0
+          }
+        ],
+        "DropChance": 9,
+        "Description": "Spawn",
+        "Reward": 40
+      },
+      {
+        "Id": 5,
+        "DailyTaskType": 5,
+        "LinearFunctions": [
+          {
+            "Id": 43,
+            "A": 0.5,
+            "B": 2.0
+          }
+        ],
+        "DropChance": 9,
+        "Description": "Defeat enemy",
+        "Reward": 40
+      },
+      {
+        "Id": 6,
+        "DailyTaskType": 6,
+        "LinearFunctions": [
+          {
+            "Id": 15,
+            "A": 0.6,
+            "B": 4.0
+          }
+        ],
+        "DropChance": 9,
+        "Description": "Defeat",
+        "Reward": 40
+      },
+      {
+        "Id": 7,
+        "DailyTaskType": 7,
+        "LinearFunctions": [
+          {
+            "Id": 16,
+            "A": 0.15,
+            "B": 3.0
+          }
+        ],
+        "DropChance": 9,
+        "Description": "Defeat",
+        "Reward": 40
+      },
+      {
+        "Id": 8,
+        "DailyTaskType": 8,
+        "LinearFunctions": [
+          {
+            "Id": 17,
+            "A": 0.15,
+            "B": 1.0
+          }
+        ],
+        "DropChance": 9,
+        "Description": "Defeat",
+        "Reward": 40
+      },
+      {
+        "Id": 9,
+        "DailyTaskType": 9,
+        "LinearFunctions": [
+          {
+            "Id": 0,
+            "A": 8.0,
+            "B": 73.0
+          },
+          {
+            "Id": 2,
+            "A": 40.0,
+            "B": 353.0
+          },
+          {
+            "Id": 4,
+            "A": 200.0,
+            "B": 1760.0
+          },
+          {
+            "Id": 6,
+            "A": 1100.0,
+            "B": 10200.0
+          },
+          {
+            "Id": 8,
+            "A": 7150.0,
+            "B": 64400.0
+          },
+          {
+            "Id": 10,
+            "A": 50050.0,
+            "B": 451000.0
+          }
+        ],
+        "DropChance": 9,
+        "Description": "Earn coins",
+        "Reward": 40
+      },
+      {
+        "Id": 10,
+        "DailyTaskType": 10,
+        "LinearFunctions": [
+          {
+            "Id": 14,
+            "A": 5.0,
+            "B": 42.0
+          }
+        ],
+        "DropChance": 9,
+        "Description": "Produce food",
+        "Reward": 40
+      }
+    ]
+  },
+  "SummoningConfigs": {
+    "Id": 1,
+    "DropListsEnabled": false,
+    "InitialDropList": [
+      17,
+      17,
+      17,
+      20,
+      17,
+      20,
+      15,
+      15,
+      20,
+      15,
+      17,
+      17,
+      23,
+      23,
+      24,
+      23,
+      24,
+      24,
+      20,
+      13
+    ],
+    "CardsSummoningConfigs": [
+      {
+        "Id": 1,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 2,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 3,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 4,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 5,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 6,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 7,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 8,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 9,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 10,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 11,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 12,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 13,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 14,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 15,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 16,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 17,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 18,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 19,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      },
+      {
+        "Id": 20,
+        "DropList": [
+          17,
+          17,
+          17,
+          20,
+          17,
+          20,
+          15,
+          15,
+          20,
+          15,
+          17,
+          17,
+          23,
+          23,
+          24,
+          23,
+          24,
+          24,
+          20,
+          13
+        ]
+      }
+    ]
+  },
+  "FeatureSettings": {
+    "IsDungeonsUnlocked": true,
+    "IsSkillsUnlocked": true,
+    "FBConfigID": "Test"
+  },
+  "SkillExtraConfig": {
+    "Id": 1,
+    "RequiredTimeline": 2,
+    "InitialDropList": [
+      1,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2
+    ]
+  }
+}

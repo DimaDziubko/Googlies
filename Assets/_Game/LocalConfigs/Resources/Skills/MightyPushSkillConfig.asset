@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c04eed90c04a73b12f67d3ff19fcc5, type: 3}
+  m_Name: MightyPushSkillConfig
+  m_EditorClassIdentifier: 
+  Id: 7
+  Type: 6
+  Icon: {fileID: -691349810, guid: c8ebff60b7985d74399d48cf782550f5, type: 3}
+  MinLevel: 1
+  MaxLevel: 20
+  DropChance: 100
+  Name: Mighty push
+  Boosts:
+  - Type: 4
+    Name: Base Health
+    Exponential:
+      _id: 0
+      A: 0
+      B: 0
+      C: 0
+      D: 0
+    Linear:
+      Id: 0
+      A: 0.005
+      B: 1
+  MaxAscensionLevel: 3
+  Sfx: {fileID: 8300000, guid: 062b64c8a6fce984f9cd05485b101ea2, type: 3}
+  IsCountdownNeeded: 0
+  IsInterruptible: 0
+  InitialPushPercentage: 0.7
+  IncreasePercentagePerLevel: 0.07
+  ImpulseStrength: 250

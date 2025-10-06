@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799d49cbf6144a05922d5451b741e486, type: 3}
+  m_Name: 2_ScythianAge
+  m_EditorClassIdentifier: 
+  Id: 2
+  Price: 16000
+  GemsPerAge: 0
+  Economy:
+    Id: 1
+    CoinPerBattle: 0
+    InitialFoodAmount: 2
+    FoodProduction:
+      Id: 0
+      Price: 8
+      PriceExponential:
+        _id: 0
+        A: 8.0472
+        B: 0
+        C: 0.1653
+        D: -7.645
+      Value: 0.18
+      ValueStep: 0.02
+    BaseHealth:
+      Id: 0
+      Price: 30
+      PriceExponential:
+        _id: 1
+        A: 32.007225
+        B: 0
+        C: 0.17674902
+        D: -32.016148
+      Value: 2
+      ValueStep: 1
+  WarriorsId: 040000000500000006000000
+  Name: Scythian age
+  AgeIconKey: AgeIcon[AgeIcon_1]
+  AgeIconAtlas:
+    m_AssetGUID: 26417f9fd21215142a85c58fb9957849
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  AgeIconName: 1
+  Description: The Scythians developed horse breeding and riding to a new level
+  DateRange: 800 - 600 BC
+  BasePrefab:
+    m_AssetGUID: c2aea0e94a11d8a41a5362879264024e
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  Level: 2
+  Order: 1

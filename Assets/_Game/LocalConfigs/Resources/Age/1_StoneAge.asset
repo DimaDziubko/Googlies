@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799d49cbf6144a05922d5451b741e486, type: 3}
+  m_Name: 1_StoneAge
+  m_EditorClassIdentifier: 
+  Id: 1
+  Price: 2000
+  GemsPerAge: 0
+  Economy:
+    Id: 0
+    CoinPerBattle: 9
+    InitialFoodAmount: 0
+    FoodProduction:
+      Id: 0
+      Price: 8
+      PriceExponential:
+        _id: 0
+        A: 8.0472
+        B: 0
+        C: 0.1653
+        D: -7.645
+      Value: 0.18
+      ValueStep: 0.02
+    BaseHealth:
+      Id: 0
+      Price: 30
+      PriceExponential:
+        _id: 1
+        A: 32.007225
+        B: 0
+        C: 0.17674902
+        D: -32.016148
+      Value: 2
+      ValueStep: 1
+  WarriorsId: 010000000200000003000000
+  Name: Stone age
+  AgeIconKey: AgeIcon[AgeIcon_0]
+  AgeIconAtlas:
+    m_AssetGUID: 26417f9fd21215142a85c58fb9957849
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  AgeIconName: 0
+  Description: Yes, they did not have houses yet - caves were the best they could
+    do
+  DateRange: 80000 BC - 20000 BC
+  BasePrefab:
+    m_AssetGUID: 80f7cd47f8c6aa04f988a6a3f9088954
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  Level: 1
+  Order: 2

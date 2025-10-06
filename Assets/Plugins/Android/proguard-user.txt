@@ -1,0 +1,31 @@
+-keep class com.appsflyer.** { *; }
+-keep class kotlin.** { *; }
+-keep class kotlin.Result { *; }
+-keep class kotlin.Result$Companion { *; }
+-keepclassmembers class kotlin.Result$Companion { *; }
+-keep class kotlin.jvm.internal.** { *; }
+-keep class kotlin.collections.** { *; }
+
+-keep class com.unity.** { *; }
+
+#unbiased
+-keep class com.vasilij.unbiasedtime.** { *; }
+-keep class com.duomindevolution.unbiasedtime.UnbiasedTimePlugin { *; }
+
+-keep class com.usercentrics.** { *; }
+
+-keep class com.devtodev.** { *; }
+-dontwarn com.devtodev.**
+
+-keep class android.net.ConnectivityManager.** { *; }
+-keep class com.google.android.instantapps.InstantApps { *; }
+-keepclassmembers class com.google.android.instantapps.InstantApps{*; }
+
+-keep public class com.google.android.gms.ads.identifier.** { *; }
+-keep public class com.google.android.gms.common.** { *; }
+-keep class com.google.android.play.core.** { *; }
+-keep public class com.android.installreferrer.** { *; }
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+-keepattributes *Annotation*

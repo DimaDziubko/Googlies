@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124261c1eb084f1bb3d88c71472c037e, type: 3}
+  m_Name: GhostsSkillConfig
+  m_EditorClassIdentifier: 
+  Id: 3
+  Type: 2
+  Icon: {fileID: 320511402, guid: c8ebff60b7985d74399d48cf782550f5, type: 3}
+  MinLevel: 1
+  MaxLevel: 20
+  DropChance: 100
+  Name: Ghosts
+  Boosts:
+  - Type: 2
+    Name: All Unit Health
+    Exponential:
+      _id: 0
+      A: 0
+      B: 0
+      C: 0
+      D: 0
+    Linear:
+      Id: 0
+      A: 0.005
+      B: 1
+  MaxAscensionLevel: 3
+  Sfx: {fileID: 8300000, guid: 85c9427a584451440ae64062ab2a7cc2, type: 3}
+  IsCountdownNeeded: 0
+  IsInterruptible: 0
+  InitialHealthPercentage: 0.5
+  HealthPercentagePerLevel: 0.13
+  HugsUnitSpeed: 0.4
+  HugsPrefabKey: Ghost
+  AttackPerSecond: 1
+  HugsAmount: 3

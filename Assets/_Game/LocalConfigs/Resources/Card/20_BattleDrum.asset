@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54599f83d19e4a10a94556b3b0914e85, type: 3}
+  m_Name: 20_BattleDrum
+  m_EditorClassIdentifier: 
+  Id: 20
+  Type: 0
+  ColorIdentifier: {r: 0.7529412, g: 0.81960785, b: 0.9372549, a: 1}
+  Icon: {fileID: 1997001804, guid: 24e70c1703b0d674a900c8fe4751e01d, type: 3}
+  Name: Battle Drum
+  Derscription: This ancient drum echoes with the rhythms of countless battles, invigorating
+    warriors and filling the air with unyielding courage
+  MaterialIdentifier: {fileID: 2100000, guid: 26e0448c443e31c4dbbe7d79f60ba537, type: 2}
+  Boosts:
+  - Type: 1
+    Name: All Unit Damage
+    Exponential:
+      _id: 5
+      A: 1
+      B: -0.0196
+      C: 0.0489
+      D: 0

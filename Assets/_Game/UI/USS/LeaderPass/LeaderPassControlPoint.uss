@@ -1,0 +1,43 @@
+.leader-pass-control-point .control-point-outer-bg {
+    background-color: rgb(95, 138, 133);
+}
+
+.leader-pass-control-point .control-point-inner-bg {
+    background-color: rgb(43, 60, 58);
+}
+
+.leader-pass-control-point .control-point-label {
+    opacity: 100%;
+}
+
+.leader-pass-control-point .control-point-icon {
+    opacity: 0;
+}
+
+.leader-pass-control-point.active .control-point-outer-bg {
+    background-color: rgb(95, 138, 133);
+}
+
+.leader-pass-control-point.active .control-point-inner-bg {
+    background-color: rgb(255, 77, 71);
+}
+
+.leader-pass-control-point.active .control-point-label {
+    opacity: 0;
+}
+
+.leader-pass-control-point.active .control-point-icon {
+    opacity: 100%;
+}
+
+.control-point-outer-bg {
+}
+
+.control-point-inner-bg {
+}
+
+.control-point-label {
+}
+
+.control-point-icon {
+}

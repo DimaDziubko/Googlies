@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102d6b0bfbe14d3baa24cdf99e4fde8e, type: 3}
+  m_Name: Warrior_32
+  m_EditorClassIdentifier: 
+  Id: 32
+  Type: 1
+  UnitLayerType: 1
+  Health: 162
+  Speed: 0.25
+  Name: Puppchen
+  PlayerIconAtlas:
+    m_AssetGUID: 70615a1de6dbe7e438fcca9a56ca3211
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  EnemyIconAtlas:
+    m_AssetGUID: 1e2577469025eb34a86933c677138b65
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  PlayerIconName: 1
+  EnemyIconName: 1
+  PlayerKey: Unit_31
+  EnemyKey: Enemy_31
+  ZombieKey: Zombie_27
+  Price: 614000
+  FoodPrice: 18
+  CoinsPerKill: 65536
+  PlayerHealthMultiplier: 1
+  EnemyHealthMultiplier: 1
+  AttackPerSecond: 1
+  AttackDistance: 2
+  DefaultAttackDistance: 0.14
+  WarriorPositionSettings:
+    HealthBarSettings:
+      Position: {x: 0, y: 0.464, z: 0}
+      Rotation: {x: -0, y: 0, z: 0}
+      Scale: {x: 1, y: 1, z: 1}
+    SkillEffectParentSettings:
+      Position: {x: 0, y: 0.2, z: 0}
+      Rotation: {x: -0, y: 0, z: 0}
+      Scale: {x: 0.25, y: 0.25, z: 0.25}
+    DamageTextPointSettings:
+      Position: {x: 0, y: 0.417, z: -0.070737384}
+      Rotation: {x: -0, y: 0, z: 0}
+      Scale: {x: 1, y: 1, z: 1}
+  ZombiePositionSettings:
+    HealthBarSettings:
+      Position: {x: 0, y: 0.464, z: 0}
+      Rotation: {x: -0, y: 0, z: 0}
+      Scale: {x: 1, y: 1, z: 1}
+    SkillEffectParentSettings:
+      Position: {x: 0, y: 0.2, z: 0}
+      Rotation: {x: -0, y: 0, z: 0}
+      Scale: {x: 0.25, y: 0.25, z: 0.25}
+    DamageTextPointSettings:
+      Position: {x: 0, y: 0.417, z: -0.070737384}
+      Rotation: {x: -0, y: 0, z: 0}
+      Scale: {x: 1, y: 1, z: 1}
+  WeaponId: 32
+  FBConfigId: 

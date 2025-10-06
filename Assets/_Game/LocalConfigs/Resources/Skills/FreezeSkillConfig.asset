@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2c98faa4ae424eb7cdb16e72e36730, type: 3}
+  m_Name: FreezeSkillConfig
+  m_EditorClassIdentifier: 
+  Id: 1
+  Type: 0
+  Icon: {fileID: -444065435, guid: c8ebff60b7985d74399d48cf782550f5, type: 3}
+  MinLevel: 1
+  MaxLevel: 20
+  DropChance: 100
+  Name: Freeze
+  Boosts:
+  - Type: 2
+    Name: All Unit Health
+    Exponential:
+      _id: 0
+      A: 0
+      B: 0
+      C: 0
+      D: 0
+    Linear:
+      Id: 0
+      A: 0.005
+      B: 1
+  MaxAscensionLevel: 3
+  Sfx: {fileID: 8300000, guid: 9dd9aca5a95f6894fa177cc8c1deb1a8, type: 3}
+  IsCountdownNeeded: 1
+  IsInterruptible: 0
+  FreezeDurationPerLevel: 0.5

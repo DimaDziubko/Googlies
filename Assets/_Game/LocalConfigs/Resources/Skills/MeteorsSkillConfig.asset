@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce17d7fbaa8042548e35e799875ac58b, type: 3}
+  m_Name: MeteorsSkillConfig
+  m_EditorClassIdentifier: 
+  Id: 6
+  Type: 5
+  Icon: {fileID: 489988689, guid: c8ebff60b7985d74399d48cf782550f5, type: 3}
+  MinLevel: 1
+  MaxLevel: 20
+  DropChance: 100
+  Name: Meteors
+  Boosts:
+  - Type: 1
+    Name: All Unit Damage
+    Exponential:
+      _id: 0
+      A: 0
+      B: 0
+      C: 0
+      D: 0
+    Linear:
+      Id: 0
+      A: 0.005
+      B: 1
+  MaxAscensionLevel: 3
+  Sfx: {fileID: 8300000, guid: 0a7ae4cc3af710348bf6bb236c5f651a, type: 3}
+  IsCountdownNeeded: 0
+  IsInterruptible: 0
+  MeteorsAmount: 20
+  MeteorConfig:
+    ScaleRange:
+      _min: 0.5
+      _max: 1
+    SpeedRange:
+      _min: 3
+      _max: 6
+    RotationSpeedRange:
+      _min: 0
+      _max: 100
+    DamageRadius: 0.5
+    PrefabKey: Meteor
+    ExplosionKey: MeteorExplosion
+    ExplodeSound: {fileID: 8300000, guid: dea563b27eedeec46aaf85fbe00cea45, type: 3}
+    ShakeMagnitude: 0.1
+    ShakeDuration: 0.5
+  InitialDamagePercentage: 0.3
+  IncreaseList:
+  - 0.04
+  - 0.03
+  SpawnDelay: 0.5

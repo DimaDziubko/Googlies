@@ -1,0 +1,245 @@
+.free-point-container .bp-point-btn {
+    opacity: 100%;
+    -unity-background-image-tint-color: rgb(139, 211, 202);
+}
+
+.free-point-container.normal .bp-point-btn {
+    opacity: 100%;
+    -unity-background-image-tint-color: rgb(139, 211, 202);
+}
+
+.free-point-container.active .bp-point-btn {
+    opacity: 100%;
+    -unity-background-image-tint-color: rgb(187, 243, 141);
+}
+
+.free-point-container.locked .bp-point-btn {
+    opacity: 100%;
+    -unity-background-image-tint-color: rgb(139, 211, 202);
+}
+
+.free-point-container.claimed .bp-point-btn {
+    opacity: 100%;
+    -unity-background-image-tint-color: rgb(95, 138, 133);
+}
+
+.free-point-container .checkmark-icon {
+    visibility: hidden;
+}
+
+.free-point-container.active .checkmark-icon {
+    visibility: hidden;
+}
+
+.free-point-container.locked .checkmark-icon {
+    visibility: hidden;
+}
+
+.free-point-container.claimed .checkmark-icon {
+    visibility: visible;
+}
+
+.free-point-container .inner-bg {
+    -unity-background-image-tint-color: rgb(95, 138, 133);
+}
+
+.free-point-container.normal .inner-bg {
+    -unity-background-image-tint-color: rgb(95, 138, 133);
+}
+
+.free-point-container.active .inner-bg {
+    -unity-background-image-tint-color: rgb(90, 200, 0);
+}
+
+.free-point-container.locked .inner-bg {
+    -unity-background-image-tint-color: rgb(95, 138, 133);
+}
+
+.free-point-container.claimed .inner-bg {
+    -unity-background-image-tint-color: rgb(43, 60, 58);
+}
+
+.free-point-container .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.free-point-container.normal .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.free-point-container.active .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.free-point-container.locked .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.free-point-container.claimed .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.5);
+}
+
+.free-point-container .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.free-point-container.normal .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.free-point-container.active .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.free-point-container.locked .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.free-point-container.claimed .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.premium-point-container .bp-point-btn {
+    opacity: 100%;
+    -unity-background-image-tint-color: rgb(187, 232, 255);
+}
+
+.premium-point-container.normal .bp-point-btn {
+    opacity: 100%;
+    -unity-background-image-tint-color: rgb(187, 232, 255);
+}
+
+.premium-point-container.active .bp-point-btn {
+    opacity: 100%;
+    -unity-background-image-tint-color: rgb(187, 243, 141);
+}
+
+.premium-point-container.locked .bp-point-btn {
+    opacity: 100%;
+    -unity-background-image-tint-color: rgb(187, 232, 255);
+}
+
+.premium-point-container.claimed .bp-point-btn {
+    opacity: 100%;
+    -unity-background-image-tint-color: rgb(98, 172, 216);
+}
+
+.premium-point-container .lock-icon {
+    visibility: hidden;
+}
+
+.premium-point-container.active .lock-icon {
+    visibility: hidden;
+}
+
+.premium-point-container.locked .lock-icon {
+    visibility: visible;
+}
+
+.premium-point-container.claimed .lock-icon {
+    visibility: hidden;
+}
+
+.premium-point-container .checkmark-icon {
+    visibility: hidden;
+}
+
+.premium-point-container.active .checkmark-icon {
+    visibility: hidden;
+}
+
+.premium-point-container.locked .checkmark-icon {
+    visibility: hidden;
+}
+
+.premium-point-container.claimed .checkmark-icon {
+    visibility: visible;
+}
+
+.premium-point-container .inner-bg {
+    -unity-background-image-tint-color: rgb(127, 211, 255);
+}
+
+.premium-point-container.normal .inner-bg {
+    -unity-background-image-tint-color: rgb(127, 211, 255);
+}
+
+.premium-point-container.active .inner-bg {
+    -unity-background-image-tint-color: rgb(90, 200, 0);
+}
+
+.premium-point-container.locked .inner-bg {
+    -unity-background-image-tint-color: rgb(127, 211, 255);
+}
+
+.premium-point-container.claimed .inner-bg {
+    -unity-background-image-tint-color: rgb(15, 88, 131);
+}
+
+.premium-point-container .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.premium-point-container.normal .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.premium-point-container.active .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.premium-point-container.locked .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 1);
+}
+
+.premium-point-container.claimed .reward-icon {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.5);
+}
+
+.premium-point-container .amount-label {
+   -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.premium-point-container.normal .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.premium-point-container.active .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.premium-point-container.locked .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.premium-point-container.claimed .amount-label {
+    -unity-text-outline-color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.inner-bg {
+}
+
+.bp-point-btn {
+}
+
+.reward-icon {
+}
+
+.amount-label {
+}
+
+.free-point-container {
+}
+
+.premium-point-container {
+}
