@@ -13,7 +13,7 @@ namespace _Game.UI.BattlePass.Scripts
     public class BattlePassPurchasePopup : MonoBehaviour
     {
         [SerializeField, Required] private UIDocument _uiDocument;
-        
+
         private Button _exitButton1;
         private Button _exitButton2;
         private Label _timerLabel;
@@ -33,24 +33,24 @@ namespace _Game.UI.BattlePass.Scripts
             _audioService = audioService;
             _logger = logger;
             _presenter = presenter;
-        } 
-        
+        }
+
         public void Initialize()
         {
             _presenter.Initialize();
-            
+
             _exitButton1 = _uiDocument.rootVisualElement.Q<Button>("BP-exit-btn-bg");
             _exitButton2 = _uiDocument.rootVisualElement.Q<Button>("Exit-btn");
             _timerLabel = _uiDocument.rootVisualElement.Q<Label>("BP-timer-label");
             _purchaseBtn = _uiDocument.rootVisualElement.Q<Button>("Common-purchase-btn");
-            
+
             VisualElement popupContainer = _uiDocument.rootVisualElement.Q<VisualElement>("BP-popup-container");
-            
+
             if (popupContainer != null)
             {
                 _animation = new PopupAppearanceAnimationToolkit(popupContainer);
             }
-            
+
             if (_exitButton1 != null)
                 _exitButton1.clicked += OnExitButtonClicked;
             if (_exitButton2 != null)
@@ -65,7 +65,8 @@ namespace _Game.UI.BattlePass.Scripts
 
             if (product != null && _purchaseBtn != null)
             {
-                _purchaseBtn.text = product.metadata.localizedPrice.ToString(CultureInfo.InvariantCulture);
+                //_purchaseBtn.text = product.metadata.localizedPrice.ToString(CultureInfo.InvariantCulture); //"грн";
+                _purchaseBtn.text = (product.metadata.localizedPriceString);
                 _purchaseBtn.SetEnabled(true);
                 return;
             }
@@ -86,9 +87,9 @@ namespace _Game.UI.BattlePass.Scripts
                 _animation.Hide(OnHideComplete);
                 return;
             }
-            
+
             _logger.Log("HIDE PURCHASE POPUP WITHOUT ANIMATION", DebugStatus.Info);
-            
+
             SetActive(false);
         }
 
@@ -106,9 +107,9 @@ namespace _Game.UI.BattlePass.Scripts
                 _animation.Show(OnShowComplete);
                 return;
             }
-            
+
             _logger.Log("SHOW PURCHASE POPUP WITHOUT ANIMATION", DebugStatus.Info);
-            
+
             SetButtonsActive(true);
             SetActive(true);
         }
@@ -128,20 +129,20 @@ namespace _Game.UI.BattlePass.Scripts
             SetButtonsActive(true);
             SetActive(true);
         }
-        
+
         public void Dispose()
         {
             _presenter.Purchased -= OnPurchased;
-            
+
             _presenter.Dispose();
-            
+
             if (_exitButton1 != null)
                 _exitButton1.clicked -= OnExitButtonClicked;
             if (_exitButton2 != null)
                 _exitButton2.clicked -= OnExitButtonClicked;
             if (_purchaseBtn != null)
                 _purchaseBtn.clicked -= OnPurchaseButtonClicked;
-            
+
             _presenter.EventTimerTick -= OnTimerTick;
         }
 
@@ -173,10 +174,10 @@ namespace _Game.UI.BattlePass.Scripts
         {
             if (isActive)
             {
-                _uiDocument.rootVisualElement.style.display = DisplayStyle.Flex; 
+                _uiDocument.rootVisualElement.style.display = DisplayStyle.Flex;
                 return;
             }
-            
+
             _uiDocument.rootVisualElement.style.display = DisplayStyle.None;
         }
 

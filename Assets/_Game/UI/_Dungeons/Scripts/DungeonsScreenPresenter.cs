@@ -113,8 +113,8 @@ namespace _Game.UI._Dungeons.Scripts
 
         void IDungeonsScreenPresenter.OnScreeActiveChanged(bool isActive)
         {
-            foreach (var presenter in _presenters.Values) 
-                presenter.OnScreeActiveChanged(isActive);
+            //foreach (var presenter in _presenters.Values) 
+            //    presenter.OnScreeActiveChanged(isActive);
             ActiveChanged?.Invoke(this, isActive);
         }
 

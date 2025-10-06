@@ -1,4 +1,5 @@
 using _Game.UI.ClassicOffers.Scripts;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -33,6 +34,5 @@ namespace _Game.UI.ClassicOffers.DailyChallenge.Scripts
         public void SetDiscountText(string text) => _discountLaybel.text = text;
         public void SetAvalivableText(string text) => _avalivableLaybel.text = text;
         public void SetTimerText(string text) => _timerLaybel.text = text;
-
     }
 }

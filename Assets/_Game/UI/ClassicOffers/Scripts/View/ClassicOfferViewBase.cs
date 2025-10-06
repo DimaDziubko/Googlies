@@ -46,6 +46,7 @@ namespace _Game.UI.ClassicOffers.Scripts
             DisableButtons();
             _animation.PlayHide(OnHideCompleteAccept);
         }
+
         public void SetPurchaseButton(string price)
         {
             _purchaseButton.SetActive(true);
@@ -53,6 +54,12 @@ namespace _Game.UI.ClassicOffers.Scripts
             _purchaseButton.SetPrice(price);
             _purchaseButton.HideCurrencyIcon();
         }
+
+        public void SetPurchaseBtnEnabled(bool state)
+        {
+            _purchaseButton?.SetActive(state);
+        }
+
         protected virtual void Subscribe()
         {
             _purchaseButton.ButtonClicked += OnPurchaseVoid;

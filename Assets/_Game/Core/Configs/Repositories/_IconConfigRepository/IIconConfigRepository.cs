@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using _Game.Core.UserState._State;
+﻿using _Game.Core.UserState._State;
 using _Game.Gameplay._Boosts.Scripts;
-using _Game.Gameplay.Common.Scripts;
 using _Game.UI._UpgradesScreen.Scripts;
-using _Game.UI.Common.Scripts;
 using _Game.UI.UpgradesAndEvolution.Scripts;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -28,7 +24,8 @@ namespace _Game.Core.Configs.Repositories._IconConfigRepository
         Sprite GetItemIconFor(int itemId);
         Sprite GetEventIconFor(string eventName);
         int GetPointInlineIndex(CurrencyType eventCurrencyCellType);
-
+        Sprite GetUnitType(bool isMelee);
         AssetReference GetWarriorsFundAtlasReference();
+        Sprite GetBoostIconCardsFor(BoostType type);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using _Game.Core._Logger;
+﻿using _Game.Core._Logger;
 using _Game.Core.Boosts;
 using _Game.Core.Navigation.Age;
 using _Game.Core.Navigation.Battle;
@@ -9,10 +8,13 @@ using _Game.Core.Services.Audio;
 using _Game.Core.UserState._State;
 using _Game.Gameplay.BattleLauncher;
 using _Game.LiveopsCore;
+using _Game.UI._EvolveScreen.Scripts;
+using _Game.UI._MainMenu.State;
 using _Game.UI.Common.Scripts;
 using _Game.UI.Global;
 using _Game.UI.Settings.Scripts;
 using Sirenix.OdinInspector;
+using System;
 using UnityUtils;
 
 namespace _Game.UI._StartBattleScreen.Scripts
@@ -108,12 +110,12 @@ namespace _Game.UI._StartBattleScreen.Scripts
             Unsubscribe();
             ScreenDisposed?.Invoke(this);
         }
-        
+
         void IStartBattleScreenPresenter.OnActiveChanged(bool isActive)
         {
             ActiveChanged?.Invoke(this, isActive);
         }
-        
+
         private void Subscribe()
         {
             _timelineNavigator.TimelineChanged += OnTimelineChanged;
@@ -121,9 +123,9 @@ namespace _Game.UI._StartBattleScreen.Scripts
             _battleNavigator.BattleChanged += OnBattleChanged;
 
             Screen.StartClicked += OnStartBattleClicked;
+            Screen.EvolutionClicked += OnEvolutionButtonClicked;
             Screen.NextBattleClicked += OnNextBattleClicked;
             Screen.PreviousBattleClicked += OnPreviousBattleClicked;
-            Screen.SettingsClicked += OnSettingsClicked;
 
             Screen.CheatPanel.NextTimelineClicked += OnNextTimelineClicked;
             Screen.CheatPanel.PreviousTimelineClicked += OnPreviousTimelineClicked;
@@ -153,11 +155,9 @@ namespace _Game.UI._StartBattleScreen.Scripts
             _battleNavigator.BattleChanged -= OnBattleChanged;
 
             Screen.StartClicked -= OnStartBattleClicked;
-
+            Screen.EvolutionClicked -= OnEvolutionButtonClicked;
             Screen.NextBattleClicked -= OnNextBattleClicked;
             Screen.PreviousBattleClicked -= OnPreviousBattleClicked;
-
-            Screen.SettingsClicked -= OnSettingsClicked;
 
             Screen.CheatPanel.NextTimelineClicked -= OnNextTimelineClicked;
             Screen.CheatPanel.PreviousTimelineClicked -= OnPreviousTimelineClicked;
@@ -173,9 +173,9 @@ namespace _Game.UI._StartBattleScreen.Scripts
 
             Screen.CheatPanel.AllBattlesWonClicked -= OnAllBattlesWonClicked;
             Screen.CheatPanel.SkillPetPotionButtonClicked -= OnSkillPetPotionButtonClicked;
-            
+
             Screen.CheatPanel.BPPointsButtonClicked -= OnBpPointsButtonClicked;
-            
+
             _balancy.Initialized -= OnBalancyInitialized;
             _gameEventScheduler.Initialized -= OnBalancyInitialized;
         }
@@ -198,7 +198,7 @@ namespace _Game.UI._StartBattleScreen.Scripts
                 $"Initialized: <color={color}>{isInitialized}</color>\n" +
                 $"Profile: <color={color}>{profile != null}</color>\n" +
                 $"Scheduler: <color={color}>{_gameEventScheduler.IsInitialized}</color>");
-            
+
             _logger.Log("START BATTLE SCREEN ON BALANCY INITIALIZED", DebugStatus.Info);
         }
 
@@ -298,6 +298,14 @@ namespace _Game.UI._StartBattleScreen.Scripts
             _audioService.PlayStartBattleSound();
         }
 
+        private void OnEvolutionButtonClicked()
+        {
+            //Screen.EvolutionStep.CompleteStep();
+
+            //_localStateMachine.Enter<EvolutionState>();
+            PlayButtonSound();
+        }
+
         private void OnForceNextBattleClicked()
         {
             _battleNavigator.ForceMoveToNextBattle();
@@ -314,14 +322,6 @@ namespace _Game.UI._StartBattleScreen.Scripts
         {
             _battleNavigator.MoveToPreviousBattle();
             PlayButtonSound();
-        }
-
-        private async void OnSettingsClicked()
-        {
-            PlayButtonSound();
-            var popup = await _settingsPopupProvider.Load();
-            await popup.Value.AwaitForExit();
-            popup.Dispose();
         }
 
         private void PlayButtonSound() => _audioService.PlayButtonSound();

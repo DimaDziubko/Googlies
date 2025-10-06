@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
-using _Game.Core._Logger;
+﻿using _Game.Core._Logger;
 using _Game.Core.Boosts;
 using _Game.Core.Configs.Repositories._IconConfigRepository;
 using _Game.Core.Data;
 using _Game.Core.Services._Camera;
 using _Game.Core.Services.Audio;
 using _Game.Gameplay._Boosts.Scripts;
+using _Game.UI._BoostPopup;
 using _Game.UI._Skills.Scripts;
 using _Game.UI.Common.Scripts;
 using _Game.Utils.Extensions;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using TMPro;
 using Unity.Theme.Binders;
 using UnityEngine;
@@ -30,20 +31,19 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
 
         [SerializeField, Required] private PassiveBoostInfoListView _passiveBoostInfoListView;
         [SerializeField, Required] private BoostInfoAnimationListView _boostInfoAnimationListView;
-        
+
         [SerializeField, Required] private PopupAppearanceAnimation _animation;
 
-          private UniTaskCompletionSource<bool> _taskCompletion;
-        
+        private UniTaskCompletionSource<bool> _taskCompletion;
+
         private IAudioService _audioService;
-        private IIconConfigRepository _config;
+        private IIconConfigRepository _iconConfig;
         private BoostContainer _boosts;
         private IMyLogger _logger;
-
         private CardPopupPresenter _cardPopupPresenter;
         private CardItemPresenter _presenter;
 
-        private readonly Dictionary<Boost, PassiveBoostInfoView> _cardBoostInfo = new();
+        private readonly Dictionary<Boost, BoostInfoItem> _cardBoostInfo = new();
 
         private readonly List<BoostInfoAnimationPresenter> _presenters = new();
 
@@ -53,15 +53,16 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
             IAudioService audioService,
             IIconConfigRepository config,
             BoostContainer boosts,
-            IMyLogger logger)
+            IMyLogger logger
+            )
         {
             _cardPopupPresenter = cardPopupPresenter;
             _audioService = audioService;
             _canvas.worldCamera = cameraService.UICameraOverlay;
-            _config = config;
+            _iconConfig = config;
             _boosts = boosts;
             _logger = logger;
-            
+
             Initialize();
         }
 
@@ -71,27 +72,27 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
             Subscribe();
 
             InitializeAnimation();
-            
+
             _cardPopupPresenter.Initialize();
-            
+
             _cardNameLabel.text = _cardPopupPresenter.GetName();
             _cardTypeLabel.text = _cardPopupPresenter.GetTypeName();
             _cardTypeLabel.color = _cardPopupPresenter.GetTypeColor();
-            _cardDescriptionLabel.text = _cardPopupPresenter.GetDescription();
-            _presenter ??= new CardItemPresenter(_cardPopupPresenter.Model, _cardItemView, _logger);
+            //_cardDescriptionLabel.text = _cardPopupPresenter.GetDescription();
+            _presenter ??= new CardItemPresenter(_cardPopupPresenter.Model, _cardItemView, _logger, _iconConfig);
             _presenter.InitializeNotClickable();
-            
+
             OnStateChanged();
         }
 
         private void InitializeAnimation()
         {
             IEnumerable<BoostModel> boosts = _boosts.GetBoostModels(BoostSource.Total);
-            
+
             foreach (BoostModel boost in boosts)
             {
                 BoostInfoAnimationView view = _boostInfoAnimationListView.SpawnElement();
-                BoostInfoAnimationPresenter presenter = new BoostInfoAnimationPresenter(boost, view, _config);
+                BoostInfoAnimationPresenter presenter = new BoostInfoAnimationPresenter(boost, view, _iconConfig);
                 presenter.Initialize();
                 _presenters.Add(presenter);
             }
@@ -109,10 +110,12 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
                     _cardBoostInfo.Add(boost, view);
                 }
 
-                view.SetIcon(_config.ForBoostIcon(boost.Type));
+                view.SetIcon(_iconConfig.ForBoostIcon(boost.Type));
                 view.SetName(boost.Name);
-                view.SetCurrentValue(boost.Exponential.GetValue(level).ToCompactFormat());
-                view.SetNextValue(boost.Exponential.GetValue(level + 1).ToCompactFormat());
+                //view.SetCurrentValue(boost.Exponential.GetValue(level).ToCompactFormat());
+                //view.SetNextValue(boost.Exponential.GetValue(level + 1).ToCompactFormat());
+                view.SetValue($"<color=white>{boost.Exponential.GetValue(level).ToCompactFormat()}</color>" +
+                    $"<color=green> > {boost.Exponential.GetValue(level).ToCompactFormat()}</color>");
             }
         }
 
@@ -120,8 +123,8 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
         {
             _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
             _cardPopupPresenter.StateChanged -= OnStateChanged;
-            
-            foreach (var button in _cancelButtons) 
+
+            foreach (var button in _cancelButtons)
                 button.onClick.RemoveAllListeners();
         }
 
@@ -129,8 +132,8 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
         {
             _cardPopupPresenter.StateChanged += OnStateChanged;
             _upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
-            
-            foreach (var button in _cancelButtons) 
+
+            foreach (var button in _cancelButtons)
                 button.onClick.AddListener(OnCancelled);
         }
 
@@ -170,10 +173,10 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
             {
                 button.interactable = false;
             }
-            
+
             _upgradeButton.interactable = false;
         }
-        
+
         private void OnHideComplete()
         {
             _canvas.enabled = false;

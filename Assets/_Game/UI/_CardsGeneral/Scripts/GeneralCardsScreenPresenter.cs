@@ -95,14 +95,14 @@ namespace _Game.UI._CardsGeneral.Scripts
             {
                 _tutorialManager.Register(Screen.SkillsStep);
                 TryToShowSkillsStep();
-                
+
                 Unsubscribe();
                 Subscribe();
                 await InitStateMachine();
                 InitButtons();
                 InitQuickBoostInfo();
                 OnCardsButtonClicked();
-                
+
                 ScreenOpened?.Invoke(this);
             }
         }
@@ -110,16 +110,16 @@ namespace _Game.UI._CardsGeneral.Scripts
         void IGeneralCardsScreenPresenter.OnGeneralCardsScreenClosed()
         {
             CancelSkillsStep();
-            
+
             _tutorialManager.UnRegister(Screen.SkillsStep);
-            
+
             _presenter?.Dispose();
             _localStateMachine?.Exit();
             _uiNotifier.UnregisterPin(typeof(ICardsScreen));
             _uiNotifier.UnregisterPin(typeof(ISkillsScreen));
-            
+
             Unsubscribe();
-            
+
             ScreenClosed?.Invoke(this);
         }
 
@@ -131,53 +131,55 @@ namespace _Game.UI._CardsGeneral.Scripts
             Unsubscribe();
         }
 
-        void IGeneralCardsScreenPresenter.OnScreenActiveChanged(bool isActive) => 
+        void IGeneralCardsScreenPresenter.OnScreenActiveChanged(bool isActive) =>
             _localStateMachine?.SetActive(isActive);
 
-        void IDisposable.Dispose() => 
+        void IDisposable.Dispose() =>
             _uiNotifier.UnregisterScreen(this);
 
         private void InitButtons()
         {
             Screen.CardBtn.UnHighlight();
-            Screen.CardBtn.SetLocked(false);
+            //Screen.CardBtn.SetLocked(false);
             Screen.CardBtn.SetInteractable(true);
-           _uiNotifier.RegisterPin(typeof(ICardsScreen), Screen.CardBtn.Pin);
+            _uiNotifier.RegisterPin(typeof(ICardsScreen), Screen.CardBtn.Pin);
 
-           Screen.SkillsBtn.UnHighlight();
-           Screen.SkillsBtn.SetLockedText($"Timeline {_config.SkillRequiredTimeline}");
-           Screen.SkillsBtn.SetLocked(!IsSkillsUnlocked);
-           Screen.SkillsBtn.SetInteractable(IsSkillsUnlocked);
-           if (IsSkillsUnlocked)
-               _uiNotifier.RegisterPin(typeof(ISkillsScreen), Screen.SkillsBtn.Pin);
-           else
-               Screen.SkillsBtn.SetupPin(false);
+            Screen.SkillsBtn.UnHighlight();
+            //Screen.SkillsBtn.SetLockedText($"Timeline {_config.SkillRequiredTimeline}");
+            //Screen.SkillsBtn.SetLocked(!IsSkillsUnlocked);
+            Screen.SkillsBtn.SetInteractable(IsSkillsUnlocked);
+            if (IsSkillsUnlocked)
+                _uiNotifier.RegisterPin(typeof(ISkillsScreen), Screen.SkillsBtn.Pin);
+            else
+                Screen.SkillsBtn.SetupPin(false);
 
-           Screen.RunesBtn.UnHighlight();
-           Screen.RunesBtn.SetLocked(true);
-           Screen.RunesBtn.SetInteractable(false);
-           Screen.RunesBtn.SetupPin(false);
-           //Screen.RunesBtn.ButtonClicked += OnRunesButtonClicked;
+            Screen.RunesBtn.UnHighlight();
+            //Screen.RunesBtn.SetLocked(true);
+            Screen.RunesBtn.SetInteractable(false);
+            Screen.RunesBtn.SetupPin(false);
+            //Screen.RunesBtn.ButtonClicked += OnRunesButtonClicked;
 
-           Screen.HeroesBtn.UnHighlight();
-           Screen.HeroesBtn.SetLocked(true);
-           Screen.HeroesBtn.SetInteractable(false);
-           Screen.HeroesBtn.SetupPin(false);
-           //Screen.HeroesBtn.ButtonClicked += OnHeroesButtonClicked;
+            Screen.HeroesBtn.UnHighlight();
+            //Screen.HeroesBtn.SetLocked(true);
+            Screen.HeroesBtn.SetInteractable(false);
+            Screen.HeroesBtn.SetupPin(false);
+            //Screen.HeroesBtn.ButtonClicked += OnHeroesButtonClicked;
         }
 
         private void OnCardsButtonClicked()
         {
             _audioService.PlayButtonSound();
             _localStateMachine.Enter<CardsState>();
+            Screen.QuickBoostInfoPanel.gameObject.SetActive(true);
         }
 
         private void OnSkillsButtonClicked()
         {
             _audioService.PlayButtonSound();
             _localStateMachine.Enter<SkillsState>();
+            Screen.QuickBoostInfoPanel.gameObject.SetActive(false);
         }
-        
+
         private void InitQuickBoostInfo()
         {
             if (_presenter != null)
@@ -186,7 +188,7 @@ namespace _Game.UI._CardsGeneral.Scripts
                 _presenter.SetView(Screen.QuickBoostInfoPanel);
             }
             else
-            {           
+            {
                 _presenter = _factory.Create(Screen.QuickBoostInfoPanel);
             }
 
@@ -225,7 +227,7 @@ namespace _Game.UI._CardsGeneral.Scripts
 
             _localStateMachine.AddState(cardsState);
             _localStateMachine.AddState(skillsState);
-            
+
             await _localStateMachine.InitializeAsync();
         }
 
@@ -244,7 +246,7 @@ namespace _Game.UI._CardsGeneral.Scripts
                 Screen.SkillsStep.CompleteStep();
             }
         }
-        
+
         public void CancelSkillsStep()
         {
             if (_featureUnlockSystem.IsFeatureUnlocked(Feature.Skills) && Screen.OrNull() != null)
@@ -252,14 +254,14 @@ namespace _Game.UI._CardsGeneral.Scripts
                 Screen.SkillsStep.CancelStep();
             }
         }
-        
+
         void IGameScreenListener<ICardsScreen>.OnScreenOpened(ICardsScreen screen) => UpdateState(screen);
         void IGameScreenListener<ICardsScreen>.OnInfoChanged(ICardsScreen screen) { }
         void IGameScreenListener<ICardsScreen>.OnRequiresAttention(ICardsScreen screen) => UpdateState(screen);
         void IGameScreenListener<ICardsScreen>.OnScreenClosed(ICardsScreen screen) { }
         void IGameScreenListener<ICardsScreen>.OnScreenActiveChanged(ICardsScreen screen, bool isActive) { }
         void IGameScreenListener<ICardsScreen>.OnScreenDisposed(ICardsScreen screen) { }
-        
+
         void IGameScreenListener<ISkillsScreen>.OnScreenOpened(ISkillsScreen screen) => UpdateState(screen);
         void IGameScreenListener<ISkillsScreen>.OnInfoChanged(ISkillsScreen screen) { }
         void IGameScreenListener<ISkillsScreen>.OnRequiresAttention(ISkillsScreen screen) => UpdateState(screen);

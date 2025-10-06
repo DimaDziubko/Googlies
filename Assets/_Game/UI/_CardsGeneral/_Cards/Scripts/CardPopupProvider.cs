@@ -36,7 +36,8 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
             IAudioService audioService,
             IIconConfigRepository config,
             BoostContainer boosts,
-            IMyLogger logger)
+            IMyLogger logger
+            )
         {
             _cardPopupPresenter = cardPopupPresenter;
             _cameraService = cameraService;
@@ -57,7 +58,8 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
                 _audioService,
                 _config,
                 _boosts,
-                _logger);
+                _logger
+                );
             
             return _popup;
         }

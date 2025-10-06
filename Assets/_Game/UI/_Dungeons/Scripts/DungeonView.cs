@@ -1,4 +1,5 @@
 ﻿using _Game.UI._Shop.Scripts._AmountView;
+using Sirenix.OdinInspector;
 using TMPro;
 using Unity.Theme.Binders;
 using UnityEngine;
@@ -11,41 +12,43 @@ namespace _Game.UI._Dungeons.Scripts
     {
         public event UnityAction Clicked
         {
-            add => _button.onClick.AddListener(value);
-            remove => _button.onClick.RemoveListener(value);
+            add => _enterButton.onClick.AddListener(value);
+            remove => _enterButton.onClick.RemoveListener(value);
         }
 
-        [SerializeField] private GameObject _activeView;
-        [SerializeField] private Image _rewardIconHolder;
-        [SerializeField] private Image _mainImage;
-        [SerializeField] private TMP_Text _nameLabel;
-        [SerializeField] private ThemedButton _button;
-        [SerializeField] private AmountListView _amountListView;
+        [SerializeField, Required] private GameObject _activeView;
+        [SerializeField, Required] private GameObject _lockedView;
+        [SerializeField, Required] private Image _mainImage;
+        [SerializeField, Required] private TMP_Text _nameLabel;
+        [SerializeField, Required] private TMP_Text _difficulty;
 
-        [SerializeField] private GameObject _lockedView;
-        [SerializeField] private TMP_Text _timelineLabel;
+        [Space, Header("Playable Panel")]
+        [SerializeField, Required] private Button _previousDifficultyBtn;
+        [SerializeField, Required] private Button _nextDifficultyBtn;
+        [SerializeField, Required] private AmountView _rewardAmountView;
+        [SerializeField, Required] private ThemedButton _enterButton;
+        [SerializeField, Required] private AmountView _costAmountView;
 
-        public AmountListView AmountListView => _amountListView;
-        
+        internal Button PreviousDifficultyBtn => _previousDifficultyBtn;
+        internal Button NextDifficultyBtn => _nextDifficultyBtn;
+
+        internal AmountView RewardAmountView => _rewardAmountView;
+        internal AmountView CostAmountView => _costAmountView;
+        internal TMP_Text Difficulty => _difficulty;
+
         public void SetLocked(bool isLocked)
         {
             _activeView.SetActive(!isLocked);
             _lockedView.SetActive(isLocked);
         }
 
-        public void SetInteractable(bool isInteractable) => 
-            _button.interactable = isInteractable;
+        public void SetInteractable(bool isInteractable) =>
+            _enterButton.interactable = isInteractable;
 
-        public void SetRewardIcon(Sprite icon) => 
-            _rewardIconHolder.sprite = icon;
-
-        public void SetMainIcon(Sprite icon) => 
+        public void SetMainIcon(Sprite icon) =>
             _mainImage.sprite = icon;
 
-        public void SetName(string name) => 
+        public void SetName(string name) =>
             _nameLabel.text = name;
-        
-        public void SetTimeline(string timelineNumber) => 
-            _timelineLabel.text = timelineNumber;
     }
 }

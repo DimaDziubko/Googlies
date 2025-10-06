@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using _Game.Core._Logger;
+﻿using _Game.Core._Logger;
+using _Game.Core.Configs.Repositories._IconConfigRepository;
 using _Game.Core.Services.Audio;
 using _Game.UI._Shop.Scripts._DecorAndUtils;
 using _Game.UI.Factory;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,7 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
         [SerializeField, Required] private CardView _singleView;
         [SerializeField, Required] private Button _exitButton;
         [SerializeField, Required] private Transform _container;
-        
+
         [SerializeField] private int _appearanceDelay = 1000;
         [SerializeField] private int _collectionAppearanceDelay = 200;
         [SerializeField] private int _illuminationAnimationDelay = 200;
@@ -28,7 +29,7 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
         private IUIFactory _uiFactory;
         private readonly List<CardView> _cardViews = new();
         private CardAppearancePopupSettings _settings;
-
+        private IIconConfigRepository _iconConfig;
         private UniTaskCompletionSource<bool> _taskCompletion;
 
         [ShowInInspector] private readonly List<CardPresenter> _presenters = new();
@@ -37,14 +38,16 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
             Camera cameraServiceUICameraOverlay,
             IAudioService audioService,
             IUIFactory uiFactory,
-            CardAppearancePopupSettings settings)
+            CardAppearancePopupSettings settings,
+            IIconConfigRepository config
+            )
         {
             //Overlay because of toolkit
             //_canvas.worldCamera = cameraServiceUICameraOverlay;
             _audioService = audioService;
             _uiFactory = uiFactory;
             _settings = settings;
-
+            _iconConfig = config;
             _singleView.Hide();
 
             Init();
@@ -112,9 +115,9 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
                 view.Resize();
                 _cardViews.Add(view);
             }
-            
+
             await UniTask.Yield();
-            
+
             foreach (var view in _cardViews)
             {
                 view.Resize();
@@ -123,7 +126,7 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
 
         private void InitCard(CardModel model, CardView view)
         {
-            CardPresenter presenter = new CardPresenter(model, view);
+            CardPresenter presenter = new CardPresenter(model, view, _iconConfig);
             presenter.Initialize();
             _presenters.Add(presenter);
         }
@@ -165,7 +168,7 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
         private void PlayAppearanceSound() => _audioService.PlayCardAppearanceSfx();
         private void PlayRippleSound() => _audioService.PlayCardRippleSfx();
         private void PlayButtonSound() => _audioService.PlayButtonSound();
-        
+
         private void Cleanup()
         {
             _exitButton.onClick.RemoveAllListeners();
@@ -177,7 +180,7 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
             {
                 view.Recycle();
             }
-            
+
             _cardViews.Clear();
             _presenters.Clear();
         }

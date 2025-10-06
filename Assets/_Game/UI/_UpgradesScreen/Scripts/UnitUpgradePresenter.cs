@@ -28,7 +28,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
         private readonly IStatsPopupProvider _provider;
         private readonly IMyLogger _logger;
         private ITimelineStateReadonly TimelineState => _userContainer.State.TimelineState;
-        private CurrencyCell Cell {get; set;}
+        private CurrencyCell Cell { get; set; }
         private ProductBuyer _productBuyer;
 
         [ShowInInspector, ReadOnly]
@@ -40,7 +40,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
         private readonly CurrencyBank _bank;
 
         public UnitUpgradePresenter(
-            UnitUpgrade model, 
+            UnitUpgrade model,
             UnitUpgradeView view,
             IUserContainer userContainer,
             IConfigRepository config,
@@ -64,10 +64,10 @@ namespace _Game.UI._UpgradesScreen.Scripts
         {
             _model = model;
             _view = view;
-            
+
             _logger.Log("SET DATA", DebugStatus.Warning);
         }
-        
+
         public void Initialize()
         {
             Cell = _bank.GetCell(CurrencyType.Coins);
@@ -79,13 +79,13 @@ namespace _Game.UI._UpgradesScreen.Scripts
             Cell.OnStateChanged += OnCurrenciesChanged;
             _view.TransactionButton.ButtonClicked += OnButtonClicked;
             _view.TransactionButton.InactiveClicked += OnInactiveClicked;
-            
+
             OnUnitOpened(_model.Type);
             _view.SetName(_model.Name);
-            
+            _view.SetUnitType(_config.GetUnitType(_model.GetWeaponType()));
             _view.SetIcon(_model.Icon);
             _view.SetCurrencyIcon(_config.GetCurrencyIconFor(CurrencyType.Coins));
-            
+
             _view.TransactionButton.SetPrice(_model.Price.FirstOrDefault().Amount.ToCompactFormat());
             _view.TransactionButton.SetInteractable(_productBuyer.CanBuy(_model));
             _view.TransactionButton.ShowCurrencyIcon();
@@ -94,7 +94,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
 
             _view.InfoClicked += OnInfoClicked;
         }
-        
+
         public void Dispose()
         {
             Cleanup();
@@ -106,15 +106,15 @@ namespace _Game.UI._UpgradesScreen.Scripts
             _view.TransactionButton.ButtonClicked -= OnButtonClicked;
             _view.TransactionButton.InactiveClicked -= OnInactiveClicked;
             _view.InfoClicked -= OnInfoClicked;
-            
+
             _productBuyer.ProductBought -= ProductBought;
 
-            foreach (var stat in _stats.Values) 
+            foreach (var stat in _stats.Values)
                 _view.StatInfoListViews.DestroyElement(stat);
 
             _stats.Clear();
         }
-        
+
         private void ProductBought(IProduct product)
         {
             if (product is UnitUpgrade model)
@@ -153,12 +153,12 @@ namespace _Game.UI._UpgradesScreen.Scripts
                     view = _view.StatInfoListViews.SpawnElement();
                     _stats.Add(stat.Type, view);
                 }
-                
+
                 view.SetIcon(_config.ForStatIcon(stat.Type));
 
                 string statValue = stat.Value.ToCompactFormat();
-                
-                
+
+
                 if (!_shownStats.TryGetValue(stat.Type, out string shownValue))
                 {
                     view.SetValue(statValue);
@@ -183,7 +183,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
         private async void OnInfoClicked()
         {
             _audioService.PlayButtonSound();
-            
+
             var popup = await _provider.Load();
             bool isConfirmed = await popup.Value.ShowStatsAndAwaitForExit(_model.Type);
             if (isConfirmed)
@@ -192,7 +192,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
             }
         }
 
-        private void OnCurrenciesChanged() => 
+        private void OnCurrenciesChanged() =>
             _view.TransactionButton.SetInteractable(_productBuyer.CanBuy(_model));
 
         private void OnUnitOpened(UnitType type)

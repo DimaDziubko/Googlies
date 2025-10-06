@@ -18,6 +18,12 @@ namespace _Game.UI._StartBattleScreen.Scripts
             remove => _startBattleButton.onClick.RemoveListener(value);
         }
 
+        public event UnityAction EvolutionClicked
+        {
+            add => _evolutionButton.onClick.AddListener(value);
+            remove => _evolutionButton.onClick.RemoveListener(value);
+        }
+
         public event UnityAction NextBattleClicked
         {
             add => _nextBattleButton.onClick.AddListener(value);
@@ -30,27 +36,21 @@ namespace _Game.UI._StartBattleScreen.Scripts
             remove => _previousBattleButton.onClick.RemoveListener(value);
         }
 
-        public event UnityAction SettingsClicked
-        {
-            add => _settingsButton.onClick.AddListener(value);
-            remove => _settingsButton.onClick.RemoveListener(value);
-        }
-
         [SerializeField] private Canvas _canvas;
 
         [SerializeField] private Button _startBattleButton;
+        [SerializeField] private Button _evolutionButton;
         [SerializeField] private Button _nextBattleButton;
         [SerializeField] private Button _previousBattleButton;
-        [SerializeField] private Button _settingsButton;
 
         [SerializeField, Required] private GameEventPanel _leftGameEventPanel;
         [SerializeField, Required] private GameEventPanel _rightGameEventPanel;
-        
+
         [SerializeField] private CheatPanel _cheatPanel;
 
         public CheatPanel CheatPanel => _cheatPanel;
-        
-        
+
+
         public GameEventPanel GetGameEventPanel(GameEventPanelType type)
         {
             return type switch
@@ -60,7 +60,7 @@ namespace _Game.UI._StartBattleScreen.Scripts
                 _ => _leftGameEventPanel
             };
         }
-        
+
         private IMyLogger _logger;
         private IStartBattleScreenPresenter _presenter;
 
@@ -73,7 +73,7 @@ namespace _Game.UI._StartBattleScreen.Scripts
             _canvas.enabled = false;
             _canvas.worldCamera = uICamera;
             _logger = logger;
-            
+
             _presenter = presenter;
             _presenter.Screen = this;
 
@@ -84,13 +84,13 @@ namespace _Game.UI._StartBattleScreen.Scripts
         public void SetStartBattleBtnInteractable(bool isInteractable) =>
             _startBattleButton.interactable = isInteractable;
 
-        public void SetNextBattleBtnInteractable(bool isInteractable) => 
+        public void SetNextBattleBtnInteractable(bool isInteractable) =>
             _nextBattleButton.interactable = isInteractable;
 
         public void SetNextBattleBtnActive(bool isActive) =>
             _nextBattleButton.gameObject.SetActive(isActive);
 
-        public void SetPreviousBattleBtnInteractable(bool isInteractable) => 
+        public void SetPreviousBattleBtnInteractable(bool isInteractable) =>
             _previousBattleButton.interactable = isInteractable;
 
         public void SetPreviousBattleBtnActive(bool isActive) =>

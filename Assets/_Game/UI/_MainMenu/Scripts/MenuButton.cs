@@ -32,8 +32,10 @@ namespace _Game.UI._MainMenu.Scripts
 
         public void SetupPin(bool isActive) => _pin.SetActive(isActive);
 
-        public void SetLocked(bool isLocked) => 
+        public void SetLocked(bool isLocked)
+        {
             _iconHolder.sprite = isLocked ? _lockedIcon : _activeIcon;
+        }
 
         public void SetInteractable(bool isInteractable) => 
             _button.interactable = isInteractable;

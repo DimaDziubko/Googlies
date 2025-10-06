@@ -4,6 +4,7 @@ using _Game.Core.Configs.Repositories._IconConfigRepository;
 using _Game.Core.Services.Audio;
 using _Game.Core.UserState._State;
 using _Game.Gameplay._Boosts.Scripts;
+using _Game.UI._BoostPopup;
 using _Game.Utils.Extensions;
 
 namespace _Game.UI._Skills.Scripts
@@ -16,11 +17,11 @@ namespace _Game.UI._Skills.Scripts
         private readonly IIconConfigRepository _config;
         private readonly IMyLogger _logger;
 
-        private readonly Dictionary<Boost, PassiveBoostInfoView> _passiveBoostInfo = new();
+        private readonly Dictionary<Boost, BoostInfoItem> _passiveBoostInfo = new();
 
         public AscendPopupPresenter(
-            SkillModel model, 
-            AscendPopup popup, 
+            SkillModel model,
+            AscendPopup popup,
             IMyLogger logger,
             IAudioService audioService,
             IIconConfigRepository config)
@@ -37,7 +38,7 @@ namespace _Game.UI._Skills.Scripts
             _model.Skill.OnAscensionLevelUp += OnAscend;
             _popup.OnAscendButtonClicked += _model.Ascend;
             _popup.OnCancelButtonClicked += Hide;
-            
+
             _popup.SetAscendButtonInteractable(_model.IsAscendAvailable());
             _popup.SetActive(false);
         }
@@ -74,32 +75,35 @@ namespace _Game.UI._Skills.Scripts
             _popup.SetAscendButtonInteractable(_model.IsAscendAvailable());
         }
 
-        private void PlayButtonSound() => 
+        private void PlayButtonSound() =>
             _audioService.PlayButtonSound();
-        
-        private void PlayUpgradeSound() => 
+
+        private void PlayUpgradeSound() =>
             _audioService.PlayUpgradeSound();
-        
+
         private void UpdateBoostInfo()
         {
             for (int i = 0; i < _model.Boosts.Length; i++)
             {
                 var boost = _model.Boosts[i];
-                
+
                 if (!_passiveBoostInfo.TryGetValue(boost, out var view))
                 {
                     view = _popup.PassiveBoostInfoListView.SpawnElement();
                     _passiveBoostInfo.Add(boost, view);
                 }
-                
+
                 float currentPassiveValue = _model.GetCurrentPassiveFor(i);
                 float nextPassiveValue = _model.GetNextPassiveFor(i);
-                
+
                 view.SetIcon(_config.ForBoostIcon(boost.Type));
                 view.SetName(boost.Name);
-                view.SetCurrentValue(currentPassiveValue.ToCompactFormat());
-                view.SetNextValue(nextPassiveValue.ToCompactFormat());
-                view.SetNextValueActive(!_model.IsAscendAvailable());
+                //view.SetCurrentValue(currentPassiveValue.ToCompactFormat());
+                //view.SetNextValue(nextPassiveValue.ToCompactFormat());
+                //view.SetNextValueActive(!_model.IsAscendAvailable());
+
+                view.SetValue($"<color=white>{currentPassiveValue.ToCompactFormat()}</color>" +
+$"<color=green> > {nextPassiveValue.ToCompactFormat()}</color>");
             }
         }
     }

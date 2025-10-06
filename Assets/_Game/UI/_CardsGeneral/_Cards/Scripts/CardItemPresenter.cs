@@ -1,4 +1,5 @@
 ﻿using _Game.Core._Logger;
+using _Game.Core.Configs.Models._IconConfig;
 using _Game.Core.Configs.Repositories._IconConfigRepository;
 using _Game.Core.Data;
 using _Game.Core.Services._Camera;
@@ -10,39 +11,41 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
 {
     public class CardItemPresenter
     {
-       public CardItemView View => _view;
+        public CardItemView View => _view;
         public CardModel Model => _cardModel;
 
         private CardModel _cardModel;
         private CardItemView _view;
-        
+        private readonly IIconConfigRepository _iconConfig;
         private readonly CardPresenter _presenter;
-        
+
         private ICardPopupProvider _cardPopupProvider;
         private IWorldCameraService _cameraService;
         private IAudioService _audioService;
-        private IIconConfigRepository _config;
         private BoostContainer _boosts;
         private CardPopupPresenter _cardPopupPresenter;
         private IMyLogger _logger;
 
         public CardItemPresenter(
-            CardModel cardModel, 
+            CardModel cardModel,
             CardItemView view,
-            IMyLogger logger)
+            IMyLogger logger,
+            IIconConfigRepository iconConfig
+            )
         {
             _cardModel = cardModel;
             _view = view;
-            _presenter = new CardPresenter(cardModel, view.CardView);
+            _iconConfig = iconConfig;
+            _presenter = new CardPresenter(cardModel, view.CardView, iconConfig);
             _logger = logger;
         }
 
         public CardItemPresenter(
-            CardModel cardModel, 
+            CardModel cardModel,
             CardItemView view,
             IWorldCameraService cameraService,
             IAudioService audioService,
-            IIconConfigRepository config,
+            IIconConfigRepository iconConfig,
             BoostContainer boosts,
             IMyLogger logger)
         {
@@ -50,11 +53,11 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
             _view = view;
             _cameraService = cameraService;
             _audioService = audioService;
-            _config = config;
             _boosts = boosts;
-            _logger = logger;            
-            
-            _presenter = new CardPresenter(cardModel, view.CardView);
+            _logger = logger;
+            _iconConfig = iconConfig;
+
+            _presenter = new CardPresenter(cardModel, view.CardView, _iconConfig);
         }
 
         public void InitializeNotClickable()
@@ -62,17 +65,17 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
             _presenter.Initialize();
             _cardModel.Card.CountChanged += OnStateChanged;
             _cardModel.Card.OnLevelUp += OnLevelChanged;
-            
+
             OnStateChanged();
         }
-        
+
         public void Initialize()
         {
             _presenter.Initialize();
             _cardModel.Card.CountChanged += OnStateChanged;
             _cardModel.Card.OnLevelUp += OnLevelChanged;
             _view.CardClicked += OnCardClicked;
-            
+
             OnStateChanged();
         }
 
@@ -97,14 +100,14 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
         private async void OnCardClicked()
         {
             _audioService.PlayButtonSound();
-            
+
             _cardModel.SetNew(false);
             _cardPopupPresenter ??= new CardPopupPresenter(Model);
             _cardPopupProvider ??= new CardPopupProvider(
                 _cardPopupPresenter,
                 _cameraService,
                 _audioService,
-                _config,
+                _iconConfig,
                 _boosts,
                 _logger);
             Disposable<CardPopup> popup = await _cardPopupProvider.Load();

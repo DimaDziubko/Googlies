@@ -15,12 +15,12 @@ namespace _Game.UI._BoostPopup
     {
         [SerializeField] private Canvas _canvas;
 
-        [SerializeField] private BoostInfoContainerListView _boostInfoContainerListView;
+        [SerializeField] private BoostInfoContainer _boostInfoContainerListView;
 
         [SerializeField] private Button[] _cancelButtons;
 
         [SerializeField] private PopupAppearanceAnimation _animation;
-        
+
         private UniTaskCompletionSource<bool> _taskCompletion;
 
         private List<BoostInfoContainer> _containers = new(2);
@@ -65,9 +65,9 @@ namespace _Game.UI._BoostPopup
             {
                 InitBoostContainer(subSource);
             }
-            
+
             _animation.PlayShow(OnShowComplete);
-            
+
             _taskCompletion = new UniTaskCompletionSource<bool>();
             var result = await _taskCompletion.Task;
             return result;
@@ -77,27 +77,30 @@ namespace _Game.UI._BoostPopup
 
         private void InitBoostContainer(BoostSource source)
         {
-            BoostInfoContainer panel = _boostInfoContainerListView.SpawnElement();
-            panel.SetName(source.ToName());
+            //BoostInfoContainer panel = _boostInfoContainerListView.SpawnElement();
+            //panel.SetName(source.ToName());
+
+            if (source != BoostSource.Total)
+                return;
 
             IEnumerable<BoostModel> boosts = _popupPresenter.GetBoosts(source);
 
             if (boosts != null)
             {
-                var boostsToShow = boosts.Where(x =>
-                    (x.Value > 1) ||
-                    (x.Type == BoostType.AllUnitDamage || x.Type == BoostType.AllUnitHealth));
+                //var boostsToShow = boosts.Where(x =>
+                //    (x.Value > 1) ||
+                //    (x.Type == BoostType.AllUnitDamage || x.Type == BoostType.AllUnitHealth)); 
 
-                foreach (var boost in boostsToShow)
+                foreach (var boost in boosts)
                 {
-                    var view = panel.BoostInfoListView.SpawnElement();
+                    var view = _boostInfoContainerListView.BoostInfoListView.SpawnElement();
                     var presenter = _factory.Create(boost, view);
                     presenter.Initialize();
                     _presenters.Add(boost, presenter);
                 }
             }
 
-            _containers.Add(panel);
+            _containers.Add(_boostInfoContainerListView);
         }
 
         private void OnCancelled()
@@ -106,7 +109,7 @@ namespace _Game.UI._BoostPopup
             PlayButtonSound();
             _animation.PlayHide(OnHideComplete);
         }
-        
+
         private void DisableButtons()
         {
             foreach (var button in _cancelButtons)

@@ -54,14 +54,16 @@ namespace _Game.UI.WarriorsFund.Scripts
                 _exitButton2.clicked += OnExitButtonClicked;
             if (_purchaseBtn != null)
                 _purchaseBtn.clicked += OnPurchaseButtonClicked;
-            
+
             _presenter.Purchased += OnPurchased;
 
             Product product = _presenter.GetSegmentedIAP();
 
             if (product != null && _purchaseBtn != null)
             {
-                _purchaseBtn.text = product.metadata.localizedPrice.ToString(CultureInfo.InvariantCulture);
+                //_purchaseBtn.text = product.metadata.localizedPrice.ToString(CultureInfo.InvariantCulture); //"грн";
+                _purchaseBtn.text = (product.metadata.localizedPriceString);
+
                 _purchaseBtn.SetEnabled(true);
                 return;
             }
@@ -153,7 +155,7 @@ namespace _Game.UI.WarriorsFund.Scripts
                 _exitButton2.clicked -= OnExitButtonClicked;
             if (_purchaseBtn != null)
                 _purchaseBtn.clicked -= OnPurchaseButtonClicked;
-            
+
         }
 
         private void OnPurchaseButtonClicked()

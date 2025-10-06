@@ -9,18 +9,18 @@ namespace _Game.UI._CardsGeneral.Scripts
 {
     public class GeneralCardsScreen : MonoBehaviour            
     {
-        public ToggleButton CardBtn => _cardsBtn;
-        public ToggleButton SkillsBtn => _skillsBtn;
-        public ToggleButton RunesBtn => _runesBtn;
-        public ToggleButton HeroesBtn => _heroesBtn;
+        public SimpleToggleButton CardBtn => _cardsBtn;
+        public SimpleToggleButton SkillsBtn => _skillsBtn;
+        public SimpleToggleButton RunesBtn => _runesBtn;
+        public SimpleToggleButton HeroesBtn => _heroesBtn;
         public TutorialStep SkillsStep => _skillsStep;
 
         [SerializeField, Required] private Canvas _canvas;
         
-        [SerializeField, Required] private ToggleButton _cardsBtn;
-        [SerializeField, Required] private ToggleButton _skillsBtn;
-        [SerializeField, Required] private ToggleButton _runesBtn;
-        [SerializeField, Required] private ToggleButton _heroesBtn;
+        [SerializeField, Required] private SimpleToggleButton _cardsBtn;
+        [SerializeField, Required] private SimpleToggleButton _skillsBtn;
+        [SerializeField, Required] private SimpleToggleButton _runesBtn;
+        [SerializeField, Required] private SimpleToggleButton _heroesBtn;
 
         [SerializeField, Required] private QuickBoostInfoPanel _quickBoostInfoPanel;
 

@@ -7,7 +7,6 @@ namespace _Game.UI._CardsGeneral._Summoning.Scripts
 {
     public class CardSummoningView : MonoBehaviour
     {
-        [SerializeField] private Image _cardColorIcon;
         [SerializeField] private TMP_Text _typeLabel;
         [SerializeField] private TMP_Text _summoningLabel;
 
@@ -17,7 +16,6 @@ namespace _Game.UI._CardsGeneral._Summoning.Scripts
         {
             _typeLabel.color = color;
             _summoningLabel.color = color;
-            _cardColorIcon.color = color;
         }
 
         public void SetTypeName(string typeName)

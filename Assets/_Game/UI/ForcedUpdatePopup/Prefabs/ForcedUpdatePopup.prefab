@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9764706, b: 0.9843137, a: 1}
+  m_Color: {r: 0.80784315, g: 0.83137256, b: 0.9529412, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -382,17 +382,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 0
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 0
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -518,17 +516,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 0
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -610,7 +606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25490198, g: 0.39215687, b: 0.49803922, a: 1}
+  m_Color: {r: 0.38431373, g: 0.42352942, b: 0.6392157, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -953,10 +949,6 @@ PrefabInstance:
       value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 4274093394713115644, guid: 796c6ff2fb8125446b6b47a74cb39c24, type: 3}
-      propertyPath: m_TextWrappingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4274093394713115644, guid: 796c6ff2fb8125446b6b47a74cb39c24, type: 3}
       propertyPath: m_characterSpacing
       value: -5
       objectReference: {fileID: 0}
@@ -982,15 +974,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4900477359537218264, guid: 796c6ff2fb8125446b6b47a74cb39c24, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.050980393
       objectReference: {fileID: 0}
     - target: {fileID: 4900477359537218264, guid: 796c6ff2fb8125446b6b47a74cb39c24, type: 3}
       propertyPath: m_Color.g
-      value: 0.6666667
+      value: 0.8039216
       objectReference: {fileID: 0}
     - target: {fileID: 4900477359537218264, guid: 796c6ff2fb8125446b6b47a74cb39c24, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 0.99215686
       objectReference: {fileID: 0}
     - target: {fileID: 5876678681457449178, guid: 796c6ff2fb8125446b6b47a74cb39c24, type: 3}
       propertyPath: m_Name

@@ -78,7 +78,10 @@ namespace _Game.UI.ClassicOffers.Scripts.Presenter
                 if (product != null)
                 {
                     _popup.SetPurchaseButton(product.metadata.localizedPriceString);
+                    //_popup.SetPurchaseBtnEnabled(true);
                 }
+                else
+                    _popup?.SetPurchaseBtnEnabled(false);
             }
         }
 
@@ -104,13 +107,11 @@ namespace _Game.UI.ClassicOffers.Scripts.Presenter
         private void OnEventTimerTick(float secondsLeft)
         {
             _popup.SetTimerText(TimeSpan.FromSeconds(secondsLeft).ToCondensedTimeFormat());
-            // EventTimerTick?.Invoke(secondsLeft);
         }
 
         private void UnSubsribe()
         {
             _event.OnEventTimerTick -= OnEventTimerTick;
-            //_event.OnOfferPurchased -= ClosePopup;
             _popup.OnPurchase -= TryToPurchaseOffer;
             _event.OnOfferPurchased -= ProgressChanged;
         }
@@ -118,7 +119,6 @@ namespace _Game.UI.ClassicOffers.Scripts.Presenter
         private void Subsribe()
         {
             _event.OnEventTimerTick += OnEventTimerTick;
-            //_event.OnOfferPurchased += ClosePopup;
             _popup.OnPurchase += TryToPurchaseOffer;
             _event.OnOfferPurchased += ProgressChanged;
         }
@@ -135,19 +135,7 @@ namespace _Game.UI.ClassicOffers.Scripts.Presenter
 
         private void TryToPurchaseOffer()
         {
-            //if (_event.Bundle != null)
-            //{
             _iapProvider.StartPurchase(GetSegmentedIAP().definition.id);
-            //}
         }
-
-        //private void CheckProduct()
-        //{
-        //    if (_event.Bundle != null)
-        //    {
-        //        if (_event.Bundle.Product == null)
-        //            _event.Bundle.TryUpdateProduct();
-        //    }
-        //}
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using _Game.Core.UserState._State;
 using _Game.Gameplay._Boosts.Scripts;
 using _Game.UI._UpgradesScreen.Scripts;
@@ -41,14 +42,18 @@ namespace _Game.Core.Configs.Models._IconConfig
         [Space]
         [Header("Cards")]
         [Required] public Sprite CardIcon;
-
+        [Header("Cards Boosts")]
+        [SerializeField, Required] private CardBoostIconConfig[] _cardBoosts;
         [Space]
+        [Header("Boosts")]
         [Required] public Sprite AllUnitDamageIcon;
-
         [Required] public Sprite AllUnitHealthIcon;
         [Required] public Sprite CoinsGainedIcon;
         [Required] public Sprite BaseHealthIcon;
-
+        [Space]
+        [Header("Unity Type")]
+        [SerializeField, Required] private Sprite _meleeSprite;
+        [SerializeField, Required] private Sprite _rangedSprite;
 
         [Space]
         [Required] public Sprite StatAttackIcon;
@@ -66,7 +71,7 @@ namespace _Game.Core.Configs.Models._IconConfig
         [Space][Header("Ads")] public Sprite AdsIcon;
 
         public GameEventIconConfig GameEventIconConfig;
-        
+
         public Sprite GetBoostIconFor(BoostType boostType)
         {
             switch (boostType)
@@ -186,16 +191,29 @@ namespace _Game.Core.Configs.Models._IconConfig
                 _ => 0,
             };
         }
-        
-        public AssetReference GetWarriorsFundAtlasReference() => 
+
+        public AssetReference GetWarriorsFundAtlasReference() =>
             GameEventIconConfig.WarriorsFundAtlasReference;
+
+        public Sprite GetUnitType(bool isMelee)
+        {
+            if (isMelee)
+                return _meleeSprite;
+            else
+                return _rangedSprite;
+        }
+
+        public Sprite GetBoostIconCardsFor(BoostType type)
+        {
+            return _cardBoosts.FirstOrDefault(x => x.Type == type)?.Icon;
+        }
     }
 
     [Serializable]
     public class GameEventIconConfig
     {
         [Required] public AssetReference WarriorsFundAtlasReference;
-        
+
         [Required] public Sprite LeaderPassIcon;
         [Required] public Sprite ClassicOfferIcon;
         [Required] public Sprite SacredLegionIcon;
@@ -204,7 +222,7 @@ namespace _Game.Core.Configs.Models._IconConfig
         public Sprite GetIconFor(string key)
         {
             Debug.Log($"GET ICON FOR {key}");
-            
+
             return key switch
             {
                 "Leader Pass" => LeaderPassIcon,
@@ -213,5 +231,11 @@ namespace _Game.Core.Configs.Models._IconConfig
                 _ => LeaderPassIcon,
             };
         }
+    }
+    [Serializable]
+    internal class CardBoostIconConfig
+    {
+        public BoostType Type;
+        public Sprite Icon;
     }
 }

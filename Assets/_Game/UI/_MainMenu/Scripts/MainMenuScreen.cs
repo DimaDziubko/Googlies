@@ -47,7 +47,6 @@ namespace _Game.UI._MainMenu.Scripts
         
         
         [SerializeField] private Vector2 _highlightedBtnScale = new(1f, 1.2f);
-        [SerializeField, Min(0)] private float _buttonOutlineWidth = 3f;
 
         private MainMenu _mainMenu;
 
@@ -85,11 +84,8 @@ namespace _Game.UI._MainMenu.Scripts
         [Button]
         private void InitButtonsLayout()
         {
-            int count = GetAllButtons().Count();
             float canvasWidth = _canvasRectTransform.rect.width;
-            
-            float normalWidth = (canvasWidth + (count - 1) * _buttonOutlineWidth) / 
-                                (count - 1 + _highlightedBtnScale.x);
+            float normalWidth = canvasWidth / (GetAllButtons().Count() - 1 + _highlightedBtnScale.x);
 
             _normalButtonSize = new Vector2(normalWidth, _normalButtonSize.y);
 
@@ -113,7 +109,7 @@ namespace _Game.UI._MainMenu.Scripts
                 var rect = button.RectTransform;
                 float width = rect.sizeDelta.x;
                 rect.anchoredPosition = new Vector2(x + width / 2f, rect.anchoredPosition.y);
-                x += width - _buttonOutlineWidth;
+                x += width;
             }
         }
 

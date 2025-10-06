@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Game.Core.Boosts;
+using _Game.Gameplay._Units.Factory;
 using _Game.Gameplay._Units.Scripts;
 using _Game.UI.Common.Scripts;
 using _Game.UI.UpgradesAndEvolution.Scripts;
@@ -29,7 +30,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
         public UnitUpgrade(IUnitData data)
         {
             _data = data;
-            
+
             UpdateStats(data);
         }
 
@@ -47,6 +48,12 @@ namespace _Game.UI._UpgradesScreen.Scripts
                 _data.GetStatInfo(StatType.Damage),
                 _data.GetStatInfo(StatType.Health)
             };
+        }
+
+        internal bool GetWeaponType()
+        {
+            if (_data.WeaponData.WeaponType == WeaponType.SimpleMelee) return true;
+            else return false;
         }
     }
 }
