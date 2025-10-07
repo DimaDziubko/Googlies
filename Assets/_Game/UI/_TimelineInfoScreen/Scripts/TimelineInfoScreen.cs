@@ -19,13 +19,12 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
 {
     public class TimelineInfoScreen : MonoBehaviour
     {
-        [SerializeField] private Canvas _canvas;
         [SerializeField] private ScrollRect _scrollRect;
-        
+
         [SerializeField] private AgeInfoListView _ageInfoListView;
 
         [SerializeField] private TimelineProgressBar _progressBar;
-        [SerializeField] private ThemedButton _exitBtn;
+        //[SerializeField] private ThemedButton _exitBtn;
         [SerializeField] private AudioClip _evolveSFX;
 
         [SerializeField] private float _animationDelay = 1.0f;
@@ -34,9 +33,9 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
 
         [SerializeField] private TMP_Text _difficultyText;
         [SerializeField] private TMP_Text _timelineText;
-        
+
         private UniTaskCompletionSource<bool> _taskCompletion;
-        
+
         private readonly List<TimelineInfoItemPresenter> _presenters = new();
 
         private IAudioService _audioService;
@@ -56,17 +55,16 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
             IMyLogger logger,
             IWorldCameraService cameraService,
             IAdsService adsService,
-            IAgeNavigator ageNavigator)
+            IAgeNavigator ageNavigator
+            )
         {
-            _canvas.enabled = false;
             _audioService = audioService;
             _timelineInfoPresenter = timelineInfoPresenter;
             _logger = logger;
-            _canvas.worldCamera = cameraService.UICameraOverlay;
-            _exitBtn.interactable = false;
+            //_exitBtn.interactable = false;
             _adsService = adsService;
             _ageNavigator = ageNavigator;
-            
+
             InitInfoItems();
         }
 
@@ -80,7 +78,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
         {
             _difficultyText.text = _timelineInfoPresenter.GetDifficulty();
             _timelineText.text = _timelineInfoPresenter.GetTimelineText();
-            
+
             foreach (var item in _timelineInfoPresenter.Items)
             {
                 AgeInfoView view = _ageInfoListView.SpawnElement();
@@ -92,7 +90,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
             InitSlider();
             UpdateSlider(_timelineInfoPresenter.CurrentAge, _presenters.Count);
             AdjustScrollPosition(_timelineInfoPresenter.CurrentAge, _presenters.Count);
-            
+
             Unsubscribe();
             Subscribe();
         }
@@ -100,7 +98,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
         private async void InitSlider()
         {
             await UniTask.Yield();
-            
+
             if (_presenters.Count < 2)
             {
                 _progressBar.SetWidth(0);
@@ -109,47 +107,46 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
             }
 
             _progressBar.SetActive(true);
-            
+
             float distanceBetweenCenters = _presenters[1].View.Transform.anchoredPosition.x - _presenters[0].View.Transform.anchoredPosition.x;
-            
+
             float totalWidth = (_presenters.Count - 1) * Mathf.Abs(distanceBetweenCenters);
-            
+
             _progressBar.SetWidth(totalWidth);
         }
 
-        public async UniTask<bool> ShowScreen()
-        {
-            await UniTask.Yield();
-            _canvas.enabled = true;
-            _exitBtn.SetInteractable(true);
-            _taskCompletion = new UniTaskCompletionSource<bool>();
-            var result = await _taskCompletion.Task;
-            _canvas.enabled = false;
-            return result;
-        }
+        //public async UniTask<bool> ShowScreen()
+        //{
+        //    await UniTask.Yield();
+        //    _exitBtn.SetInteractable(true);
+        //    _taskCompletion = new UniTaskCompletionSource<bool>();
+        //    var result = await _taskCompletion.Task;
 
-        public async UniTask<bool> ShowScreenWithTransitionAnimation()
-        {
-            await UniTask.Yield();
-            
-            _canvas.enabled = true;
-            _taskCompletion = new UniTaskCompletionSource<bool>();
-            PlayEvolveAnimation();
-            var result = await _taskCompletion.Task;
-            _canvas.enabled = false;
-            return result;
-        }
+        //    return result;
+        //}
+
+        //public async UniTask<bool> ShowScreenWithTransitionAnimation()
+        //{
+        //    await UniTask.Yield();
+
+        //    _canvas.enabled = true;
+        //    _taskCompletion = new UniTaskCompletionSource<bool>();
+        //    PlayEvolveAnimation();
+        //    var result = await _taskCompletion.Task;
+        //    _canvas.enabled = false;
+        //    return result;
+        //}
 
         [Button]
         public void PlayFirstAgeAnimation()
         {
             _progressBar.Cleanup();
-            
+
             _animation?.Kill();
             _subAnimation?.Kill();
-            
-            _exitBtn.SetInteractable(false);
-            
+
+            //_exitBtn.SetInteractable(false);
+
             _animation = DOTween.Sequence().AppendInterval(_animationDelay);
             _animation.OnComplete(() =>
             {
@@ -163,7 +160,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
 
                 _subAnimation.OnComplete(() =>
                 {
-                    _exitBtn.SetInteractable(true);
+                    //_exitBtn.SetInteractable(true);
                 });
             });
         }
@@ -171,11 +168,11 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
         private void PlayEvolveAnimation()
         {
             _progressBar.Cleanup();
-            
+
             _animation?.Kill();
             _subAnimation?.Kill();
-            
-            _exitBtn.SetInteractable(false);
+
+            //_exitBtn.SetInteractable(false);
 
             PlayEvolveSound();
 
@@ -188,15 +185,15 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
                 int nextAge = _ageNavigator.CurrentIdx + 1;
 
                 _presenters[nextAge].SetLocked(false);
-                
+
                 int totalAges = _ageNavigator.GetTotalAgesCount();
-                
+
                 if (nextAge >= totalAges)
                 {
                     _logger.LogWarning("Attempting to access out of range age. Animation aborted.");
-        
-                    _exitBtn.SetInteractable(true);
-                    
+
+                    //_exitBtn.SetInteractable(true);
+
                     return;
                 }
 
@@ -213,8 +210,8 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
                 _subAnimation.OnComplete(() =>
                 {
                     _ageNavigator.MoveToNextAge();
-                    _exitBtn.SetInteractable(true);
-                    if(_adsService.IsAdReady(AdType.Interstitial)) _adsService.ShowInterstitialVideo(Placement.Evolution);
+                    //_exitBtn.SetInteractable(true);
+                    if (_adsService.IsAdReady(AdType.Interstitial)) _adsService.ShowInterstitialVideo(Placement.Evolution);
                 });
             });
         }
@@ -226,7 +223,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
             float scrollPercentage = ((float)currentItem / (items - 1));
             _scrollRect.horizontalNormalizedPosition = scrollPercentage;
         }
-        
+
         private void OnExit()
         {
             _audioService.PlayButtonSound();
@@ -239,36 +236,36 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
         {
             _animation?.Kill();
             _animation = null;
-            
+
             _subAnimation?.Kill();
             _subAnimation = null;
 
             _progressBar.Cleanup();
-            
+
             foreach (var presenter in _presenters)
             {
                 presenter.Dispose();
                 _ageInfoListView.DestroyElement(presenter.View);
             }
-            
+
             _presenters.Clear();
         }
 
         private void Subscribe()
         {
-            _exitBtn.onClick.AddListener(OnExit);
+            //_exitBtn.onClick.AddListener(OnExit);
             _timelineInfoPresenter.StateChanged += OnStateChanged;
         }
 
         private void Unsubscribe()
         {
-            _exitBtn.onClick.RemoveAllListeners();
+            //_exitBtn.onClick.RemoveAllListeners();
             _timelineInfoPresenter.StateChanged -= OnStateChanged;
         }
-        
+
         private void UpdateSlider(int currentAge, int ages) =>
             _progressBar.UpdateValue(currentAge, ages);
-        
+
         private void PlayEvolveSound()
         {
             if (_audioService != null && _evolveSFX != null)

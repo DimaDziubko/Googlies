@@ -1,9 +1,15 @@
 using _Game.Core._FeatureUnlockSystem.Scripts;
+using _Game.Core._Logger;
+using _Game.Core.Ads;
 using _Game.Core.Configs.Repositories;
+using _Game.Core.Navigation.Age;
 using _Game.Core.Services._Camera;
+using _Game.Core.Services.Audio;
 using _Game.Core.UserState._State;
 using _Game.UI._Shop._MiniShop.Scripts;
 using _Game.UI._Shop.Scripts._AmountView;
+using _Game.UI._TimelineInfoPresenter;
+using _Game.UI._TimelineInfoScreen.Scripts;
 using _Game.UI.Common.Scripts;
 using _Game.Utils.Extensions;
 using Sirenix.OdinInspector;
@@ -24,7 +30,10 @@ namespace _Game.UI._EvolveScreen.Scripts
         [SerializeField, Required] private TransactionButton _evolveButton;
         [SerializeField, Required] private Button _timelineInfoButton;
         [SerializeField, Required] private AmountView _rewardView;
-        
+
+        [Space]
+        [SerializeField] private TimelineInfoScreen _testTimelineInfo;
+
         private IEvolveScreenPresenter _presenter;
         private IMiniShopProvider _miniShopProvider;
         private IFeatureUnlockSystem _featureUnlockSystem;
@@ -34,13 +43,28 @@ namespace _Game.UI._EvolveScreen.Scripts
             IWorldCameraService cameraService,
             IEvolveScreenPresenter evolveScreenPresenter,
             IConfigRepository config,
-            IFeatureUnlockSystem featureUnlockSystem)
+            IFeatureUnlockSystem featureUnlockSystem,
+            IAudioService audioService,
+            ITimelineInfoPresenter timelineInfoPresenter,
+            IMyLogger logger,
+            IAdsService adsService,
+            IAgeNavigator ageNavigator
+            )
         {
             _featureUnlockSystem = featureUnlockSystem;
             _config = config;
             _canvas.worldCamera = cameraService.UICameraOverlay;
             _presenter = evolveScreenPresenter;
             _canvas.enabled = false;
+
+            _testTimelineInfo.Construct(
+                audioService,
+                timelineInfoPresenter,
+                logger,
+                cameraService,
+                adsService,
+                ageNavigator
+                );
         }
 
         public void Show()
@@ -49,14 +73,14 @@ namespace _Game.UI._EvolveScreen.Scripts
             Subscribe();
             _presenter.OnScreenOpen();
             OnStateChanged();
-            
+
             _canvas.enabled = true;
         }
 
         private void OnStateChanged()
         {
             _timelineLabel.text = _presenter.GetTimelineNumber();
-            
+
             _currentAgeImage.sprite = _presenter.GetCurrentAgeIcon();
             _nextAgeImage.sprite = _presenter.GetNextAgeIcon();
 
@@ -76,7 +100,7 @@ namespace _Game.UI._EvolveScreen.Scripts
 
             OnButtonStateChanged();
         }
-        
+
         private void Subscribe()
         {
             _evolveButton.ButtonClicked += _presenter.OnEvolveClicked;
@@ -88,7 +112,7 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         private void OnButtonStateChanged()
         {
-            _evolveButton.SetPrice(_presenter.GetEvolutionPrice().ToCompactFormat());    
+            _evolveButton.SetPrice(_presenter.GetEvolutionPrice().ToCompactFormat());
             _evolveButton.SetCurrencyIcon(_presenter.GetCurrencyIcon());
             _evolveButton.SetMoneyPanelActive(_presenter.GetEvolutionPrice() > 0);
             _evolveButton.SetInteractable(_presenter.CanEvolve());
@@ -109,7 +133,7 @@ namespace _Game.UI._EvolveScreen.Scripts
             _canvas.enabled = false;
             _presenter.OnScreenClosed();
         }
-        
+
         public void Dispose()
         {
             Unsubscribe();

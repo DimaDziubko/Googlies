@@ -38,7 +38,6 @@ namespace _Game.UI._EvolveScreen.Scripts
         
         public async UniTask InitializeAsync()
         {
-            _subStateMachine.AddState(new EvolveState(_evolveProvider, _logger));
             _subStateMachine.AddState(new TravelState(_travelProvider, _logger));
             
             await _subStateMachine.InitializeAsync();
@@ -73,7 +72,7 @@ namespace _Game.UI._EvolveScreen.Scripts
             if(!_ageNavigator.IsNextAge() || _ageNavigator.IsAllBattlesWon()) _subStateMachine.Enter<TravelState>();
             else
             {
-                _subStateMachine.Enter<EvolveState>();
+                //_subStateMachine.Enter<EvolveState>(); //TODO
             }
         }
 

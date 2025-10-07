@@ -1,7 +1,12 @@
 ﻿using _Game.Core._FeatureUnlockSystem.Scripts;
+using _Game.Core._Logger;
+using _Game.Core.Ads;
 using _Game.Core.AssetManagement;
 using _Game.Core.Configs.Repositories;
+using _Game.Core.Navigation.Age;
 using _Game.Core.Services._Camera;
+using _Game.Core.Services.Audio;
+using _Game.UI._TimelineInfoPresenter;
 using _Game.Utils;
 using _Game.Utils.Disposable;
 using Cysharp.Threading.Tasks;
@@ -14,19 +19,34 @@ namespace _Game.UI._EvolveScreen.Scripts
         private readonly IEvolveScreenPresenter _evolveScreenPresenter;
         private readonly IConfigRepository _config;
         private readonly IFeatureUnlockSystem _featureUnlockSystem;
-
+        private readonly IAudioService _audioService;
+        private readonly ITimelineInfoPresenter _timelineInfoPresenter;
+        private readonly IMyLogger _logger;
+        private readonly IAdsService _adsService;
+        private readonly IAgeNavigator _ageNavigator;
         private Disposable<EvolveScreen> _screen;
 
         public EvolveScreenProvider(
             IWorldCameraService cameraService,
-            IEvolveScreenPresenter evolveScreenPresenter, 
+            IEvolveScreenPresenter evolveScreenPresenter,
             IConfigRepository config,
-            IFeatureUnlockSystem featureUnlockSystem)
+            IFeatureUnlockSystem featureUnlockSystem,
+            IAudioService audioService,
+            ITimelineInfoPresenter timelineInfoPresenter,
+            IMyLogger logger,
+            IAdsService adsService,
+            IAgeNavigator ageNavigator
+            )
         {
             _cameraService = cameraService;
             _evolveScreenPresenter = evolveScreenPresenter;
             _config = config;
             _featureUnlockSystem = featureUnlockSystem;
+            _audioService = audioService;
+            _timelineInfoPresenter = timelineInfoPresenter;
+            _logger = logger;
+            _adsService = adsService;
+            _ageNavigator = ageNavigator;
         }
 
         public async UniTask<Disposable<EvolveScreen>> Load()
@@ -38,7 +58,13 @@ namespace _Game.UI._EvolveScreen.Scripts
                 _cameraService,
                 _evolveScreenPresenter,
                 _config,
-                _featureUnlockSystem);
+                _featureUnlockSystem,
+                _audioService,
+                _timelineInfoPresenter,
+                _logger,
+                _adsService,
+                _ageNavigator
+                );
             return _screen;
         }
 

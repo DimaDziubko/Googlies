@@ -11,11 +11,14 @@ using _Game.LiveopsCore;
 using _Game.UI._EvolveScreen.Scripts;
 using _Game.UI._MainMenu.State;
 using _Game.UI.Common.Scripts;
+using _Game.UI.EvolutionScreen;
 using _Game.UI.Global;
 using _Game.UI.Settings.Scripts;
+using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using System;
 using UnityUtils;
+using Zenject;
 
 namespace _Game.UI._StartBattleScreen.Scripts
 {
@@ -51,7 +54,8 @@ namespace _Game.UI._StartBattleScreen.Scripts
         private readonly IUINotifier _uiNotifier;
         private readonly IBalancySDKService _balancy;
         private readonly IGameEventScheduler _gameEventScheduler;
-
+        private EvolutionPresenter _evolutionPresenter;
+        private readonly IEvolveScreenProvider _evolveProvider;
         private CurrencyBank _bank;
 
         private bool _isOpened;
@@ -67,7 +71,9 @@ namespace _Game.UI._StartBattleScreen.Scripts
             IUINotifier uiNotifier,
             CurrencyBank bank,
             IBalancySDKService balancy,
-            IGameEventScheduler gameEventScheduler)
+            IGameEventScheduler gameEventScheduler,
+            IEvolveScreenProvider evolveProvider
+            )
         {
             _balancy = balancy;
             _bank = bank;
@@ -80,6 +86,7 @@ namespace _Game.UI._StartBattleScreen.Scripts
             _audioService = audioService;
             _uiNotifier = uiNotifier;
             _gameEventScheduler = gameEventScheduler;
+            _evolveProvider = evolveProvider;
 
             _uiNotifier.RegisterScreen(this, this);
         }
@@ -303,6 +310,11 @@ namespace _Game.UI._StartBattleScreen.Scripts
             //Screen.EvolutionStep.CompleteStep();
 
             //_localStateMachine.Enter<EvolutionState>();
+
+            if (_evolutionPresenter == null)
+                _evolutionPresenter = new EvolutionPresenter(_evolveProvider, _logger);
+
+            _evolutionPresenter.ShowScreen().Forget();
             PlayButtonSound();
         }
 

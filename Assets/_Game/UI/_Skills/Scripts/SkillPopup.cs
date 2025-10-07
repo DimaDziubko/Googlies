@@ -34,10 +34,10 @@ namespace _Game.UI._Skills.Scripts
         [SerializeField, Required] private ThemedButton _upgradeButton;
         [SerializeField, Required] private ThemedButton _ascendButton;
 
-        [SerializeField, Required] private GameObject _equipButtonContainer;
-        [SerializeField, Required] private GameObject _removeButtonContainer;
-        [SerializeField, Required] private GameObject _upgradeButtonContainer;
-        [SerializeField, Required] private GameObject _ascendButtonContainer;
+        //[SerializeField, Required] private GameObject _equipButtonContainer;
+        //[SerializeField, Required] private GameObject _removeButtonContainer;
+        //[SerializeField, Required] private GameObject _upgradeButtonContainer;
+        //[SerializeField, Required] private GameObject _ascendButtonContainer;
 
         [SerializeField, Required] private GameObject _hint;
         [SerializeField, Required] private Button _hintButton;
@@ -218,10 +218,15 @@ namespace _Game.UI._Skills.Scripts
 
         private void UpdateButtons()
         {
-            _equipButtonContainer.SetActive(!_skillPopupPresenter.IsEquipped);
-            _removeButtonContainer.SetActive(_skillPopupPresenter.IsEquipped);
-            _upgradeButtonContainer.SetActive(!_skillPopupPresenter.IsAscendAvailable);
-            _ascendButtonContainer.SetActive(_skillPopupPresenter.IsAscendAvailable);
+            //_equipButtonContainer.SetActive(!_skillPopupPresenter.IsEquipped);
+            //_removeButtonContainer.SetActive(_skillPopupPresenter.IsEquipped);
+            //_upgradeButtonContainer.SetActive(!_skillPopupPresenter.IsAscendAvailable);
+            //_ascendButtonContainer.SetActive(_skillPopupPresenter.IsAscendAvailable);
+
+            _equipButton.gameObject.SetActive(!_skillPopupPresenter.IsEquipped);
+            _removeButton.gameObject.SetActive(_skillPopupPresenter.IsEquipped);
+            _upgradeButton.gameObject.SetActive(!_skillPopupPresenter.IsAscendAvailable);
+            _ascendButton.gameObject.SetActive(_skillPopupPresenter.IsAscendAvailable);
 
             _equipButton.SetInteractable(true);
             _removeButton.SetInteractable(true);

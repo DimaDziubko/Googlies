@@ -228,8 +228,8 @@ namespace _Game.UI._EvolveScreen.Scripts
         {
             _audioService.PlayButtonSound();
             var screen = await _timelineInfoProvider.Load();
-            var isExited = await screen.Value.ShowScreenWithTransitionAnimation();
-            if (isExited) _timelineInfoProvider.Dispose();
+            //var isExited = await screen.Value.ShowScreenWithTransitionAnimation();
+            //if (isExited) _timelineInfoProvider.Dispose();
         }
 
         public async void OnInactiveEvolveClicked()
@@ -247,8 +247,8 @@ namespace _Game.UI._EvolveScreen.Scripts
         {
             _audioService.PlayButtonSound();
             var screen = await _timelineInfoProvider.Load();
-            var isExited = await screen.Value.ShowScreen();
-            if (isExited) _timelineInfoProvider.Dispose();
+            //var isExited = await screen.Value.ShowScreen();
+           // if (isExited) _timelineInfoProvider.Dispose();
         }
         
         //Debug

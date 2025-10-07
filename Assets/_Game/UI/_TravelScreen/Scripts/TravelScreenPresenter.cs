@@ -31,7 +31,7 @@ namespace _Game.UI._TravelScreen.Scripts
         public bool IsReviewed { get; private set; }
         public bool NeedAttention => CanTravel;
         public string Info => "Travel";
-        
+
         private readonly IGameInitializer _gameInitializer;
         private readonly IAgeNavigator _ageNavigator;
         private readonly ITimelineNavigator _timelineNavigator;
@@ -73,7 +73,7 @@ namespace _Game.UI._TravelScreen.Scripts
             _battleNavigator.BattleChanged += OnStateChanged;
 
             IsReviewed = !NeedAttention;
-            
+
             OnStateChanged();
         }
 
@@ -102,10 +102,10 @@ namespace _Game.UI._TravelScreen.Scripts
             _logger.Log("TRAVEL SCREEN DISPOSED", DebugStatus.Info);
             ScreenDisposed?.Invoke(this);
         }
-        
-        void ITravelScreenPresenter.OnScreenActiveChanged(bool isActive) => 
+
+        void ITravelScreenPresenter.OnScreenActiveChanged(bool isActive) =>
             ActiveChanged?.Invoke(this, isActive);
-        
+
         private void OnStateChanged()
         {
             StateChanged?.Invoke();
@@ -120,7 +120,7 @@ namespace _Game.UI._TravelScreen.Scripts
 
         public bool CanTravel => _battleNavigator.AllBattlesWon && IsNextTimeline;
 
-        public string GetTravelConditionHint() => 
+        public string GetTravelConditionHint() =>
             $"Win battle {_battleNavigator.LastBattleNumber} first";
 
         public string GetTravelInfo()
@@ -143,7 +143,7 @@ namespace _Game.UI._TravelScreen.Scripts
 
             Disposable<TimelineInfoScreen> infoScreen = await _infoScreenProvider.Load();
 
-            var showScreenTask = infoScreen.Value.ShowScreen();
+            //var showScreenTask = infoScreen.Value.ShowScreen();
 
             Disposable<TravelAnimationScreen> animationScreen = await travelAnimationScreenProvider.Load();
 
@@ -156,11 +156,11 @@ namespace _Game.UI._TravelScreen.Scripts
                 infoScreen.Value.PlayFirstAgeAnimation();
             }
 
-            var isExit = await showScreenTask;
-            if (isExit)
-            {
-                _infoScreenProvider.Dispose();
-            }
+            //var isExit = await showScreenTask;
+            //if (isExit)
+            //{
+            //    _infoScreenProvider.Dispose();
+            //}
         }
 
         public string GetTravelText()
@@ -170,7 +170,7 @@ namespace _Game.UI._TravelScreen.Scripts
                 : "<color=red>Travel</color>";
             return text;
         }
-        
+
         void IGameScreenListener<IMenuScreen>.OnScreenOpened(IMenuScreen screen)
         {
             if (NeedAttention)
