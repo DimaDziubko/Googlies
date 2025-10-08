@@ -58,6 +58,7 @@ namespace _Game.Gameplay._DailyTasks.Scripts
 
             if (!_view.gameObject.activeSelf) _view.gameObject.SetActive(true);
             _view.SetDailyInfo(_model.DailyInfo);
+            _view.SetTaskLaybel(_model.CustomDescription);
             _view.RewardView.SetAmount(_model.Reward.FirstOrDefault().Amount.ToCompactFormat());
             _view.RewardView.SetIcon(_config.GetCurrencyIconFor(_model.Reward.FirstOrDefault().Type));
 
@@ -92,7 +93,7 @@ namespace _Game.Gameplay._DailyTasks.Scripts
             {
                 _view.PlayNotification();
                 _view.DailyTaskStep.ShowStep(0.5f);
-            } 
+            }
             else
             {
                 _view.DailyTaskStep.CancelStep();
@@ -103,6 +104,7 @@ namespace _Game.Gameplay._DailyTasks.Scripts
         private void OnProgressChanged()
         {
             _view.SetProgress(_model.Progress);
+            _view.SetProgress(_model.ProgressValue);
             _view.SetInteractable(_model.IsReady);
 
             HandleTutorialStepAndNotification();

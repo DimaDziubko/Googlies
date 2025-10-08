@@ -23,8 +23,13 @@ namespace _Game.Gameplay._DailyTasks.Scripts
         public string AdditionalDescription { get; private set; }
 
         public string Progress =>
-            $"{Description} {AdditionalDescription} {Mathf.Min(State.ProgressOnTask, Target).ToCompactFormat(999)}/{Target.ToCompactFormat(999)}";
-
+            $"{Mathf.Min(State.ProgressOnTask, Target).ToCompactFormat(999)}/{Target.ToCompactFormat(999)}";
+        public float ProgressValue =>
+            Target > 0
+                ? Mathf.Clamp01((float)State.ProgressOnTask / Target)
+                : 0f;
+        public string CustomDescription =>
+            $"{Description} {AdditionalDescription}";
         public bool IsReady => State.ProgressOnTask >= Target - float.Epsilon;
 
         public void SetTarget(int target)

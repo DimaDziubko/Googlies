@@ -4,7 +4,7 @@ using _Game.Utils.Disposable;
 using Cysharp.Threading.Tasks;
 using System;
 
-namespace _Game.UI.EvolutionScreen
+namespace _Game.UI._EvolutionScreen
 {
     public class EvolutionPresenter : IDisposable
     {
