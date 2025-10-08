@@ -102,7 +102,8 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
                 _group.constraintCount = settings.ColumnsCount;
                 _dynamicGridLayout.SetColumns(settings.ColumnsCount);
                 _dynamicGridLayout.SetSpacing(settings.Spacing);
-                _dynamicGridLayout.AdjustCellSize();
+                if (count > 20)
+                    _dynamicGridLayout.AdjustCellSize();
             }
         }
 

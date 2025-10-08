@@ -10,6 +10,7 @@ using _Game.Core.Services.UserContainer;
 using _Game.Core.UserState._State;
 using _Game.Gameplay._Tutorial.Scripts;
 using _Game.Gameplay._Units.Scripts;
+using _Game.UI._BoostPopup;
 using _Game.UI.Common.Scripts;
 using _Game.UI.Global;
 using _Game.UI.UpgradesAndEvolution.Scripts;
@@ -24,7 +25,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
         public float Value;
         public float BoostValue;
     }
-    
+
     public class UpgradesScreenPresenter :
         IUpgradesScreenPresenter,
         IDisposable,
@@ -41,7 +42,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
 
         [ShowInInspector, ReadOnly]
         public bool IsReviewed { get; private set; }
-        
+
         //[ShowInInspector, ReadOnly]
         public bool NeedAttention => UpgradeItems.Any(x => _bank.IsEnough(x.Price))
                                      || Units.Any(x => _bank.IsEnough(x.Price) && !TimelineState.OpenUnits.Contains(x.Type));
@@ -53,14 +54,15 @@ namespace _Game.UI._UpgradesScreen.Scripts
 
         [ShowInInspector, ReadOnly]
         private readonly Dictionary<UnitType, UnitUpgrade> _unitUpgradeModelsCache = new(3);
-        
+
         [ShowInInspector, ReadOnly]
         private readonly Dictionary<UpgradeItemType, UpgradeItemPresenter> _upgradeItemPresenters = new(2);
 
         [ShowInInspector, ReadOnly]
         private readonly Dictionary<UnitType, UnitUpgradePresenter> _unitUpgradePresenters = new(3);
+        private readonly QuickBoostInfoPresenter.Factory _factory;
 
-        private IEnumerable<UpgradeItemModel> UpgradeItems =>_upgradeItemContainer.GetAllItems();
+        private IEnumerable<UpgradeItemModel> UpgradeItems => _upgradeItemContainer.GetAllItems();
 
         private IEnumerable<IUnitData> Units => _unitDataProvider.GetAllPlayerUnits();
 
@@ -72,10 +74,11 @@ namespace _Game.UI._UpgradesScreen.Scripts
         private readonly ITutorialManager _tutorialManager;
 
         private readonly CurrencyBank _bank;
-        
+
         private readonly IUserContainer _userContainer;
-        private ITimelineStateReadonly TimelineState => _userContainer.State.TimelineState; 
+        private ITimelineStateReadonly TimelineState => _userContainer.State.TimelineState;
         private CurrencyCell Cell => _bank.GetCell(CurrencyType.Coins);
+        private QuickBoostInfoPresenter _quickBoostPresenter;
 
         public UpgradesScreenPresenter(
             UpgradeItemPresenter.Factory upgradeItemPresenterFactory,
@@ -83,6 +86,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
             UpgradeItemContainer upgradeItemContainer,
             IBattleModeUnitDataProvider unitDataProvider,
             IUINotifier uiNotifier,
+            QuickBoostInfoPresenter.Factory factory,
             IGameInitializer gameInitializer,
             CurrencyBank bank,
             ITutorialManager tutorialManager,
@@ -97,9 +101,10 @@ namespace _Game.UI._UpgradesScreen.Scripts
             _unitUpgradePresenterFactory = unitUpgradePresenterFactory;
             _uiNotifier = uiNotifier;
             _gameInitializer = gameInitializer;
+            _factory = factory;
             _logger = logger;
             _tutorialManager = tutorialManager;
-            
+
             gameInitializer.OnPostInitialization += Init;
 
             _uiNotifier.RegisterScreen(this, this);
@@ -108,12 +113,12 @@ namespace _Game.UI._UpgradesScreen.Scripts
         private void Init()
         {
             Cell.OnAmountAdded += OnStateChanged;
-            
+
             IsReviewed = !NeedAttention;
 
             OnStateChanged(0);
         }
-        
+
         void IDisposable.Dispose()
         {
             Cell.OnAmountAdded -= OnStateChanged;
@@ -145,11 +150,12 @@ namespace _Game.UI._UpgradesScreen.Scripts
                 UpdateItems();
                 IsReviewed = true;
                 ScreenOpened?.Invoke(this);
+                InitQuickBoostInfo();
 
                 if (_tutorialManager.Register(Screen.FoodStep))
                 {
                     var foodUpgradeItemPresenter = _upgradeItemPresenters[UpgradeItemType.FoodProduction];
-                
+
                     if (foodUpgradeItemPresenter.IsReady)
                     {
                         Screen.FoodStep.ShowStep();
@@ -158,6 +164,21 @@ namespace _Game.UI._UpgradesScreen.Scripts
                     foodUpgradeItemPresenter.Upgraded += OnFoodUpgraded;
                 }
             }
+        }
+
+        private void InitQuickBoostInfo()
+        {
+            if (_quickBoostPresenter != null)
+            {
+                _quickBoostPresenter.Dispose();
+                _quickBoostPresenter.SetView(Screen.QuickBoostInfoPanel);
+            }
+            else
+            {
+                _quickBoostPresenter = _factory.Create(Screen.QuickBoostInfoPanel);
+            }
+
+            _quickBoostPresenter.Initialize();
         }
 
         private void OnFoodUpgraded() => Screen.FoodStep.CompleteStep();
@@ -177,16 +198,16 @@ namespace _Game.UI._UpgradesScreen.Scripts
                 presenter.Dispose();
             }
         }
-        
+
         void IUpgradesScreenPresenter.OnUpgradesScreenClosed()
         {
             if (_upgradeItemPresenters.TryGetValue(UpgradeItemType.FoodProduction, out var upgradeItemPresenter))
                 upgradeItemPresenter.Upgraded -= OnFoodUpgraded;
-            
+
             Screen.FoodStep.CancelStep();
-            
+
             _tutorialManager.UnRegister(Screen.FoodStep);
-            
+
             ScreenClosed?.Invoke(this);
             Cleanup();
         }
@@ -195,17 +216,17 @@ namespace _Game.UI._UpgradesScreen.Scripts
         {
             if (_upgradeItemPresenters.TryGetValue(UpgradeItemType.FoodProduction, out var upgradeItemPresenter))
                 upgradeItemPresenter.Upgraded -= OnFoodUpgraded;
-            
+
             Screen.FoodStep.CancelStep();
-            
+
             _tutorialManager.UnRegister(Screen.FoodStep);
 
             Cleanup();
-            
+
             ScreenDisposed?.Invoke(this);
         }
 
-        void IUpgradesScreenPresenter.OnScreenActiveChanged(bool isActive) => 
+        void IUpgradesScreenPresenter.OnScreenActiveChanged(bool isActive) =>
             ActiveChanged?.Invoke(this, isActive);
 
         private void Cleanup()
@@ -234,7 +255,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
         {
             foreach (var unit in Units)
             {
-               UpdateUnitUpgrade(unit);
+                UpdateUnitUpgrade(unit);
             }
 
             foreach (var item in UpgradeItems)
@@ -242,11 +263,11 @@ namespace _Game.UI._UpgradesScreen.Scripts
                 UpdateUpgrade(item);
             }
         }
-        
+
         private void UpdateUnitUpgrade(IUnitData unit)
         {
             var data = _unitDataProvider.GetDecoratedUnitData(Faction.Player, unit.Type, Skin.Ally);
-            
+
             if (_unitUpgradeModelsCache.TryGetValue(unit.Type, out var model))
             {
                 model.SetData(data);
@@ -254,10 +275,10 @@ namespace _Game.UI._UpgradesScreen.Scripts
             else
             {
                 model = new UnitUpgrade(data);
-                
+
                 _unitUpgradeModelsCache.Add(unit.Type, model);
             }
-            
+
             UnitUpgradeView view = Screen.GetUnitUpgrade(unit.Type);
 
             if (_unitUpgradePresenters.TryGetValue(unit.Type, out var presenter))
@@ -269,7 +290,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
                 presenter = _unitUpgradePresenterFactory.Create(model, view);
                 _unitUpgradePresenters.Add(unit.Type, presenter);
             }
-            
+
             presenter.Initialize();
         }
 
@@ -286,7 +307,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
                 presenter = _upgradeItemPresenterFactory.Create(model, view);
                 _upgradeItemPresenters.Add(model.Type, presenter);
             }
-            
+
             presenter.Initialize();
         }
 

@@ -63,10 +63,11 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
         [Button]
         public void Resize()
         {
-            var size = _cardTransform.sizeDelta;
-            var identifierSize = new Vector2(_identifierTransform.sizeDelta.x, size.y * _identifierYSizeRatio);
+            //TODO
+            // var size = _cardTransform.sizeDelta;
+            // var identifierSize = new Vector2(_identifierTransform.sizeDelta.x, size.y * _identifierYSizeRatio);
 
-            _identifierTransform.sizeDelta = identifierSize;
+            // _identifierTransform.sizeDelta = identifierSize;
         }
 
         public void Hide() => _canvasGroup.alpha = 0;

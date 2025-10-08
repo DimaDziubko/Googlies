@@ -110,8 +110,7 @@ namespace _Game.UI._UpgradesAndEvolution.Scripts
                 InitButtons();
                 InitQuickBoostInfo();
             
-                if(_openEvolveScreenFirst) OnEvolutionButtonClicked();
-                else OnUpgradesButtonClicked();
+                    OnUpgradesButtonClicked();
             }
         }
 
@@ -156,7 +155,6 @@ namespace _Game.UI._UpgradesAndEvolution.Scripts
         private void Subscribe()
         {
             Screen.UpgradesButton.ButtonClicked += OnUpgradesButtonClicked;
-            Screen.EvolutionButton.ButtonClicked += OnEvolutionButtonClicked;
         }
 
         private void Unsubscribe()
@@ -164,7 +162,6 @@ namespace _Game.UI._UpgradesAndEvolution.Scripts
             if (Screen != null)
             {
                 Screen.UpgradesButton.ButtonClicked -= OnUpgradesButtonClicked;
-                Screen.EvolutionButton.ButtonClicked -= OnEvolutionButtonClicked;
             }
         }
         
@@ -198,15 +195,15 @@ namespace _Game.UI._UpgradesAndEvolution.Scripts
                 _logger);
             _localStateMachine.AddState(menuUpgradesState);
 
-            EvolutionState evolutionState =
-                new EvolutionState(
-                    _evolveScreenProvider,
-                    _travelScreenProvider,
-                    this,
-                    _logger,
-                    _ageNavigator,
-                    _timelineNavigator);
-            _localStateMachine.AddState(evolutionState);
+            // EvolutionState evolutionState =
+            //     new EvolutionState(
+            //         _evolveScreenProvider,
+            //         _travelScreenProvider,
+            //         this,
+            //         _logger,
+            //         _ageNavigator,
+            //         _timelineNavigator);
+            // _localStateMachine.AddState(evolutionState);
 
             await _localStateMachine.InitializeAsync();
         }
@@ -214,14 +211,6 @@ namespace _Game.UI._UpgradesAndEvolution.Scripts
         private void OnUpgradesButtonClicked()
         {
             _localStateMachine.Enter<UpgradesState>();
-            _audioService.PlayButtonSound();
-        }
-
-        private void OnEvolutionButtonClicked()
-        {
-            Screen.EvolutionStep.CompleteStep();
-            
-            _localStateMachine.Enter<EvolutionState>();
             _audioService.PlayButtonSound();
         }
 

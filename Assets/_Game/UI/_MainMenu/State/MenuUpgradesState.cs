@@ -18,7 +18,8 @@ namespace _Game.UI._MainMenu.State
         public MenuUpgradesState(
             MainMenu mainMenu,
             IUpgradeAndEvolutionScreenProvider provider,
-            IMyLogger logger)
+            IMyLogger logger
+            )
         {
             _mainMenu = mainMenu;
             _provider = provider;
