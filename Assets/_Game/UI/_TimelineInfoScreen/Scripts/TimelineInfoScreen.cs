@@ -19,12 +19,15 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
 {
     public class TimelineInfoScreen : MonoBehaviour
     {
+
+        [SerializeField, Required] private Canvas _canvas;
+
         [SerializeField] private ScrollRect _scrollRect;
 
         [SerializeField] private AgeInfoListView _ageInfoListView;
 
         [SerializeField] private TimelineProgressBar _progressBar;
-        //[SerializeField] private ThemedButton _exitBtn;
+        [SerializeField] private ThemedButton _exitBtn;
         [SerializeField] private AudioClip _evolveSFX;
 
         [SerializeField] private float _animationDelay = 1.0f;
@@ -118,24 +121,24 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
         //public async UniTask<bool> ShowScreen()
         //{
         //    await UniTask.Yield();
-        //    _exitBtn.SetInteractable(true);
+        //    //_exitBtn.SetInteractable(true);
         //    _taskCompletion = new UniTaskCompletionSource<bool>();
         //    var result = await _taskCompletion.Task;
 
         //    return result;
         //}
 
-        //public async UniTask<bool> ShowScreenWithTransitionAnimation()
-        //{
-        //    await UniTask.Yield();
+        public async UniTask<bool> ShowScreenWithTransitionAnimation()
+        {
+            await UniTask.Yield();
 
-        //    _canvas.enabled = true;
-        //    _taskCompletion = new UniTaskCompletionSource<bool>();
-        //    PlayEvolveAnimation();
-        //    var result = await _taskCompletion.Task;
-        //    _canvas.enabled = false;
-        //    return result;
-        //}
+            _canvas.enabled = true;
+            _taskCompletion = new UniTaskCompletionSource<bool>();
+            PlayEvolveAnimation();
+            var result = await _taskCompletion.Task;
+            _canvas.enabled = false;
+            return result;
+        }
 
         [Button]
         public void PlayFirstAgeAnimation()
@@ -172,7 +175,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
             _animation?.Kill();
             _subAnimation?.Kill();
 
-            //_exitBtn.SetInteractable(false);
+            _exitBtn.SetInteractable(false);
 
             PlayEvolveSound();
 
@@ -192,7 +195,8 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
                 {
                     _logger.LogWarning("Attempting to access out of range age. Animation aborted.");
 
-                    //_exitBtn.SetInteractable(true);
+
+                    _exitBtn.SetInteractable(true);
 
                     return;
                 }
@@ -210,7 +214,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
                 _subAnimation.OnComplete(() =>
                 {
                     _ageNavigator.MoveToNextAge();
-                    //_exitBtn.SetInteractable(true);
+                    _exitBtn.SetInteractable(true);
                     if (_adsService.IsAdReady(AdType.Interstitial)) _adsService.ShowInterstitialVideo(Placement.Evolution);
                 });
             });
@@ -253,13 +257,13 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
 
         private void Subscribe()
         {
-            //_exitBtn.onClick.AddListener(OnExit);
+            _exitBtn.onClick.AddListener(OnExit);
             _timelineInfoPresenter.StateChanged += OnStateChanged;
         }
 
         private void Unsubscribe()
         {
-            //_exitBtn.onClick.RemoveAllListeners();
+            _exitBtn.onClick.RemoveAllListeners();
             _timelineInfoPresenter.StateChanged -= OnStateChanged;
         }
 

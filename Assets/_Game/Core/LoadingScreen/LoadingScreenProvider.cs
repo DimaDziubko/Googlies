@@ -28,6 +28,7 @@ namespace _Game.Core.LoadingScreen
         public async UniTask LoadAndDestroy(Queue<ILoadingOperation> loadingOperations, LoadingScreenType type)
         {
             LoadingScreen loadingScreen = await Load<LoadingScreen>(AssetsConstants.LOADING_SCREEN, Constants.Scenes.UI);
+            _logger.Log($"LOADING CANVAS HERE __");
             loadingScreen.Construct(_logger);
             await loadingScreen.Load(loadingOperations, type);
             LoadingCompleted?.Invoke();

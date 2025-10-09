@@ -12,7 +12,7 @@ namespace _Game.UI._Shop.Scripts._ShopScr
         private const int FIXED_COLUMNS_COUNT = 3;
         
         [SerializeField, Required] private RectTransform _transform;
-        [SerializeField, Required] private Delimiter _delimiter;
+
 
         private readonly List<ShopItemView> _shopItems = new();
         private readonly List<Plug> _plugs = new();
@@ -26,17 +26,12 @@ namespace _Game.UI._Shop.Scripts._ShopScr
 
         public RectTransform Transform => _transform;
 
-        private void ShowDelimiter() => _delimiter.Show();
-
-        private void HideDelimiter() => _delimiter.Hide();
-
         private int GetCountInCategory(RectTransform container) => 
             _shopItems.FindAll(item => item.transform.parent == container).Count;
 
         public void AddView(ShopItemView shopItem)
         {
             _shopItems.Add(shopItem);
-            if (_shopItems.Count > 0) ShowDelimiter();
         }
 
         public void ForceRebuildLayoutImmediate() => 
@@ -44,8 +39,6 @@ namespace _Game.UI._Shop.Scripts._ShopScr
 
         public void Cleanup()
         {
-            _delimiter.Hide();
-            
             foreach (var shopItem in _shopItems)
             {
                 shopItem.Release();

@@ -33,6 +33,7 @@ namespace _Game.UI._EvolutionScreen
         {
             _evolveScreen = await _provider.Load();
             _evolveScreen.Value.Show();
+            _evolveScreen.Value.CloseClicked += Dispose;
         }
     }
 }

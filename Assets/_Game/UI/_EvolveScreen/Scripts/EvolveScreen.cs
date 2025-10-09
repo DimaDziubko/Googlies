@@ -15,12 +15,19 @@ using _Game.Utils.Extensions;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace _Game.UI._EvolveScreen.Scripts
 {
     public class EvolveScreen : MonoBehaviour
     {
+        public event UnityAction CloseClicked
+        {
+            add => _closeButton.onClick.AddListener(value);
+            remove => _closeButton.onClick.RemoveListener(value);
+        }
+
         [SerializeField, Required] private Canvas _canvas;
         [SerializeField, Required] private TMP_Text _timelineLabel;
         [SerializeField, Required] private Image _currentAgeImage;
@@ -28,11 +35,12 @@ namespace _Game.UI._EvolveScreen.Scripts
         [SerializeField, Required] private Image _nextAgeImage;
         [SerializeField, Required] private TMP_Text _nextAgeName;
         [SerializeField, Required] private TransactionButton _evolveButton;
-        [SerializeField, Required] private Button _timelineInfoButton;
         [SerializeField, Required] private AmountView _rewardView;
 
         [Space]
         [SerializeField] private TimelineInfoScreen _testTimelineInfo;
+        [Space]
+        [SerializeField, Required] private Button _closeButton;
 
         private IEvolveScreenPresenter _presenter;
         private IMiniShopProvider _miniShopProvider;
@@ -107,7 +115,6 @@ namespace _Game.UI._EvolveScreen.Scripts
             _evolveButton.InactiveClicked += _presenter.OnInactiveEvolveClicked;
             _presenter.StateChanged += OnStateChanged;
             _presenter.ButtonStateChanged += OnButtonStateChanged;
-            _timelineInfoButton.onClick.AddListener(_presenter.OnInfoClicked);
         }
 
         private void OnButtonStateChanged()
@@ -124,14 +131,6 @@ namespace _Game.UI._EvolveScreen.Scripts
             _evolveButton.InactiveClicked -= _presenter.OnInactiveEvolveClicked;
             _presenter.StateChanged -= OnStateChanged;
             _presenter.ButtonStateChanged -= OnButtonStateChanged;
-            _timelineInfoButton.onClick.RemoveListener(_presenter.OnInfoClicked);
-        }
-
-        public void Hide()
-        {
-            Unsubscribe();
-            _canvas.enabled = false;
-            _presenter.OnScreenClosed();
         }
 
         public void Dispose()
