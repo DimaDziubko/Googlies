@@ -91,6 +91,14 @@ extern "C" {
     void ucDenyAll() {
         [[UsercentricsUsercentricsUnityCompanion companion] denyAllFirstLayerForTCF];
     }
+    
+    void ucAcceptAllForGDPR() {
+        [[UsercentricsUsercentricsUnityCompanion companion] acceptAllFirstLayerForGDPR];
+    }
+    
+    void ucDenyAllForGDPR() {
+        [[UsercentricsUsercentricsUnityCompanion companion] denyAllFirstLayerForGDPR];
+    }
 
     void ucTrack(int eventType) {
         [[UsercentricsUsercentricsUnityCompanion companion] trackEventTypeEnumIndex:eventType];
@@ -123,4 +131,8 @@ extern "C" {
     void ucClearUserSession() {
         [[UsercentricsUsercentricsUnityCompanion companion] clearUserSession];
     }
+    
+    char* ucSaveDecisionsForGDPR(char* decisions) {
+         return toChar([[UsercentricsUsercentricsUnityCompanion companion] saveDecisionsForGDPRDecisions:UcCreateNSString(decisions)]);
+    };
 }

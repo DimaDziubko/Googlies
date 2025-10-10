@@ -15,6 +15,7 @@ namespace Unity.Usercentrics
         public long TimeoutMillis = 10000L;
         public UsercentricsNetworkMode NetworkMode = UsercentricsNetworkMode.World;
         public bool ConsentMediation = false;
+        public long InitTimeoutMillis = 10000L;
         public AndroidOptions Android = new AndroidOptions();
     }
 
@@ -38,6 +39,7 @@ namespace Unity.Usercentrics
         public UsercentricsLoggerLevel loggerLevel;
         public UsercentricsNetworkMode networkMode;
         public bool consentMediation;
+        public long initTimeoutMillis;
 
         public static UsercentricsOptionsInternal CreateFrom(UsercentricsOptions unityOptions, string settingsId, string ruleSetId)
         {
@@ -50,6 +52,7 @@ namespace Unity.Usercentrics
             userOptions.loggerLevel = unityOptions.DebugMode ? UsercentricsLoggerLevel.Debug : UsercentricsLoggerLevel.None;
             userOptions.networkMode = unityOptions.NetworkMode;
             userOptions.consentMediation = unityOptions.ConsentMediation;
+            userOptions.initTimeoutMillis = unityOptions.InitTimeoutMillis;
             return userOptions;
         }
     }
@@ -89,6 +92,7 @@ namespace Unity.Usercentrics
         public string version;
         public bool isEssential;
         public string _type;
+        public string category;
 
         public UsercentricsConsentType? type
         {
@@ -491,5 +495,24 @@ namespace Unity.Usercentrics
         {
             this.list = list;
         }
+    }
+
+    [Serializable]
+    public class UsercentricsUserDecision
+    {
+        public string serviceId;
+        public bool consent;
+    }
+    
+    [Serializable]
+    public class UsercentricsUserDecisionListWrapper
+    {
+        public List<UsercentricsUserDecision> decisions;
+    }
+    
+    [Serializable]
+    public class UsercentricsServiceConsentWrapper
+    {
+        public List<UsercentricsServiceConsent> consents;
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 #if UNITY_ANDROID
-using Unity.Notifications.Android;
+//using Unity.Notifications.Android;
 #elif UNITY_IOS
 using Unity.Notifications.iOS;
 #endif
@@ -22,10 +22,10 @@ namespace _Game.Core.Notifications
         private void CancelDailyNotification()
         {
 #if UNITY_ANDROID
-            if (AndroidNotificationCenter.CheckScheduledNotificationStatus(ID) == NotificationStatus.Scheduled)
-            {
-                AndroidNotificationCenter.CancelScheduledNotification(ID);
-            }
+            //if (AndroidNotificationCenter.CheckScheduledNotificationStatus(ID) == NotificationStatus.Scheduled)
+            //{
+            //    AndroidNotificationCenter.CancelScheduledNotification(ID);
+            //}
 #elif UNITY_IOS
             iOSNotificationCenter.RemoveScheduledNotification(ID_DAILYTASK);
 #endif
@@ -35,16 +35,16 @@ namespace _Game.Core.Notifications
         {
 #if UNITY_ANDROID
             CancelDailyNotification();
-            AndroidNotificationCenter.CancelAllNotifications();
-            var notification = new AndroidNotification()
-            {
-                Title = "Don’t miss out!",
-                Text = "You have new daily tasks available!",
-                FireTime = fireTime,
-                SmallIcon = "icon_small",
-                LargeIcon = "icon_big",
-            };
-            AndroidNotificationCenter.SendNotificationWithExplicitID(notification, ID_DAILYTASK, ID);
+            //AndroidNotificationCenter.CancelAllNotifications();
+            //var notification = new AndroidNotification()
+            //{
+            //    Title = "Don’t miss out!",
+            //    Text = "You have new daily tasks available!",
+            //    FireTime = fireTime,
+            //    SmallIcon = "icon_small",
+            //    LargeIcon = "icon_big",
+            //};
+            //AndroidNotificationCenter.SendNotificationWithExplicitID(notification, ID_DAILYTASK, ID);
 
 #elif UNITY_IOS
             CancelDailyNotification();
@@ -73,14 +73,14 @@ namespace _Game.Core.Notifications
         private void CreateChannelDailyTask()
         {
 #if UNITY_ANDROID
-            var channel = new AndroidNotificationChannel()
-            {
-                Id = ID_DAILYTASK,
-                Name = "Daily Task",
-                Importance = Importance.Default,
-                Description = "Generic notifications",
-            };
-            AndroidNotificationCenter.RegisterNotificationChannel(channel);
+            //var channel = new AndroidNotificationChannel()
+            //{
+            //    Id = ID_DAILYTASK,
+            //    Name = "Daily Task",
+            //    Importance = Importance.Default,
+            //    Description = "Generic notifications",
+            //};
+            //AndroidNotificationCenter.RegisterNotificationChannel(channel);
 #elif UNITY_IOS
             // For iOS, Channels are not required, but we need to handle permissions
 #endif

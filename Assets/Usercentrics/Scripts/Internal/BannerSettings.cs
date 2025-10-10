@@ -17,9 +17,34 @@ namespace Unity.Usercentrics
                               string variantName = "")
         {
             this.generalStyleSettings = generalStyleSettings;
-            this.firstLayerStyleSettings = firstLayerStyleSettings;
+            this.firstLayerStyleSettings = firstLayerStyleSettings ?? DefaultFirstLayerSettings();
             this.secondLayerStyleSettings = secondLayerStyleSettings;
             this.variantName = variantName;
+        }
+        
+        private FirstLayerStyleSettings DefaultFirstLayerSettings()
+        {
+            return new FirstLayerStyleSettings(
+                layout: UsercentricsLayout.Undefined,
+                headerImage: HeaderImageSettings.Undefined(),
+                title: new TitleSettings(
+                    alignment: SectionAlignment.Undefined,
+                    textSize: 0.0F,
+                    textColor: ""
+                ),
+                message: new MessageSettings(
+                    textSize: 0.0F,
+                    alignment: SectionAlignment.Undefined,
+                    textColor: "",
+                    linkTextColor: "",
+                    underlineLink: true
+                ),
+                buttonLayout: ButtonLayout.Undefined(),
+                backgroundColor: "",
+                cornerRadius: 0.0F,
+                overlayColor: "",
+                overlayAlpha: 0.0F
+            );
         }
     }
 

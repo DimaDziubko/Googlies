@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Unity.Usercentrics
 {
-
     [Serializable]
     public class FirstLayerStyleSettings
     {
@@ -62,6 +61,11 @@ namespace Unity.Usercentrics
         public SectionAlignment alignment;
         public float height;
 
+        public static HeaderImageSettings Undefined()
+        {
+            return new HeaderImageSettings(imageType: HeaderImageType.Undefined);
+        }
+        
         public static HeaderImageSettings Extended(string imageUrl)
         {
             return new HeaderImageSettings(imageType: HeaderImageType.Extended, imageUrl: imageUrl);
@@ -153,6 +157,11 @@ namespace Unity.Usercentrics
         public List<ButtonSettings> buttons;
         public List<ButtonSettingsRow> gridButtons;
 
+        public static ButtonLayout Undefined()
+        {
+            return new ButtonLayout(type: ButtonLayoutType.Undefined, buttons: new List<ButtonSettings>());
+        }
+        
         public static ButtonLayout Grid(List<ButtonSettingsRow> buttons)
         {
             return new ButtonLayout(gridButtons: buttons);
