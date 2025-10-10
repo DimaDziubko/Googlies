@@ -41,7 +41,8 @@ namespace _Game.UI._CardsGeneral._Cards.Scripts
                                      _productBuyer.CanBuy(_x10CardsBundle) ||
                                      CardsState.Cards.Any(x => x.Count >= _cardsConfigRepository.ForCard(x.Id).GetUpgradeCount(x.Level));
 
-        public string Info => $"Cards\n<style=Smaller>{CardsState.Cards.Count}/{_cardsConfigRepository.GetAllCardsCount()}</style>";
+        //public string Info => $"Cards\n<style=Smaller>{CardsState.Cards.Count}/{_cardsConfigRepository.GetAllCardsCount()}</style>";
+        public string Info => $"Cards\n{CardsState.Cards.Count}/{_cardsConfigRepository.GetAllCardsCount()}";
 
         private readonly IUserContainer _userContainer;
         private readonly ICardsConfigRepository _cardsConfigRepository;

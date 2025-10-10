@@ -89,6 +89,9 @@ namespace _Game.UI._Dungeons.Scripts
                 _amountView.SetAmount($"{_model.KeysCount}/{_model.MaxKeysCount}");
                 _view.SetInteractable(true);
             }
+
+            _view.NextDifficultyBtn.interactable = _model.CanMoveNext();
+            _view.PreviousDifficultyBtn.interactable = _model.CanMovePrevious();
         }
 
         public void Dispose()
