@@ -21,7 +21,6 @@ using _Game.UI._StartBattleScreen.Scripts;
 using _Game.UI._StatsPopup._Scripts;
 using _Game.UI._TimelineInfoScreen.Scripts;
 using _Game.UI._TravelScreen.Scripts;
-using _Game.UI._UpgradesAndEvolution.Scripts;
 using _Game.UI._UpgradesScreen.Scripts;
 using _Game.UI.Factory;
 using _Game.UI.Global;
@@ -82,7 +81,6 @@ namespace _Game.Core.Installers.Core
             BindGeneralCardsScreenPresenter();
             BindGeneralCardsScreenProvider();
 
-            // BindUpgradesAndEvolutionScreenPresenter();
             BindUpgradesScreenProvider();
 
             BindGameResultPopupProvider();
@@ -164,11 +162,6 @@ namespace _Game.Core.Installers.Core
 
         private void BindUpgradesScreenProvider() =>
             Container.BindInterfacesTo<UpgradesScreenProvider>().AsSingle().NonLazy();
-
-        private void BindUpgradesAndEvolutionScreenPresenter() =>
-            Container
-                .BindInterfacesAndSelfTo<UpgradesAndEvolutionScreenPresenter>()
-                .AsSingle();
 
         private void BindStartBattleScreenPresenter() =>
             Container

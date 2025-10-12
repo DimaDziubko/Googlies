@@ -10,7 +10,6 @@ using _Game.Gameplay._Units.Scripts;
 using _Game.UI._Shop._MiniShop.Scripts;
 using _Game.UI._StatsPopup._Scripts;
 using _Game.UI.Common.Scripts;
-using _Game.UI.UpgradesAndEvolution.Scripts;
 using _Game.Utils.Extensions;
 using Sirenix.OdinInspector;
 using Zenject;

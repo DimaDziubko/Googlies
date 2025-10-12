@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using _Game.Core.Boosts;
 using _Game.Core.Configs.Models._WarriorsConfig;
 using _Game.Gameplay._Weapon.Scripts;
+using _Game.UI._StatsPopup._Scripts;
 using _Game.UI._UpgradesScreen.Scripts;
-using _Game.UI.UpgradesAndEvolution.Scripts;
 using Pathfinding.RVO;
 using UnityEngine;
 

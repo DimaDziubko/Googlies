@@ -1,4 +1,4 @@
-using _Game.UI.UpgradesAndEvolution.Scripts;
+using _Game.UI._StatsPopup.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

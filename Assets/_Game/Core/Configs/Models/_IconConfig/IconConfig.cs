@@ -2,8 +2,8 @@
 using System.Linq;
 using _Game.Core.UserState._State;
 using _Game.Gameplay._Boosts.Scripts;
+using _Game.UI._StatsPopup._Scripts;
 using _Game.UI._UpgradesScreen.Scripts;
-using _Game.UI.UpgradesAndEvolution.Scripts;
 using _Game.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;

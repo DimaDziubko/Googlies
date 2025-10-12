@@ -3,7 +3,6 @@ using _Game.Core.Navigation.Age;
 using _Game.Core.Navigation.Timeline;
 using _Game.UI._MainMenu.State;
 using _Game.UI._TravelScreen.Scripts;
-using _Game.UI._UpgradesAndEvolution.Scripts;
 using Cysharp.Threading.Tasks;
 
 namespace _Game.UI._EvolveScreen.Scripts
@@ -15,14 +14,12 @@ namespace _Game.UI._EvolveScreen.Scripts
         private readonly IEvolveScreenProvider _evolveProvider;
         private readonly ITravelScreenProvider _travelProvider;
         private readonly IMyLogger _logger;
-
         private readonly LocalStateMachine _subStateMachine;
-        private readonly UpgradesAndEvolutionScreenPresenter _presenter;
+
  
         public EvolutionState(
             IEvolveScreenProvider evolveProvider,
             ITravelScreenProvider travelProvider,
-            UpgradesAndEvolutionScreenPresenter presenter,
             IMyLogger logger,
             IAgeNavigator ageNavigator,
             ITimelineNavigator timelineNavigator)
@@ -30,7 +27,6 @@ namespace _Game.UI._EvolveScreen.Scripts
             _subStateMachine = new LocalStateMachine();
             _evolveProvider = evolveProvider;
             _travelProvider = travelProvider;
-            _presenter = presenter;
             _logger = logger;
             _ageNavigator = ageNavigator;
             _timelineNavigator = timelineNavigator;
@@ -52,7 +48,6 @@ namespace _Game.UI._EvolveScreen.Scripts
             _ageNavigator.AgeChanged += OnAgeChanged;
             
             // _presenter.HighlightEvolutionBtn(); //TODO
-
             OnTimelineChanged();
         }
 

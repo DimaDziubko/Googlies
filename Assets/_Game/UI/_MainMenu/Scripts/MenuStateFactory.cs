@@ -5,7 +5,6 @@ using _Game.UI._Dungeons.Scripts;
 using _Game.UI._MainMenu.State;
 using _Game.UI._Shop.Scripts._ShopScr;
 using _Game.UI._StartBattleScreen.Scripts;
-using _Game.UI._UpgradesAndEvolution.Scripts;
 using _Game.UI._UpgradesScreen.Scripts;
 
 namespace _Game.UI._MainMenu.Scripts

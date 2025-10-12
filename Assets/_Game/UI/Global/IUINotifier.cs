@@ -1,7 +1,6 @@
 ﻿using System;
 using _Game.UI.Common.Scripts;
 using _Game.UI.Pin.Scripts;
-using _Game.UI.UpgradesAndEvolution.Scripts;
 
 namespace _Game.UI.Global
 {

@@ -2,8 +2,6 @@
 using _Game.Core.AssetManagement;
 using _Game.Core.Configs.Repositories;
 using _Game.Core.Services._Camera;
-using _Game.UI.Global;
-using _Game.UI.UpgradesAndEvolution.Scripts;
 using _Game.Utils;
 using _Game.Utils.Disposable;
 using Cysharp.Threading.Tasks;

@@ -11,9 +11,9 @@ using _Game.Core.UserState._State;
 using _Game.Gameplay._Tutorial.Scripts;
 using _Game.Gameplay._Units.Scripts;
 using _Game.UI._BoostPopup;
+using _Game.UI._StatsPopup._Scripts;
 using _Game.UI.Common.Scripts;
 using _Game.UI.Global;
-using _Game.UI.UpgradesAndEvolution.Scripts;
 using Sirenix.OdinInspector;
 using UnityUtils;
 

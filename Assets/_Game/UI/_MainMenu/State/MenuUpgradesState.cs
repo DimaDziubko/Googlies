@@ -1,6 +1,5 @@
 ﻿using _Game.Core._Logger;
 using _Game.UI._MainMenu.Scripts;
-using _Game.UI._UpgradesAndEvolution.Scripts;
 using _Game.UI._UpgradesScreen.Scripts;
 using _Game.Utils.Disposable;
 using Cysharp.Threading.Tasks;
@@ -55,7 +54,7 @@ namespace _Game.UI._MainMenu.State
             }
             else
             {
-                _logger.Log("Exit called but _upgradesAndEvolutionScreen is null", DebugStatus.Warning);
+                _logger.Log("Exit called but _upgradesScreen is null", DebugStatus.Warning);
             }
 
             _mainMenu.SetButtonHighlighted(MenuButtonType.Upgrades, false);

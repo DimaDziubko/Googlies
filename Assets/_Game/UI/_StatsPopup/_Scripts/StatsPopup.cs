@@ -3,7 +3,6 @@ using _Game.Core.Services.Audio;
 using _Game.Gameplay._Units.Scripts;
 using _Game.UI._UpgradesScreen.Scripts;
 using _Game.UI.Common.Scripts;
-using _Game.UI.UpgradesAndEvolution.Scripts;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using Unity.Theme.Binders;

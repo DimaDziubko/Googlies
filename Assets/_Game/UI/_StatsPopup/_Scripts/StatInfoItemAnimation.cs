@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Game.UI.UpgradesAndEvolution.Scripts
+namespace _Game.UI._StatsPopup._Scripts
 {
     public class StatInfoItemAnimation : MonoBehaviour
     {

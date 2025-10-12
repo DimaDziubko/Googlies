@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using _Game.Core.Boosts;
 using _Game.Gameplay._Units.Factory;
 using _Game.Gameplay._Units.Scripts;
+using _Game.UI._StatsPopup._Scripts;
 using _Game.UI.Common.Scripts;
-using _Game.UI.UpgradesAndEvolution.Scripts;
 using UnityEngine;
 
 namespace _Game.UI._UpgradesScreen.Scripts

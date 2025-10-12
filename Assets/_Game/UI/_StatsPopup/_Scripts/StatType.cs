@@ -1,4 +1,4 @@
-﻿namespace _Game.UI.UpgradesAndEvolution.Scripts
+﻿namespace _Game.UI._StatsPopup._Scripts
 {
     public enum StatType
     {
