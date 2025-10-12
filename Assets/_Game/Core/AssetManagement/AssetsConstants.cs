@@ -11,7 +11,6 @@ namespace _Game.Core.AssetManagement
         public const string SKILLS_SCREEN = "SkillsScreen";
         public const string MINI_SHOP = "MiniShop";
         public const string TIMELINE_INFO_SCREEN = "TimelineInfoScreen";
-        public const string UPGRADE_AND_EVOLUTION_SCREEN = "UpgradeAndEvolutionScreen";
         public const string START_BATTLE_SCREEN = "StartBattleScreen";
         public const string MAIN_MENU = "MainMenu";
         public const string BATTLE_RESULT_POPUP = "BattleResultPopup";

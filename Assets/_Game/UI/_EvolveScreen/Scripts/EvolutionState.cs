@@ -51,7 +51,7 @@ namespace _Game.UI._EvolveScreen.Scripts
             _timelineNavigator.TimelineChanged += OnTimelineChanged;
             _ageNavigator.AgeChanged += OnAgeChanged;
             
-            _presenter.HighlightEvolutionBtn();
+            // _presenter.HighlightEvolutionBtn(); //TODO
 
             OnTimelineChanged();
         }
@@ -61,7 +61,7 @@ namespace _Game.UI._EvolveScreen.Scripts
             _timelineNavigator.TimelineChanged -= OnTimelineChanged;
             _ageNavigator.AgeChanged -= OnAgeChanged;
             
-            _presenter.UnHighlightEvolutionBtn();
+            // _presenter.UnHighlightEvolutionBtn(); //TODO
             _subStateMachine.Exit();
         }
 

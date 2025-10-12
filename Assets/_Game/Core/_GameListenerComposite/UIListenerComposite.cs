@@ -17,7 +17,7 @@ namespace _Game.Core._GameListenerComposite
         IGameScreenListener<IEvolveScreen>,
         IGameScreenListener<ICardsScreen>,
         IGameScreenListener<ISkillsScreen>,
-        IGameScreenListener<IUpgradeAndEvolutionScreen>,
+        IGameScreenListener<IUpgradeUnitsScreen>,
         IGameScreenListener<IGeneralCardsScreen>,
         IGameScreenListener<ITravelScreen>,
         IGameScreenListener<IMenuScreen>,
@@ -130,12 +130,12 @@ namespace _Game.Core._GameListenerComposite
         void IGameScreenListener<ICardsScreen>.OnScreenDisposed(ICardsScreen screen) => NotifyDisposed(screen);
  
 
-        void IGameScreenListener<IUpgradeAndEvolutionScreen>.OnScreenOpened(IUpgradeAndEvolutionScreen screen) => NotifyListeners(screen, true);
-        void IGameScreenListener<IUpgradeAndEvolutionScreen>.OnInfoChanged(IUpgradeAndEvolutionScreen screen) => NotifyInfoChanged(screen);
-        void IGameScreenListener<IUpgradeAndEvolutionScreen>.OnRequiresAttention(IUpgradeAndEvolutionScreen screen) => NotifyRequiresAttention(screen);
-        void IGameScreenListener<IUpgradeAndEvolutionScreen>.OnScreenClosed(IUpgradeAndEvolutionScreen screen) => NotifyListeners(screen, false);
-        void IGameScreenListener<IUpgradeAndEvolutionScreen>.OnScreenActiveChanged(IUpgradeAndEvolutionScreen screen, bool isActive) => NotifyActiveChanged(screen, isActive);
-        void IGameScreenListener<IUpgradeAndEvolutionScreen>.OnScreenDisposed(IUpgradeAndEvolutionScreen screen) => NotifyDisposed(screen);
+        void IGameScreenListener<IUpgradeUnitsScreen>.OnScreenOpened(IUpgradeUnitsScreen screen) => NotifyListeners(screen, true);
+        void IGameScreenListener<IUpgradeUnitsScreen>.OnInfoChanged(IUpgradeUnitsScreen screen) => NotifyInfoChanged(screen);
+        void IGameScreenListener<IUpgradeUnitsScreen>.OnRequiresAttention(IUpgradeUnitsScreen screen) => NotifyRequiresAttention(screen);
+        void IGameScreenListener<IUpgradeUnitsScreen>.OnScreenClosed(IUpgradeUnitsScreen screen) => NotifyListeners(screen, false);
+        void IGameScreenListener<IUpgradeUnitsScreen>.OnScreenActiveChanged(IUpgradeUnitsScreen screen, bool isActive) => NotifyActiveChanged(screen, isActive);
+        void IGameScreenListener<IUpgradeUnitsScreen>.OnScreenDisposed(IUpgradeUnitsScreen screen) => NotifyDisposed(screen);
     
 
         void IGameScreenListener<IGeneralCardsScreen>.OnScreenOpened(IGeneralCardsScreen screen) => NotifyListeners(screen, true);

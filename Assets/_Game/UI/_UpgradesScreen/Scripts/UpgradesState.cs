@@ -35,18 +35,18 @@ namespace _Game.UI._UpgradesScreen.Scripts
         
         public void Enter()
         {
-            _presenter.HighlightUpgradesBtn();
+            // _presenter.HighlightUpgradesBtn(); //TODO
 
-            if (_upgradesScreen != null)
-            {
-                _upgradesScreen.Value.Show();
-            }
+            // if (_upgradesScreen != null)
+            // {
+            //     _upgradesScreen.Value.Show();
+            // }
         }
 
         public void Exit()
         {
             _upgradesScreen?.Value.Hide();
-            _presenter.UnHighlightUpgradesBtn();
+            // _presenter.UnHighlightUpgradesBtn(); //TODO
         }
 
         public void Cleanup() => _provider.Dispose();

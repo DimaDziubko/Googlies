@@ -6,13 +6,14 @@ using _Game.UI._MainMenu.State;
 using _Game.UI._Shop.Scripts._ShopScr;
 using _Game.UI._StartBattleScreen.Scripts;
 using _Game.UI._UpgradesAndEvolution.Scripts;
+using _Game.UI._UpgradesScreen.Scripts;
 
 namespace _Game.UI._MainMenu.Scripts
 {
     public class MenuStateFactory
     {
         private readonly IStartBattleScreenProvider _startBattleScreenProvider;
-        private readonly IUpgradeAndEvolutionScreenProvider _upgradeAndEvolutionScreenProvider;
+        private readonly IUpgradesScreenProvider _upgradesScreenProvider;
         private readonly IShopProvider _shopProvider;
         private readonly IGeneralCardsScreenProvider _generalCardsScreenProvider;
         private readonly IMyLogger _logger;
@@ -20,14 +21,14 @@ namespace _Game.UI._MainMenu.Scripts
 
         public MenuStateFactory(
             IStartBattleScreenProvider startBattleScreenProvider,
-            IUpgradeAndEvolutionScreenProvider upgradeAndEvolutionScreenProvider,
+            IUpgradesScreenProvider upgradesScreenProvider,
             IShopProvider shopProvider,
             IGeneralCardsScreenProvider generalCardsScreenProvider,
             IDungeonsScreenProvider dungeonsDungeonsProvider,
             IMyLogger logger)
         {
             _startBattleScreenProvider = startBattleScreenProvider;
-            _upgradeAndEvolutionScreenProvider = upgradeAndEvolutionScreenProvider;
+            _upgradesScreenProvider = upgradesScreenProvider;
             _shopProvider = shopProvider;
             _generalCardsScreenProvider = generalCardsScreenProvider;
             _dungeonsProvider = dungeonsDungeonsProvider;
@@ -41,7 +42,7 @@ namespace _Game.UI._MainMenu.Scripts
                 case MenuButtonType.Battle:
                     return new BattleState(mainMenu, _startBattleScreenProvider, _logger) as TState;
                 case MenuButtonType.Upgrades:
-                    return new MenuUpgradesState(mainMenu, _upgradeAndEvolutionScreenProvider, _logger) as TState;
+                    return new MenuUpgradesState(mainMenu, _upgradesScreenProvider, _logger) as TState;
                 case MenuButtonType.Shop:
                     return new ShopState(mainMenu, _shopProvider, _logger) as TState;
                 case MenuButtonType.Cards:

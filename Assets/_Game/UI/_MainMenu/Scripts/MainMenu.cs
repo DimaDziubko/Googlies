@@ -138,7 +138,7 @@ namespace _Game.UI._MainMenu.Scripts
             _tutorialManager.UnRegister(Screen.SkillsTutorialStep);
 
             _uiNotifier.UnregisterPin(typeof(IStartBattleScreen));
-            _uiNotifier.UnregisterPin(typeof(IUpgradeAndEvolutionScreen));
+            _uiNotifier.UnregisterPin(typeof(IUpgradeUnitsScreen));
             _uiNotifier.UnregisterPin(typeof(IGeneralCardsScreen));
             _uiNotifier.UnregisterPin(typeof(IShopScreen));
             _uiNotifier.UnregisterPin(typeof(IDungeonScreen));
@@ -262,7 +262,7 @@ namespace _Game.UI._MainMenu.Scripts
 
             if (IsUpgradesUnlocked)
             {
-                _uiNotifier.RegisterPin(typeof(IUpgradeAndEvolutionScreen), Screen.UpgradesButton.Pin);
+                _uiNotifier.RegisterPin(typeof(IUpgradeUnitsScreen), Screen.UpgradesButton.Pin);
             }
             else Screen.UpgradesButton.SetupPin(false);
 

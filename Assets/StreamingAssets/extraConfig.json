@@ -8,18 +8,18 @@
   "BattleSpeedConfigs": [
     {
       "Id": 0,
-      "SpeedFactor": 1.0,
-      "Duration": 0.0
+      "SpeedFactor": 1,
+      "Duration": 0
     },
     {
       "Id": 1,
       "SpeedFactor": 1.5,
-      "Duration": 300.0
+      "Duration": 300
     },
     {
       "Id": 2,
-      "SpeedFactor": 2.0,
-      "Duration": 0.0
+      "SpeedFactor": 2,
+      "Duration": 0
     }
   ],
   "ShopConfig": {
@@ -28,8 +28,9 @@
         "Id": 1,
         "MajorIconKey": "GemsPack_0",
         "MinorIconKey": "Currencies[Gem]",
-        "Quantity": 1000.0,
+        "Quantity": 1000,
         "IAP_ID": "com.thearmyevolution.gemspack_1",
+        "IAP_ID_IOS": "com.evolution.army.gemspack_1",
         "MaxPurchaseCount": -1,
         "ShopItemViewId": 100,
         "ProductType": 0
@@ -38,8 +39,9 @@
         "Id": 2,
         "MajorIconKey": "GemsPack_1",
         "MinorIconKey": "Currencies[Gem]",
-        "Quantity": 3050.0,
+        "Quantity": 3050,
         "IAP_ID": "com.thearmyevolution.gemspack_2",
+        "IAP_ID_IOS": "com.evolution.army.gemspack_2",
         "MaxPurchaseCount": -1,
         "ShopItemViewId": 100,
         "ProductType": 0
@@ -48,8 +50,9 @@
         "Id": 3,
         "MajorIconKey": "GemsPack_2",
         "MinorIconKey": "Currencies[Gem]",
-        "Quantity": 9500.0,
+        "Quantity": 9500,
         "IAP_ID": "com.thearmyevolution.gemspack_3",
+        "IAP_ID_IOS": "com.evolution.army.gemspack_3",
         "MaxPurchaseCount": -1,
         "ShopItemViewId": 100,
         "ProductType": 0
@@ -63,10 +66,10 @@
         "Price": 50,
         "QuantityExponential": {
           "Id": 2,
-          "A": 1.0,
+          "A": 1,
           "B": 4.5251,
           "C": 0.0498,
-          "D": 0.0
+          "D": 0
         },
         "CurrencyIconKey": "Currencies[Gem]",
         "IGP_ID": "coins_1",
@@ -76,33 +79,33 @@
         "LinearFunctions": [
           {
             "Id": 0,
-            "A": 8.0,
-            "B": 73.0
+            "A": 8,
+            "B": 73
           },
           {
             "Id": 2,
-            "A": 40.0,
-            "B": 353.0
+            "A": 40,
+            "B": 353
           },
           {
             "Id": 4,
-            "A": 200.0,
-            "B": 1760.0
+            "A": 200,
+            "B": 1760
           },
           {
             "Id": 6,
-            "A": 1100.0,
-            "B": 10200.0
+            "A": 1100,
+            "B": 10200
           },
           {
             "Id": 8,
-            "A": 7150.0,
-            "B": 64400.0
+            "A": 7150,
+            "B": 64400
           },
           {
             "Id": 10,
-            "A": 50050.0,
-            "B": 451000.0
+            "A": 50050,
+            "B": 451000
           }
         ]
       },
@@ -113,10 +116,10 @@
         "Price": 300,
         "QuantityExponential": {
           "Id": 3,
-          "A": 1.0,
+          "A": 1,
           "B": 6.4583,
           "C": 0.047,
-          "D": 0.0
+          "D": 0
         },
         "CurrencyIconKey": "Currencies[Gem]",
         "IGP_ID": "coins_2",
@@ -126,33 +129,33 @@
         "LinearFunctions": [
           {
             "Id": 1,
-            "A": 54.0,
-            "B": 488.0
+            "A": 54,
+            "B": 488
           },
           {
             "Id": 3,
-            "A": 270.0,
-            "B": 2360.0
+            "A": 270,
+            "B": 2360
           },
           {
             "Id": 5,
-            "A": 1350.0,
-            "B": 11800.0
+            "A": 1350,
+            "B": 11800
           },
           {
             "Id": 7,
-            "A": 7425.0,
-            "B": 68700.0
+            "A": 7425,
+            "B": 68700
           },
           {
             "Id": 9,
-            "A": 48263.0,
-            "B": 431000.0
+            "A": 48263,
+            "B": 431000
           },
           {
             "Id": 11,
-            "A": 337838.0,
-            "B": 3020000.0
+            "A": 337838,
+            "B": 3020000
           }
         ]
       }
@@ -165,9 +168,10 @@
         "BattleSpeed": {
           "Id": 1,
           "SpeedFactor": 1.5,
-          "Duration": 300.0
+          "Duration": 300
         },
         "IAP_ID": "speedx1",
+        "IAP_ID_IOS": "com.thearmyevolution.speedx1",
         "MaxPurchaseCount": 1,
         "ShopItemViewId": 200,
         "RequiredIdBought": "-",
@@ -179,10 +183,11 @@
         "Description": "Game speed forever",
         "BattleSpeed": {
           "Id": 2,
-          "SpeedFactor": 2.0,
-          "Duration": 0.0
+          "SpeedFactor": 2,
+          "Duration": 0
         },
         "IAP_ID": "speedx2",
+        "IAP_ID_IOS": "com.thearmyevolution.speedx2",
         "MaxPurchaseCount": 1,
         "ShopItemViewId": 200,
         "RequiredIdBought": "speedx1",
@@ -196,6 +201,7 @@
         "MinorIconKey": "Currencies[Coin]",
         "Name": "Gold Reserves Bundle",
         "IAP_ID": "com.thearmyevolution.profit1",
+        "IAP_ID_IOS": "com.evolution.army.profit1",
         "MaxPurchaseCount": 1,
         "ShopItemViewId": 300,
         "Description": "Coins Gained Forever!",
@@ -204,7 +210,7 @@
           {
             "Id": 1,
             "IconKey": "Currencies[Gem]",
-            "Quantity": 500.0,
+            "Quantity": 500,
             "CurrencyType": 1
           }
         ],
@@ -217,6 +223,7 @@
         "MinorIconKey": "Currencies[Coin]",
         "Name": "Tactical Bundle",
         "IAP_ID": "com.thearmyevolution.profit2",
+        "IAP_ID_IOS": "com.evolution.army.profit2",
         "MaxPurchaseCount": 1,
         "ShopItemViewId": 300,
         "Description": "Coins Gained Forever!",
@@ -225,7 +232,7 @@
           {
             "Id": 2,
             "IconKey": "Currencies[Gem]",
-            "Quantity": 3500.0,
+            "Quantity": 3500,
             "CurrencyType": 1
           }
         ],
@@ -238,7 +245,7 @@
       {
         "Id": 1,
         "DailyGemsPackCount": 2,
-        "RecoverTimeMinutes": 1440.0,
+        "RecoverTimeMinutes": 1440,
         "MajorIconKey": "GemsPack_3",
         "MinorIconKey": "Currencies[Gem]",
         "AdIconKey": "UI[AdsIcon]",
@@ -276,14 +283,56 @@
         "IAP_ID": "com.thearmyevolution.profit2",
         "IAP_ID_IOS": "com.evolution.army.profit2",
         "ProductType": 1
+      },
+      {
+        "Id": 6,
+        "IAP_ID": "com.army.leaderpass",
+        "IAP_ID_IOS": "com.army.leaderpass",
+        "ProductType": 0
+      },
+      {
+        "Id": 7,
+        "IAP_ID": "com.army.warriors.fund",
+        "IAP_ID_IOS": "com.army.warriors.fund",
+        "ProductType": 0
+      },
+      {
+        "Id": 8,
+        "IAP_ID": "com.army.classic_offer_1",
+        "IAP_ID_IOS": "com.army.classic_offer_1",
+        "ProductType": 0
+      },
+      {
+        "Id": 9,
+        "IAP_ID": "com.army.classic_offer_2",
+        "IAP_ID_IOS": "com.army.classic_offer_2",
+        "ProductType": 0
+      },
+      {
+        "Id": 10,
+        "IAP_ID": "com.army.classic_offer_3",
+        "IAP_ID_IOS": "com.army.classic_offer_3",
+        "ProductType": 0
+      },
+      {
+        "Id": 11,
+        "IAP_ID": "com.army.classic_offer_4",
+        "IAP_ID_IOS": "com.army.classic_offer_4",
+        "ProductType": 0
+      },
+      {
+        "Id": 12,
+        "IAP_ID": "com.army.warriors.fund",
+        "IAP_ID_IOS": "com.army.warriors.fund",
+        "ProductType": 0
       }
     ]
   },
   "AdsConfig": {
     "Id": 0,
     "IsInterstitialActive": false,
-    "InterstitialDelay": 60.0,
-    "RewardInterstitialDelay": 240.0,
+    "InterstitialDelay": 60,
+    "RewardInterstitialDelay": 240,
     "InterstitialBattleTreshold": 5
   },
   "GeneralDailyTaskConfig": {
@@ -297,8 +346,8 @@
         "LinearFunctions": [
           {
             "Id": 13,
-            "A": 0.0,
-            "B": 5.0
+            "A": 0,
+            "B": 5
           }
         ],
         "DropChance": 9,
@@ -312,7 +361,7 @@
           {
             "Id": 42,
             "A": 0.5,
-            "B": 2.0
+            "B": 2
           }
         ],
         "DropChance": 9,
@@ -326,7 +375,7 @@
           {
             "Id": 15,
             "A": 0.6,
-            "B": 4.0
+            "B": 4
           }
         ],
         "DropChance": 9,
@@ -340,7 +389,7 @@
           {
             "Id": 16,
             "A": 0.15,
-            "B": 3.0
+            "B": 3
           }
         ],
         "DropChance": 9,
@@ -354,7 +403,7 @@
           {
             "Id": 17,
             "A": 0.15,
-            "B": 1.0
+            "B": 1
           }
         ],
         "DropChance": 9,
@@ -368,7 +417,7 @@
           {
             "Id": 43,
             "A": 0.5,
-            "B": 2.0
+            "B": 2
           }
         ],
         "DropChance": 9,
@@ -382,7 +431,7 @@
           {
             "Id": 15,
             "A": 0.6,
-            "B": 4.0
+            "B": 4
           }
         ],
         "DropChance": 9,
@@ -396,7 +445,7 @@
           {
             "Id": 16,
             "A": 0.15,
-            "B": 3.0
+            "B": 3
           }
         ],
         "DropChance": 9,
@@ -410,7 +459,7 @@
           {
             "Id": 17,
             "A": 0.15,
-            "B": 1.0
+            "B": 1
           }
         ],
         "DropChance": 9,
@@ -423,33 +472,33 @@
         "LinearFunctions": [
           {
             "Id": 0,
-            "A": 8.0,
-            "B": 73.0
+            "A": 8,
+            "B": 73
           },
           {
             "Id": 2,
-            "A": 40.0,
-            "B": 353.0
+            "A": 40,
+            "B": 353
           },
           {
             "Id": 4,
-            "A": 200.0,
-            "B": 1760.0
+            "A": 200,
+            "B": 1760
           },
           {
             "Id": 6,
-            "A": 1100.0,
-            "B": 10200.0
+            "A": 1100,
+            "B": 10200
           },
           {
             "Id": 8,
-            "A": 7150.0,
-            "B": 64400.0
+            "A": 7150,
+            "B": 64400
           },
           {
             "Id": 10,
-            "A": 50050.0,
-            "B": 451000.0
+            "A": 50050,
+            "B": 451000
           }
         ],
         "DropChance": 9,
@@ -462,8 +511,8 @@
         "LinearFunctions": [
           {
             "Id": 14,
-            "A": 5.0,
-            "B": 42.0
+            "A": 5,
+            "B": 42
           }
         ],
         "DropChance": 9,

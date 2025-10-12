@@ -6,7 +6,7 @@
         bool NeedAttention { get; }
     }
 
-    public interface IUpgradeAndEvolutionScreen : IGameScreen
+    public interface IUpgradeUnitsScreen : IGameScreen
     {
         
     }

@@ -19,20 +19,19 @@ using UnityUtils;
 namespace _Game.UI._UpgradesAndEvolution.Scripts
 {
     public class UpgradesAndEvolutionScreenPresenter :
-        IUpgradesAndEvolutionScreenPresenter, 
-        IUpgradeAndEvolutionScreen,
-        IGameScreenEvents<IUpgradeAndEvolutionScreen>,
+        IUpgradeUnitsScreen,
+        IGameScreenEvents<IUpgradeUnitsScreen>,
         IGameScreenListener<IUpgradesScreen>,
         IGameScreenListener<IEvolveScreen>,
         IGameScreenListener<IMenuScreen>,
         IDisposable
     {
-        public event Action<IUpgradeAndEvolutionScreen> ScreenOpened;
-        public event Action<IUpgradeAndEvolutionScreen> InfoChanged;
-        public event Action<IUpgradeAndEvolutionScreen> RequiresAttention;
-        public event Action<IUpgradeAndEvolutionScreen> ScreenClosed;
-        public event Action<IUpgradeAndEvolutionScreen, bool> ActiveChanged;
-        public event Action<IUpgradeAndEvolutionScreen> ScreenDisposed;
+        public event Action<IUpgradeUnitsScreen> ScreenOpened;
+        public event Action<IUpgradeUnitsScreen> InfoChanged;
+        public event Action<IUpgradeUnitsScreen> RequiresAttention;
+        public event Action<IUpgradeUnitsScreen> ScreenClosed;
+        public event Action<IUpgradeUnitsScreen, bool> ActiveChanged;
+        public event Action<IUpgradeUnitsScreen> ScreenDisposed;
 
         [ShowInInspector, ReadOnly]
         public bool IsReviewed => _screenStateAggregator.IsReviewed;
@@ -40,7 +39,7 @@ namespace _Game.UI._UpgradesAndEvolution.Scripts
         [ShowInInspector, ReadOnly]
         public bool NeedAttention => _screenStateAggregator.NeedAttention;
         
-        public UpgradeAndEvolutionScreen Screen { get; set; }
+        // public UpgradeAndEvolutionScreen Screen { get; set; }
 
         private readonly IUpgradesScreenProvider _upgradesScreenProvider;
         private readonly IUINotifier _uiNotifier;
@@ -93,90 +92,90 @@ namespace _Game.UI._UpgradesAndEvolution.Scripts
             _uiNotifier.RegisterScreen(this, this);
         }
 
-        async void IUpgradesAndEvolutionScreenPresenter.OnUpgradesAndEvolutionScreenOpened()
-        {
-            if (Screen.OrNull() != null)
-            {
-                _tutorialManager.Register(Screen.EvolutionStep);
+        // async void IUpgradesAndEvolutionScreenPresenter.OnUpgradesAndEvolutionScreenOpened()
+        // {
+        //     if (Screen.OrNull() != null)
+        //     {
+        //         _tutorialManager.Register(Screen.EvolutionStep);
             
-                ScreenOpened?.Invoke(this);
+        //         ScreenOpened?.Invoke(this);
                 
-                if (_featureUnlockSystem.IsFeatureUnlocked(Feature.EvolutionScreen))
-                    Screen.EvolutionStep.ShowStep();
+        //         if (_featureUnlockSystem.IsFeatureUnlocked(Feature.EvolutionScreen))
+        //             Screen.EvolutionStep.ShowStep();
             
-                Unsubscribe();
-                Subscribe();
-                await InitStateMachine();
-                InitButtons();
-                InitQuickBoostInfo();
+        //         Unsubscribe();
+        //         Subscribe();
+        //         await InitStateMachine();
+        //         InitButtons();
+        //         InitQuickBoostInfo();
             
-                    OnUpgradesButtonClicked();
-            }
-        }
+        //             OnUpgradesButtonClicked();
+        //     }
+        // }
 
-        void IUpgradesAndEvolutionScreenPresenter.OnScreenActiveChanged(bool isActive)
-        {
-            _localStateMachine?.SetActive(isActive);
-            ActiveChanged?.Invoke(this, isActive);
-        }
+        // void IUpgradesAndEvolutionScreenPresenter.OnScreenActiveChanged(bool isActive)
+        // {
+        //     _localStateMachine?.SetActive(isActive);
+        //     ActiveChanged?.Invoke(this, isActive);
+        // }
 
-        void IUpgradesAndEvolutionScreenPresenter.OnUpgradesAndEvolutionScreenClosed()
-        {
-            _logger.Log("upgradesAndEvolutionScreenPresenter CLOSED", DebugStatus.Warning);
-            Screen.EvolutionStep.CancelStep();
-            _tutorialManager.UnRegister(Screen.EvolutionStep);
+        // void IUpgradesAndEvolutionScreenPresenter.OnUpgradesAndEvolutionScreenClosed()
+        // {
+        //     _logger.Log("upgradesAndEvolutionScreenPresenter CLOSED", DebugStatus.Warning);
+        //     Screen.EvolutionStep.CancelStep();
+        //     _tutorialManager.UnRegister(Screen.EvolutionStep);
             
-            _presenter?.Dispose();
-            _localStateMachine?.Exit();
+        //     _presenter?.Dispose();
+        //     _localStateMachine?.Exit();
             
-            _uiNotifier.UnregisterPin(typeof(IUpgradesScreen));
-            _uiNotifier.UnregisterPin(typeof(IEvolveScreen));
+        //     _uiNotifier.UnregisterPin(typeof(IUpgradesScreen));
+        //     _uiNotifier.UnregisterPin(typeof(IEvolveScreen));
             
-            Unsubscribe();
+        //     Unsubscribe();
             
-            ScreenClosed?.Invoke(this);
-        }
+        //     ScreenClosed?.Invoke(this);
+        // }
         
         private void InitQuickBoostInfo()
         {
-            if (_presenter != null)
-            {
-                _presenter.Dispose();
-                _presenter.SetView(Screen.QuickBoostInfoPanel);
-            }
-            else
-            {           
-                _presenter = _factory.Create(Screen.QuickBoostInfoPanel);
-            }
+            // if (_presenter != null)
+            // {
+            //     _presenter.Dispose();
+            //     _presenter.SetView(Screen.QuickBoostInfoPanel);
+            // }
+            // else
+            // {           
+            //     _presenter = _factory.Create(Screen.QuickBoostInfoPanel);
+            // }
 
-            _presenter.Initialize();
+            // _presenter.Initialize();
         }
 
         private void Subscribe()
         {
-            Screen.UpgradesButton.ButtonClicked += OnUpgradesButtonClicked;
+            // Screen.UpgradesButton.ButtonClicked += OnUpgradesButtonClicked;
         }
 
         private void Unsubscribe()
         {
-            if (Screen != null)
-            {
-                Screen.UpgradesButton.ButtonClicked -= OnUpgradesButtonClicked;
-            }
+            // if (Screen != null)
+            // {
+            //     Screen.UpgradesButton.ButtonClicked -= OnUpgradesButtonClicked;
+            // }
         }
         
         private void InitButtons()
         {
-            Screen.UpgradesButton.UnHighlight();
-            Screen.UpgradesButton.SetLocked(false);
-            Screen.UpgradesButton.SetInteractable(true);
-            _uiNotifier.RegisterPin(typeof(IUpgradesScreen), Screen.UpgradesButton.Pin);
+            // Screen.UpgradesButton.UnHighlight();
+            // Screen.UpgradesButton.SetLocked(false);
+            // Screen.UpgradesButton.SetInteractable(true);
+            // _uiNotifier.RegisterPin(typeof(IUpgradesScreen), Screen.UpgradesButton.Pin);
 
-            bool isEvolutionUnlocked = _featureUnlockSystem.IsFeatureUnlocked(Feature.EvolutionScreen);
-            Screen.EvolutionButton.UnHighlight();
-            Screen.EvolutionButton.SetLocked(!isEvolutionUnlocked);
-            Screen.EvolutionButton.SetInteractable(isEvolutionUnlocked);
-            _uiNotifier.RegisterPin(typeof(IEvolveScreen), Screen.EvolutionButton.Pin);
+            // bool isEvolutionUnlocked = _featureUnlockSystem.IsFeatureUnlocked(Feature.EvolutionScreen);
+            // Screen.EvolutionButton.UnHighlight();
+            // Screen.EvolutionButton.SetLocked(!isEvolutionUnlocked);
+            // Screen.EvolutionButton.SetInteractable(isEvolutionUnlocked);
+            // _uiNotifier.RegisterPin(typeof(IEvolveScreen), Screen.EvolutionButton.Pin);
         }
 
         private async UniTask InitStateMachine()
@@ -195,16 +194,6 @@ namespace _Game.UI._UpgradesAndEvolution.Scripts
                 _logger);
             _localStateMachine.AddState(menuUpgradesState);
 
-            // EvolutionState evolutionState =
-            //     new EvolutionState(
-            //         _evolveScreenProvider,
-            //         _travelScreenProvider,
-            //         this,
-            //         _logger,
-            //         _ageNavigator,
-            //         _timelineNavigator);
-            // _localStateMachine.AddState(evolutionState);
-
             await _localStateMachine.InitializeAsync();
         }
 
@@ -218,11 +207,11 @@ namespace _Game.UI._UpgradesAndEvolution.Scripts
         {
             _logger.Log("upgradesAndEvolutionScreenPresenter DISPOSED", DebugStatus.Warning);
             
-            if (Screen != null)
-            {
-                Screen.EvolutionStep.CancelStep();
-                _tutorialManager.UnRegister(Screen.EvolutionStep);
-            }
+            // if (Screen != null)
+            // {
+            //     Screen.EvolutionStep.CancelStep();
+            //     _tutorialManager.UnRegister(Screen.EvolutionStep);
+            // }
             
             _localStateMachine?.Cleanup();
             _localStateMachine = null;
@@ -280,13 +269,13 @@ namespace _Game.UI._UpgradesAndEvolution.Scripts
             }
         }
 
-        public void UnHighlightUpgradesBtn() => Screen.UpgradesButton.UnHighlight();
+        // public void UnHighlightUpgradesBtn() => Screen.UpgradesButton.UnHighlight();
 
-        public void HighlightUpgradesBtn() => Screen.UpgradesButton.Highlight();
+        // public void HighlightUpgradesBtn() => Screen.UpgradesButton.Highlight();
 
-        public void HighlightEvolutionBtn() => Screen.EvolutionButton.Highlight();
+        // public void HighlightEvolutionBtn() => Screen.EvolutionButton.Highlight();
 
-        public void UnHighlightEvolutionBtn() => Screen.EvolutionButton.UnHighlight();
+        // public void UnHighlightEvolutionBtn() => Screen.EvolutionButton.UnHighlight();
 
         void IGameScreenListener<IMenuScreen>.OnScreenOpened(IMenuScreen screen) 
         {

@@ -39,7 +39,7 @@ namespace _Game.Core.Installers.Core
         [SerializeField, Required] private UIFactory _uiFactory;
         [SerializeField, Required] private Curtain _curtain;
         [SerializeField, Required] private CardAppearancePopupSettings _cardAppearancePopupSettings;
-        
+
         public override void InstallBindings()
         {
             BindMainMenuStateFactory();
@@ -47,10 +47,10 @@ namespace _Game.Core.Installers.Core
             BindMainMenuProvider();
 
             BindBoostsContainer();
-            
+
             BindBoostPopupPresenter();
             BindBoostPopupProvider();
-            
+
             BindQuickBoostInfoPresenterFactory();
             BindBoostDataPresenterFactory();
 
@@ -73,41 +73,40 @@ namespace _Game.Core.Installers.Core
             BindUpgradesScreenPresenter();
             BindEvolveScreenPresenter();
             BindTravelScreenPresenter();
-            
+
             BindTravelScreenProvider();
             BindEvolutionScreenProvider();
-            BindUpgradesScreenProvider();
-            
+
             BindCardsScreenProvider();
-            
+
             BindGeneralCardsScreenPresenter();
             BindGeneralCardsScreenProvider();
 
-            BindUpgradesAndEvolutionScreenPresenter();
-            BindUpgradesAndEvolutionScreenProvider();
-            
+            // BindUpgradesAndEvolutionScreenPresenter();
+            BindUpgradesScreenProvider();
+
             BindGameResultPopupProvider();
             BindTimelineInfoScreenProvider();
 
             BindGameRateScreenProvider();
             BindRateGameChecker();
-            
+
             BindStatsPopupPresenter();
             BindStatsPopupProvider();
 
             BindDungeonPresenterFactory();
             BindDungeonsScreenPresenter();
             BindDungeonsScreenProvider();
-            
+
             BindSkillScreenProvider();
             BindSkillsScreenPresenter();
             BindSkillService();
-            
+
             BindCardAppearanceScreenProvider();
 
             BindParticleAttractorRegistry();
         }
-        
+
         private void BindParticleAttractorRegistry() =>
             Container.BindInterfacesAndSelfTo<ParticleAttractorRegistry>()
                 .AsSingle();
@@ -117,12 +116,12 @@ namespace _Game.Core.Installers.Core
                 .To<CardAppearanceScreenProvider>()
                 .AsSingle()
                 .WithArguments(_cardAppearancePopupSettings);
-        
+
         private void BindSkillService() =>
             Container.BindInterfacesAndSelfTo<SkillService>()
                 .AsSingle();
 
-        private void BindSkillsScreenPresenter() => 
+        private void BindSkillsScreenPresenter() =>
             Container
                 .BindInterfacesAndSelfTo<SkillsScreenPresenter>()
                 .AsSingle();
@@ -142,10 +141,10 @@ namespace _Game.Core.Installers.Core
                 .To<BoostPopupPresenter>()
                 .AsSingle();
 
-        private void BindGeneralCardsScreenPresenter() => 
+        private void BindGeneralCardsScreenPresenter() =>
             Container.BindInterfacesTo<GeneralCardsScreenPresenter>().AsSingle();
 
-        private void BindCardsScreenPresenter() => 
+        private void BindCardsScreenPresenter() =>
             Container.BindInterfacesTo<CardsScreenPresenter>().AsSingle();
 
         private void BindUpgradesScreenPresenter() =>
@@ -164,7 +163,7 @@ namespace _Game.Core.Installers.Core
             Container.BindInterfacesTo<EvolveScreenProvider>().AsSingle();
 
         private void BindUpgradesScreenProvider() =>
-            Container.BindInterfacesTo<UpgradesScreenProvider>().AsSingle();
+            Container.BindInterfacesTo<UpgradesScreenProvider>().AsSingle().NonLazy();
 
         private void BindUpgradesAndEvolutionScreenPresenter() =>
             Container
@@ -192,7 +191,7 @@ namespace _Game.Core.Installers.Core
                     QuickBoostDataPresenter.Factory>()
                 .AsSingle()
                 .NonLazy();
-            
+
             Container
                 .BindFactory<BoostModel, BoostInfoItem, BoostDataPresenter,
                     BoostDataPresenter.Factory>()
@@ -278,11 +277,6 @@ namespace _Game.Core.Installers.Core
                 .BindInterfacesAndSelfTo<MainMenuProvider>()
                 .AsSingle();
 
-        private void BindUpgradesAndEvolutionScreenProvider() =>
-            Container
-                .BindInterfacesAndSelfTo<UpgradeAndEvolutionScreenProvider>()
-                .AsSingle();
-
         private void BindStartBattleScreenProvider() =>
             Container
                 .BindInterfacesAndSelfTo<StartBattleScreenProvider>()
@@ -297,7 +291,7 @@ namespace _Game.Core.Installers.Core
             Container
                 .BindInterfacesAndSelfTo<TimelineInfoScreenProvider>()
                 .AsSingle();
-        
+
         private void BindRateGameChecker() =>
             Container
                 .BindInterfacesAndSelfTo<RateGameChecker>()
@@ -305,7 +299,7 @@ namespace _Game.Core.Installers.Core
 
         private void BindUIFactory()
         {
-            _uiFactory.Initialize();   
+            _uiFactory.Initialize();
             Container.BindInterfacesAndSelfTo<UIFactory>().FromInstance(_uiFactory).AsSingle();
         }
 
