@@ -30,10 +30,6 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         [SerializeField, Required] private Canvas _canvas;
         [SerializeField, Required] private TMP_Text _timelineLabel;
-        [SerializeField, Required] private Image _currentAgeImage;
-        [SerializeField, Required] private TMP_Text _currentAgeName;
-        [SerializeField, Required] private Image _nextAgeImage;
-        [SerializeField, Required] private TMP_Text _nextAgeName;
         [SerializeField, Required] private TransactionButton _evolveButton;
         [SerializeField, Required] private AmountView _rewardView;
 
@@ -88,12 +84,6 @@ namespace _Game.UI._EvolveScreen.Scripts
         private void OnStateChanged()
         {
             _timelineLabel.text = _presenter.GetTimelineNumber();
-
-            _currentAgeImage.sprite = _presenter.GetCurrentAgeIcon();
-            _nextAgeImage.sprite = _presenter.GetNextAgeIcon();
-
-            _currentAgeName.text = _presenter.GetCurrentAgeName();
-            _nextAgeName.text = _presenter.GetNextAgeName();
 
             if (_featureUnlockSystem.IsFeatureUnlocked(Feature.Skills))
             {
