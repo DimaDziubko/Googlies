@@ -17,15 +17,16 @@ namespace _Game.UI._TimelineInfoPresenter
         public event Action StateChanged;
         public IEnumerable<TimelineInfoItem> Items => _items;
         public int CurrentAge => _ageNavigator.CurrentIdx;
+        public int NextAge => _ageNavigator.CurrentIdx + 1;
         private readonly IGameInitializer _gameInitializer;
         private readonly ITimelineNavigator _timelineNavigator;
         private readonly IMyLogger _logger;
         private readonly IAgeNavigator _ageNavigator;
         private readonly AgeIconContainer _container;
-        
+
         private List<TimelineInfoItem> _items;
-        
-        
+
+
         private readonly IConfigRepository _configRepository;
         private ITimelineConfigRepository TimelineConfig => _configRepository.TimelineConfigRepository;
         private IDifficultyConfigRepository Difficulty => _configRepository.DifficultyConfigRepository;
@@ -44,7 +45,7 @@ namespace _Game.UI._TimelineInfoPresenter
             _gameInitializer = gameInitializer;
             _timelineNavigator = timelineNavigator;
             _container = container;
-            
+
             gameInitializer.OnPostInitialization += Init;
         }
 
@@ -53,7 +54,7 @@ namespace _Game.UI._TimelineInfoPresenter
             return $"Difficulty x{Difficulty.GetDifficultyValue(_timelineNavigator.CurrentTimelineId).ToCompactFormat()}";
         }
 
-        public string GetTimelineText() => 
+        public string GetTimelineText() =>
             $"Timeline {_timelineNavigator.CurrentTimelineNumber.ToString()}";
 
         private void Init()
@@ -83,9 +84,9 @@ namespace _Game.UI._TimelineInfoPresenter
         private void PrepareTimelineInfoItems()
         {
             var totalAgesCount = _ageNavigator.GetTotalAgesCount();
-            
+
             _items = new List<TimelineInfoItem>(totalAgesCount);
-            
+
             int ageIndex = 0;
 
             for (int i = 0; i < totalAgesCount; i++)
@@ -94,15 +95,15 @@ namespace _Game.UI._TimelineInfoPresenter
 
                 var iconRef = ageConfig.GetIconReference();
                 var icon = _container.Get(iconRef.Atlas.AssetGUID).Get(iconRef.IconName);
-                
+
                 var model = new TimelineInfoItem.TimelineInfoItemBuilder()
                     .WithIcon(icon)
                     .WithName(ageConfig.Name)
                     .WithDateRange(ageConfig.DateRange)
                     .WithDescription(ageConfig.Description)
                     .Build();
-                
-                model.SetLocked(ageIndex > CurrentAge);
+
+                model.SetLocked(ageIndex > NextAge);
                 _items.Add(model);
                 ageIndex++;
             }
@@ -111,7 +112,7 @@ namespace _Game.UI._TimelineInfoPresenter
         private void UpdateTimelineInfoItems()
         {
             int ageIndex = 0;
-            
+
             foreach (var item in _items)
             {
                 item.SetLocked(ageIndex > CurrentAge);

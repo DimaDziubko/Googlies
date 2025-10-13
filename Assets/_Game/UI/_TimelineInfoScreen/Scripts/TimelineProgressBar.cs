@@ -6,6 +6,8 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
 {
     public class TimelineProgressBar : MonoBehaviour
     {
+        private const float _sliderCoefficient = 0.825f;
+
         [SerializeField] private RectTransform _transform;
         [SerializeField] private Slider _slider;
 
@@ -13,13 +15,25 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
 
         public void UpdateValue(int currentAge, int ages)
         {
+            Debug.Log($"[UpdateValue] currentAge: {currentAge}, ages: {ages}");
+
             float percentage = 0;
             if (ages > 0)
             {
-                percentage = (float) currentAge / (ages - 1);
+                percentage = (float)currentAge / (ages - 1) * _sliderCoefficient;
+                Debug.Log($"[UpdateValue] percentage calculated: {percentage}");
+            }
+            else
+            {
+                Debug.LogWarning("[UpdateValue] ages <= 0, percentage = 0");
             }
 
-            _slider.value = Mathf.Clamp01(percentage);
+            float clampedValue = Mathf.Clamp01(percentage);
+            Debug.Log($"[UpdateValue] clamped value: {clampedValue}, slider value before: {_slider.value}");
+
+            _slider.value = clampedValue;
+
+            Debug.Log($"[UpdateValue] slider value after: {_slider.value}");
         }
 
         public Tween PlayValueAnimation(float newValue, float duration)
@@ -38,6 +52,8 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
             size.x = width;
             _transform.sizeDelta = size;
         }
+
+       public void SetAnchoredPosition(float firstPresenterX) => _transform.anchoredPosition = new Vector2(firstPresenterX, _transform.anchoredPosition.y);
 
         public void Cleanup()
         {

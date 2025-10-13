@@ -13,7 +13,8 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
         
         public TimelineInfoItemPresenter(
             TimelineInfoItem model, 
-            AgeInfoView view)
+            AgeInfoView view
+            )
         {
             _model = model;
             _view = view;

@@ -19,6 +19,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
 {
     public class TimelineInfoScreen : MonoBehaviour
     {
+        private const float POSITONLEFT = -90f;
 
         [SerializeField, Required] private Canvas _canvas;
 
@@ -113,9 +114,9 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
 
             float distanceBetweenCenters = _presenters[1].View.Transform.anchoredPosition.x - _presenters[0].View.Transform.anchoredPosition.x;
 
-            float totalWidth = (_presenters.Count - 1) * Mathf.Abs(distanceBetweenCenters);
-
+            float totalWidth = (_presenters.Count + 1) * Mathf.Abs(distanceBetweenCenters);
             _progressBar.SetWidth(totalWidth);
+            _progressBar.SetAnchoredPosition(POSITONLEFT);
         }
 
         //public async UniTask<bool> ShowScreen()
@@ -220,15 +221,32 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
             });
         }
 
+        private float _scrollCoefficient = 0.825f;
+
         private async void AdjustScrollPosition(int currentItem, int items)
         {
             await UniTask.Yield();
+            currentItem += 1;
 
-            float scrollPercentage = ((float)currentItem / (items - 1));
-            _scrollRect.horizontalNormalizedPosition = scrollPercentage;
+            Debug.Log($"[AdjustScrollPosition] currentItem: {currentItem}, items: {items}");
+
+            float scrollPercentage = ((float)currentItem / (items - 1)) * _scrollCoefficient;
+
+            // Если это последний элемент, ставим 1
+            if (currentItem >= items - 1)
+            {
+                scrollPercentage = 1f;
+            }
+
+            Debug.Log($"[AdjustScrollPosition] scrollPercentage calculated: {scrollPercentage}");
+            Debug.Log($"[AdjustScrollPosition] horizontalNormalizedPosition before: {_scrollRect.horizontalNormalizedPosition}");
+
+            _scrollRect.horizontalNormalizedPosition = Mathf.Clamp01(scrollPercentage);
+
+            Debug.Log($"[AdjustScrollPosition] horizontalNormalizedPosition after: {_scrollRect.horizontalNormalizedPosition}");
         }
 
-        private void OnExit()
+        public void OnExit()
         {
             _audioService.PlayButtonSound();
             _taskCompletion.TrySetResult(true);

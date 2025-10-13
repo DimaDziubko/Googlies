@@ -127,6 +127,7 @@ namespace _Game.UI._EvolveScreen.Scripts
         {
             Unsubscribe();
             _presenter.OnScreenDisposed();
+            _testTimelineInfo.OnExit();
         }
 
         public void SetActive(bool isActive)
