@@ -41,7 +41,7 @@ namespace _Game.UI._MainMenu.Scripts
             _button.interactable = isInteractable;
          
         public void SetHighlighted(bool isHighlighted) => 
-            _highlightedImage.enabled = isHighlighted;
+            _highlightedImage.gameObject.SetActive(isHighlighted);
 
         public void SetSize(Vector2 size) => 
             _rectTransform.sizeDelta = size;

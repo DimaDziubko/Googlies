@@ -12,7 +12,7 @@ namespace _Game.Core.Communication
         private static string FileName => "userAccountState.json";
         private static string Path => $"{SaveFolder}/{FileName}";
 
-        [MenuItem("Project Manager/Clear JSON File")]
+        [MenuItem("Tools/Clear JSON File")]
         public static void DeleteConfigFile()
         {
             if (!Directory.Exists(SaveFolder))
@@ -41,7 +41,7 @@ namespace _Game.Core.Communication
             }
         }
 
-        [MenuItem("Project Manager/Clear All PP Saves")]
+        [MenuItem("Tools/Clear All PP Saves")]
         public static void ClearAllPPSaves()
         {
             Debug.LogWarning("Player Prefs was cleared");

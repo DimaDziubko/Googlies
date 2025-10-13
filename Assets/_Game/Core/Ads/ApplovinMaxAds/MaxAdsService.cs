@@ -1,5 +1,5 @@
-﻿using System;
-using _Game.Common;
+﻿using _Game.Common;
+using _Game.Core._GameMode;
 using _Game.Core._Logger;
 using _Game.Core.Configs.Repositories;
 using _Game.Core.Services.UserContainer;
@@ -9,6 +9,7 @@ using _Game.Gameplay.Common;
 using _Game.Utils.Timers;
 using Assets._Game.Core.UserState;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 namespace _Game.Core.Ads.ApplovinMaxAds
@@ -167,7 +168,7 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         private void Subscribe()
         {
-            if (MaxHelper.I.IsDebugAdMode)
+            if (GameModeSettings.I.IsTestAds)
             {
                 MaxSdkCallbacks.OnSdkInitializedEvent += sdkConfiguration =>
                 {
