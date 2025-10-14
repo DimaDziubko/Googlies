@@ -14,7 +14,6 @@ namespace _Game.Core._GameListenerComposite
         IGameScreenListener<IStartBattleScreen>,
         IGameScreenListener<IShopScreen>,
         IGameScreenListener<IUpgradesScreen>,
-        IGameScreenListener<IEvolveScreen>,
         IGameScreenListener<ICardsScreen>,
         IGameScreenListener<ISkillsScreen>,
         IGameScreenListener<IUpgradeUnitsScreen>,
@@ -114,14 +113,6 @@ namespace _Game.Core._GameListenerComposite
         void IGameScreenListener<IUpgradesScreen>.OnScreenDisposed(IUpgradesScreen screen) => NotifyDisposed(screen);
 
 
-        void IGameScreenListener<IEvolveScreen>.OnScreenOpened(IEvolveScreen screen) => NotifyListeners(screen, true);
-        void IGameScreenListener<IEvolveScreen>.OnInfoChanged(IEvolveScreen screen) => NotifyInfoChanged(screen);
-        void IGameScreenListener<IEvolveScreen>.OnRequiresAttention(IEvolveScreen screen) => NotifyRequiresAttention(screen);
-        void IGameScreenListener<IEvolveScreen>.OnScreenClosed(IEvolveScreen screen) => NotifyListeners(screen, false);
-        void IGameScreenListener<IEvolveScreen>.OnScreenActiveChanged(IEvolveScreen screen, bool isActive) => NotifyActiveChanged(screen, isActive);
-  
-
-        void IGameScreenListener<IEvolveScreen>.OnScreenDisposed(IEvolveScreen screen) => NotifyDisposed(screen);
         void IGameScreenListener<ICardsScreen>.OnScreenOpened(ICardsScreen screen) => NotifyListeners(screen, true);
         void IGameScreenListener<ICardsScreen>.OnInfoChanged(ICardsScreen screen) => NotifyInfoChanged(screen);
         void IGameScreenListener<ICardsScreen>.OnRequiresAttention(ICardsScreen screen) => NotifyRequiresAttention(screen);

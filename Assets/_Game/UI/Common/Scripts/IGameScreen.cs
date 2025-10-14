@@ -41,11 +41,6 @@
         
     }
 
-    public interface IEvolveScreen : IGameScreenWithInfo
-    {
-        
-    }
-
     public interface ITravelScreen : IGameScreenWithInfo
     {
         

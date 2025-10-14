@@ -22,25 +22,14 @@ namespace _Game.UI._EvolveScreen.Scripts
 {
     public class EvolveScreenPresenter :
         IEvolveScreenPresenter,
-        IDisposable,
-        IGameScreenEvents<IEvolveScreen>, 
-        IEvolveScreen,
-        IGameScreenListener<ITravelScreen>,
-        IGameScreenListener<IMenuScreen>
+        IDisposable
     {
-        public event Action<IEvolveScreen> ScreenOpened;
-        public event Action<IEvolveScreen> InfoChanged;
-        public event Action<IEvolveScreen> RequiresAttention;
-        public event Action<IEvolveScreen> ScreenClosed;
-        public event Action<IEvolveScreen, bool> ActiveChanged;
-        public event Action<IEvolveScreen> ScreenDisposed;
-
         private bool _isReviewed;
 
         [ShowInInspector, ReadOnly]
         public bool IsReviewed
         {
-            get =>  _isReviewed && _screenStateAggregator.IsReviewed;
+            get => _isReviewed && _screenStateAggregator.IsReviewed;
             private set => _isReviewed = value;
         }
 
@@ -48,10 +37,10 @@ namespace _Game.UI._EvolveScreen.Scripts
         public bool NeedAttention => IsNextAgeAffordable() || _screenStateAggregator.NeedAttention;
 
         public string Info => "Evolution";
-        
+
         public event Action StateChanged;
         public event Action ButtonStateChanged;
-        
+
         private readonly IGameInitializer _gameInitializer;
         private readonly IUserContainer _userContainer;
         private readonly IAgeNavigator _ageNavigator;
@@ -61,7 +50,7 @@ namespace _Game.UI._EvolveScreen.Scripts
         private readonly IUINotifier _uiNotifier;
         private readonly IMyLogger _logger;
         private readonly IConfigRepository _config;
-        
+
         private ITimelineConfigRepository TimelineConfigRepository => _config.TimelineConfigRepository;
         private IIconConfigRepository IconConfig => _config.IconConfigRepository;
 
@@ -86,7 +75,6 @@ namespace _Game.UI._EvolveScreen.Scripts
             IMiniShopProvider miniShopProvider,
             ITimelineInfoScreenProvider timelineInfoProvider,
             IAudioService audioService,
-            IUINotifier uiNotifier,
             AgeIconContainer ageIconContainer,
             CurrencyBank bank)
         {
@@ -99,13 +87,10 @@ namespace _Game.UI._EvolveScreen.Scripts
             _miniShopProvider = miniShopProvider;
             _timelineInfoProvider = timelineInfoProvider;
             _audioService = audioService;
-            _uiNotifier = uiNotifier;
             _ageIconContainer = ageIconContainer;
             gameInitializer.OnPostInitialization += Init;
-            
-            _screenStateAggregator = new ScreenStateAggregator();
 
-            _uiNotifier.RegisterScreen(this, this);
+            _screenStateAggregator = new ScreenStateAggregator();
         }
 
         private async void Init()
@@ -123,7 +108,6 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         void IDisposable.Dispose()
         {
-            _uiNotifier.UnregisterScreen(this);
             TimelineState.NextAgeOpened -= OnAgeChanged;
             _gameInitializer.OnPostInitialization -= Init;
             Cell.OnStateChanged -= OnCurrenciesStateChanged;
@@ -133,37 +117,33 @@ namespace _Game.UI._EvolveScreen.Scripts
         void IEvolveScreenPresenter.OnScreenOpen()
         {
             IsReviewed = true;
-            ScreenOpened?.Invoke(this);
         }
 
         void IEvolveScreenPresenter.OnScreenClosed()
         {
-            ScreenClosed?.Invoke(this);
         }
-        
+
         void IEvolveScreenPresenter.OnScreenDisposed()
         {
             _logger.Log("EVOLVE SCREEN DISPOSED", DebugStatus.Info);
-            ScreenDisposed?.Invoke(this);
-        }
-        
-        void IEvolveScreenPresenter.OnScreenActiveChanged(bool isActive)
-        {
-            ActiveChanged?.Invoke(this, isActive);
         }
 
-        public Sprite GetCurrencyIcon() => 
+        void IEvolveScreenPresenter.OnScreenActiveChanged(bool isActive)
+        {
+        }
+
+        public Sprite GetCurrencyIcon() =>
             IconConfig.GetCurrencyIconFor(CurrencyType.Coins);
 
         private void OnCurrenciesAdded(double _)
         {
             if (NeedAttention)
             {
-                RequiresAttention?.Invoke(this);
+                //RequiresAttention?.Invoke(this);
             }
             _logger.Log("EVOLVE SCREEN NEED ATTENTION", DebugStatus.Warning);
         }
-        
+
         private void OnCurrenciesStateChanged() => ButtonStateChanged?.Invoke();
 
         private void OnAgeChanged() => StateChanged?.Invoke();
@@ -171,8 +151,8 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         public bool IsNextAgeAffordable()
         {
-            if(TimelineState.AgeId == TimelineConfigRepository.LastAgeIdx()) return false;
-            
+            if (TimelineState.AgeId == TimelineConfigRepository.LastAgeIdx()) return false;
+
             if (TimelineState.MaxBattle > TimelineState.AgeId)
                 return true;
 
@@ -191,37 +171,37 @@ namespace _Game.UI._EvolveScreen.Scripts
         public Sprite GetCurrentAgeIcon()
         {
             var currentAgeConfig = TimelineConfigRepository.GetRelatedAge(TimelineState.TimelineId, TimelineState.AgeId);
-            
-            var iconReference =currentAgeConfig .GetIconReference();
+
+            var iconReference = currentAgeConfig.GetIconReference();
             Sprite icon = _ageIconContainer.Get(iconReference.Atlas.AssetGUID).Get(iconReference.IconName);
-            
+
             return icon;
         }
 
         public string GetCurrentAgeName()
         {
             var currentAgeConfig = TimelineConfigRepository.GetRelatedAge(TimelineState.TimelineId, TimelineState.AgeId);
-            return currentAgeConfig .Name;
+            return currentAgeConfig.Name;
         }
 
         public Sprite GetNextAgeIcon()
         {
             var nextAgeConfig = TimelineConfigRepository.GetRelatedAge(
-                TimelineState.TimelineId, 
+                TimelineState.TimelineId,
                 Mathf.Min(TimelineState.AgeId + 1, TimelineConfigRepository.LastAgeIdx()));
 
             var iconReference = nextAgeConfig.GetIconReference();
             Sprite icon = _ageIconContainer.Get(iconReference.Atlas.AssetGUID).Get(iconReference.IconName);
-            
+
             return icon;
         }
 
         public string GetNextAgeName()
         {
             var nextAgeConfig = TimelineConfigRepository.GetRelatedAge(
-                TimelineState.TimelineId, 
+                TimelineState.TimelineId,
                 Mathf.Min(TimelineState.AgeId + 1, TimelineConfigRepository.LastAgeIdx()));
-            return nextAgeConfig .Name;
+            return nextAgeConfig.Name;
         }
 
         public async void OnEvolveClicked()
@@ -248,9 +228,9 @@ namespace _Game.UI._EvolveScreen.Scripts
             _audioService.PlayButtonSound();
             var screen = await _timelineInfoProvider.Load();
             //var isExited = await screen.Value.ShowScreen();
-           // if (isExited) _timelineInfoProvider.Dispose();
+            // if (isExited) _timelineInfoProvider.Dispose();
         }
-        
+
         //Debug
         [Button]
         public void RequiredAttention()
@@ -258,34 +238,13 @@ namespace _Game.UI._EvolveScreen.Scripts
             OnCurrenciesAdded(0);
         }
 
-        void IGameScreenListener<ITravelScreen>.OnScreenOpened(ITravelScreen screen) => UpdateState(screen);
-        void IGameScreenListener<ITravelScreen>.OnInfoChanged(ITravelScreen screen) { }
-        void IGameScreenListener<ITravelScreen>.OnRequiresAttention(ITravelScreen screen) => UpdateState(screen);
-        void IGameScreenListener<ITravelScreen>.OnScreenClosed(ITravelScreen screen) { }
-        void IGameScreenListener<ITravelScreen>.OnScreenActiveChanged(ITravelScreen screen, bool isActive) { }
-        void IGameScreenListener<ITravelScreen>.OnScreenDisposed(ITravelScreen screen) { }
 
         private void UpdateState(IGameScreen screen)
         {
             if (_screenStateAggregator.UpdateState(screen))
             {
-                RequiresAttention?.Invoke(this);
+                //RequiresAttention?.Invoke(this);
             }
         }
-
-        void IGameScreenListener<IMenuScreen>.OnScreenOpened(IMenuScreen screen)
-        {
-            if (NeedAttention)
-            {
-                IsReviewed = false;
-                RequiresAttention?.Invoke(this);
-            }
-        }
-
-        void IGameScreenListener<IMenuScreen>.OnInfoChanged(IMenuScreen screen) { }
-        void IGameScreenListener<IMenuScreen>.OnRequiresAttention(IMenuScreen screen) { }
-        void IGameScreenListener<IMenuScreen>.OnScreenClosed(IMenuScreen screen) { }
-        void IGameScreenListener<IMenuScreen>.OnScreenActiveChanged(IMenuScreen screen, bool isActive) { }
-        void IGameScreenListener<IMenuScreen>.OnScreenDisposed(IMenuScreen screen) { }
     }
 }
