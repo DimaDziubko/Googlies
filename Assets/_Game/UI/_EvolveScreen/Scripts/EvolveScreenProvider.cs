@@ -58,12 +58,12 @@ namespace _Game.UI._EvolveScreen.Scripts
                 _cameraService,
                 _evolveScreenPresenter,
                 _config,
-                _featureUnlockSystem,
                 _audioService,
                 _timelineInfoPresenter,
                 _logger,
                 _adsService,
-                _ageNavigator
+                _ageNavigator,
+                _featureUnlockSystem
                 );
             return _screen;
         }

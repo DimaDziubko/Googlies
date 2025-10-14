@@ -1557,7 +1557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.00003660938, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7297580056626678530
@@ -2338,7 +2338,6 @@ GameObject:
   - component: {fileID: 4957488854050798103}
   - component: {fileID: 1190698113112926462}
   - component: {fileID: 3670470209005879870}
-  - component: {fileID: 5614951630454501026}
   m_Layer: 5
   m_Name: EvolveScreen
   m_TagString: Untagged
@@ -2444,34 +2443,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 3557092669519344071}
-  _timelineLabel: {fileID: 7262696039877682343}
+  _timelineLaybel: {fileID: 7262696039877682343}
+  _difficultyLaybel: {fileID: 2626747426752182074}
   _evolveButton: {fileID: 7787955787695546903}
   _rewardView: {fileID: 3209355477936037364}
-  _testTimelineInfo: {fileID: 5614951630454501026}
   _closeButton: {fileID: 6399155630679801422}
---- !u!114 &5614951630454501026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7238858939938834579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84be32d017964253a4728be47836da3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvas: {fileID: 3557092669519344071}
   _scrollRect: {fileID: 5886849579349777363}
   _ageInfoListView: {fileID: 3431089104869632755}
   _progressBar: {fileID: 5871507119224459253}
-  _exitBtn: {fileID: 8432165424603298197}
-  _evolveSFX: {fileID: 8300000, guid: ee9d8fa311c9107448a91cbc8090165c, type: 3}
+  _evolveSFX: {fileID: 8300000, guid: 093b57562718c464aa592e13a00295d3, type: 3}
   _animationDelay: 1
   _scrollAnimationDuration: 3
   _rippleAnimationDuration: 0.2
-  _difficultyText: {fileID: 2626747426752182074}
-  _timelineText: {fileID: 7262696039877682343}
 --- !u!1 &7311096277874225508
 GameObject:
   m_ObjectHideFlags: 0
