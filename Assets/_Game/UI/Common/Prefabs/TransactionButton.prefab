@@ -283,7 +283,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -316,7 +316,6 @@ GameObject:
   - component: {fileID: 1058585485758766936}
   - component: {fileID: 7025368318250395310}
   - component: {fileID: 8786151788669996346}
-  - component: {fileID: 5286468038555135913}
   - component: {fileID: 769899933031127515}
   - component: {fileID: 6039683021644994378}
   - component: {fileID: 9136890184315329649}
@@ -368,14 +367,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.99215686, g: 0.8039216, b: 0.050980393, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -210725172, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+  m_Sprite: {fileID: -1052617231, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -385,28 +384,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5286468038555135913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9057834989758634897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576051ea85e5447aa2bb7cb2de874151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    colorGuid: 8727c1e6-63c3-4d39-9cd9-a9a8bfa49747
-    overrideAlpha: 0
-    alpha: 1
-  _image: {fileID: 8786151788669996346}
-  _button: {fileID: 769899933031127515}
-  _nonInteractableColorData:
-    colorGuid: 795f4ccb-76aa-45f4-8cd4-61f2ffd79155
-    overrideAlpha: 0
-    alpha: 1
 --- !u!114 &769899933031127515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,9 +414,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: -876264539, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+    m_PressedSprite: {fileID: -437274292, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: -210725172, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+    m_DisabledSprite: {fileID: 1055348953, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted

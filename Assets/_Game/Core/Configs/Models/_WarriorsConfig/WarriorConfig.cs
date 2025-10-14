@@ -14,16 +14,16 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
     public enum Skin
     {
         None,
-        
+
         Ally,
         Hostile,
         Zombie,
-        
+
         GreenGhost,
         BlueGhost,
         MagentaGhost
     }
-    
+
     [CreateAssetMenu(fileName = "WarriorConfig", menuName = "Configs/Warrior")]
     [Serializable]
     public class WarriorConfig : ScriptableObject, IConfigWithId
@@ -82,7 +82,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 _ => WarriorPositionSettings
             };
         }
-        
+
         public string GetPrefabKeyFor(Skin skin)
         {
             return skin switch
@@ -118,7 +118,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 _ => PlayerIconName
             };
         }
-        
+
         public int GetAggroLayer(Faction faction)
         {
             return faction switch
@@ -152,7 +152,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 _ => Constants.Layer.RVO_MELEE_PLAYER
             };
         }
-        
+
         public int GetAttackLayer(Faction faction)
         {
             return faction switch
@@ -174,11 +174,11 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 _ => new IconReference(PlayerIconAtlas, PlayerIconName),
             };
         }
-        
-        private IEnumerable<string> GetPlayerIconNames() => 
+
+        private IEnumerable<string> GetPlayerIconNames() =>
             new List<string> { "0", "1", "2" };
 
-        private IEnumerable<string> GetEnemyIconNames() => 
+        private IEnumerable<string> GetEnemyIconNames() =>
             new List<string> { "0", "1", "2" };
 
         private IEnumerable<string> GetPlayerKeys()
@@ -204,8 +204,10 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Unit_45", "Unit_46", "Unit_47",
                 "Unit_48", "Unit_49", "Unit_50",
                 "Unit_51", "Unit_52", "Unit_53",
-                "Unit_100", "Warrior_4","Warrior_5",
-                "Warrior_7", "Warrior_8", "Warrior_9",  
+                "Unit_100","Warrior_0", "Warrior_1",
+                "Warrior_2","Warrior_3","Warrior_4",
+                "Warrior_5",
+                "Warrior_7", "Warrior_8", "Warrior_9",
                 "Warrior_10", "Warrior_11", "Warrior_12",
                 "Warrior_13", "Warrior_14", "Warrior_15",
             };
@@ -214,7 +216,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
         private IEnumerable<string> GetEnemyKeys()
         {
             return new List<string>
-            { 
+            {
                 "Enemy_3", "Enemy_4", "Enemy_5",
                 "Enemy_6", "Enemy_7", "Enemy_8",
                 "Enemy_9", "Enemy_10", "Enemy_11",
@@ -234,23 +236,25 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Unit_45", "Unit_46", "Unit_47",
                 "Unit_48", "Unit_49", "Unit_50",
                 "Unit_51", "Unit_52", "Unit_53",
-                "Unit_100", "Warrior_4", "Warrior_7",
-                "Warrior_8", "Warrior_5", "Warrior_9",
+                "Unit_100","Warrior_0", "Warrior_1",
+                "Warrior_2","Warrior_3","Warrior_4",
+                "Warrior_5",
+                "Warrior_7", "Warrior_8", "Warrior_9",
                 "Warrior_10", "Warrior_11", "Warrior_12",
                 "Warrior_13", "Warrior_14", "Warrior_15",
             };
         }
-        
+
         private IEnumerable<string> GetZombieKeys()
         {
             return new List<string>
             {
-                "Zombie_3", 
-                "Zombie_6", 
-                "Zombie_9", 
-                "Zombie_18", 
-                "Zombie_21", 
-                "Zombie_24", 
+                "Zombie_3",
+                "Zombie_6",
+                "Zombie_9",
+                "Zombie_18",
+                "Zombie_21",
+                "Zombie_24",
                 "Zombie_27", 
                 //Spine
                 "Unit_0",
@@ -258,9 +262,10 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Unit_39",
                 "Unit_42",
                 "Unit_45",
+                "Warrior_0"
             };
         }
-        
+
         private void OnValidate()
         {
             WeaponId = Id;

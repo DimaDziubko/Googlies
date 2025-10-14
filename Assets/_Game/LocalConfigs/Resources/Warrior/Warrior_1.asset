@@ -32,9 +32,9 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   PlayerIconName: 0
   EnemyIconName: 0
-  PlayerKey: Unit_0
-  EnemyKey: Unit_0
-  ZombieKey: Unit_0
+  PlayerKey: Warrior_0
+  EnemyKey: Warrior_0
+  ZombieKey: Warrior_0
   Price: 0
   FoodPrice: 3
   CoinsPerKill: 12
@@ -43,6 +43,7 @@ MonoBehaviour:
   AttackPerSecond: 0.95
   AttackDistance: 0.14
   DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.44, z: 0}

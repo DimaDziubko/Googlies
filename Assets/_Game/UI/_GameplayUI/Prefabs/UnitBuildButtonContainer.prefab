@@ -160,6 +160,7 @@ MonoBehaviour:
   _button: {fileID: 645142067077660363}
   _unitIconHolder: {fileID: 1498340005519678133}
   _foodIconHolder: {fileID: 2700358400410343317}
+  _unitTypeIconHolder: {fileID: 2500610773382285063}
   _priceLabel: {fileID: 3293398103476823986}
   _btnContainer: {fileID: 6981895714869958733}
   _animation: {fileID: 8225677798952896120}
@@ -403,7 +404,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -755,6 +756,17 @@ RectTransform:
 --- !u!114 &1498340005519678133 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5267552076486080236, guid: 9727098a3eca63646a26d5a397bd520c, type: 3}
+  m_PrefabInstance: {fileID: 6760244987039001689}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2500610773382285063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9179113122368351070, guid: 9727098a3eca63646a26d5a397bd520c, type: 3}
   m_PrefabInstance: {fileID: 6760244987039001689}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

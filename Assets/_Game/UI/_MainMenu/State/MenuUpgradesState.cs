@@ -41,7 +41,7 @@ namespace _Game.UI._MainMenu.State
             {
                 _upgradesScreen.Value.Show();
 
-                _mainMenu.CancelEvolveStep();
+                //_mainMenu.CancelEvolveStep();
                 _mainMenu.CancelUpgradesStep();
             }
         }
@@ -59,7 +59,7 @@ namespace _Game.UI._MainMenu.State
 
             _mainMenu.SetButtonHighlighted(MenuButtonType.Upgrades, false);
 
-            _mainMenu.ShowEvolveStep();
+            //_mainMenu.ShowEvolveStep();
             _mainMenu.ShowUpgradesStep();
         }
 

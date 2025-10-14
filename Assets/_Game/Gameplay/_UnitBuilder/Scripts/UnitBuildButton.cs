@@ -18,19 +18,21 @@ namespace _Game.Gameplay._UnitBuilder.Scripts
         [SerializeField] private ThemedButton _button;
         [SerializeField] private Image _unitIconHolder;
         [SerializeField] private Image _foodIconHolder;
+        [SerializeField] private Image _unitTypeIconHolder;
         [SerializeField] private TMP_Text _priceLabel;
         [SerializeField] private GameObject _btnContainer;
         [SerializeField] private UnitBuilderBtnScaleAnimation _animation;
-        
+
         [SerializeField] private UnitType _type;
+
         public UnitType Type => _type;
-        public void SetUnitIcon(Sprite icon) => 
+        public void SetUnitIcon(Sprite icon) =>
             _unitIconHolder.sprite = icon;
-        public void SetUnitIconColor(Color color) => 
+        public void SetUnitIconColor(Color color) =>
             _unitIconHolder.color = color;
-        public void SetFoodIcon(Sprite icon) => 
+        public void SetFoodIcon(Sprite icon) =>
             _foodIconHolder.sprite = icon;
-        public void SetPrice(string price) => 
+        public void SetPrice(string price) =>
             _priceLabel.text = price;
         public void SetInteractable(bool isInteractable)
         {
@@ -38,11 +40,13 @@ namespace _Game.Gameplay._UnitBuilder.Scripts
             {
                 _animation.DoScaleAnimation();
             }
-            
+
             _button.SetInteractable(isInteractable);
         }
+        public void SetUnitTypeIconHolder(Sprite icon) =>
+            _unitTypeIconHolder.sprite = icon;
 
-        public void SetActive(bool isActive) => 
+        public void SetActive(bool isActive) =>
             _btnContainer.SetActive(isActive);
     }
 }

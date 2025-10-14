@@ -1,4 +1,5 @@
-﻿using _Game.Core._Logger;
+﻿using _Game.Core._FeatureUnlockSystem.Scripts;
+using _Game.Core._Logger;
 using _Game.Core.Boosts;
 using _Game.Core.Navigation.Age;
 using _Game.Core.Navigation.Battle;
@@ -6,12 +7,13 @@ using _Game.Core.Navigation.Timeline;
 using _Game.Core.Services._Balancy;
 using _Game.Core.Services.Audio;
 using _Game.Core.UserState._State;
+using _Game.Gameplay._Tutorial.Scripts;
 using _Game.Gameplay.BattleLauncher;
 using _Game.LiveopsCore;
+using _Game.UI._EvolutionScreen;
 using _Game.UI._EvolveScreen.Scripts;
 using _Game.UI._MainMenu.State;
 using _Game.UI.Common.Scripts;
-using _Game.UI._EvolutionScreen;
 using _Game.UI.Global;
 using _Game.UI.Settings.Scripts;
 using Cysharp.Threading.Tasks;
@@ -54,11 +56,14 @@ namespace _Game.UI._StartBattleScreen.Scripts
         private readonly IUINotifier _uiNotifier;
         private readonly IBalancySDKService _balancy;
         private readonly IGameEventScheduler _gameEventScheduler;
-        private EvolutionPresenter _evolutionPresenter;
         private readonly IEvolveScreenProvider _evolveProvider;
-        private CurrencyBank _bank;
+        private readonly ITutorialManager _tutorialManager;
+        private readonly IFeatureUnlockSystem _featureUnlockSystem;
 
+        private EvolutionPresenter _evolutionPresenter;
+        private CurrencyBank _bank;
         private bool _isOpened;
+        private bool IsEvolutionAScreenUnlocked => _featureUnlockSystem.IsFeatureUnlocked(Feature.EvolutionScreen);
 
         public StartBattleScreenPresenter(
             IAudioService audioService,
@@ -72,7 +77,9 @@ namespace _Game.UI._StartBattleScreen.Scripts
             CurrencyBank bank,
             IBalancySDKService balancy,
             IGameEventScheduler gameEventScheduler,
-            IEvolveScreenProvider evolveProvider
+            IEvolveScreenProvider evolveProvider,
+            ITutorialManager tutorialManager,
+            IFeatureUnlockSystem featureUnlockSystem
             )
         {
             _balancy = balancy;
@@ -87,6 +94,8 @@ namespace _Game.UI._StartBattleScreen.Scripts
             _uiNotifier = uiNotifier;
             _gameEventScheduler = gameEventScheduler;
             _evolveProvider = evolveProvider;
+            _tutorialManager = tutorialManager;
+            _featureUnlockSystem = featureUnlockSystem;
 
             _uiNotifier.RegisterScreen(this, this);
         }
@@ -99,6 +108,8 @@ namespace _Game.UI._StartBattleScreen.Scripts
                 Subscribe();
                 OnTimelineChanged();
                 OnBalancyInitialized();
+                _tutorialManager.Register(Screen.EvolveTutorialStep);
+                if (IsEvolutionAScreenUnlocked) Screen.EvolveTutorialStep.ShowStep(0.5f);
 
                 ScreenOpened?.Invoke(this);
             }
@@ -107,6 +118,8 @@ namespace _Game.UI._StartBattleScreen.Scripts
         void IStartBattleScreenPresenter.OnScreenClosed()
         {
             _isOpened = false;
+            Screen.EvolveTutorialStep.CancelStep();
+            _tutorialManager.UnRegister(Screen.EvolveTutorialStep);
             Unsubscribe();
             ScreenClosed?.Invoke(this);
         }
@@ -114,6 +127,7 @@ namespace _Game.UI._StartBattleScreen.Scripts
         void IStartBattleScreenPresenter.OnScreenDispose()
         {
             _isOpened = false;
+
             Unsubscribe();
             ScreenDisposed?.Invoke(this);
         }
@@ -307,9 +321,7 @@ namespace _Game.UI._StartBattleScreen.Scripts
 
         private void OnEvolutionButtonClicked()
         {
-            //Screen.EvolutionStep.CompleteStep();
-
-            //_localStateMachine.Enter<EvolutionState>();
+            Screen.EvolveTutorialStep.CompleteStep();
 
             if (_evolutionPresenter == null)
                 _evolutionPresenter = new EvolutionPresenter(_evolveProvider, _logger);
@@ -337,6 +349,22 @@ namespace _Game.UI._StartBattleScreen.Scripts
         }
 
         private void PlayButtonSound() => _audioService.PlayButtonSound();
+
+        private void ShowEvolveStep()
+        {
+            if (IsEvolutionAScreenUnlocked && Screen.OrNull() != null)
+            {
+                Screen.EvolveTutorialStep.ShowStep(0.5f);
+            }
+        }
+
+        private void CancelEvolveStep()
+        {
+            if (IsEvolutionAScreenUnlocked && Screen.OrNull() != null)
+            {
+                Screen.EvolveTutorialStep.CancelStep();
+            }
+        }
 
         void IDisposable.Dispose()
         {

@@ -143,9 +143,12 @@ namespace _Game.UI._EvolveScreen.Scripts
                 _presenters.Add(presenter);
             }
 
-            InitSlider();
+            //InitSlider();
+            _progressBar.SetActive(true);
             UpdateSlider(_timelineInfoPresenter.CurrentAge, _presenters.Count);
             AdjustScrollPosition(_timelineInfoPresenter.CurrentAge, _presenters.Count);
+            var currentMarker = _presenters[_timelineInfoPresenter.CurrentAge].View.MarkerRect;
+            //ScrollToTarget(currentMarker);//.Forget();
         }
 
         private async void InitSlider()
@@ -191,6 +194,43 @@ namespace _Game.UI._EvolveScreen.Scripts
 
             Debug.Log($"[AdjustScrollPosition] horizontalNormalizedPosition after: {_scrollRect.horizontalNormalizedPosition}");
         }
+        private void ScrollToTarget(RectTransform target)
+        {
+            if (_scrollRect == null || target == null)
+            {
+                Debug.LogWarning("[ScrollToTargetInstant] ScrollRect or target is null!");
+                return;
+            }
+
+            var content = _scrollRect.content;
+            if (content == null)
+            {
+                Debug.LogWarning("[ScrollToTargetInstant] ScrollRect has no content!");
+                return;
+            }
+
+            // ѕолучаем локальную позицию цели относительно контента
+            Vector3 targetLocalPos = content.InverseTransformPoint(target.position);
+
+            // ќбща€ прокручиваема€ ширина
+            float totalScrollable = content.rect.width - _scrollRect.viewport.rect.width;
+
+            if (totalScrollable <= 0f)
+                return; // контент не скроллитс€
+
+            // ÷ентр цели в координатах контента
+            float targetCenterX = -targetLocalPos.x - (target.rect.width * 0.5f);
+
+            //  онвертируем в нормализованное значение (0..1)
+            float normalized = Mathf.InverseLerp(-totalScrollable * 0.5f, totalScrollable * 0.5f, targetCenterX);
+            normalized = Mathf.Clamp01(normalized);
+
+            // ћгновенно ставим позицию скролла
+            _scrollRect.horizontalNormalizedPosition = normalized;
+
+            Debug.Log($"[ScrollToTargetInstant] targetX: {targetCenterX:F2}, normalized: {normalized:F3}");
+        }
+
 
         private void PlayEvolveAnimation()
         {
@@ -249,8 +289,10 @@ namespace _Game.UI._EvolveScreen.Scripts
             return result;
         }
 
-        private void UpdateSlider(int currentAge, int ages) =>
-            _progressBar.UpdateValue(currentAge, ages);
+        private void UpdateSlider(int currentAge, int ages)
+        {
+            _progressBar.AdjustScrollPositionToAge(++currentAge);
+        }
 
         private void PlayEvolveSound()
         {

@@ -81,7 +81,7 @@ namespace _Game.UI._UpgradesScreen.Scripts
 
             OnUnitOpened(_model.Type);
             _view.SetName(_model.Name);
-            _view.SetUnitType(_config.GetUnitType(_model.GetWeaponType()));
+            _view.SetUnitType(_config.GetMeleeOrRangedIcon(_model.IsWeaponMelee()));
             _view.SetIcon(_model.Icon);
             _view.SetCurrencyIcon(_config.GetCurrencyIconFor(CurrencyType.Coins));
 

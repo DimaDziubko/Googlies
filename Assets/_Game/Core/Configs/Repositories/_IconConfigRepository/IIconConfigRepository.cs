@@ -24,7 +24,7 @@ namespace _Game.Core.Configs.Repositories._IconConfigRepository
         Sprite GetItemIconFor(int itemId);
         Sprite GetEventIconFor(string eventName);
         int GetPointInlineIndex(CurrencyType eventCurrencyCellType);
-        Sprite GetUnitType(bool isMelee);
+        Sprite GetMeleeOrRangedIcon(bool isMelee);
         AssetReference GetWarriorsFundAtlasReference();
         Sprite GetBoostIconCardsFor(BoostType type);
     }

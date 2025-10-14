@@ -35,7 +35,9 @@ namespace _Game.Core._DataPresenters.UnitBuilderDataPresenter
                     _config.FoodIcon(),
                     unitData.Icon,
                     unitData.FoodPrice,
-                    TimelineState.OpenUnits.Contains(unitData.Type));
+                    TimelineState.OpenUnits.Contains(unitData.Type),
+                    _config.GetMeleeOrRangedIcon(unitData.IsWeaponMelee)
+                    );
             }
         }
     }

@@ -13,7 +13,6 @@ namespace _Game.UI._MainMenu.Scripts
     public class MainMenuScreen : MonoBehaviour
     {
         public TutorialStep UpgradeTutorialStep => _upgradesTutorialStep;
-        public TutorialStep EvolveTutorialStep => _evolveTutorialStep;
         public TutorialStep CardsTutorialStep => _cardsTutorialStep;
         public TutorialStep SkillsTutorialStep => _skillsTutorialStep;
         
@@ -36,7 +35,6 @@ namespace _Game.UI._MainMenu.Scripts
         [SerializeField, Required] private MenuButton _shopButton;
 
         [SerializeField, Required] public TutorialStep _upgradesTutorialStep;
-        [SerializeField, Required] public TutorialStep _evolveTutorialStep;
         [SerializeField, Required] public TutorialStep _cardsTutorialStep;
         [SerializeField, Required] public TutorialStep _skillsTutorialStep;
         

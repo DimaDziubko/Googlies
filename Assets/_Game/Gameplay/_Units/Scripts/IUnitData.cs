@@ -12,26 +12,27 @@ namespace _Game.Gameplay._Units.Scripts
 {
     public interface IUnitData
     {
-        float CoinsPerKill { get;}
-        float AttackDistance { get;}
-        float Speed { get;}
-        float AttackPerSecond { get;}
+        float CoinsPerKill { get; }
+        float AttackDistance { get; }
+        float Speed { get; }
+        float AttackPerSecond { get; }
         UnitType Type { get; }
-        IWeaponData WeaponData { get;}
-        string PrefabKey { get;}
-        IReadOnlyList<CurrencyData> Price { get;}
+        IWeaponData WeaponData { get; }
+        string PrefabKey { get; }
+        IReadOnlyList<CurrencyData> Price { get; }
         int FoodPrice { get; }
         string Name { get; }
         float Health { get; }
-        Sprite Icon { get;}
-        int Layer { get;}
-        int AttackLayer { get;}
-        int AggroLayer { get;}
-        RVOLayer RVOLayer { get;}
-        Skin Skin { get;}
-        float HealthBoost { get;}
-        WarriorObjectsPositionSettings PositionSettings  { get;}
-        bool IsPushable { get;}
+        Sprite Icon { get; }
+        int Layer { get; }
+        int AttackLayer { get; }
+        int AggroLayer { get; }
+        RVOLayer RVOLayer { get; }
+        Skin Skin { get; }
+        float HealthBoost { get; }
+        WarriorObjectsPositionSettings PositionSettings { get; }
+        bool IsPushable { get; }
+        bool IsWeaponMelee { get; }
 
         StatInfo GetStatInfo(StatType statType)
         {
@@ -53,7 +54,7 @@ namespace _Game.Gameplay._Units.Scripts
                     };
                 default:
                     throw new ArgumentOutOfRangeException(nameof(statType), statType, null);
-            }   
+            }
         }
     }
 }

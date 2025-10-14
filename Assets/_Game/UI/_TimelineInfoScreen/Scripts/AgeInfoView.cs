@@ -28,11 +28,13 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
         private Tween _iconAnimation;
 
         public RectTransform Transform => _transform;
-        
+
         public void SetName(string name) => _nameLabel.text = name;
         public void SetIcon(Sprite icon) => _ageIconHolder.sprite = icon;
         public void SetDataRange(string dateRange) => _dateRangeLabel.text = dateRange;
         public void SetDescription(string description) => _descriptionLabel.text = description;
+
+        public RectTransform MarkerRect => _marker.GetComponent<RectTransform>();
 
         public void SetLocked(bool isLocked)
         {
@@ -47,18 +49,18 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
         {
             _marker.SetFilled(isFilled);
         }
-        
+
         public void PlayRippleAnimation(in float duration)
         {
             Cleanup();
-            
+
             _scaleAnimation = _iconTransform.DOScale(_animationScale, duration / _loopCount)
                 .SetEase(Ease.InOutQuad)
                 .SetLoops(_loopCount, LoopType.Yoyo);
             _iconAnimation = _ageIconHolder.DOFade(_animationFade, duration / _loopCount)
                 .SetEase(Ease.InOutQuad)
                 .SetLoops(_loopCount, LoopType.Yoyo);
-            
+
             _marker.PlayRippleAnimation(duration);
         }
 

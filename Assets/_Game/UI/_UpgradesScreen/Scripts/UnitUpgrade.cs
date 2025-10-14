@@ -50,10 +50,6 @@ namespace _Game.UI._UpgradesScreen.Scripts
             };
         }
 
-        internal bool GetWeaponType()
-        {
-            if (_data.WeaponData.WeaponType == WeaponType.SimpleMelee) return true;
-            else return false;
-        }
+        internal bool IsWeaponMelee() => _data.IsWeaponMelee;
     }
 }

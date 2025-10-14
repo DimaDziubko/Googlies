@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using _Game.Core.Boosts;
 using _Game.Core.Configs.Models._WarriorsConfig;
+using _Game.Gameplay._Units.Factory;
 using _Game.Gameplay._Weapon.Scripts;
 using Pathfinding.RVO;
 using UnityEngine;
@@ -34,6 +35,7 @@ namespace _Game.Gameplay._Units.Scripts
         public virtual float HealthBoost => _unitData.HealthBoost;
         public WarriorObjectsPositionSettings PositionSettings => _unitData.PositionSettings;
         public bool IsPushable => _unitData.IsPushable;
- 
+        public bool IsWeaponMelee => WeaponData.WeaponType == WeaponType.SimpleMelee;
+
     }
 }

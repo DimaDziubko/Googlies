@@ -125,7 +125,7 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: 50
     textureCompression: 1
-    compressionQuality: 50
+    compressionQuality: 100
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 1
@@ -166,9 +166,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1025
-        width: 1024
-        height: 1024
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,7 +177,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13964c65b489bae4fb316b6963c3767a
+      spriteID: 2bee976206f3bdf4dbb4458a9d8b8f81
       internalID: 2112096571
       vertices: []
       indices: 
@@ -187,10 +187,10 @@ TextureImporter:
       name: 1
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 1025
-        width: 1024
-        height: 1024
+        x: 256
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,7 +199,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6fc2219a7d423e45a8aada17ad0a15a
+      spriteID: c90cfa1451f11eb4fb70e6266a5d826e
       internalID: 125450883
       vertices: []
       indices: 
@@ -211,8 +211,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,7 +221,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60254f27486a25a4f9f4db65399be198
+      spriteID: b0135fc9e7bde1147b0e7c16e944569f
       internalID: 1797238314
       vertices: []
       indices: 
@@ -239,11 +239,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceOnImport
+        value: False
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":256.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       0: 2112096571
       1: 125450883
       2: 1797238314
+      UnitIcon_0_3: -258627834
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

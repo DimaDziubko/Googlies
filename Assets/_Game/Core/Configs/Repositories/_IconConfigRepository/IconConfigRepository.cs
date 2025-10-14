@@ -65,8 +65,8 @@ namespace _Game.Core.Configs.Repositories._IconConfigRepository
         public AssetReference GetWarriorsFundAtlasReference() =>
             _userContainer.GameConfig.IconConfig.GetWarriorsFundAtlasReference();
 
-        public Sprite GetUnitType(bool isMelee) =>
-            _userContainer.GameConfig.IconConfig.GetUnitType(isMelee);
+        public Sprite GetMeleeOrRangedIcon(bool isMelee) =>
+            _userContainer.GameConfig.IconConfig.GetMeleeOrRangedIcon(isMelee);
 
         public Sprite GetBoostIconCardsFor(BoostType type) =>
             _userContainer.GameConfig.IconConfig.GetBoostIconCardsFor(type);

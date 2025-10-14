@@ -36,6 +36,11 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
             Debug.Log($"[UpdateValue] slider value after: {_slider.value}");
         }
 
+        public void AdjustScrollPositionToAge(int currentAge)
+        {
+            _slider.value = currentAge;
+        }
+
         public Tween PlayValueAnimation(float newValue, float duration)
         {
             _sliderTween?.Kill();
@@ -43,7 +48,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
             return _sliderTween;
         }
 
-        public void SetActive(bool isActive) => 
+        public void SetActive(bool isActive) =>
             gameObject.SetActive(isActive);
 
         public void SetWidth(float width)
@@ -53,7 +58,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
             _transform.sizeDelta = size;
         }
 
-       public void SetAnchoredPosition(float firstPresenterX) => _transform.anchoredPosition = new Vector2(firstPresenterX, _transform.anchoredPosition.y);
+        public void SetAnchoredPosition(float firstPresenterX) => _transform.anchoredPosition = new Vector2(firstPresenterX, _transform.anchoredPosition.y);
 
         public void Cleanup()
         {

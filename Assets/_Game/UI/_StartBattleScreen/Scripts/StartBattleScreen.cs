@@ -1,5 +1,6 @@
 using _Game.Core._GameMode;
 using _Game.Core._Logger;
+using _Game.Gameplay._Tutorial.Scripts;
 using _Game.LiveopsCore;
 using _Game.LiveopsCore._Enums;
 using _Game.Utils;
@@ -36,6 +37,9 @@ namespace _Game.UI._StartBattleScreen.Scripts
             remove => _previousBattleButton.onClick.RemoveListener(value);
         }
 
+        public TutorialStep EvolveTutorialStep => _evolveTutorialStep;
+
+
         [SerializeField] private Canvas _canvas;
 
         [SerializeField] private Button _startBattleButton;
@@ -45,6 +49,7 @@ namespace _Game.UI._StartBattleScreen.Scripts
 
         [SerializeField, Required] private GameEventPanel _leftGameEventPanel;
         [SerializeField, Required] private GameEventPanel _rightGameEventPanel;
+        [SerializeField, Required] public TutorialStep _evolveTutorialStep;
 
         [SerializeField] private CheatPanel _cheatPanel;
 

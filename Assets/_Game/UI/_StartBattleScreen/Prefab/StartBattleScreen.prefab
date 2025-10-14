@@ -96,6 +96,63 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!1 &157950054177552075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4562619995498879768}
+  - component: {fileID: 5134614826864873782}
+  m_Layer: 5
+  m_Name: EvolutionTutorialStep
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4562619995498879768
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157950054177552075}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1177474049868944504}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &5134614826864873782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157950054177552075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c01f693c8f46a3a080227ec3d92609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _step: 5
+  _affectedSteps: 0400000005000000
+  _exclusiveSteps: 
+  _requiredPointerSize: {x: 140, y: 140}
+  _offset: {x: 0, y: 50}
+  _rootCanvasTransform: {fileID: 4690993739289926140}
+  _tutorialObjectRectTransform: {fileID: 4562619995498879768}
+  _isUnderneath: 0
+  _needAppearanceAnimation: 0
 --- !u!1 &201847808498803320
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +619,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -827,7 +884,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -1175,7 +1232,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -1390,7 +1447,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -1676,7 +1733,6 @@ GameObject:
   - component: {fileID: 3363373211426686372}
   - component: {fileID: 4144135523069677838}
   - component: {fileID: 9196027001965050279}
-  - component: {fileID: 4882053521727200664}
   m_Layer: 5
   m_Name: EvolutionBattleButton
   m_TagString: Untagged
@@ -1697,6 +1753,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4935883865375477619}
+  - {fileID: 4562619995498879768}
   m_Father: {fileID: 4690993739280280958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1725,14 +1782,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.99215686, g: 0.8039216, b: 0.050980393, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -210725172, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+  m_Sprite: {fileID: -1052617231, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1772,9 +1829,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: -876264539, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+    m_PressedSprite: {fileID: -437274292, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: -210725172, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+    m_DisabledSprite: {fileID: 1055348953, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1799,28 +1856,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pressWarp: 0.9
---- !u!114 &4882053521727200664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3366190238080042498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576051ea85e5447aa2bb7cb2de874151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    colorGuid: 8727c1e6-63c3-4d39-9cd9-a9a8bfa49747
-    overrideAlpha: 0
-    alpha: 1
-  _image: {fileID: 3363373211426686372}
-  _button: {fileID: 4144135523069677838}
-  _nonInteractableColorData:
-    colorGuid: 795f4ccb-76aa-45f4-8cd4-61f2ffd79155
-    overrideAlpha: 0
-    alpha: 1
 --- !u!1 &3424879558938051666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2475,7 +2510,6 @@ GameObject:
   - component: {fileID: 5042980317081478614}
   - component: {fileID: 6397857599849861617}
   - component: {fileID: 1147044964657547838}
-  - component: {fileID: 9008311561803005931}
   m_Layer: 5
   m_Name: StartBattleButton
   m_TagString: Untagged
@@ -2524,14 +2558,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.99215686, g: 0.8039216, b: 0.050980393, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -210725172, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+  m_Sprite: {fileID: -1052617231, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2571,9 +2605,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: -876264539, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+    m_PressedSprite: {fileID: 61926306, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: -210725172, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+    m_DisabledSprite: {fileID: -437274292, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -2598,28 +2632,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pressWarp: 0.9
---- !u!114 &9008311561803005931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4637864530653107347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576051ea85e5447aa2bb7cb2de874151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    colorGuid: 8727c1e6-63c3-4d39-9cd9-a9a8bfa49747
-    overrideAlpha: 0
-    alpha: 1
-  _image: {fileID: 5042980317081478614}
-  _button: {fileID: 6397857599849861617}
-  _nonInteractableColorData:
-    colorGuid: 795f4ccb-76aa-45f4-8cd4-61f2ffd79155
-    overrideAlpha: 0
-    alpha: 1
 --- !u!1 &4649666101075592101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2957,6 +2969,7 @@ MonoBehaviour:
   _previousBattleButton: {fileID: 5104130322616323548}
   _leftGameEventPanel: {fileID: 1930984898238075361}
   _rightGameEventPanel: {fileID: 6850872198875830784}
+  _evolveTutorialStep: {fileID: 5134614826864873782}
   _cheatPanel: {fileID: 5894786054254934457}
 --- !u!1 &4690993739516719546
 GameObject:
@@ -3809,7 +3822,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -4314,7 +4327,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -4450,7 +4463,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -4823,7 +4836,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -5416,7 +5429,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -5552,7 +5565,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -6093,7 +6106,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -6515,7 +6528,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -6651,7 +6664,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -6787,7 +6800,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1

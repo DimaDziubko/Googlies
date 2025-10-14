@@ -43,7 +43,6 @@ namespace _Game.UI._MainMenu.Scripts
 
         private bool IsDungeonUnlocked => _featureUnlockSystem.IsFeatureUnlocked(Feature.Dugneons);
         private bool IsUpgradesUnlocked => _featureUnlockSystem.IsFeatureUnlocked(Feature.UpgradesScreen);
-        private bool IsEvolutionAScreenUnlocked => _featureUnlockSystem.IsFeatureUnlocked(Feature.EvolutionScreen);
         private bool IsBattleUnlocked => true;
         private bool IsCardsUnlocked => _featureUnlockSystem.IsFeatureUnlocked(Feature.Cards);
         private bool IsShopUnlocked => _featureUnlockSystem.IsFeatureUnlocked(Feature.Shop);
@@ -80,11 +79,9 @@ namespace _Game.UI._MainMenu.Scripts
             {
                 _tutorialManager.Register(Screen.CardsTutorialStep);
                 _tutorialManager.Register(Screen.UpgradeTutorialStep);
-                _tutorialManager.Register(Screen.EvolveTutorialStep);
                 _tutorialManager.Register(Screen.SkillsTutorialStep);
                 
                 if (IsUpgradesUnlocked) Screen.UpgradeTutorialStep.ShowStep(0.5f);
-                if (IsEvolutionAScreenUnlocked) Screen.EvolveTutorialStep.ShowStep(0.5f);
                 if (IsCardsUnlocked) Screen.CardsTutorialStep.ShowStep(0.5f);
                 if (IsSkillsUnlocked) Screen.SkillsTutorialStep.ShowStep(0.5f);
 
@@ -129,12 +126,10 @@ namespace _Game.UI._MainMenu.Scripts
 
             Screen.CardsTutorialStep.CancelStep();
             Screen.UpgradeTutorialStep.CancelStep();
-            Screen.EvolveTutorialStep.CancelStep();
             Screen.SkillsTutorialStep.CancelStep();
 
             _tutorialManager.UnRegister(Screen.CardsTutorialStep);
             _tutorialManager.UnRegister(Screen.UpgradeTutorialStep);
-            _tutorialManager.UnRegister(Screen.EvolveTutorialStep);
             _tutorialManager.UnRegister(Screen.SkillsTutorialStep);
 
             _uiNotifier.UnregisterPin(typeof(IStartBattleScreen));
@@ -149,14 +144,6 @@ namespace _Game.UI._MainMenu.Scripts
             _menuStateMachine.SetActive(false);
 
             ScreenClosed?.Invoke(this);
-        }
-
-        public void ShowEvolveStep()
-        {
-            if (IsEvolutionAScreenUnlocked && Screen.OrNull() != null)
-            {
-                Screen.EvolveTutorialStep.ShowStep(0.5f);
-            }
         }
 
         public void ShowUpgradesStep()
@@ -180,14 +167,6 @@ namespace _Game.UI._MainMenu.Scripts
             if (IsSkillsUnlocked && Screen.OrNull() != null)
             {
                 Screen.SkillsTutorialStep.ShowStep(0.5f);
-            }
-        }
-
-        public void CancelEvolveStep()
-        {
-            if (IsEvolutionAScreenUnlocked && Screen.OrNull() != null)
-            {
-                Screen.EvolveTutorialStep.CancelStep();
             }
         }
 

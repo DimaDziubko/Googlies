@@ -13,7 +13,8 @@ namespace _Game.Core._DataPresenters.UnitBuilderDataPresenter
 
         public ZombieRushUnitBuilderModel(
             IConfigRepository configRepository,
-            IZombieRushModeUnitDataProvider provider)
+            IZombieRushModeUnitDataProvider provider
+            )
         {
             _config = configRepository.IconConfigRepository;
             _provider = provider;
@@ -28,7 +29,9 @@ namespace _Game.Core._DataPresenters.UnitBuilderDataPresenter
                     _config.FoodIcon(),
                     unitData.Icon,
                     unitData.FoodPrice,
-                    true);
+                    true,
+                    _config.GetMeleeOrRangedIcon(unitData.IsWeaponMelee)
+                    );
             }
         }
     }

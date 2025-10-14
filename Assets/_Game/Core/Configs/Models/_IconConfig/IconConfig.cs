@@ -195,7 +195,7 @@ namespace _Game.Core.Configs.Models._IconConfig
         public AssetReference GetWarriorsFundAtlasReference() =>
             GameEventIconConfig.WarriorsFundAtlasReference;
 
-        public Sprite GetUnitType(bool isMelee)
+        public Sprite GetMeleeOrRangedIcon(bool isMelee)
         {
             if (isMelee)
                 return _meleeSprite;
