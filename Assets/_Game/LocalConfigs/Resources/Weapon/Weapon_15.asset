@@ -15,16 +15,16 @@ MonoBehaviour:
   Id: 15
   WeaponType: 2
   ProjectileKey: Mine
-  IsMuzzle: 0
-  MuzzleKey: '-'
+  IsMuzzle: 1
+  MuzzleKey: Muzzle_3
   IsExplosion: 0
   ProjectileExplosionKey: Explosion_0
   Damage: 243
-  ProjectileSpeed: 2
-  TrajectoryWarpFactor: 2
+  ProjectileSpeed: 3
+  TrajectoryWarpFactor: 1.5
   SplashRadius: 0.4
   SplashDamageRatio: 0.3
-  trajectoryType: 1
+  trajectoryType: 0
   ProjectileImpactType: 2
   AttackSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}

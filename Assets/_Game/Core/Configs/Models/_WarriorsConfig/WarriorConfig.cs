@@ -206,7 +206,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Unit_51", "Unit_52", "Unit_53",
                 "Unit_100","Warrior_0", "Warrior_1",
                 "Warrior_2","Warrior_3","Warrior_4",
-                "Warrior_5",
+                "Warrior_5","Warrior_6",
                 "Warrior_7", "Warrior_8", "Warrior_9",
                 "Warrior_10", "Warrior_11", "Warrior_12",
                 "Warrior_13", "Warrior_14", "Warrior_15",
@@ -238,10 +238,10 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Unit_51", "Unit_52", "Unit_53",
                 "Unit_100","Warrior_0", "Warrior_1",
                 "Warrior_2","Warrior_3","Warrior_4",
-                "Warrior_5",
-                "Warrior_7", "Warrior_8", "Warrior_9",
-                "Warrior_10", "Warrior_11", "Warrior_12",
-                "Warrior_13", "Warrior_14", "Warrior_15",
+                "Warrior_5","Warrior_6","Warrior_7",
+                "Warrior_8", "Warrior_9","Warrior_10",
+                "Warrior_11", "Warrior_12","Warrior_13",
+                "Warrior_14", "Warrior_15",
             };
         }
 

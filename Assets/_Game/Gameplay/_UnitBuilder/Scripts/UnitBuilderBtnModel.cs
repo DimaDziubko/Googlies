@@ -18,7 +18,8 @@ namespace _Game.Gameplay._UnitBuilder.Scripts
             Sprite icon,
             int foodPrice,
             bool isUnlocked,
-            Sprite unitAttackSprite)
+            Sprite unitAttackSprite
+            )
         {
             Type = type;
             FoodIcon = foodIcon;

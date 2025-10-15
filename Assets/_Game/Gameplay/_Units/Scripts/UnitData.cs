@@ -29,9 +29,9 @@ namespace _Game.Gameplay._Units.Scripts
         public RVOLayer RVOLayer { get; private set; }
         public Skin Skin { get; private set; }
         public float HealthBoost { get; private set; }
-        public WarriorObjectsPositionSettings PositionSettings  { get; private set; }
-        public bool IsPushable  { get; private set; }
-        public bool IsWeaponMelee => WeaponData.WeaponType == WeaponType.SimpleMelee;
+        public WarriorObjectsPositionSettings PositionSettings { get; private set; }
+        public bool IsPushable { get; private set; }
+        public bool IsWeaponMelee => WeaponData.WeaponType is WeaponType.SimpleMelee or WeaponType.PushMelle;
 
         public class UnitDataBuilder
         {
@@ -169,7 +169,7 @@ namespace _Game.Gameplay._Units.Scripts
                 _positionSettings = positionSettings;
                 return this;
             }
-            
+
             public UnitDataBuilder WithIsPushable(bool isPushable)
             {
                 _isPushable = isPushable;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1486648200674442078
+--- !u!1 &583097272352634574
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6740237447003534143}
-  - component: {fileID: 3729869107901059996}
-  - component: {fileID: 3400804986565459791}
-  - component: {fileID: 6644009076974178980}
-  - component: {fileID: 7654207281437493496}
+  - component: {fileID: 6046465792313446939}
+  - component: {fileID: 8491758433561666750}
+  - component: {fileID: 5749548009014270107}
+  - component: {fileID: 1979541476998271673}
+  - component: {fileID: 192796322231213353}
   m_Layer: 0
   m_Name: Spine GameObject (Warrior_9)
   m_TagString: Untagged
@@ -20,36 +20,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6740237447003534143
+--- !u!4 &6046465792313446939
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486648200674442078}
+  m_GameObject: {fileID: 583097272352634574}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.041, y: 0.1625, z: -0.070737384}
-  m_LocalScale: {x: 0.06, y: 0.06, z: 1}
+  m_LocalPosition: {x: 0.036, y: 0.164, z: -0.070737384}
+  m_LocalScale: {x: 0.05472296, y: 0.05472296, z: 0.91204935}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3164853740265671117}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3729869107901059996
+--- !u!33 &8491758433561666750
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486648200674442078}
+  m_GameObject: {fileID: 583097272352634574}
   m_Mesh: {fileID: 0}
---- !u!23 &3400804986565459791
+--- !u!23 &5749548009014270107
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486648200674442078}
+  m_GameObject: {fileID: 583097272352634574}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dd2d6fa71a199db41a0762d1c9ba44fc, type: 2}
+  - {fileID: 2100000, guid: 7dbd530b7c993064987db2b111b19390, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,19 +91,19 @@ MeshRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6644009076974178980
+--- !u!114 &1979541476998271673
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486648200674442078}
+  m_GameObject: {fileID: 583097272352634574}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: spine-unity::Spine.Unity.SkeletonAnimation
-  skeletonDataAsset: {fileID: 11400000, guid: af341a4af254a0b4c9899f3cc271dfb6, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: f718a50a24ff09a4985230faa39febc7, type: 2}
   initialSkinName: Ally
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -134,36 +134,37 @@ MonoBehaviour:
   _animationName: 
   loop: 1
   timeScale: 1
---- !u!114 &7654207281437493496
+--- !u!114 &192796322231213353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486648200674442078}
+  m_GameObject: {fileID: 583097272352634574}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cb8810c9d094ba6b597e0eb3146fe2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Game.Gameplay._Units.Scripts._Animation.SpineUnitAnimator
-  _idleBottom: {fileID: 11400000, guid: 8a6475bd008feb6488ae3b116b412bd3, type: 2}
-  _idleTop: {fileID: 11400000, guid: a2a166ffb1869374f93562459fe0350d, type: 2}
-  _walkBottom: {fileID: 11400000, guid: 9b2d12d2eedfb1c439defcae6decd502, type: 2}
-  _walkTop: {fileID: 11400000, guid: f2db6aef58137ea489693f30e5e5809e, type: 2}
+  _idleBottom: {fileID: 11400000, guid: eabb927cc65399b4dae280ae0efce4ac, type: 2}
+  _idleTop: {fileID: 11400000, guid: 54141b4e66ad1de4f9d4c94d2fde3955, type: 2}
+  _walkBottom: {fileID: 11400000, guid: 18ef1fec376a25c4eae189d3723cb22a, type: 2}
+  _walkTop: {fileID: 11400000, guid: 7d07a2b4aa313bd4eaa1f304f3c9018e, type: 2}
   _attacks:
-  - {fileID: 11400000, guid: cfcf7ff66ec3c6c4f819647077f4f037, type: 2}
-  - {fileID: 11400000, guid: da0518bbcaf5f1844b6f02489c34f9ec, type: 2}
-  - {fileID: 11400000, guid: d1a0f8c55e6c65440b409ae31de431cf, type: 2}
+  - {fileID: 11400000, guid: 9a6b8931c0fed194191f7e3803f45155, type: 2}
+  - {fileID: 11400000, guid: dc29225767856404a90b0f9e383c2aee, type: 2}
+  - {fileID: 11400000, guid: c135af134184c5e409b6c69260194a2a, type: 2}
+  - {fileID: 11400000, guid: 5482264867869984d8ac11eca38bb518, type: 2}
   _isAttack: 1
-  _aggroIntro: {fileID: 11400000, guid: cb107d01145bc384d8ae5832eaae2d9a, type: 2}
-  _aggro: {fileID: 11400000, guid: 8f51d9293ceba3a409cb527dfacbc1d7, type: 2}
-  _death: {fileID: 11400000, guid: 76c05b46b9aba404c9e8dce300bb683c, type: 2}
+  _aggroIntro: {fileID: 11400000, guid: 9a03255d1da4754429eb47f9b5a8a90b, type: 2}
+  _aggro: {fileID: 11400000, guid: d08ebd083bd1cbf46b4e6d1fe9c4d0fe, type: 2}
+  _death: {fileID: 0}
   _isAggroIntro: 1
   _isAggro: 1
-  _isDeath: 1
+  _isDeath: 0
   _aimingIn: {fileID: 0}
   _aimingOut: {fileID: 0}
-  _skeletonAnimation: {fileID: 6644009076974178980}
+  _skeletonAnimation: {fileID: 1979541476998271673}
   _isAiming: 0
   _settings:
     AimTransform: {fileID: 0}
@@ -175,7 +176,8 @@ MonoBehaviour:
       _min: -45
       _max: 45
     AimSmoothTime: 0.1
-  _locomotionBaseSpeed: 0.05
+  _locomotionBaseSpeed: 0.1
+  _animationFolderPath: Assets/_Game/Bundles/Timeline_1/Units/Spine/Warrior_9_New/ReferenceAssets
 --- !u!1 &3076519443256387985
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +207,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6740237447003534143}
+  - {fileID: 6046465792313446939}
   m_Father: {fileID: 958203460998866586}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &3078240555696291004
@@ -219,7 +221,7 @@ PrefabInstance:
     - target: {fileID: 51915423071092570, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: '_meshRenderers.Array.data[0]'
       value: 
-      objectReference: {fileID: 3400804986565459791}
+      objectReference: {fileID: 5749548009014270107}
     - target: {fileID: 334178145423606527, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -263,7 +265,7 @@ PrefabInstance:
     - target: {fileID: 2887546130212765018, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: _skeletonAnimation
       value: 
-      objectReference: {fileID: 6644009076974178980}
+      objectReference: {fileID: 1979541476998271673}
     - target: {fileID: 3422250074657817466, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -280,6 +282,14 @@ PrefabInstance:
       propertyPath: _dissolveColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3550503916258392969, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
+      propertyPath: _meshRenderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550503916258392969, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
+      propertyPath: '_meshRenderers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 5749548009014270107}
     - target: {fileID: 3993092324173637634, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.002
@@ -291,11 +301,11 @@ PrefabInstance:
     - target: {fileID: 4791001562467347759, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: _meshRenderer
       value: 
-      objectReference: {fileID: 3400804986565459791}
+      objectReference: {fileID: 5749548009014270107}
     - target: {fileID: 4979644030443954241, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: _skeletonAnimation
       value: 
-      objectReference: {fileID: 6644009076974178980}
+      objectReference: {fileID: 1979541476998271673}
     - target: {fileID: 5562371957400219988, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -359,7 +369,7 @@ PrefabInstance:
     - target: {fileID: 7315094200717886893, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: _animator
       value: 
-      objectReference: {fileID: 7654207281437493496}
+      objectReference: {fileID: 192796322231213353}
     - target: {fileID: 8263895972462444447, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.389
