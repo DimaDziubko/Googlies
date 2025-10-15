@@ -185,10 +185,6 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
         {
             return new List<string>
             {
-                "Unit_3", "Unit_4", "Unit_5",
-                "Unit_6", "Unit_7", "Unit_8",
-                "Unit_9", "Unit_10", "Unit_11",
-                "Unit_12", "Unit_13", "Unit_14",
                 "Unit_15", "Unit_16", "Unit_17",
                 "Unit_18", "Unit_19", "Unit_20",
                 "Unit_21", "Unit_22", "Unit_23",
@@ -196,7 +192,6 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Unit_27", "Unit_28", "Unit_29",
                 "Unit_30", "Unit_31", "Unit_32",
                 //Spine
-                "Unit_0", "Unit_1", "Unit_2",
                 "Unit_33", "Unit_34", "Unit_35",
                 "Unit_36", "Unit_37", "Unit_38",
                 "Unit_39", "Unit_40", "Unit_41",
@@ -204,12 +199,13 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Unit_45", "Unit_46", "Unit_47",
                 "Unit_48", "Unit_49", "Unit_50",
                 "Unit_51", "Unit_52", "Unit_53",
-                "Unit_100","Warrior_0", "Warrior_1",
-                "Warrior_2","Warrior_3","Warrior_4",
-                "Warrior_5","Warrior_6",
-                "Warrior_7", "Warrior_8", "Warrior_9",
-                "Warrior_10", "Warrior_11", "Warrior_12",
-                "Warrior_13", "Warrior_14", "Warrior_15",
+                "Unit_100","Warrior_1","Warrior_2",
+                "Warrior_3","Warrior_4","Warrior_5",
+                "Warrior_6","Warrior_7", "Warrior_8",
+                "Warrior_9","Warrior_10", "Warrior_11",
+                "Warrior_12","Warrior_13", "Warrior_14",
+                "Warrior_15", "Warrior_16","Warrior_17",
+                 "Warrior_18", "Warrior_19",
             };
         }
 
@@ -236,12 +232,13 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Unit_45", "Unit_46", "Unit_47",
                 "Unit_48", "Unit_49", "Unit_50",
                 "Unit_51", "Unit_52", "Unit_53",
-                "Unit_100","Warrior_0", "Warrior_1",
-                "Warrior_2","Warrior_3","Warrior_4",
-                "Warrior_5","Warrior_6","Warrior_7",
-                "Warrior_8", "Warrior_9","Warrior_10",
-                "Warrior_11", "Warrior_12","Warrior_13",
-                "Warrior_14", "Warrior_15",
+                "Unit_100","Warrior_1","Warrior_2",
+                "Warrior_3","Warrior_4","Warrior_5",
+                "Warrior_6","Warrior_7", "Warrior_8",
+                "Warrior_9","Warrior_10", "Warrior_11",
+                "Warrior_12","Warrior_13", "Warrior_14",
+                "Warrior_15", "Warrior_16","Warrior_17",
+                 "Warrior_18", "Warrior_19",
             };
         }
 
@@ -262,7 +259,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Unit_39",
                 "Unit_42",
                 "Unit_45",
-                "Warrior_0"
+                "Warrior_1"
             };
         }
 

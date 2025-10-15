@@ -14,31 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 16
   Type: 0
-  Health: 1450
+  UnitLayerType: 0
+  Health: 1460
   Speed: 0.25
   Name: Trooper
   PlayerIconAtlas:
     m_AssetGUID: 8dfd4d7f94591a74fb7187dc80f8212d
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   EnemyIconAtlas:
     m_AssetGUID: 95b091a3e163e964aaecb0b767ba9d24
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   PlayerIconName: 0
   EnemyIconName: 0
-  PlayerKey: Unit_15
-  EnemyKey: Enemy_15
+  PlayerKey: Warrior_16
+  EnemyKey: Warrior_16
   ZombieKey: Zombie_9
   Price: 0
-  FoodPrice: 13
+  FoodPrice: 8
   CoinsPerKill: 393216
   PlayerHealthMultiplier: 1
   EnemyHealthMultiplier: 1
-  AttackPerSecond: 0.5
-  AttackDistance: 0.17
+  AttackPerSecond: 0.7
+  AttackDistance: 1
+  DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.439, z: 0}
@@ -66,3 +71,4 @@ MonoBehaviour:
       Rotation: {x: -0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
   WeaponId: 16
+  FBConfigId: '-'

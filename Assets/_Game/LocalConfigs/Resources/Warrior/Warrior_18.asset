@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 18
   Type: 2
-  UnitLayerType: 1
+  UnitLayerType: 0
   Health: 3640
   Speed: 0.25
   Name: Himars
@@ -22,16 +22,18 @@ MonoBehaviour:
     m_AssetGUID: 8dfd4d7f94591a74fb7187dc80f8212d
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   EnemyIconAtlas:
     m_AssetGUID: 95b091a3e163e964aaecb0b767ba9d24
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   PlayerIconName: 2
   EnemyIconName: 2
-  PlayerKey: Unit_17
-  EnemyKey: Enemy_17
+  PlayerKey: Warrior_18
+  EnemyKey: Warrior_18
   ZombieKey: Zombie_9
   Price: 13100000
   FoodPrice: 30
@@ -41,6 +43,7 @@ MonoBehaviour:
   AttackPerSecond: 0.2
   AttackDistance: 1.5
   DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.4871, z: 0}

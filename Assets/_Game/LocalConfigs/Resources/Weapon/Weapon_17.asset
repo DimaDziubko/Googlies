@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Weapon_17
   m_EditorClassIdentifier: 
   Id: 17
-  WeaponType: 2
+  WeaponType: 3
   ProjectileKey: JavelinMissile
-  IsMuzzle: 0
-  MuzzleKey: Muzzle_1
+  IsMuzzle: 1
+  MuzzleKey: Muzzle_2
   IsExplosion: 0
   ProjectileExplosionKey: Explosion_1
   Damage: 352
@@ -24,7 +24,7 @@ MonoBehaviour:
   TrajectoryWarpFactor: 2
   SplashRadius: 0.4
   SplashDamageRatio: 0.3
-  ProjectileMoveType: 2
+  trajectoryType: 0
   ProjectileImpactType: 2
   AttackSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
@@ -123,5 +123,13 @@ MonoBehaviour:
     IgnoreListenerVolume: 0
     IgnoreListenerPause: 0
     RolloffMode: 0
+  IsAiming: 0
+  AimingSettings:
+    MaxAimDistance: 2
+    AngleRange:
+      _min: -45
+      _max: 45
+    AimSmoothTime: 0.1
+  ImpulseStrength: 0
   AllyLaserColors: []
   HostileLaserColors: []
