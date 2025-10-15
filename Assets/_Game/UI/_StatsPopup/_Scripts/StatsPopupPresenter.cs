@@ -27,7 +27,7 @@ namespace _Game.UI._StatsPopup._Scripts
             IUserContainer userContainer)
         {
             _unitDataProvider = unitDataProvider;
-            
+
             _commonConfig = configRepository.IconConfigRepository;
             _userContainer = userContainer;
         }
@@ -41,8 +41,8 @@ namespace _Game.UI._StatsPopup._Scripts
         public string GetStatValue(UnitType type, StatType statType, Faction faction)
         {
             IUnitData data = _unitDataProvider.GetDecoratedUnitData(faction, type, Skin.Ally);
-            StatInfo statInfo = data.GetStatInfo(statType); 
-            return $"<color=white>{statInfo.Value.ToCompactFormat()}</color><color={Constants.SpecialColors.SPECIAL_BLUE}>(x{statInfo.BoostValue.ToCompactFormat()})</color>";
+            StatInfo statInfo = data.GetStatInfo(statType);
+            return $"{statInfo.Value.ToCompactFormat()} (x{statInfo.BoostValue.ToCompactFormat()})";
         }
 
         public bool CanMovePrevious(UnitType currentType) =>
@@ -54,7 +54,7 @@ namespace _Game.UI._StatsPopup._Scripts
         public bool FindNextAvailable(UnitType currentType, bool forward, out UnitType nextType)
         {
             List<UnitType> openUnits = TimelineState.OpenUnits
-                .OrderBy(unit => unit) 
+                .OrderBy(unit => unit)
                 .ToList();
 
             int currentIndex = openUnits.IndexOf(currentType);
@@ -66,7 +66,7 @@ namespace _Game.UI._StatsPopup._Scripts
             }
 
             int newIndex = forward ? currentIndex + 1 : currentIndex - 1;
-    
+
             if (newIndex >= 0 && newIndex < openUnits.Count)
             {
                 nextType = openUnits[newIndex];
@@ -87,6 +87,17 @@ namespace _Game.UI._StatsPopup._Scripts
 
         public Sprite GetStatIcon(StatType damage) =>
             _commonConfig.ForStatIcon(damage);
-        
+
+        public string GetWeaponName(UnitType type)
+        {
+            IUnitData data = _unitDataProvider.GetDecoratedUnitData(Faction.Player, type, Skin.Ally);
+            return data.WeaponData.ProjectileKey;
+        }
+
+        public Sprite GetWeaponTypeIcon(UnitType type)
+        {
+            IUnitData data = _unitDataProvider.GetDecoratedUnitData(Faction.Player, type, Skin.Ally);
+            return _commonConfig.GetMeleeOrRangedIcon(data.IsWeaponMelee);
+        }
     }
 }

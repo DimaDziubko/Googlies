@@ -79,7 +79,7 @@ namespace _Game.Core.Configs.Models._WeaponConfig
         public float ImpulseStrength = 0;
         
         private bool IsPushType() => 
-            WeaponType == WeaponType.PushMelle;
+            WeaponType == WeaponType.PushMelee;
         private bool IsProjectileType() => 
             WeaponType == WeaponType.SimpleProjectile;
         

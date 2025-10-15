@@ -1,4 +1,4 @@
-using _Game.Core._FeatureUnlockSystem.Scripts;
+п»їusing _Game.Core._FeatureUnlockSystem.Scripts;
 using _Game.Core._Logger;
 using _Game.Core.Ads;
 using _Game.Core.Configs.Repositories;
@@ -95,7 +95,7 @@ namespace _Game.UI._EvolveScreen.Scripts
             Unsubscribe();
             Subscribe();
             _presenter.OnScreenOpen();
-            InitTimeline();
+            InitTimeline().Forget();
             OnStateChanged();
 
             _canvas.enabled = true;
@@ -128,7 +128,7 @@ namespace _Game.UI._EvolveScreen.Scripts
             _evolveButton.SetInteractable(_presenter.CanEvolve());
         }
 
-        private async void InitTimeline()
+        private async UniTask InitTimeline()
         {
             await UniTask.Yield();
 
@@ -143,12 +143,18 @@ namespace _Game.UI._EvolveScreen.Scripts
                 _presenters.Add(presenter);
             }
 
-            //InitSlider();
             _progressBar.SetActive(true);
             UpdateSlider(_timelineInfoPresenter.CurrentAge, _presenters.Count);
-            AdjustScrollPosition(_timelineInfoPresenter.CurrentAge, _presenters.Count);
+
+            await UniTask.WaitUntil(() => _scrollRect.content.rect.height > 100);
+            Debug.Log($"вњ… Content ready: {_scrollRect.content.rect.height}");
+
+            await UniTask.DelayFrame(1);
+
             var currentMarker = _presenters[_timelineInfoPresenter.CurrentAge].View.MarkerRect;
-            //ScrollToTarget(currentMarker);//.Forget();
+            Debug.Log($"рџЋЇ Current age: {_timelineInfoPresenter.CurrentAge}, Marker: {currentMarker.name}, pos: {currentMarker.position}");
+
+            _scrollRect.SnapScrollToTarget(currentMarker);
         }
 
         private async void InitSlider()
@@ -209,23 +215,23 @@ namespace _Game.UI._EvolveScreen.Scripts
                 return;
             }
 
-            // Получаем локальную позицию цели относительно контента
+            // РџРѕР»СѓС‡Р°РµРј Р»РѕРєР°Р»СЊРЅСѓСЋ РїРѕР·РёС†РёСЋ С†РµР»Рё РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РєРѕРЅС‚РµРЅС‚Р°
             Vector3 targetLocalPos = content.InverseTransformPoint(target.position);
 
-            // Общая прокручиваемая ширина
+            // РћР±С‰Р°СЏ РїСЂРѕРєСЂСѓС‡РёРІР°РµРјР°СЏ С€РёСЂРёРЅР°
             float totalScrollable = content.rect.width - _scrollRect.viewport.rect.width;
 
             if (totalScrollable <= 0f)
-                return; // контент не скроллится
+                return; // РєРѕРЅС‚РµРЅС‚ РЅРµ СЃРєСЂРѕР»Р»РёС‚СЃСЏ
 
-            // Центр цели в координатах контента
+            // Р¦РµРЅС‚СЂ С†РµР»Рё РІ РєРѕРѕСЂРґРёРЅР°С‚Р°С… РєРѕРЅС‚РµРЅС‚Р°
             float targetCenterX = -targetLocalPos.x - (target.rect.width * 0.5f);
 
-            // Конвертируем в нормализованное значение (0..1)
+            // РљРѕРЅРІРµСЂС‚РёСЂСѓРµРј РІ РЅРѕСЂРјР°Р»РёР·РѕРІР°РЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ (0..1)
             float normalized = Mathf.InverseLerp(-totalScrollable * 0.5f, totalScrollable * 0.5f, targetCenterX);
             normalized = Mathf.Clamp01(normalized);
 
-            // Мгновенно ставим позицию скролла
+            // РњРіРЅРѕРІРµРЅРЅРѕ СЃС‚Р°РІРёРј РїРѕР·РёС†РёСЋ СЃРєСЂРѕР»Р»Р°
             _scrollRect.horizontalNormalizedPosition = normalized;
 
             Debug.Log($"[ScrollToTargetInstant] targetX: {targetCenterX:F2}, normalized: {normalized:F3}");
@@ -305,7 +311,7 @@ namespace _Game.UI._EvolveScreen.Scripts
         public void OnTimelineStateChanged()
         {
             Cleanup();
-            InitTimeline();
+            InitTimeline().Forget();
         }
 
         private void Subscribe()

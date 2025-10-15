@@ -13,5 +13,7 @@ namespace _Game.UI._StatsPopup._Scripts
         bool CanMoveNext(UnitType currentType);
         bool FindNextAvailable(UnitType currentType, bool forward, out UnitType nextType);
         string GetTimelineText();
+        string GetWeaponName(UnitType type);
+        Sprite GetWeaponTypeIcon(UnitType type);
     }
 }

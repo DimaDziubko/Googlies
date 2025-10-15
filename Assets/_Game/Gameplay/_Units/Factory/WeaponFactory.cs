@@ -14,7 +14,7 @@ namespace _Game.Gameplay._Units.Factory
         RangeNonProjectile,
         LaserSaber,
         LaserWhip,
-        PushMelle,
+        PushMelee,
     }
 
     [CreateAssetMenu(fileName = "Weapon Factory", menuName = "Factories/Weapon")]
@@ -38,7 +38,7 @@ namespace _Game.Gameplay._Units.Factory
                 WeaponType.LaserSaber => new LightSaber(_soundService),
                 WeaponType.LaserWhip => new LightWhip(_soundService),
                 WeaponType.RangeNonProjectile => new RangeNonProjectile(_soundService),
-                WeaponType.PushMelle => new PushMelee(_soundService),
+                WeaponType.PushMelee => new PushMelee(_soundService),
                 _ => new SimpleMelee(_soundService),
             };
         }

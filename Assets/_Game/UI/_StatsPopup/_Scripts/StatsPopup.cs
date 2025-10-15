@@ -15,6 +15,8 @@ namespace _Game.UI._StatsPopup._Scripts
     {
         [SerializeField] private Canvas _canvas;
 
+
+        [SerializeField] private TMP_Text _timelineLabel;
         [SerializeField] private TMP_Text _currentWarriorLabel;
 
         [SerializeField] private ThemedButton _previousStatsButton;
@@ -93,6 +95,7 @@ namespace _Game.UI._StatsPopup._Scripts
         private void UpdateView(UnitType type)
         {
             _currentWarriorLabel.text = _statsPopupPresenter.GetNameFor(type);
+            _timelineLabel.text = _statsPopupPresenter.GetTimelineText();
             UpdateUnitView(_playerUnitInfoItem, type, Faction.Player);
             UpdateUnitView(_enemyUnitInfoItem, type, Faction.Enemy);
         }
@@ -100,7 +103,8 @@ namespace _Game.UI._StatsPopup._Scripts
         private void UpdateUnitView(UnitInfoItem unitInfoItem, UnitType type, Faction faction)
         {
             unitInfoItem.SetIcon(_statsPopupPresenter.GetIconFor(type, faction));
-            unitInfoItem.SetTimelineText(_statsPopupPresenter.GetTimelineText());
+            unitInfoItem.SetWeaponNameText(_statsPopupPresenter.GetWeaponName(type));
+            unitInfoItem.SetWeaponTypeImage(_statsPopupPresenter.GetWeaponTypeIcon(type));
 
             UpdateStat(unitInfoItem, type, StatType.Damage, faction);
             UpdateStat(unitInfoItem, type, StatType.Health, faction);
@@ -153,8 +157,8 @@ namespace _Game.UI._StatsPopup._Scripts
             PlayButtonSound();
             _animation.PlayHide(OnHideComplete);
         }
-        
-        
+
+
         private void OnHideComplete()
         {
             _canvas.enabled = false;

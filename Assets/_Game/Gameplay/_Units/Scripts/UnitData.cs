@@ -31,7 +31,7 @@ namespace _Game.Gameplay._Units.Scripts
         public float HealthBoost { get; private set; }
         public WarriorObjectsPositionSettings PositionSettings { get; private set; }
         public bool IsPushable { get; private set; }
-        public bool IsWeaponMelee => WeaponData.WeaponType is WeaponType.SimpleMelee or WeaponType.PushMelle;
+        public bool IsWeaponMelee => WeaponData.WeaponType is WeaponType.SimpleMelee or WeaponType.PushMelee;
 
         public class UnitDataBuilder
         {
