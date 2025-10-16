@@ -91,7 +91,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
                 _presenters.Add(presenter);
             }
 
-            InitSlider();
+            //InitSlider();
             UpdateSlider(_timelineInfoPresenter.CurrentAge, _presenters.Count);
             AdjustScrollPosition(_timelineInfoPresenter.CurrentAge, _presenters.Count);
 
@@ -99,25 +99,25 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
             Subscribe();
         }
 
-        private async void InitSlider()
-        {
-            await UniTask.Yield();
+        //private async void InitSlider()
+        //{
+        //    await UniTask.Yield();
 
-            if (_presenters.Count < 2)
-            {
-                _progressBar.SetWidth(0);
-                _progressBar.SetActive(false);
-                return;
-            }
+        //    if (_presenters.Count < 2)
+        //    {
+        //        _progressBar.SetWidth(0);
+        //        _progressBar.SetActive(false);
+        //        return;
+        //    }
 
-            _progressBar.SetActive(true);
+        //    _progressBar.SetActive(true);
 
-            float distanceBetweenCenters = _presenters[1].View.Transform.anchoredPosition.x - _presenters[0].View.Transform.anchoredPosition.x;
+        //    float distanceBetweenCenters = _presenters[1].View.Transform.anchoredPosition.x - _presenters[0].View.Transform.anchoredPosition.x;
 
-            float totalWidth = (_presenters.Count + 1) * Mathf.Abs(distanceBetweenCenters);
-            _progressBar.SetWidth(totalWidth);
-            _progressBar.SetAnchoredPosition(POSITONLEFT);
-        }
+        //    float totalWidth = (_presenters.Count + 1) * Mathf.Abs(distanceBetweenCenters);
+        //    _progressBar.SetWidth(totalWidth);
+        //    _progressBar.SetAnchoredPosition(POSITONLEFT);
+        //}
 
         //public async UniTask<bool> ShowScreen()
         //{
@@ -202,7 +202,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
                     return;
                 }
 
-                float nextViewportAndBarValue = (float)nextAge / (totalAges - 1);
+                float nextViewportAndBarValue = nextAge + 1;
 
                 _subAnimation.Append(_scrollRect.DOHorizontalNormalizedPos(nextViewportAndBarValue, _scrollAnimationDuration));
                 _subAnimation.Join(_progressBar.PlayValueAnimation(nextViewportAndBarValue, _scrollAnimationDuration));
@@ -286,7 +286,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
         }
 
         private void UpdateSlider(int currentAge, int ages) =>
-            _progressBar.UpdateValue(currentAge, ages);
+            _progressBar.AdjustScrollPositionToAge(currentAge);
 
         private void PlayEvolveSound()
         {

@@ -18,9 +18,11 @@ MonoBehaviour:
   skeletonJSON: {fileID: 4900000, guid: 70abd2a96d929854fb627895e7bc1f2a, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
-    requiresBlendModeMaterials: 0
+    requiresBlendModeMaterials: 1
     applyAdditiveMaterial: 1
-    additiveMaterials: []
+    additiveMaterials:
+    - pageName: Warrior_16.png
+      material: {fileID: 2100000, guid: 18b59072fc3bce742a3de9d43ab557b0, type: 2}
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []

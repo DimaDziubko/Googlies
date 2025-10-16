@@ -185,12 +185,6 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
         {
             return new List<string>
             {
-                "Unit_15", "Unit_16", "Unit_17",
-                "Unit_18", "Unit_19", "Unit_20",
-                "Unit_21", "Unit_22", "Unit_23",
-                "Unit_24", "Unit_25", "Unit_26",
-                "Unit_27", "Unit_28", "Unit_29",
-                "Unit_30", "Unit_31", "Unit_32",
                 //Spine
                 "Unit_33", "Unit_34", "Unit_35",
                 "Unit_36", "Unit_37", "Unit_38",
@@ -205,7 +199,8 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Warrior_9","Warrior_10", "Warrior_11",
                 "Warrior_12","Warrior_13", "Warrior_14",
                 "Warrior_15", "Warrior_16","Warrior_17",
-                 "Warrior_18", "Warrior_19",
+                "Warrior_18", "Warrior_19", "Warrior_20",
+                "Warrior_21", "Warrior_22", "Warrior_23",
             };
         }
 
@@ -213,18 +208,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
         {
             return new List<string>
             {
-                "Enemy_3", "Enemy_4", "Enemy_5",
-                "Enemy_6", "Enemy_7", "Enemy_8",
-                "Enemy_9", "Enemy_10", "Enemy_11",
-                "Enemy_12", "Enemy_13", "Enemy_14",
-                "Enemy_15", "Enemy_16", "Enemy_17",
-                "Enemy_18", "Enemy_19", "Enemy_20",
-                "Enemy_21", "Enemy_22", "Enemy_23",
-                "Enemy_24", "Enemy_25", "Enemy_26",
-                "Enemy_27", "Enemy_28", "Enemy_29",
-                "Enemy_30", "Enemy_31", "Enemy_32",
                 //Spine
-                "Unit_0", "Unit_1",  "Unit_2",
                 "Unit_33", "Unit_34", "Unit_35",
                 "Unit_36", "Unit_37", "Unit_38",
                 "Unit_39", "Unit_40", "Unit_41",
@@ -238,7 +222,8 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Warrior_9","Warrior_10", "Warrior_11",
                 "Warrior_12","Warrior_13", "Warrior_14",
                 "Warrior_15", "Warrior_16","Warrior_17",
-                 "Warrior_18", "Warrior_19",
+                "Warrior_18", "Warrior_19", "Warrior_20",
+                "Warrior_21", "Warrior_22", "Warrior_23",
             };
         }
 
