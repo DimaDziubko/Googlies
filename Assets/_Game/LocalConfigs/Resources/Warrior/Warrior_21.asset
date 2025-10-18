@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 21
   Type: 2
+  UnitLayerType: 0
   Health: 30
   Speed: 0.25
   Name: Ajaw
@@ -21,24 +22,28 @@ MonoBehaviour:
     m_AssetGUID: d4fbcf31dd5a8b449bbd3fb943186ebb
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   EnemyIconAtlas:
     m_AssetGUID: eed37a7135352064dbe545ffd53cba7c
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   PlayerIconName: 2
   EnemyIconName: 2
-  PlayerKey: Unit_20
-  EnemyKey: Enemy_20
+  PlayerKey: Warrior_21
+  EnemyKey: Warrior_21
   ZombieKey: Zombie_18
   Price: 400
   FoodPrice: 7
   CoinsPerKill: 20
   PlayerHealthMultiplier: 1
   EnemyHealthMultiplier: 1
-  AttackPerSecond: 0.6
-  AttackDistance: 0.22
+  AttackPerSecond: 0.82
+  AttackDistance: 0.16
+  DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.464, z: 0}
@@ -66,3 +71,4 @@ MonoBehaviour:
       Rotation: {x: -0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
   WeaponId: 21
+  FBConfigId: '-'

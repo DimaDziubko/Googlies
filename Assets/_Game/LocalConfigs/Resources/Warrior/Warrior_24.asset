@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 24
   Type: 2
-  UnitLayerType: 1
+  UnitLayerType: 0
   Health: 48
   Speed: 0.25
   Name: Chariot
@@ -22,16 +22,18 @@ MonoBehaviour:
     m_AssetGUID: 2012d6bb181c1f746945a8a4cd8993ca
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   EnemyIconAtlas:
     m_AssetGUID: 56596a516a6adda4f93be88efb228255
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   PlayerIconName: 2
   EnemyIconName: 2
-  PlayerKey: Unit_23
-  EnemyKey: Enemy_23
+  PlayerKey: Warrior_24
+  EnemyKey: Warrior_24
   ZombieKey: Zombie_21
   Price: 3200
   FoodPrice: 12
@@ -41,6 +43,7 @@ MonoBehaviour:
   AttackPerSecond: 0.6
   AttackDistance: 0.2
   DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.594, z: 0}

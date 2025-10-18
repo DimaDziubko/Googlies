@@ -185,15 +185,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
         {
             return new List<string>
             {
-                //Spine
-                "Unit_33", "Unit_34", "Unit_35",
-                "Unit_36", "Unit_37", "Unit_38",
-                "Unit_39", "Unit_40", "Unit_41",
-                "Unit_42", "Unit_43", "Unit_44",
-                "Unit_45", "Unit_46", "Unit_47",
-                "Unit_48", "Unit_49", "Unit_50",
-                "Unit_51", "Unit_52", "Unit_53",
-                "Unit_100","Warrior_1","Warrior_2",
+                "Warrior_1","Warrior_2",
                 "Warrior_3","Warrior_4","Warrior_5",
                 "Warrior_6","Warrior_7", "Warrior_8",
                 "Warrior_9","Warrior_10", "Warrior_11",
@@ -201,6 +193,11 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Warrior_15", "Warrior_16","Warrior_17",
                 "Warrior_18", "Warrior_19", "Warrior_20",
                 "Warrior_21", "Warrior_22", "Warrior_23",
+                "Warrior_24", "Warrior_25", "Warrior_26",
+                "Warrior_27", "Warrior_28", "Warrior_29",
+                "Warrior_30", "Warrior_31", "Warrior_32",
+                "Warrior_33", "Warrior_34", "Warrior_35",
+                "Warrior_36", "Warrior_37", "Warrior_38",
             };
         }
 
@@ -208,15 +205,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
         {
             return new List<string>
             {
-                //Spine
-                "Unit_33", "Unit_34", "Unit_35",
-                "Unit_36", "Unit_37", "Unit_38",
-                "Unit_39", "Unit_40", "Unit_41",
-                "Unit_42", "Unit_43", "Unit_44",
-                "Unit_45", "Unit_46", "Unit_47",
-                "Unit_48", "Unit_49", "Unit_50",
-                "Unit_51", "Unit_52", "Unit_53",
-                "Unit_100","Warrior_1","Warrior_2",
+                "Warrior_1","Warrior_2",
                 "Warrior_3","Warrior_4","Warrior_5",
                 "Warrior_6","Warrior_7", "Warrior_8",
                 "Warrior_9","Warrior_10", "Warrior_11",
@@ -224,6 +213,11 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Warrior_15", "Warrior_16","Warrior_17",
                 "Warrior_18", "Warrior_19", "Warrior_20",
                 "Warrior_21", "Warrior_22", "Warrior_23",
+                "Warrior_24", "Warrior_25", "Warrior_26",
+                "Warrior_27", "Warrior_28", "Warrior_29",
+                "Warrior_30", "Warrior_31", "Warrior_32",
+                "Warrior_33", "Warrior_34", "Warrior_35",
+                "Warrior_36", "Warrior_37", "Warrior_38",
             };
         }
 

@@ -19,19 +19,21 @@ MonoBehaviour:
   Speed: 0.25
   Name: Guardian
   PlayerIconAtlas:
-    m_AssetGUID: 699e2b1fb154a104fb2449fe38ef8610
+    m_AssetGUID: 9235e027835308a4c90b227bbebbc78c
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   EnemyIconAtlas:
-    m_AssetGUID: 699e2b1fb154a104fb2449fe38ef8610
+    m_AssetGUID: 005f2e39d84ddf043a84fbe58bd68ff9
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   PlayerIconName: 0
   EnemyIconName: 0
-  PlayerKey: Unit_33
-  EnemyKey: Unit_33
+  PlayerKey: Warrior_34
+  EnemyKey: Warrior_34
   ZombieKey: Zombie_27
   Price: 0
   FoodPrice: 8
@@ -41,6 +43,7 @@ MonoBehaviour:
   AttackPerSecond: 0.65
   AttackDistance: 0.14
   DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.464, z: 0}
@@ -68,4 +71,4 @@ MonoBehaviour:
       Rotation: {x: -0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
   WeaponId: 34
-  FBConfigId: 
+  FBConfigId: '-'

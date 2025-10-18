@@ -19,19 +19,21 @@ MonoBehaviour:
   Speed: 0.25
   Name: Blastermaster
   PlayerIconAtlas:
-    m_AssetGUID: 699e2b1fb154a104fb2449fe38ef8610
+    m_AssetGUID: 9235e027835308a4c90b227bbebbc78c
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   EnemyIconAtlas:
-    m_AssetGUID: 699e2b1fb154a104fb2449fe38ef8610
+    m_AssetGUID: 005f2e39d84ddf043a84fbe58bd68ff9
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   PlayerIconName: 1
   EnemyIconName: 1
-  PlayerKey: Unit_34
-  EnemyKey: Unit_34
+  PlayerKey: Warrior_35
+  EnemyKey: Warrior_35
   ZombieKey: Zombie_27
   Price: 4910000
   FoodPrice: 14
@@ -41,6 +43,7 @@ MonoBehaviour:
   AttackPerSecond: 1
   AttackDistance: 1.7
   DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.464, z: 0}

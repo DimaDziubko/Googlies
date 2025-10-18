@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Weapon_35
   m_EditorClassIdentifier: 
   Id: 35
-  WeaponType: 2
+  WeaponType: 3
   ProjectileKey: Laser_1
-  IsMuzzle: 0
-  MuzzleKey: '-'
+  IsMuzzle: 1
+  MuzzleKey: Muzzle_0
   IsExplosion: 0
   ProjectileExplosionKey: '-'
   Damage: 244
@@ -130,5 +130,6 @@ MonoBehaviour:
       _min: -45
       _max: 45
     AimSmoothTime: 0.1
+  ImpulseStrength: 0
   AllyLaserColors: []
   HostileLaserColors: []

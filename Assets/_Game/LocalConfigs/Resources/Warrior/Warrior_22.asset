@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 22
   Type: 0
+  UnitLayerType: 0
   Health: 18
   Speed: 0.25
   Name: Khopesh
@@ -21,24 +22,28 @@ MonoBehaviour:
     m_AssetGUID: 2012d6bb181c1f746945a8a4cd8993ca
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   EnemyIconAtlas:
     m_AssetGUID: 56596a516a6adda4f93be88efb228255
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   PlayerIconName: 0
   EnemyIconName: 0
-  PlayerKey: Unit_21
-  EnemyKey: Enemy_21
+  PlayerKey: Warrior_22
+  EnemyKey: Warrior_22
   ZombieKey: Zombie_21
   Price: 0
-  FoodPrice: 5
+  FoodPrice: 4
   CoinsPerKill: 96
   PlayerHealthMultiplier: 1
   EnemyHealthMultiplier: 1
-  AttackPerSecond: 0.6
+  AttackPerSecond: 0.87
   AttackDistance: 0.16
+  DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.464, z: 0}
@@ -66,3 +71,4 @@ MonoBehaviour:
       Rotation: {x: -0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
   WeaponId: 22
+  FBConfigId: '-'

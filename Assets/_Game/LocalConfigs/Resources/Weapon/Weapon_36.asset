@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Weapon_36
   m_EditorClassIdentifier: 
   Id: 36
-  WeaponType: 5
-  ProjectileKey: '-'
-  IsMuzzle: 0
-  MuzzleKey: '-'
+  WeaponType: 2
+  ProjectileKey: Laser_1
+  IsMuzzle: 1
+  MuzzleKey: Muzzle_0
   IsExplosion: 0
   ProjectileExplosionKey: '-'
   Damage: 1460
@@ -24,7 +24,7 @@ MonoBehaviour:
   TrajectoryWarpFactor: 0
   SplashRadius: 0
   SplashDamageRatio: 0
-  ProjectileMoveType: 0
+  trajectoryType: 0
   ProjectileImpactType: 0
   AttackSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
@@ -123,6 +123,14 @@ MonoBehaviour:
     IgnoreListenerVolume: 0
     IgnoreListenerPause: 0
     RolloffMode: 0
+  IsAiming: 0
+  AimingSettings:
+    MaxAimDistance: 2
+    AngleRange:
+      _min: -45
+      _max: 45
+    AimSmoothTime: 0.1
+  ImpulseStrength: 0
   AllyLaserColors:
   - {r: 0.08569312, g: 1, b: 0, a: 1}
   - {r: 0.9632838, g: 1, b: 0, a: 1}

@@ -22,16 +22,18 @@ MonoBehaviour:
     m_AssetGUID: d4fbcf31dd5a8b449bbd3fb943186ebb
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   EnemyIconAtlas:
     m_AssetGUID: eed37a7135352064dbe545ffd53cba7c
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   PlayerIconName: 1
   EnemyIconName: 1
-  PlayerKey: Unit_19
-  EnemyKey: Enemy_19
+  PlayerKey: Warrior_20
+  EnemyKey: Warrior_20
   ZombieKey: Zombie_18
   Price: 150
   FoodPrice: 5
@@ -41,6 +43,7 @@ MonoBehaviour:
   AttackPerSecond: 0.7
   AttackDistance: 1.4
   DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.577, z: 0}
