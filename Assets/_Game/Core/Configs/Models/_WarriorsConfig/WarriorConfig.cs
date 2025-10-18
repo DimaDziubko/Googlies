@@ -225,20 +225,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
         {
             return new List<string>
             {
-                "Zombie_3",
-                "Zombie_6",
-                "Zombie_9",
-                "Zombie_18",
-                "Zombie_21",
-                "Zombie_24",
-                "Zombie_27", 
-                //Spine
-                "Unit_0",
-                "Unit_36",
-                "Unit_39",
-                "Unit_42",
-                "Unit_45",
-                "Warrior_1"
+                "Warrior_1", "Warrior_4", "Warrior_7",
             };
         }
 

@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: spine-unity::Spine.Unity.SkeletonAnimation
   skeletonDataAsset: {fileID: 11400000, guid: a4bcb14e4eaedfe4baff5fc9e6659840, type: 2}
-  initialSkinName: Ally
+  initialSkinName: Zombie
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -176,6 +176,7 @@ MonoBehaviour:
       _max: 45
     AimSmoothTime: 0.1
   _locomotionBaseSpeed: 0.1
+  _animationFolderPath: Assets/_Game/Bundles/Timeline_1/Units/Spine/Warrior_6
 --- !u!1001 &3078240555696291004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -314,7 +315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5562371957400219991, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: m_Name
-      value: Unit_0
+      value: Warrior_1
       objectReference: {fileID: 0}
     - target: {fileID: 5562371957453458334, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: m_LocalScale.x
