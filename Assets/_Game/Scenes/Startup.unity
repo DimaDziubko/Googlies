@@ -129,7 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 440415232}
   - component: {fileID: 440415231}
-  - component: {fileID: 440415230}
   - component: {fileID: 440415229}
   m_Layer: 0
   m_Name: _TempLoadingCamera
@@ -182,14 +181,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!81 &440415230
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 440415228}
-  m_Enabled: 1
 --- !u!20 &440415231
 Camera:
   m_ObjectHideFlags: 0

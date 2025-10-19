@@ -554,10 +554,10 @@ MonoBehaviour:
   _isAttack: 1
   _aggroIntro: {fileID: 0}
   _aggro: {fileID: 0}
-  _death: {fileID: 11400000, guid: de05d31b5c96054489fdb7b90738c080, type: 2}
+  _death: {fileID: 0}
   _isAggroIntro: 0
   _isAggro: 0
-  _isDeath: 1
+  _isDeath: 0
   _aimingIn: {fileID: 11400000, guid: 3e09780a3f355f54dadbecbce28320c0, type: 2}
   _aimingOut: {fileID: 11400000, guid: 89a2ef15fdd67ae429c7ae81d81b25cb, type: 2}
   _skeletonAnimation: {fileID: 7322299668790636263}
@@ -572,7 +572,8 @@ MonoBehaviour:
       _min: -45
       _max: 45
     AimSmoothTime: 0.1
-  _locomotionBaseSpeed: 0.1
+  _locomotionBaseSpeed: 0.11
+  _animationFolderPath: Assets/_Game/Bundles/Timeline_1/Units/Spine/Warrior_6
 --- !u!1 &3878660137228398459
 GameObject:
   m_ObjectHideFlags: 0

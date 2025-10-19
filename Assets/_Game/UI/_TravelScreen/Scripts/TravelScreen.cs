@@ -13,40 +13,42 @@ namespace _Game.UI._TravelScreen.Scripts
 {
     public class TravelScreen : MonoBehaviour
     {
-        [SerializeField] private Canvas _canvas;
-
+        [SerializeField, Required] private CanvasGroup _canvasGroup;
         [SerializeField, Required] private TMP_Text _travelInfo;
         [SerializeField, Required] private ThemedButton _travelButton;
         [SerializeField, Required] private TMP_Text _travelConditionHint;
         [SerializeField, Required] private TMP_Text _travelText;
         [SerializeField, Required] private AmountView _rewardView;
-        
+
         private ITravelScreenPresenter _presenter;
         private IFeatureUnlockSystem _featureUnlockSystem;
         private IConfigRepository _config;
 
         public void Construct(
-            IWorldCameraService cameraService,
             ITravelScreenPresenter presenter,
             IConfigRepository config,
-            IFeatureUnlockSystem featureUnlockSystem)
+            IFeatureUnlockSystem featureUnlockSystem
+            )
         {
             _config = config;
             _featureUnlockSystem = featureUnlockSystem;
             _presenter = presenter;
-            _canvas.worldCamera = cameraService.UICameraOverlay;
-            _canvas.enabled = false;
+
+            gameObject.SetActive(false);
+            _canvasGroup.alpha = 0f;
         }
 
         public void Show()
         {
+            gameObject.SetActive(true);
+            _canvasGroup.alpha = 1f;
+
             Unsubscribe();
             Subscribe();
 
             UpdateView();
 
             _presenter.OnScreenOpen();
-            _canvas.enabled = true;
         }
 
         private void UpdateView()
@@ -56,7 +58,7 @@ namespace _Game.UI._TravelScreen.Scripts
             _travelConditionHint.text = _presenter.GetTravelConditionHint();
             _travelInfo.text = _presenter.GetTravelInfo();
             _travelText.text = _presenter.GetTravelText();
-            
+
             if (_featureUnlockSystem.IsFeatureUnlocked(Feature.Skills))
             {
                 _rewardView.SetActive(true);
@@ -81,7 +83,6 @@ namespace _Game.UI._TravelScreen.Scripts
         public void Hide()
         {
             Unsubscribe();
-            _canvas.enabled = false;
             _presenter.OnScreenClosed();
         }
 
@@ -90,7 +91,7 @@ namespace _Game.UI._TravelScreen.Scripts
             Unsubscribe();
             _presenter.OnScreenDisposed();
         }
-        
+
         private void Unsubscribe()
         {
             _travelButton.onClick.RemoveListener(_presenter.OnTravelButtonClicked);

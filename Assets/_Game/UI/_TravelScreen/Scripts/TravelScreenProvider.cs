@@ -34,11 +34,11 @@ namespace _Game.UI._TravelScreen.Scripts
             if (_screen != null) return _screen;
 
             _screen = await LoadDisposable<TravelScreen>(AssetsConstants.TRAVEL_SCREEN, Constants.Scenes.UI);
-            _screen.Value.Construct(
-                _cameraService,
-                _travelScreenPresenter,
-                 _config,
-                _featureUnlockSystem);
+            //_screen.Value.Construct(
+            //    _cameraService,
+            //    _travelScreenPresenter,
+            //     _config,
+            //    _featureUnlockSystem);
             return _screen;
         }
 
