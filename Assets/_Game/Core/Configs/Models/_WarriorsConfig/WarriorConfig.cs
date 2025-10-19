@@ -226,6 +226,8 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
             return new List<string>
             {
                 "Warrior_1", "Warrior_4", "Warrior_7",
+                "Warrior_10", "Warrior_19", "Warrior_22", 
+                "Warrior_25", "Warrior_28", 
             };
         }
 
