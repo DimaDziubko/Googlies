@@ -348,7 +348,7 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         private void Subscribe()
         {
-            _evolveButton.ButtonClicked += _presenter.OnEvolveClicked;
+            _evolveButton.ButtonClicked += () => _presenter.OnEvolveClicked(this);
             _evolveButton.InactiveClicked += _presenter.OnInactiveEvolveClicked;
             _presenter.StateChanged += OnStateChanged;
             _presenter.ButtonStateChanged += OnButtonStateChanged;
@@ -356,7 +356,7 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         private void Unsubscribe()
         {
-            _evolveButton.ButtonClicked -= _presenter.OnEvolveClicked;
+            _evolveButton.ButtonClicked -= () => _presenter.OnEvolveClicked(this);
             _evolveButton.InactiveClicked -= _presenter.OnInactiveEvolveClicked;
             _presenter.StateChanged -= OnStateChanged;
             _presenter.ButtonStateChanged -= OnButtonStateChanged;
