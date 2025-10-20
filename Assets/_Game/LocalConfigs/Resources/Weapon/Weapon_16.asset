@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Weapon_16
   m_EditorClassIdentifier: 
   Id: 16
-  WeaponType: 6
+  WeaponType: 4
   ProjectileKey: '-'
   IsMuzzle: 0
   MuzzleKey: Muzzle_0
@@ -131,5 +131,7 @@ MonoBehaviour:
       _max: 45
     AimSmoothTime: 0.1
   ImpulseStrength: 0
-  AllyLaserColors: []
-  HostileLaserColors: []
+  AllyLaserColors:
+  - {r: 0.36602938, g: 1, b: 0, a: 1}
+  HostileLaserColors:
+  - {r: 1, g: 0, b: 0, a: 1}
