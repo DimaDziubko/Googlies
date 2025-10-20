@@ -99,13 +99,15 @@ namespace _Game.UI._EvolveScreen.Scripts
             _featureUnlockSystem = featureUnlockSystem;
             _userContainer = userContainer;
 
-            _travelScreen.Construct(travelScreenPresenter, config, featureUnlockSystem);
+            _travelScreen.Construct(travelScreenPresenter, config, featureUnlockSystem, this);
             _canvas.enabled = false;
-            _evolutionPanelGroup.alpha = 0f;
         }
 
         public void Show()
         {
+            _evolutionPanelGroup.alpha = 0f;
+            _travelScreen.Hide();
+
             if (TimelineState.AgeId == TimelineConfigRepository.LastAgeIdx())
             {
                 _travelScreen.Show();

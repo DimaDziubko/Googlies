@@ -1,15 +1,17 @@
-﻿using System;
-using _Game.Core._GameInitializer;
+﻿using _Game.Core._GameInitializer;
 using _Game.Core._Logger;
 using _Game.Core.Navigation.Age;
 using _Game.Core.Navigation.Battle;
 using _Game.Core.Navigation.Timeline;
 using _Game.Core.Services._Camera;
 using _Game.Core.Services.Audio;
+using _Game.UI._EvolveScreen.Scripts;
 using _Game.UI._TimelineInfoScreen.Scripts;
-using _Game.UI.Common.Scripts;
 using _Game.UI.Global;
 using _Game.Utils.Disposable;
+using Cysharp.Threading.Tasks;
+using System;
+using UnityEngine;
 
 namespace _Game.UI._TravelScreen.Scripts
 {
@@ -28,6 +30,7 @@ namespace _Game.UI._TravelScreen.Scripts
         private readonly ITimelineNavigator _timelineNavigator;
         private readonly IBattleNavigator _battleNavigator;
         private readonly IAudioService _audioService;
+        private readonly IWorldCameraService _cameraService;
         private readonly IUINotifier _uiNotifier;
         private readonly IMyLogger _logger;
 
@@ -37,7 +40,8 @@ namespace _Game.UI._TravelScreen.Scripts
             IAgeNavigator ageNavigator,
             ITimelineNavigator timelineNavigator,
             IBattleNavigator battleNavigator,
-            IAudioService audioService
+            IAudioService audioService,
+            IWorldCameraService cameraService
             )
         {
             _logger = logger;
@@ -46,6 +50,7 @@ namespace _Game.UI._TravelScreen.Scripts
             _timelineNavigator = timelineNavigator;
             _battleNavigator = battleNavigator;
             _audioService = audioService;
+            _cameraService = cameraService;
             gameInitializer.OnPostInitialization += Init;
         }
 
@@ -93,22 +98,22 @@ namespace _Game.UI._TravelScreen.Scripts
         private void PlayButtonSound() =>
             _audioService.PlayButtonSound();
 
-        public async void OnTravelButtonClicked()
+        public async void OnTravelButtonClicked(EvolveScreen evolveScreen)
         {
             PlayButtonSound();
-
             _timelineNavigator.MoveToNextTimeline();
 
-            //Disposable<TravelAnimationScreen> animationScreen = await travelAnimationScreenProvider.Load();
+            TravelAnimationScreenProvider travelAnimationScreenProvider
+                = new TravelAnimationScreenProvider(_cameraService.UICameraOverlay);
 
-            //var isAnimationCompleted = await animationScreen.Value.Play();
+            Disposable<TravelAnimationScreen> animationScreen = await travelAnimationScreenProvider.Load();
 
-            //if (isAnimationCompleted)
-            //{
-            //    animationScreen.Dispose();
+            await animationScreen.Value.Play(); 
 
-            //    infoScreen.Value.PlayFirstAgeAnimation();
-            //}
+            //await UniTask.Delay(1000); // Small delay to ensure smooth transition
+
+            animationScreen.Dispose();
+            evolveScreen.Show();
         }
 
         public string GetTravelText()
@@ -119,4 +124,5 @@ namespace _Game.UI._TravelScreen.Scripts
             return text;
         }
     }
+
 }

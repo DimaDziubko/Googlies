@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Weapon_18
   m_EditorClassIdentifier: 
   Id: 18
-  WeaponType: 6
+  WeaponType: 4
   ProjectileKey: HimarsMissile
   IsMuzzle: 0
   MuzzleKey: '-'
   IsExplosion: 0
   ProjectileExplosionKey: Explosion_2
   Damage: 700
-  ProjectileSpeed: 6
-  TrajectoryWarpFactor: 0.3
-  SplashRadius: 0.6
-  SplashDamageRatio: 0.3
-  trajectoryType: 1
-  ProjectileImpactType: 2
+  ProjectileSpeed: 0
+  TrajectoryWarpFactor: 0
+  SplashRadius: 0
+  SplashDamageRatio: 0
+  trajectoryType: 0
+  ProjectileImpactType: 0
   AttackSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
     Clip: {fileID: 8300000, guid: a66c1f1a70de29d498d097b7f136d9cb, type: 3}

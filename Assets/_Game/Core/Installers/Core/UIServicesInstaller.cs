@@ -280,11 +280,6 @@ namespace _Game.Core.Installers.Core
                 .BindInterfacesTo<BattleResultPopupProvider>()
                 .AsSingle();
 
-        private void BindTimelineInfoScreenProvider() =>
-            Container
-                .BindInterfacesAndSelfTo<TimelineInfoScreenProvider>()
-                .AsSingle();
-
         private void BindRateGameChecker() =>
             Container
                 .BindInterfacesAndSelfTo<RateGameChecker>()
