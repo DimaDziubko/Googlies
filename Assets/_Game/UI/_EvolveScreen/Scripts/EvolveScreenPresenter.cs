@@ -208,9 +208,19 @@ namespace _Game.UI._EvolveScreen.Scripts
         public async void OnEvolveClicked()
         {
             _audioService.PlayButtonSound();
+
             var screen = await _timelineInfoProvider.Load();
             var isExited = await screen.Value.ShowScreenWithTransitionAnimation();
             if (isExited) _timelineInfoProvider.Dispose();
+        }
+
+        public void OnEvolveClicked(EvolveScreen evolveScreen)
+        {
+            _audioService.PlayButtonSound();
+            _ageNavigator.MoveToNextAge();
+
+            evolveScreen.OnExit();
+            //if (_adsService.IsAdReady(AdType.Interstitial)) _adsService.ShowInterstitialVideo(Placement.Evolution);
         }
 
         public async void OnInactiveEvolveClicked()
@@ -247,5 +257,6 @@ namespace _Game.UI._EvolveScreen.Scripts
                 //RequiresAttention?.Invoke(this);
             }
         }
+
     }
 }

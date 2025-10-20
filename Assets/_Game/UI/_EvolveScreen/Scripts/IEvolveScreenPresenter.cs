@@ -13,7 +13,7 @@ namespace _Game.UI._EvolveScreen.Scripts
         Sprite GetCurrentAgeIcon();
         string GetCurrentAgeName();
         string GetNextAgeName();
-        void OnEvolveClicked();
+        void OnEvolveClicked(EvolveScreen evolveScreen);
         void OnInactiveEvolveClicked();
         bool CanEvolve();
         void OnInfoClicked();

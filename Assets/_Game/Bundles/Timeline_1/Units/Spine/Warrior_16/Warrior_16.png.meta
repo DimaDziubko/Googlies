@@ -38,6 +38,9 @@ TextureImporter:
   - first:
       213: 7258995356896187814
     second: Warrior_16_11
+  - first:
+      213: -5952787160708273151
+    second: Warrior_16_12
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -142,19 +145,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 512
-    resizeAlgorithm: 0
-    textureFormat: 50
-    textureCompression: 0
-    compressionQuality: 100
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 1
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -228,10 +218,10 @@ TextureImporter:
       name: Warrior_16_3
       rect:
         serializedVersion: 2
-        x: 449
-        y: 471
-        width: 325
-        height: 301
+        x: 754
+        y: 795
+        width: 71
+        height: 107
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -251,9 +241,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 774
-        y: 626
-        width: 101
-        height: 98
+        y: 724
+        width: 107
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -272,10 +262,10 @@ TextureImporter:
       name: Warrior_16_5
       rect:
         serializedVersion: 2
-        x: 774
-        y: 528
-        width: 102
-        height: 98
+        x: 449
+        y: 471
+        width: 325
+        height: 301
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -294,10 +284,10 @@ TextureImporter:
       name: Warrior_16_6
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 448
-        height: 477
+        x: 774
+        y: 626
+        width: 101
+        height: 98
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,10 +306,10 @@ TextureImporter:
       name: Warrior_16_7
       rect:
         serializedVersion: 2
-        x: 449
-        y: 154
-        width: 325
-        height: 301
+        x: 774
+        y: 528
+        width: 102
+        height: 98
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,10 +328,10 @@ TextureImporter:
       name: Warrior_16_8
       rect:
         serializedVersion: 2
-        x: 774
-        y: 144
-        width: 155
-        height: 384
+        x: 1
+        y: 1
+        width: 448
+        height: 477
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -360,10 +350,10 @@ TextureImporter:
       name: Warrior_16_9
       rect:
         serializedVersion: 2
-        x: 929
-        y: 251
-        width: 71
-        height: 107
+        x: 449
+        y: 154
+        width: 325
+        height: 301
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -382,10 +372,10 @@ TextureImporter:
       name: Warrior_16_10
       rect:
         serializedVersion: 2
-        x: 929
+        x: 774
         y: 144
-        width: 71
-        height: 107
+        width: 155
+        height: 384
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -404,6 +394,28 @@ TextureImporter:
       name: Warrior_16_11
       rect:
         serializedVersion: 2
+        x: 929
+        y: 144
+        width: 50
+        height: 453
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a5d10a31d12db460800000000000000
+      internalID: 7258995356896187814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Warrior_16_12
+      rect:
+        serializedVersion: 2
         x: 449
         y: 1
         width: 535
@@ -416,8 +428,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a5d10a31d12db460800000000000000
-      internalID: 7258995356896187814
+      spriteID: 10c2a76dd93736da0800000000000000
+      internalID: -5952787160708273151
       vertices: []
       indices: 
       edges: []
@@ -440,6 +452,7 @@ TextureImporter:
       Warrior_16_1: -7861469096418043485
       Warrior_16_10: -8523892914836357110
       Warrior_16_11: 7258995356896187814
+      Warrior_16_12: -5952787160708273151
       Warrior_16_2: 4819033801877477546
       Warrior_16_3: 5367677017021248252
       Warrior_16_4: -9166242104782959046
