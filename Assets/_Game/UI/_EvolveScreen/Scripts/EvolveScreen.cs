@@ -16,7 +16,6 @@ using _Game.UI._TravelScreen.Scripts;
 using _Game.UI.Common.Scripts;
 using _Game.Utils.Extensions;
 using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Triggers;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
@@ -29,9 +28,6 @@ namespace _Game.UI._EvolveScreen.Scripts
 {
     public class EvolveScreen : MonoBehaviour
     {
-        private const float POSITION_LEFT = -90f;
-        private const float SCROLL_COEFFICIENT = 0.825f;
-
         public event UnityAction CloseClicked
         {
             add => _closeButton.onClick.AddListener(value);
@@ -60,8 +56,6 @@ namespace _Game.UI._EvolveScreen.Scripts
         [SerializeField, Required] private CanvasGroup _evolutionPanelGroup;
         [SerializeField, Required] private GameObject _evolutionPanelObject;
 
-
-
         private readonly List<TimelineInfoItemPresenter> _presenters = new();
         private UniTaskCompletionSource<bool> _taskCompletion;
 
@@ -74,6 +68,7 @@ namespace _Game.UI._EvolveScreen.Scripts
         private IAudioService _audioService;
         private IFeatureUnlockSystem _featureUnlockSystem;
         private IUserContainer _userContainer;
+
         private Sequence _animation;
         private Sequence _subAnimation;
 
@@ -91,8 +86,7 @@ namespace _Game.UI._EvolveScreen.Scripts
             IAgeNavigator ageNavigator,
             IFeatureUnlockSystem featureUnlockSystem,
             ITravelScreenPresenter travelScreenPresenter,
-            IUserContainer userContainer
-            )
+            IUserContainer userContainer)
         {
             _canvas.worldCamera = cameraService.UICameraOverlay;
             _presenter = evolveScreenPresenter;
@@ -105,11 +99,7 @@ namespace _Game.UI._EvolveScreen.Scripts
             _featureUnlockSystem = featureUnlockSystem;
             _userContainer = userContainer;
 
-            _travelScreen.Construct(
-                travelScreenPresenter,
-                config,
-                featureUnlockSystem
-                );
+            _travelScreen.Construct(travelScreenPresenter, config, featureUnlockSystem);
             _canvas.enabled = false;
             _evolutionPanelGroup.alpha = 0f;
         }
@@ -122,21 +112,26 @@ namespace _Game.UI._EvolveScreen.Scripts
                 _canvas.enabled = true;
                 return;
             }
+
             _evolutionPanelGroup.alpha = 1f;
+            _canvas.enabled = true;
 
             Unsubscribe();
             Subscribe();
             _presenter.OnScreenOpen();
             InitTimeline().Forget();
             OnStateChanged();
-
-            _canvas.enabled = true;
         }
 
         private void OnStateChanged()
         {
             _timelineLaybel.text = _presenter.GetTimelineNumber();
+            UpdateRewardView();
+            OnButtonStateChanged();
+        }
 
+        private void UpdateRewardView()
+        {
             if (_featureUnlockSystem.IsFeatureUnlocked(Feature.Skills))
             {
                 _rewardView.SetActive(true);
@@ -147,8 +142,6 @@ namespace _Game.UI._EvolveScreen.Scripts
             {
                 _rewardView.SetActive(false);
             }
-
-            OnButtonStateChanged();
         }
 
         private void OnButtonStateChanged()
@@ -167,6 +160,16 @@ namespace _Game.UI._EvolveScreen.Scripts
             _difficultyLaybel.text = _timelineInfoPresenter.GetDifficulty();
             _timelineLaybel.text = _timelineInfoPresenter.GetTimelineText();
 
+            SpawnAgeInfoViews();
+            _progressBar.SetActive(true);
+            UpdateSlider(_timelineInfoPresenter.CurrentAge);
+
+            await WaitForScrollContentReady();
+            ScrollToCurrentAge();
+        }
+
+        private void SpawnAgeInfoViews()
+        {
             foreach (var item in _timelineInfoPresenter.Items)
             {
                 AgeInfoView view = _ageInfoListView.SpawnElement();
@@ -174,110 +177,103 @@ namespace _Game.UI._EvolveScreen.Scripts
                 presenter.Initialize();
                 _presenters.Add(presenter);
             }
-
-            _progressBar.SetActive(true);
-            UpdateSlider(_timelineInfoPresenter.CurrentAge, _presenters.Count);
-
-            await UniTask.WaitUntil(() => _scrollRect.content.rect.height > 100);
-            Debug.Log($"✅ Content ready: {_scrollRect.content.rect.height}");
-
-            await UniTask.DelayFrame(1);
-
-            SnapToMiddleBetweenMarkers(_timelineInfoPresenter.CurrentAge);
-
-            //var currentMarker = _presenters[].View.MarkerRect;
-            //Debug.Log($"🎯 Current age: {_timelineInfoPresenter.CurrentAge}, Marker: {currentMarker.name}, pos: {currentMarker.position}");
-
-            //_scrollRect.SnapScrollToTarget(currentMarker);
         }
 
-        private void SnapToMiddleBetweenMarkers(int currentAge)
+        private async UniTask WaitForScrollContentReady()
         {
-            if (_scrollRect == null || _presenters == null || _presenters.Count == 0)
-            {
-                Debug.LogWarning("[SnapToMiddleBetweenMarkers] Missing scrollRect or presenters!");
-                return;
-            }
+            await UniTask.WaitUntil(() => _scrollRect.content.rect.height > 100);
+            await UniTask.DelayFrame(1);
+            Debug.Log($"✅ Content ready: {_scrollRect.content.rect.height}");
+        }
 
-            int count = _presenters.Count;
-            int a = currentAge;
-            int b = currentAge + 1;
-
-            // если вылезли за границы — пробуем шаг назад
-            if (b >= count)
-            {
-                b = currentAge;
-                a = Mathf.Max(0, currentAge - 1);
-            }
-
-            var markerA = _presenters[a].View.MarkerRect;
-            var markerB = _presenters[b].View.MarkerRect;
-
-            if (!markerA || !markerB)
-            {
-                Debug.LogWarning($"[SnapToMiddleBetweenMarkers] Missing marker refs! A:{markerA} B:{markerB}");
-                return;
-            }
-
-            var content = _scrollRect.content;
-            Vector3 localA = content.InverseTransformPoint(markerA.position);
-            Vector3 localB = content.InverseTransformPoint(markerB.position);
-            Vector3 midpoint = (localA + localB) * 0.5f;
-
-            // создаём временную точку в середине между маркерами
-            var dummy = new GameObject("ScrollTarget", typeof(RectTransform)).GetComponent<RectTransform>();
-            dummy.SetParent(content, false);
-            dummy.localPosition = midpoint;
-
-            _scrollRect.SnapScrollToTarget(dummy);
-            Destroy(dummy.gameObject);
-
-            Debug.Log($"🎯 Snap between [{a}] {markerA.name} and [{b}] {markerB.name}, midpointX: {midpoint.x:F2}");
+        private void ScrollToCurrentAge()
+        {
+            int currentAge = _timelineInfoPresenter.CurrentAge;
+            float scrollPosition = CalculateMiddleScrollPosition(currentAge);
+            _scrollRect.horizontalNormalizedPosition = scrollPosition;
+            Debug.Log($"🎯 Scrolled to age {currentAge}, position: {scrollPosition:F2}");
         }
 
         private void PlayEvolveAnimation()
         {
+            _evolveButton.gameObject.SetActive(false);
+            _closeButton.interactable = false;
             _progressBar.Cleanup();
             _animation?.Kill();
             _subAnimation?.Kill();
             PlayEvolveSound();
+
             _animation = DOTween.Sequence().AppendInterval(_animationDelay);
-            _animation.OnComplete(() =>
+            _animation.OnComplete(() => AnimateToNextAge());
+        }
+
+        private void AnimateToNextAge()
+        {
+            _subAnimation = DOTween.Sequence();
+
+            int nextAge = _ageNavigator.CurrentIdx + 1;
+            int totalAges = _ageNavigator.GetTotalAgesCount();
+
+            if (!ValidateNextAge(nextAge, totalAges))
+                return;
+
+            _presenters[nextAge].SetLocked(false);
+
+            float targetScrollPosition = CalculateMiddleScrollPosition(nextAge);
+
+            _subAnimation.Append(_scrollRect.DOHorizontalNormalizedPos(targetScrollPosition, _scrollAnimationDuration));
+            _subAnimation.Join(_progressBar.PlayValueAnimation(nextAge + 1, _scrollAnimationDuration));
+            _subAnimation.AppendCallback(() => _presenters[nextAge].PlayRippleAnimation(_rippleAnimationDuration));
+            _subAnimation.OnComplete(() => OnAnimationComplete());
+        }
+
+        private bool ValidateNextAge(int nextAge, int totalAges)
+        {
+            if (nextAge >= totalAges)
             {
-                _subAnimation = DOTween.Sequence();
-                int nextAge = _ageNavigator.CurrentIdx + 1;
-                _presenters[nextAge].SetLocked(false);
-                int totalAges = _ageNavigator.GetTotalAgesCount();
-                if (nextAge >= totalAges)
-                {
-                    _logger.LogWarning("Attempting to access out of range age. Animation aborted.");
-                    return;
-                }
+                _logger.LogWarning("Attempting to access out of range age. Animation aborted.");
+                return false;
+            }
+            return true;
+        }
 
-                // ВЫЧИСЛЯЕМ ПОЗИЦИЮ ПО СЕРЕДИНЕ МЕЖДУ МАРКЕРАМИ
-                float targetScrollPosition = CalculateMiddleScrollPosition(nextAge);
+        private void OnAnimationComplete()
+        {
+            _ageNavigator.MoveToNextAge();
 
-                _subAnimation.Append(_scrollRect.DOHorizontalNormalizedPos(targetScrollPosition, _scrollAnimationDuration));
-                _subAnimation.Join(_progressBar.PlayValueAnimation(nextAge + 1, _scrollAnimationDuration));
-                _subAnimation.AppendCallback(() =>
-                {
-                    _presenters[nextAge].PlayRippleAnimation(_rippleAnimationDuration);
-                });
-                _subAnimation.OnComplete(() =>
-                {
-                    _ageNavigator.MoveToNextAge();
-                    if (_adsService.IsAdReady(AdType.Interstitial))
-                        _adsService.ShowInterstitialVideo(Placement.Evolution);
-                });
-            });
+            if (_adsService.IsAdReady(AdType.Interstitial))
+                _adsService.ShowInterstitialVideo(Placement.Evolution);
+
+            _evolveButton.gameObject.SetActive(true);
+            _closeButton.interactable = true;
         }
 
         private float CalculateMiddleScrollPosition(int currentAge)
         {
-            if (_scrollRect == null || _presenters == null || _presenters.Count == 0)
+            if (!ValidateScrollCalculation())
                 return 0f;
 
             int count = _presenters.Count;
+            (int a, int b) = GetMarkerIndices(currentAge, count);
+
+            var (markerA, markerB) = GetMarkers(a, b);
+            if (markerA == null || markerB == null)
+                return 0f;
+
+            Vector3 midpoint = CalculateMidpoint(markerA, markerB);
+            float scrollPos = CalculateScrollPosition(midpoint);
+
+            Debug.Log($"🎯 Calculated scroll position for age {currentAge}: {scrollPos:F3}");
+            return scrollPos;
+        }
+
+        private bool ValidateScrollCalculation()
+        {
+            return _scrollRect != null && _presenters != null && _presenters.Count > 0;
+        }
+
+        private (int a, int b) GetMarkerIndices(int currentAge, int count)
+        {
             int a = currentAge;
             int b = currentAge + 1;
 
@@ -287,18 +283,35 @@ namespace _Game.UI._EvolveScreen.Scripts
                 a = Mathf.Max(0, currentAge - 1);
             }
 
-            var markerA = _presenters[a].View.MarkerRect;
-            var markerB = _presenters[b].View.MarkerRect;
+            return (a, b);
+        }
+
+        private (RectTransform markerA, RectTransform markerB) GetMarkers(int indexA, int indexB)
+        {
+            var markerA = _presenters[indexA].View.MarkerRect;
+            var markerB = _presenters[indexB].View.MarkerRect;
 
             if (!markerA || !markerB)
-                return 0f;
+            {
+                Debug.LogWarning($"[CalculateMiddleScrollPosition] Missing marker refs! A:{markerA} B:{markerB}");
+                return (null, null);
+            }
 
+            return (markerA, markerB);
+        }
+
+        private Vector3 CalculateMidpoint(RectTransform markerA, RectTransform markerB)
+        {
             var content = _scrollRect.content;
-            var viewport = _scrollRect.viewport;
-
             Vector3 localA = content.InverseTransformPoint(markerA.position);
             Vector3 localB = content.InverseTransformPoint(markerB.position);
-            Vector3 midpoint = (localA + localB) * 0.5f;
+            return (localA + localB) * 0.5f;
+        }
+
+        private float CalculateScrollPosition(Vector3 midpoint)
+        {
+            var content = _scrollRect.content;
+            var viewport = _scrollRect.viewport;
 
             float contentWidth = content.rect.width;
             float viewportWidth = viewport.rect.width;
@@ -309,24 +322,10 @@ namespace _Game.UI._EvolveScreen.Scripts
             float targetCenterX = midpoint.x;
             float scrollPos = (targetCenterX - viewportWidth / 2f) / (contentWidth - viewportWidth);
 
-            Debug.Log($"🎯 Calculated scroll position for age {currentAge}: {Mathf.Clamp01(scrollPos)}");
-
             return Mathf.Clamp01(scrollPos);
         }
 
-        public async UniTask<bool> ShowScreenWithTransitionAnimation()
-        {
-            await UniTask.Yield();
-
-            _canvas.enabled = true;
-            _taskCompletion = new UniTaskCompletionSource<bool>();
-            PlayEvolveAnimation();
-            var result = await _taskCompletion.Task;
-            _canvas.enabled = false;
-            return result;
-        }
-
-        private void UpdateSlider(int currentAge, int ages)
+        private void UpdateSlider(int currentAge)
         {
             _progressBar.AdjustScrollPositionToAge(++currentAge);
         }
@@ -347,7 +346,7 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         private void Subscribe()
         {
-            _evolveButton.ButtonClicked += PlayEvolveAnimation;//() => _presenter.OnEvolveClicked(this);
+            _evolveButton.ButtonClicked += PlayEvolveAnimation;
             _evolveButton.InactiveClicked += _presenter.OnInactiveEvolveClicked;
             _presenter.StateChanged += OnStateChanged;
             _presenter.ButtonStateChanged += OnButtonStateChanged;
@@ -355,7 +354,7 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         private void Unsubscribe()
         {
-            _evolveButton.ButtonClicked -= PlayEvolveAnimation;//() => _presenter.OnEvolveClicked(this);
+            _evolveButton.ButtonClicked -= PlayEvolveAnimation;
             _evolveButton.InactiveClicked -= _presenter.OnInactiveEvolveClicked;
             _presenter.StateChanged -= OnStateChanged;
             _presenter.ButtonStateChanged -= OnButtonStateChanged;
