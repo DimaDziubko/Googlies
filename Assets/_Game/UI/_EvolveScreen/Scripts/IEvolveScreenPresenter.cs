@@ -16,7 +16,6 @@ namespace _Game.UI._EvolveScreen.Scripts
         void OnEvolveClicked(EvolveScreen evolveScreen);
         void OnInactiveEvolveClicked();
         bool CanEvolve();
-        void OnInfoClicked();
         bool IsNextAgeAffordable();
         void OnScreenClosed();
         void OnScreenOpen();

@@ -84,7 +84,7 @@ namespace _Game.Core.Installers.Core
             BindUpgradesScreenProvider();
 
             BindGameResultPopupProvider();
-            BindTimelineInfoScreenProvider();
+            //BindTimelineInfoScreenProvider();
 
             BindGameRateScreenProvider();
             BindRateGameChecker();

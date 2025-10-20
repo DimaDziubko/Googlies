@@ -48,7 +48,7 @@ namespace _Game.UI._TravelScreen.Scripts
 
             UpdateView();
 
-            _presenter.OnScreenOpen();
+            //_presenter.OnScreenOpen();
         }
 
         private void UpdateView()
@@ -83,13 +83,13 @@ namespace _Game.UI._TravelScreen.Scripts
         public void Hide()
         {
             Unsubscribe();
-            _presenter.OnScreenClosed();
+            //_presenter.OnScreenClosed();
         }
 
         public void Dispose()
         {
             Unsubscribe();
-            _presenter.OnScreenDisposed();
+            //_presenter.OnScreenDisposed();
         }
 
         private void Unsubscribe()
@@ -104,7 +104,7 @@ namespace _Game.UI._TravelScreen.Scripts
         public void SetActive(bool isActive)
         {
             gameObject.SetActive(isActive);
-            _presenter.OnScreenActiveChanged(isActive);
+            //_presenter.OnScreenActiveChanged(isActive);
         }
     }
 }

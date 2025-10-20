@@ -183,136 +183,135 @@ namespace _Game.UI._EvolveScreen.Scripts
 
             await UniTask.DelayFrame(1);
 
-            var currentMarker = _presenters[_timelineInfoPresenter.CurrentAge].View.MarkerRect;
-            Debug.Log($"🎯 Current age: {_timelineInfoPresenter.CurrentAge}, Marker: {currentMarker.name}, pos: {currentMarker.position}");
+            SnapToMiddleBetweenMarkers(_timelineInfoPresenter.CurrentAge);
 
-            _scrollRect.SnapScrollToTarget(currentMarker);
+            //var currentMarker = _presenters[].View.MarkerRect;
+            //Debug.Log($"🎯 Current age: {_timelineInfoPresenter.CurrentAge}, Marker: {currentMarker.name}, pos: {currentMarker.position}");
+
+            //_scrollRect.SnapScrollToTarget(currentMarker);
         }
 
-        private async void InitSlider()
+        private void SnapToMiddleBetweenMarkers(int currentAge)
         {
-            await UniTask.Yield();
-
-            if (_presenters.Count < 2)
+            if (_scrollRect == null || _presenters == null || _presenters.Count == 0)
             {
-                _progressBar.SetWidth(0);
-                _progressBar.SetActive(false);
+                Debug.LogWarning("[SnapToMiddleBetweenMarkers] Missing scrollRect or presenters!");
                 return;
             }
 
-            _progressBar.SetActive(true);
+            int count = _presenters.Count;
+            int a = currentAge;
+            int b = currentAge + 1;
 
-            float distanceBetweenCenters = _presenters[1].View.Transform.anchoredPosition.x - _presenters[0].View.Transform.anchoredPosition.x;
-            float totalWidth = (_presenters.Count + 1) * Mathf.Abs(distanceBetweenCenters);
-
-            _progressBar.SetWidth(totalWidth);
-            _progressBar.SetAnchoredPosition(POSITION_LEFT);
-        }
-
-        private float _scrollCoefficient = SCROLL_COEFFICIENT;
-
-        private async void AdjustScrollPosition(int currentItem, int items)
-        {
-            await UniTask.Yield();
-            currentItem += 1;
-
-            Debug.Log($"[AdjustScrollPosition] currentItem: {currentItem}, items: {items}");
-
-            float scrollPercentage = ((float)currentItem / (items - 1)) * _scrollCoefficient;
-
-            if (currentItem >= items - 1)
+            // если вылезли за границы — пробуем шаг назад
+            if (b >= count)
             {
-                scrollPercentage = 1f;
+                b = currentAge;
+                a = Mathf.Max(0, currentAge - 1);
             }
 
-            Debug.Log($"[AdjustScrollPosition] scrollPercentage calculated: {scrollPercentage}");
-            Debug.Log($"[AdjustScrollPosition] horizontalNormalizedPosition before: {_scrollRect.horizontalNormalizedPosition}");
+            var markerA = _presenters[a].View.MarkerRect;
+            var markerB = _presenters[b].View.MarkerRect;
 
-            _scrollRect.horizontalNormalizedPosition = Mathf.Clamp01(scrollPercentage);
-
-            Debug.Log($"[AdjustScrollPosition] horizontalNormalizedPosition after: {_scrollRect.horizontalNormalizedPosition}");
-        }
-
-        private void ScrollToTarget(RectTransform target)
-        {
-            if (_scrollRect == null || target == null)
+            if (!markerA || !markerB)
             {
-                Debug.LogWarning("[ScrollToTargetInstant] ScrollRect or target is null!");
+                Debug.LogWarning($"[SnapToMiddleBetweenMarkers] Missing marker refs! A:{markerA} B:{markerB}");
                 return;
             }
 
             var content = _scrollRect.content;
-            if (content == null)
-            {
-                Debug.LogWarning("[ScrollToTargetInstant] ScrollRect has no content!");
-                return;
-            }
+            Vector3 localA = content.InverseTransformPoint(markerA.position);
+            Vector3 localB = content.InverseTransformPoint(markerB.position);
+            Vector3 midpoint = (localA + localB) * 0.5f;
 
-            // Получаем локальную позицию цели относительно контента
-            Vector3 targetLocalPos = content.InverseTransformPoint(target.position);
+            // создаём временную точку в середине между маркерами
+            var dummy = new GameObject("ScrollTarget", typeof(RectTransform)).GetComponent<RectTransform>();
+            dummy.SetParent(content, false);
+            dummy.localPosition = midpoint;
 
-            // Общая прокручиваемая ширина
-            float totalScrollable = content.rect.width - _scrollRect.viewport.rect.width;
+            _scrollRect.SnapScrollToTarget(dummy);
+            Destroy(dummy.gameObject);
 
-            if (totalScrollable <= 0f)
-                return; // контент не скроллится
-
-            // Центр цели в координатах контента
-            float targetCenterX = -targetLocalPos.x - (target.rect.width * 0.5f);
-
-            // Конвертируем в нормализованное значение (0..1)
-            float normalized = Mathf.InverseLerp(-totalScrollable * 0.5f, totalScrollable * 0.5f, targetCenterX);
-            normalized = Mathf.Clamp01(normalized);
-
-            // Мгновенно ставим позицию скролла
-            _scrollRect.horizontalNormalizedPosition = normalized;
-
-            Debug.Log($"[ScrollToTargetInstant] targetX: {targetCenterX:F2}, normalized: {normalized:F3}");
+            Debug.Log($"🎯 Snap between [{a}] {markerA.name} and [{b}] {markerB.name}, midpointX: {midpoint.x:F2}");
         }
 
         private void PlayEvolveAnimation()
         {
             _progressBar.Cleanup();
-
             _animation?.Kill();
             _subAnimation?.Kill();
-
             PlayEvolveSound();
-
             _animation = DOTween.Sequence().AppendInterval(_animationDelay);
-
             _animation.OnComplete(() =>
             {
                 _subAnimation = DOTween.Sequence();
-
                 int nextAge = _ageNavigator.CurrentIdx + 1;
-
                 _presenters[nextAge].SetLocked(false);
-
                 int totalAges = _ageNavigator.GetTotalAgesCount();
-
                 if (nextAge >= totalAges)
                 {
                     _logger.LogWarning("Attempting to access out of range age. Animation aborted.");
                     return;
                 }
 
-                float nextViewportAndBarValue = (float)nextAge / (totalAges - 1);
+                // ВЫЧИСЛЯЕМ ПОЗИЦИЮ ПО СЕРЕДИНЕ МЕЖДУ МАРКЕРАМИ
+                float targetScrollPosition = CalculateMiddleScrollPosition(nextAge);
 
-                _subAnimation.Append(_scrollRect.DOHorizontalNormalizedPos(nextViewportAndBarValue, _scrollAnimationDuration));
-                _subAnimation.Join(_progressBar.PlayValueAnimation(nextViewportAndBarValue, _scrollAnimationDuration));
-
+                _subAnimation.Append(_scrollRect.DOHorizontalNormalizedPos(targetScrollPosition, _scrollAnimationDuration));
+                _subAnimation.Join(_progressBar.PlayValueAnimation(nextAge + 1, _scrollAnimationDuration));
                 _subAnimation.AppendCallback(() =>
                 {
                     _presenters[nextAge].PlayRippleAnimation(_rippleAnimationDuration);
                 });
-
                 _subAnimation.OnComplete(() =>
                 {
                     _ageNavigator.MoveToNextAge();
-                    if (_adsService.IsAdReady(AdType.Interstitial)) _adsService.ShowInterstitialVideo(Placement.Evolution);
+                    if (_adsService.IsAdReady(AdType.Interstitial))
+                        _adsService.ShowInterstitialVideo(Placement.Evolution);
                 });
             });
+        }
+
+        private float CalculateMiddleScrollPosition(int currentAge)
+        {
+            if (_scrollRect == null || _presenters == null || _presenters.Count == 0)
+                return 0f;
+
+            int count = _presenters.Count;
+            int a = currentAge;
+            int b = currentAge + 1;
+
+            if (b >= count)
+            {
+                b = currentAge;
+                a = Mathf.Max(0, currentAge - 1);
+            }
+
+            var markerA = _presenters[a].View.MarkerRect;
+            var markerB = _presenters[b].View.MarkerRect;
+
+            if (!markerA || !markerB)
+                return 0f;
+
+            var content = _scrollRect.content;
+            var viewport = _scrollRect.viewport;
+
+            Vector3 localA = content.InverseTransformPoint(markerA.position);
+            Vector3 localB = content.InverseTransformPoint(markerB.position);
+            Vector3 midpoint = (localA + localB) * 0.5f;
+
+            float contentWidth = content.rect.width;
+            float viewportWidth = viewport.rect.width;
+
+            if (Mathf.Approximately(contentWidth, viewportWidth))
+                return 0f;
+
+            float targetCenterX = midpoint.x;
+            float scrollPos = (targetCenterX - viewportWidth / 2f) / (contentWidth - viewportWidth);
+
+            Debug.Log($"🎯 Calculated scroll position for age {currentAge}: {Mathf.Clamp01(scrollPos)}");
+
+            return Mathf.Clamp01(scrollPos);
         }
 
         public async UniTask<bool> ShowScreenWithTransitionAnimation()
@@ -348,7 +347,7 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         private void Subscribe()
         {
-            _evolveButton.ButtonClicked += () => _presenter.OnEvolveClicked(this);
+            _evolveButton.ButtonClicked += PlayEvolveAnimation;//() => _presenter.OnEvolveClicked(this);
             _evolveButton.InactiveClicked += _presenter.OnInactiveEvolveClicked;
             _presenter.StateChanged += OnStateChanged;
             _presenter.ButtonStateChanged += OnButtonStateChanged;
@@ -356,7 +355,7 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         private void Unsubscribe()
         {
-            _evolveButton.ButtonClicked -= () => _presenter.OnEvolveClicked(this);
+            _evolveButton.ButtonClicked -= PlayEvolveAnimation;//() => _presenter.OnEvolveClicked(this);
             _evolveButton.InactiveClicked -= _presenter.OnInactiveEvolveClicked;
             _presenter.StateChanged -= OnStateChanged;
             _presenter.ButtonStateChanged -= OnButtonStateChanged;

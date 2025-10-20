@@ -35,7 +35,7 @@ namespace _Game.UI._TimelineInfoScreen.Scripts
         private void OnStateChanged()
         {
             _view.SetLocked(_model.IsLocked);
-            _view.FillMarker(!_model.IsLocked);
+            _view.FillMarker(!_model.IsGained);
         }
 
         public void Dispose()
