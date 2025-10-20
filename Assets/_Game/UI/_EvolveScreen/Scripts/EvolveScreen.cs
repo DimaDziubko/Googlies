@@ -2,17 +2,21 @@
 using _Game.Core._Logger;
 using _Game.Core.Ads;
 using _Game.Core.Configs.Repositories;
+using _Game.Core.Configs.Repositories.Timeline;
 using _Game.Core.Navigation.Age;
 using _Game.Core.Services._Camera;
 using _Game.Core.Services.Audio;
+using _Game.Core.Services.UserContainer;
 using _Game.Core.UserState._State;
 using _Game.Gameplay.Common;
 using _Game.UI._Shop.Scripts._AmountView;
 using _Game.UI._TimelineInfoPresenter;
 using _Game.UI._TimelineInfoScreen.Scripts;
+using _Game.UI._TravelScreen.Scripts;
 using _Game.UI.Common.Scripts;
 using _Game.Utils.Extensions;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
@@ -51,6 +55,13 @@ namespace _Game.UI._EvolveScreen.Scripts
         [SerializeField] private float _scrollAnimationDuration = 3f;
         [SerializeField] private float _rippleAnimationDuration = 0.2f;
 
+        [Header("Switch to TRAVEL")]
+        [SerializeField, Required] private TravelScreen _travelScreen;
+        [SerializeField, Required] private CanvasGroup _evolutionPanelGroup;
+        [SerializeField, Required] private GameObject _evolutionPanelObject;
+
+
+
         private readonly List<TimelineInfoItemPresenter> _presenters = new();
         private UniTaskCompletionSource<bool> _taskCompletion;
 
@@ -62,8 +73,12 @@ namespace _Game.UI._EvolveScreen.Scripts
         private IConfigRepository _config;
         private IAudioService _audioService;
         private IFeatureUnlockSystem _featureUnlockSystem;
+        private IUserContainer _userContainer;
         private Sequence _animation;
         private Sequence _subAnimation;
+
+        private ITimelineStateReadonly TimelineState => _userContainer.State.TimelineState;
+        private ITimelineConfigRepository TimelineConfigRepository => _config.TimelineConfigRepository;
 
         public void Construct(
             IWorldCameraService cameraService,
@@ -74,7 +89,9 @@ namespace _Game.UI._EvolveScreen.Scripts
             IMyLogger logger,
             IAdsService adsService,
             IAgeNavigator ageNavigator,
-            IFeatureUnlockSystem featureUnlockSystem
+            IFeatureUnlockSystem featureUnlockSystem,
+            ITravelScreenPresenter travelScreenPresenter,
+            IUserContainer userContainer
             )
         {
             _canvas.worldCamera = cameraService.UICameraOverlay;
@@ -86,12 +103,27 @@ namespace _Game.UI._EvolveScreen.Scripts
             _ageNavigator = ageNavigator;
             _audioService = audioService;
             _featureUnlockSystem = featureUnlockSystem;
+            _userContainer = userContainer;
 
+            _travelScreen.Construct(
+                travelScreenPresenter,
+                config,
+                featureUnlockSystem
+                );
             _canvas.enabled = false;
+            _evolutionPanelGroup.alpha = 0f;
         }
 
         public void Show()
         {
+            if (TimelineState.AgeId == TimelineConfigRepository.LastAgeIdx())
+            {
+                _travelScreen.Show();
+                _canvas.enabled = true;
+                return;
+            }
+            _evolutionPanelGroup.alpha = 1f;
+
             Unsubscribe();
             Subscribe();
             _presenter.OnScreenOpen();
@@ -200,6 +232,7 @@ namespace _Game.UI._EvolveScreen.Scripts
 
             Debug.Log($"[AdjustScrollPosition] horizontalNormalizedPosition after: {_scrollRect.horizontalNormalizedPosition}");
         }
+
         private void ScrollToTarget(RectTransform target)
         {
             if (_scrollRect == null || target == null)
@@ -236,7 +269,6 @@ namespace _Game.UI._EvolveScreen.Scripts
 
             Debug.Log($"[ScrollToTargetInstant] targetX: {targetCenterX:F2}, normalized: {normalized:F3}");
         }
-
 
         private void PlayEvolveAnimation()
         {

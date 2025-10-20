@@ -6,7 +6,9 @@ using _Game.Core.Configs.Repositories;
 using _Game.Core.Navigation.Age;
 using _Game.Core.Services._Camera;
 using _Game.Core.Services.Audio;
+using _Game.Core.Services.UserContainer;
 using _Game.UI._TimelineInfoPresenter;
+using _Game.UI._TravelScreen.Scripts;
 using _Game.Utils;
 using _Game.Utils.Disposable;
 using Cysharp.Threading.Tasks;
@@ -24,6 +26,9 @@ namespace _Game.UI._EvolveScreen.Scripts
         private readonly IMyLogger _logger;
         private readonly IAdsService _adsService;
         private readonly IAgeNavigator _ageNavigator;
+        private readonly ITravelScreenPresenter _travelScreenPresenter;
+        private readonly IUserContainer _userContainer;
+
         private Disposable<EvolveScreen> _screen;
 
         public EvolveScreenProvider(
@@ -35,7 +40,9 @@ namespace _Game.UI._EvolveScreen.Scripts
             ITimelineInfoPresenter timelineInfoPresenter,
             IMyLogger logger,
             IAdsService adsService,
-            IAgeNavigator ageNavigator
+            IAgeNavigator ageNavigator,
+            ITravelScreenPresenter travelScreenPresenter,
+            IUserContainer userContainer
             )
         {
             _cameraService = cameraService;
@@ -47,6 +54,9 @@ namespace _Game.UI._EvolveScreen.Scripts
             _logger = logger;
             _adsService = adsService;
             _ageNavigator = ageNavigator;
+
+            _travelScreenPresenter = travelScreenPresenter;
+            _userContainer = userContainer;
         }
 
         public async UniTask<Disposable<EvolveScreen>> Load()
@@ -63,7 +73,9 @@ namespace _Game.UI._EvolveScreen.Scripts
                 _logger,
                 _adsService,
                 _ageNavigator,
-                _featureUnlockSystem
+                _featureUnlockSystem,
+                _travelScreenPresenter,
+                _userContainer
                 );
             return _screen;
         }

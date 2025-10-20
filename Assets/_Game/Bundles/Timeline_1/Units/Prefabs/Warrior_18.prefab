@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7487257388736905495}
   - component: {fileID: 7904895612571319980}
   - component: {fileID: 6499611832515525998}
-  - component: {fileID: 5170873972089600361}
+  - component: {fileID: 8314796448024637019}
   m_Layer: 0
   m_Name: Spine GameObject (Warrior_18)
   m_TagString: Untagged
@@ -168,7 +168,7 @@ MonoBehaviour:
   _animationName: 
   loop: 1
   timeScale: 1
---- !u!114 &5170873972089600361
+--- !u!114 &8314796448024637019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,7 +207,7 @@ MonoBehaviour:
       _min: -45
       _max: 45
     AimSmoothTime: 0.1
-  _locomotionBaseSpeed: 0.05
+  _locomotionBaseSpeed: 0.11
   _animationFolderPath: Assets/_Game/Bundles/Timeline_1/Units/Spine/Warrior_18/ReferenceAssets
 --- !u!1001 &3078240555696291004
 PrefabInstance:
@@ -372,7 +372,7 @@ PrefabInstance:
     - target: {fileID: 7315094200717886893, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: _animator
       value: 
-      objectReference: {fileID: 5170873972089600361}
+      objectReference: {fileID: 8314796448024637019}
     - target: {fileID: 8263895972462444447, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.389

@@ -76,7 +76,8 @@ namespace _Game.UI._EvolveScreen.Scripts
             ITimelineInfoScreenProvider timelineInfoProvider,
             IAudioService audioService,
             AgeIconContainer ageIconContainer,
-            CurrencyBank bank)
+            CurrencyBank bank
+            )
         {
             _bank = bank;
             _userContainer = userContainer;
