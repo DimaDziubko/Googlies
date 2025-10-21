@@ -122,8 +122,7 @@ namespace _Game.Core.Configs.Models._WeaponConfig
             return new List<string>
             {
                 "-", "Stone", "Arrow",
-                "ThrowingAxe", "Mine", "Bomb", "JavelinMissile",
-                "HimarsMissile", "Spear_1", "Cannonball",
+                "Mine", "Spear_1", "Cannonball",
                 "Laser_1", "Atlatl", "Projectile_1", "Projectile_2",
                 "ScorpioArrow", "Fireball_0", "LaserBall_0",
             };
