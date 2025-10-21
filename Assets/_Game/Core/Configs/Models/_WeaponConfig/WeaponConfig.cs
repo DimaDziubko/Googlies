@@ -22,78 +22,81 @@ namespace _Game.Core.Configs.Models._WeaponConfig
         public int Id;
         public WeaponType WeaponType;
 
-        [ValueDropdown("GetProjectileKeys"), ShowIf( "IsProjectileType")]
+        [ValueDropdown("GetProjectileKeys"), ShowIf("IsProjectileType")]
         public string ProjectileKey;
-        
+        [Space]
+        public string WeaponName;
+
         public bool IsMuzzle;
-        [ValueDropdown("GetMuzzleKeys"), ShowIf( "IsMuzzle")]
+        [ValueDropdown("GetMuzzleKeys"), ShowIf("IsMuzzle")]
         public string MuzzleKey;
 
         public bool IsExplosion;
-        [ValueDropdown("GetExplosionKeys"), ShowIf( "IsExplosion")]
+        [ValueDropdown("GetExplosionKeys"), ShowIf("IsExplosion")]
         public string ProjectileExplosionKey;
 
         public float Damage;
-        
-        [ShowIf( "IsProjectileType")]
+
+        [ShowIf("IsProjectileType")]
         public float ProjectileSpeed;
 
-        [ShowIf( "IsProjectileType")]
+        [ShowIf("IsProjectileType")]
         public float TrajectoryWarpFactor;
-        
-        [ShowIf( "IsSplash")]
+
+        [ShowIf("IsSplash")]
         public float SplashRadius;
 
-        [ShowIf( "IsSplash")]
+        [ShowIf("IsSplash")]
         public float SplashDamageRatio = 0;
 
-        [FormerlySerializedAs("ProjectileMoveType")] [ShowIf( "IsProjectileType")]
+        [FormerlySerializedAs("ProjectileMoveType")]
+        [ShowIf("IsProjectileType")]
         public TrajectoryType trajectoryType;
 
-        [ShowIf( "IsProjectileType")]
+        [ShowIf("IsProjectileType")]
         public ProjectileImpactType ProjectileImpactType;
 
         public SoundData AttackSfx;
-        
-        [ShowIf( "IsProjectileType")]
+
+        [ShowIf("IsProjectileType")]
         public SoundData ProjectileSfx;
-        
+
         public float PlayerDamageMultiplier = 1;
         public float EnemyDamageMultiplier = 1;
 
         public string FBConfigId;
 
         public bool IsWeaponEnableSfx;
-        [ShowIf( "IsWeaponEnableSfx")]
+        [ShowIf("IsWeaponEnableSfx")]
         public SoundData WeaponEnableSfx;
 
         public bool IsSpecialAttackSfx;
-        [ShowIf( "IsSpecialAttackSfx")]
+        [ShowIf("IsSpecialAttackSfx")]
         public SoundData SpecialAttackSfx;
 
         public bool IsAiming;
-        [ShowIf( "IsAiming")]
+        [ShowIf("IsAiming")]
         public AimingSettings AimingSettings;
 
         [ShowIf("IsPushType")]
         public float ImpulseStrength = 0;
-        
-        private bool IsPushType() => 
+
+        private bool IsPushType() =>
             WeaponType == WeaponType.PushMelee;
-        private bool IsProjectileType() => 
+        private bool IsProjectileType() =>
             WeaponType == WeaponType.SimpleProjectile;
-        
-        private bool IsLaserWeaponType() => 
+
+        private bool IsLaserWeaponType() =>
             WeaponType == WeaponType.LaserSaber ||
             WeaponType == WeaponType.LaserWhip;
 
-        private bool IsSplash() => 
+        private bool IsSplash() =>
             ProjectileImpactType == ProjectileImpactType.Splash;
-        
-        [ShowIf( "IsLaserWeaponType")]
+
+        [ShowIf("IsLaserWeaponType")]
         public Color[] AllyLaserColors;
-        
-        [ShowIf( "IsLaserWeaponType")]
+
+        [ShowIf("IsLaserWeaponType")]
         public Color[] HostileLaserColors;
 
         public Color GetRandomWeaponColorFor(Faction faction)
@@ -113,16 +116,16 @@ namespace _Game.Core.Configs.Models._WeaponConfig
 
             return Color.white;
         }
-        
+
         private IEnumerable<string> GetProjectileKeys()
         {
             return new List<string>
             {
-                "-", "Stone", "Arrow", 
+                "-", "Stone", "Arrow",
                 "ThrowingAxe", "Mine", "Bomb", "JavelinMissile",
-                "HimarsMissile", "Spear_1", "Cannonball", 
+                "HimarsMissile", "Spear_1", "Cannonball",
                 "Laser_1", "Atlatl", "Projectile_1", "Projectile_2",
-                "ScorpioArrow", "Fireball_0", "LaserBall_0", 
+                "ScorpioArrow", "Fireball_0", "LaserBall_0",
             };
         }
 
@@ -139,11 +142,11 @@ namespace _Game.Core.Configs.Models._WeaponConfig
         {
             return new List<string>
             {
-                "-", "Explosion_0", "Explosion_1", 
+                "-", "Explosion_0", "Explosion_1",
                 "Explosion_2"
             };
         }
-        
+
         public float GetProjectileDamageForFaction(Faction faction)
         {
             return faction switch
@@ -153,7 +156,7 @@ namespace _Game.Core.Configs.Models._WeaponConfig
                 _ => throw new ArgumentOutOfRangeException($"Unsupported Faction: {faction}")
             };
         }
-        
+
         public int GetLayerForFaction(Faction faction)
         {
             return faction switch
@@ -163,17 +166,17 @@ namespace _Game.Core.Configs.Models._WeaponConfig
                 _ => throw new ArgumentOutOfRangeException($"Unsupported Race: {faction}")
             };
         }
-        
+
         public int GetCollisionMask(Faction faction)
         {
             return GetLayerForFaction(faction) switch
             {
-                Constants.Layer.PLAYER_PROJECTILE => 
+                Constants.Layer.PLAYER_PROJECTILE =>
                     (1 << Constants.Layer.MELEE_ENEMY) |
                     (1 << Constants.Layer.ENEMY_BASE) |
                     (1 << Constants.Layer.RANGE_ENEMY),
 
-                Constants.Layer.ENEMY_PROJECTILE => 
+                Constants.Layer.ENEMY_PROJECTILE =>
                     (1 << Constants.Layer.MELEE_PLAYER) |
                     (1 << Constants.Layer.PLAYER_BASE) |
                     (1 << Constants.Layer.RANGE_PLAYER),
@@ -181,7 +184,7 @@ namespace _Game.Core.Configs.Models._WeaponConfig
                 _ => 0
             };
         }
-        
+
         [Button("Auto Assign Mixers")]
         private void AutoAssignMixers()
         {

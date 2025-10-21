@@ -10,6 +10,7 @@ namespace _Game.Gameplay._Weapon.Scripts
     {
         public WeaponType WeaponType { get; private set; }
         public string ProjectileKey { get; private set; }
+        public string WeaponName { get; private set; }
         public int WeaponId { get; private set; }
         public float ProjectileSpeed { get; private set; }
         public float TrajectoryWarpFactor { get; private set; }
@@ -36,9 +37,11 @@ namespace _Game.Gameplay._Weapon.Scripts
         public SoundData WeaponEnableSfx { get; private set; }
         public Color Color { get; private set; }
 
+
         public class WeaponDataBuilder
         {
             WeaponType _weaponType;
+            string _weaponName;
             string _projectileKey;
             int _weaponId;
             float _projectileSpeed;
@@ -75,6 +78,12 @@ namespace _Game.Gameplay._Weapon.Scripts
             public WeaponDataBuilder WithProjectileKey(string projectileKey)
             {
                 _projectileKey = projectileKey;
+                return this;
+            }
+
+            public WeaponDataBuilder WithWeaponName(string weaponName)
+            {
+                _weaponName = weaponName;
                 return this;
             }
 
@@ -119,7 +128,7 @@ namespace _Game.Gameplay._Weapon.Scripts
                 _damage = damage;
                 return this;
             }
-            
+
             public WeaponDataBuilder WithDamageBoost(float damageBoost)
             {
                 _damageBoost = damageBoost;
@@ -137,19 +146,19 @@ namespace _Game.Gameplay._Weapon.Scripts
                 _collisionMask = collisionMask;
                 return this;
             }
-            
+
             public WeaponDataBuilder WithSplashDamageRatio(float splashDamageRatio)
             {
                 _splashDamageRatio = splashDamageRatio;
                 return this;
             }
-            
+
             public WeaponDataBuilder WithProjectileMoveType(TrajectoryType trajectoryType)
             {
                 _trajectoryType = trajectoryType;
                 return this;
             }
-            
+
             public WeaponDataBuilder WithProjectileImpactType(ProjectileImpactType projectileImpactType)
             {
                 _projectileImpactType = projectileImpactType;
@@ -185,19 +194,19 @@ namespace _Game.Gameplay._Weapon.Scripts
                 _color = color;
                 return this;
             }
-            
+
             public WeaponDataBuilder WithAiming(bool isAiming)
             {
                 _isAiming = isAiming;
                 return this;
             }
-            
+
             public WeaponDataBuilder WithAimingSettings(AimingSettings settings)
             {
                 _aimingSettings = settings;
                 return this;
             }
-            
+
             public WeaponDataBuilder WithImpulseStrength(float impulseStrength)
             {
                 _impulseStrength = impulseStrength;
@@ -210,6 +219,7 @@ namespace _Game.Gameplay._Weapon.Scripts
                 {
                     WeaponType = _weaponType,
                     ProjectileKey = _projectileKey,
+                    WeaponName = _weaponName,
                     WeaponId = _weaponId,
                     ProjectileSpeed = _projectileSpeed,
                     TrajectoryWarpFactor = _trajectoryWarpFactor,

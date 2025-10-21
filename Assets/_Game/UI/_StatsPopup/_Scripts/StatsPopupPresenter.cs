@@ -91,7 +91,7 @@ namespace _Game.UI._StatsPopup._Scripts
         public string GetWeaponName(UnitType type)
         {
             IUnitData data = _unitDataProvider.GetDecoratedUnitData(Faction.Player, type, Skin.Ally);
-            return data.WeaponData.ProjectileKey;
+            return data.WeaponData.WeaponName;
         }
 
         public Sprite GetWeaponTypeIcon(UnitType type)

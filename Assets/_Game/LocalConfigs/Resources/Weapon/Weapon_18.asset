@@ -15,6 +15,7 @@ MonoBehaviour:
   Id: 18
   WeaponType: 4
   ProjectileKey: HimarsMissile
+  WeaponName: Laser sword
   IsMuzzle: 0
   MuzzleKey: '-'
   IsExplosion: 0
@@ -131,5 +132,9 @@ MonoBehaviour:
       _max: 45
     AimSmoothTime: 0.1
   ImpulseStrength: 0
-  AllyLaserColors: []
-  HostileLaserColors: []
+  AllyLaserColors:
+  - {r: 0, g: 0.7539096, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.1580646, a: 1}
+  HostileLaserColors:
+  - {r: 0.84797406, g: 0.06132078, b: 1, a: 1}
+  - {r: 0.91549075, g: 0.9622642, b: 0.44028127, a: 1}
