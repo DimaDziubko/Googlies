@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 39
   Type: 2
+  UnitLayerType: 0
   Health: 30
   Speed: 0.25
   Name: Focusnix
@@ -21,17 +22,19 @@ MonoBehaviour:
     m_AssetGUID: 8de9b50e5b5c803489368d24d081e837
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   EnemyIconAtlas:
     m_AssetGUID: af15e513ab6ef7645bcf095707b2df8b
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   PlayerIconName: 2
   EnemyIconName: 2
-  PlayerKey: Unit_38
-  EnemyKey: Unit_38
-  ZombieKey: Unit_36
+  PlayerKey: Warrior_39
+  EnemyKey: Warrior_39
+  ZombieKey: Warrior_37
   Price: 400
   FoodPrice: 7
   CoinsPerKill: 20
@@ -39,6 +42,8 @@ MonoBehaviour:
   EnemyHealthMultiplier: 1
   AttackPerSecond: 0.82
   AttackDistance: 0.16
+  DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.542, z: -0.070737384}
@@ -66,3 +71,4 @@ MonoBehaviour:
       Rotation: {x: -0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
   WeaponId: 39
+  FBConfigId: 
