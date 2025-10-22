@@ -198,6 +198,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Warrior_30", "Warrior_31", "Warrior_32",
                 "Warrior_33", "Warrior_34", "Warrior_35",
                 "Warrior_36", "Warrior_37", "Warrior_38",
+                "Warrior_39", "Warrior_40", "Warrior_41",
             };
         }
 
@@ -218,6 +219,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Warrior_30", "Warrior_31", "Warrior_32",
                 "Warrior_33", "Warrior_34", "Warrior_35",
                 "Warrior_36", "Warrior_37", "Warrior_38",
+                "Warrior_39", "Warrior_40", "Warrior_41",
             };
         }
 
@@ -227,7 +229,7 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
             {
                 "Warrior_1", "Warrior_4", "Warrior_7",
                 "Warrior_10", "Warrior_19", "Warrior_22", 
-                "Warrior_25", "Warrior_28", 
+                "Warrior_25", "Warrior_28", "Warrior_37",
             };
         }
 
