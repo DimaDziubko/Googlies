@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Firebase.RemoteConfig;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace _Game.Core.Configs.Providers
 {
@@ -41,6 +42,14 @@ namespace _Game.Core.Configs.Providers
         private bool _isWeaponsConfigLoaded;
         private bool _isSkillsConfigLoaded;
 
+        // Общее состояние для Firebase
+        private static bool _isFirebaseInitialized = false;
+        private static bool _isFetching = false;
+        private static UniTaskCompletionSource _fetchCompletionSource;
+        private static bool _fetchSuccessful = false;
+        private static DateTime _lastSuccessfulFetch = DateTime.MinValue;
+        private static readonly TimeSpan FETCH_COOLDOWN = TimeSpan.FromMinutes(1); // Минимум минута между fetch'ами
+
         public RemoteConfigProvider(IMyLogger logger)
         {
             _logger = logger;
@@ -50,7 +59,8 @@ namespace _Game.Core.Configs.Providers
         {
             if (!_isConfigLoaded)
             {
-                await LoadConfig("ExtraConfig", "ExtraConfigTest", config => _cachedConfig = config);
+                await EnsureFirebaseReady();
+                _cachedConfig = await LoadConfigSafe("ExtraConfig", "ExtraConfigTest");
                 _isConfigLoaded = true;
             }
 
@@ -61,68 +71,70 @@ namespace _Game.Core.Configs.Providers
         {
             if (!_isDungeonConfigLoaded)
             {
-                await LoadConfig("Dungeons", "DungeonsTest", config => _cachedDungeonConfig = config);
+                await EnsureFirebaseReady();
+                _cachedDungeonConfig = await LoadConfigSafe("Dungeons", "DungeonsTest");
                 _isDungeonConfigLoaded = true;
             }
 
             return _cachedDungeonConfig;
         }
-        
+
         public async UniTask<JObject> GetSkillsConfig()
         {
             if (!_isSkillsConfigLoaded)
             {
-                await LoadConfig("Skills", "SkillsTest", config => _cachedSkillsConfig = config);
+                await EnsureFirebaseReady();
+                _cachedSkillsConfig = await LoadConfigSafe("Skills", "SkillsTest");
                 _isSkillsConfigLoaded = true;
             }
 
             return _cachedSkillsConfig;
         }
-        
+
         public async UniTask<bool> GetIsShowForcedUpdate()
         {
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
-                Debug.LogWarning("Internet connection is not available.");
+                _logger.Log("Internet connection is not available.", DebugStatus.Warning);
                 return false;
             }
 
-            bool isEnabled = false;
+            await EnsureFirebaseReady();
 
-            await LoadConfig("ForcedUpdate", "ForcedUpdateTest", config =>
+            try
             {
-                try
-                {
-                    if (!string.IsNullOrEmpty(config))
-                    {
-                        if (bool.TryParse(config, out var parsedValue))
-                        {
-                            isEnabled = parsedValue;
-                        }
-                        else
-                        {
-                            _logger.Log("Failed to parse config string to boolean.", DebugStatus.Warning);
-                        }
-                    }
-                    else
-                    {
-                        _logger.Log("Config string is null or empty.", DebugStatus.Warning);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.Log($"Error parsing config string: {ex.Message}", DebugStatus.Fault);
-                }
-            });
+                var remoteConfig = FirebaseRemoteConfig.DefaultInstance;
+                string configString = GameModeSettings.I.TestMode
+                    ? remoteConfig.GetValue("ForcedUpdateTest").StringValue
+                    : remoteConfig.GetValue("ForcedUpdate").StringValue;
 
-            return isEnabled;
+                if (string.IsNullOrEmpty(configString))
+                {
+                    _logger.Log("ForcedUpdate config is null or empty.", DebugStatus.Warning);
+                    return false;
+                }
+
+                if (bool.TryParse(configString, out var result))
+                {
+                    return result;
+                }
+
+                _logger.Log($"Failed to parse ForcedUpdate config: {configString}", DebugStatus.Warning);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log($"Error getting ForcedUpdate config: {ex.Message}", DebugStatus.Fault);
+                return false;
+            }
         }
 
         public async UniTask<JObject> GetAgesConfig()
         {
             if (!_isAgesConfigLoaded)
             {
-                await LoadConfig("Ages", "AgesTest", config => _cachedAgesConfig = config);
+                await EnsureFirebaseReady();
+                _cachedAgesConfig = await LoadConfigSafe("Ages", "AgesTest");
                 _isAgesConfigLoaded = true;
             }
 
@@ -133,7 +145,8 @@ namespace _Game.Core.Configs.Providers
         {
             if (!_isBattlesConfigLoaded)
             {
-                await LoadConfig("Battles", "BattlesTest", config => _cachedBattlesConfig = config);
+                await EnsureFirebaseReady();
+                _cachedBattlesConfig = await LoadConfigSafe("Battles", "BattlesTest");
                 _isBattlesConfigLoaded = true;
             }
 
@@ -144,7 +157,8 @@ namespace _Game.Core.Configs.Providers
         {
             if (!_isWarriorsConfigLoaded)
             {
-                await LoadConfig("Warriors", "WarriorsTest", config => _cachedWarriorsConfig = config);
+                await EnsureFirebaseReady();
+                _cachedWarriorsConfig = await LoadConfigSafe("Warriors", "WarriorsTest");
                 _isWarriorsConfigLoaded = true;
             }
 
@@ -155,7 +169,8 @@ namespace _Game.Core.Configs.Providers
         {
             if (!_isWeaponsConfigLoaded)
             {
-                await LoadConfig("Weapons", "WeaponsTest", config => _cachedWeaponsConfig = config);
+                await EnsureFirebaseReady();
+                _cachedWeaponsConfig = await LoadConfigSafe("Weapons", "WeaponsTest");
                 _isWeaponsConfigLoaded = true;
             }
 
@@ -169,7 +184,7 @@ namespace _Game.Core.Configs.Providers
             _cachedAgesConfig = null;
             _cachedBattlesConfig = null;
             _cachedWarriorsConfig = null;
-            _cachedSkillsConfig = null;
+            _cachedWeaponsConfig = null;
 
             _isConfigLoaded = false;
             _isDungeonConfigLoaded = false;
@@ -177,73 +192,172 @@ namespace _Game.Core.Configs.Providers
             _isBattlesConfigLoaded = false;
             _isWarriorsConfigLoaded = false;
             _isSkillsConfigLoaded = false;
+
+            // Сбрасываем состояние Firebase для повторного fetch
+            _isFirebaseInitialized = false;
+            _fetchSuccessful = false;
+            _fetchCompletionSource = null;
+            _isFetching = false;
         }
 
-        private async UniTask LoadConfig(string prodKey, string testKey, Action<JObject> cacheSetter)
+        /// <summary>
+        /// Обеспечивает единократную загрузку данных из Firebase
+        /// </summary>
+        private async UniTask EnsureFirebaseReady()
         {
-            _logger.Log($"Fetching data for {prodKey} or {testKey}...");
+            if (_isFirebaseInitialized && _fetchSuccessful)
+            {
+                return;
+            }
+
+            // Если уже идет fetch, ждем его завершения
+            if (_isFetching)
+            {
+                if (_fetchCompletionSource != null)
+                {
+                    await _fetchCompletionSource.Task;
+                }
+                return;
+            }
+
+            // Проверяем cooldown
+            if (_lastSuccessfulFetch != DateTime.MinValue &&
+                DateTime.Now - _lastSuccessfulFetch < FETCH_COOLDOWN)
+            {
+                _logger.Log("Firebase fetch is on cooldown, using cached data.");
+                _isFirebaseInitialized = true;
+                return;
+            }
+
+            _isFetching = true;
+            _fetchCompletionSource = new UniTaskCompletionSource();
+
             try
             {
-                await FirebaseRemoteConfig.DefaultInstance.FetchAsync(TimeSpan.Zero);
+                await FetchRemoteConfigOnce();
+                _fetchCompletionSource.TrySetResult();
+            }
+            catch (Exception ex)
+            {
+                _fetchCompletionSource.TrySetException(ex);
+            }
+            finally
+            {
+                _isFetching = false;
+                _fetchCompletionSource = null;
+            }
+        }
 
+        /// <summary>
+        /// Единократный fetch конфигурации из Firebase
+        /// </summary>
+        private async UniTask FetchRemoteConfigOnce()
+        {
+            if (_isFirebaseInitialized && _fetchSuccessful)
+            {
+                return;
+            }
+
+            _logger.Log("[FirebaseRemoteConfig] Starting fetch...");
+
+            try
+            {
                 var remoteConfig = FirebaseRemoteConfig.DefaultInstance;
+
+                // Fetch с таймаутом
+                await remoteConfig.FetchAsync(TimeSpan.Zero);
+
                 var info = remoteConfig.Info;
 
                 if (info.LastFetchStatus != LastFetchStatus.Success)
                 {
-                    _logger.LogError($"Fetch was unsuccessful\nLastFetchStatus: {info.LastFetchStatus}");
+                    _logger.Log($"[FirebaseRemoteConfig] Fetch failed. Status: {info.LastFetchStatus}", DebugStatus.Warning);
+
+                    // Даже если fetch не удался, можем использовать закешированные данные
+                    _isFirebaseInitialized = true;
+                    _fetchSuccessful = false;
                     return;
                 }
 
                 await remoteConfig.ActivateAsync();
-                _logger.Log($"Remote data loaded and ready for use. Last fetch time {info.FetchTime}");
 
-                string configString = GameModeSettings.I.TestMode
-                    ? remoteConfig.GetValue(testKey).StringValue
-                    : remoteConfig.GetValue(prodKey).StringValue;
+                _logger.Log($"[FirebaseRemoteConfig] Remote data loaded successfully. Last fetch time: {info.FetchTime}");
 
-                _logger.Log(GameModeSettings.I.TestMode ? $"{testKey} loaded" : $"{prodKey} loaded");
-                _logger.Log(configString);
-
-                var configJsonData = JObject.Parse(configString);
-                cacheSetter(configJsonData);
+                _isFirebaseInitialized = true;
+                _fetchSuccessful = true;
+                _lastSuccessfulFetch = DateTime.Now;
             }
             catch (Exception e)
             {
-                _logger.Log($"Error fetching remote config: {e.Message}");
+                _logger.Log($"[FirebaseRemoteConfig] Error during fetch: {e.Message}", DebugStatus.Warning);
+
+                // Помечаем как инициализированный, чтобы использовать fallback данные
+                _isFirebaseInitialized = true;
+                _fetchSuccessful = false;
             }
         }
-        private async UniTask LoadConfig(string prodKey, string testKey, Action<string> cacheSetter)
+
+        /// <summary>
+        /// Безопасная загрузка конфига с fallback на embedded данные
+        /// </summary>
+        private async UniTask<JObject> LoadConfigSafe(string prodKey, string testKey)
         {
-            _logger.Log($"Fetching data for {prodKey} or {testKey}...");
             try
             {
-                await FirebaseRemoteConfig.DefaultInstance.FetchAsync(TimeSpan.Zero);
-
                 var remoteConfig = FirebaseRemoteConfig.DefaultInstance;
-                var info = remoteConfig.Info;
+                string configKey = GameModeSettings.I.TestMode ? testKey : prodKey;
+                string configString = remoteConfig.GetValue(configKey).StringValue;
 
-                if (info.LastFetchStatus != LastFetchStatus.Success)
+                if (string.IsNullOrEmpty(configString))
                 {
-                    _logger.Log($"Fetch was unsuccessful\nLastFetchStatus: {info.LastFetchStatus}", DebugStatus.Fault);
-                    return;
+                    _logger.Log($"Remote config for {configKey} is empty, trying fallback...", DebugStatus.Warning);
+                    return await LoadFallbackConfig(configKey);
                 }
 
-                await remoteConfig.ActivateAsync();
-                _logger.Log($"Remote data loaded and ready for use. Last fetch time {info.FetchTime}");
-
-                string configString = GameModeSettings.I.TestMode
-                    ? remoteConfig.GetValue(testKey).StringValue
-                    : remoteConfig.GetValue(prodKey).StringValue;
-
-                _logger.Log(GameModeSettings.I.TestMode ? $"{testKey} loaded" : $"{prodKey} loaded");
-                _logger.Log(configString);
-
-                cacheSetter(configString);
+                _logger.Log($"{configKey} loaded from remote config");
+                return JObject.Parse(configString);
             }
             catch (Exception e)
             {
-                _logger.Log($"Error fetching remote config: {e.Message}");
+                _logger.Log($"Error parsing remote config for {prodKey}/{testKey}: {e.Message}", DebugStatus.Warning);
+                return await LoadFallbackConfig(GameModeSettings.I.TestMode ? testKey : prodKey);
+            }
+        }
+
+        /// <summary>
+        /// Загрузка embedded конфига как fallback
+        /// </summary>
+        private async UniTask<JObject> LoadFallbackConfig(string configName)
+        {
+            try
+            {
+                _logger.Log($"Loading embedded config as fallback for {configName}.", DebugStatus.Warning);
+
+                // Здесь должна быть логика загрузки embedded конфига
+                // Например, из Resources или StreamingAssets
+                string fallbackPath = $"Configs/{configName}";
+                TextAsset fallbackAsset = Resources.Load<TextAsset>(fallbackPath);
+
+                if (fallbackAsset == null)
+                {
+                    _logger.Log($"Fallback config not found at {fallbackPath}", DebugStatus.Fault);
+                    return new JObject(); // Возвращаем пустой объект вместо null
+                }
+
+                string fallbackJson = fallbackAsset.text;
+
+                if (string.IsNullOrEmpty(fallbackJson))
+                {
+                    _logger.Log($"Fallback config is empty for {configName}", DebugStatus.Fault);
+                    return new JObject();
+                }
+
+                return JObject.Parse(fallbackJson);
+            }
+            catch (Exception e)
+            {
+                _logger.Log($"Error loading fallback config for {configName}: {e.Message}", DebugStatus.Fault);
+                return new JObject();
             }
         }
     }
