@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 799d49cbf6144a05922d5451b741e486, type: 3}
-  m_Name: 6_ModernAge
+  m_Name: 12_ModernAge
   m_EditorClassIdentifier: 
-  Id: 6
+  Id: 12
   Price: 0
   GemsPerAge: 0
   Economy:
@@ -41,13 +41,14 @@ MonoBehaviour:
         D: -32.016148
       Value: 2
       ValueStep: 1
-  WarriorsId: 100000001100000012000000
+  WarriorsId: 220000002300000024000000
   Name: Modern age
-  AgeIconKey: AgeIcon[AgeIcon_5]
+  AgeIconKey: 'AgeIcon[AgeIcon_5]'
   AgeIconAtlas:
     m_AssetGUID: 26417f9fd21215142a85c58fb9957849
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   AgeIconName: 5
   Description: Ukraine has witnessed a resurgence of Ukrainian culture, language,
@@ -58,6 +59,8 @@ MonoBehaviour:
     m_AssetGUID: f6007201ac8aacf4280bdf25631173ad
     m_SubObjectName: 
     m_SubObjectType: 
-    m_EditorAssetChanged: 0
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 1
   Level: 6
-  Order: 1
+  Order: 2
+  FBConfigId: '-'

@@ -154,7 +154,7 @@ namespace _Game.Core._GameMode
 
         private EnvironmentType DetermineActiveEnvironment()
         {
-            return _environmentConfig?.GetActiveEnvironment() ?? GetFallbackEnvironmentType();
+            return _environmentConfig.GetActiveEnvironment();// ?? GetFallbackEnvironmentType();
         }
 
         private EnvironmentType GetFallbackEnvironmentType()
