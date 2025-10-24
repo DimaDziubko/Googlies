@@ -146,7 +146,7 @@ namespace _Game.UI._Skills.Scripts
             _view.SetActiveUpgradeNotifier(_skillModel.IsReadyForUpgrade);
 
         private void SetLevel() => 
-            _view.SetLevel($"Level {_skillModel.Skill.Level}");
+            _view.SetLevel($"Lv {_skillModel.Skill.Level}");
 
         private void SetProgress()
         {

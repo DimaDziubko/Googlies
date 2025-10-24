@@ -90,8 +90,15 @@ namespace _Game.UI._Dungeons.Scripts
                 _view.SetInteractable(true);
             }
 
-            _view.NextDifficultyBtn.interactable = _model.CanMoveNext();
-            _view.PreviousDifficultyBtn.interactable = _model.CanMovePrevious();
+            UpdateButtonsState();
+        }
+
+        private void UpdateButtonsState()
+        {
+            _view.NextDifficultyBtn.SetInteractable(_model.CanMoveNext());
+            _view.PreviousDifficultyBtn.SetInteractable(_model.CanMovePrevious());
+
+            _logger.Log($"Dungeon _ canMoveNext: {_model.CanMoveNext()} __ canMovePrevious: {_model.CanMovePrevious()}");
         }
 
         public void Dispose()

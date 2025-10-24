@@ -14,18 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 12
   WeaponType: 2
-  ProjectileKey: Bomb
+  ProjectileKey: Cannonball
+  WeaponName: Bombard
   IsMuzzle: 1
   MuzzleKey: Muzzle_2
   IsExplosion: 1
   ProjectileExplosionKey: Explosion_0
   Damage: 162
-  ProjectileSpeed: 2
-  TrajectoryWarpFactor: 0.1
-  SplashRadius: 0.6
-  SplashDamageRatio: 0.3
+  ProjectileSpeed: 0
+  TrajectoryWarpFactor: 0
+  SplashRadius: 0
+  SplashDamageRatio: 0
   trajectoryType: 0
-  ProjectileImpactType: 1
+  ProjectileImpactType: 0
   AttackSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
     Clip: {fileID: 8300000, guid: 14c5e6711d45d6640880cda7058d48e2, type: 3}

@@ -2,6 +2,7 @@ using _Game.Core._FeatureUnlockSystem.Scripts;
 using _Game.Core.Configs.Repositories;
 using _Game.Core.Services._Camera;
 using _Game.Core.UserState._State;
+using _Game.UI._EvolveScreen.Scripts;
 using _Game.UI._Shop.Scripts._AmountView;
 using _Game.Utils.Extensions;
 using Sirenix.OdinInspector;
@@ -21,21 +22,23 @@ namespace _Game.UI._TravelScreen.Scripts
         [SerializeField, Required] private AmountView _rewardView;
 
         private ITravelScreenPresenter _presenter;
+        private EvolveScreen _evolveScreen;
         private IFeatureUnlockSystem _featureUnlockSystem;
         private IConfigRepository _config;
 
         public void Construct(
             ITravelScreenPresenter presenter,
             IConfigRepository config,
-            IFeatureUnlockSystem featureUnlockSystem
+            IFeatureUnlockSystem featureUnlockSystem,
+            EvolveScreen evolveScreen
             )
         {
             _config = config;
             _featureUnlockSystem = featureUnlockSystem;
             _presenter = presenter;
+            _evolveScreen = evolveScreen;
 
-            gameObject.SetActive(false);
-            _canvasGroup.alpha = 0f;
+            Hide();
         }
 
         public void Show()
@@ -48,7 +51,13 @@ namespace _Game.UI._TravelScreen.Scripts
 
             UpdateView();
 
-            _presenter.OnScreenOpen();
+            //_presenter.OnScreenOpen();
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+            _canvasGroup.alpha = 0f;
         }
 
         private void UpdateView()
@@ -73,38 +82,27 @@ namespace _Game.UI._TravelScreen.Scripts
 
         private void Subscribe()
         {
-            _travelButton.onClick.AddListener(_presenter.OnTravelButtonClicked);
-            _presenter.StateChanged += OnStateChanged;
-        }
-
-        private void OnStateChanged() => UpdateView();
-
-
-        public void Hide()
-        {
-            Unsubscribe();
-            _presenter.OnScreenClosed();
+            _travelButton.onClick.AddListener(() => _presenter.OnTravelButtonClicked(_evolveScreen));
         }
 
         public void Dispose()
         {
             Unsubscribe();
-            _presenter.OnScreenDisposed();
+            //_presenter.OnScreenDisposed();
         }
 
         private void Unsubscribe()
         {
-            _travelButton.onClick.RemoveListener(_presenter.OnTravelButtonClicked);
-            _presenter.StateChanged -= OnStateChanged;
+            _travelButton.onClick.RemoveListener(() => _presenter.OnTravelButtonClicked(_evolveScreen));
         }
 
         [Button] //Debug
-        private void ForceTravel() => _presenter.OnTravelButtonClicked();
+        private void ForceTravel() => _presenter.OnTravelButtonClicked(_evolveScreen);
 
         public void SetActive(bool isActive)
         {
             gameObject.SetActive(isActive);
-            _presenter.OnScreenActiveChanged(isActive);
+            //_presenter.OnScreenActiveChanged(isActive);
         }
     }
 }

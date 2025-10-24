@@ -15,6 +15,7 @@ MonoBehaviour:
   Id: 32
   WeaponType: 2
   ProjectileKey: Projectile_1
+  WeaponName: Puppchen
   IsMuzzle: 1
   MuzzleKey: Muzzle_2
   IsExplosion: 1
@@ -24,7 +25,7 @@ MonoBehaviour:
   TrajectoryWarpFactor: 0.1
   SplashRadius: 0
   SplashDamageRatio: 0
-  ProjectileMoveType: 1
+  trajectoryType: 1
   ProjectileImpactType: 1
   AttackSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
@@ -123,5 +124,13 @@ MonoBehaviour:
     IgnoreListenerVolume: 0
     IgnoreListenerPause: 0
     RolloffMode: 0
+  IsAiming: 0
+  AimingSettings:
+    MaxAimDistance: 2
+    AngleRange:
+      _min: -45
+      _max: 45
+    AimSmoothTime: 0.1
+  ImpulseStrength: 0
   AllyLaserColors: []
   HostileLaserColors: []

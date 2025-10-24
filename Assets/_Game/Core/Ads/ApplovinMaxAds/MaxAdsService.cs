@@ -22,8 +22,8 @@ namespace _Game.Core.Ads.ApplovinMaxAds
         private readonly string _rewardedID = "d1fd0c994dee3e7d";
 
 #elif UNITY_ANDROID
-        private readonly string _interstitialID = "e5356d767e863373";
-        private readonly string _rewardedID = "ab82f71faa3259df";
+        private readonly string _interstitialID = "a1e8dd54aafa9d07";
+        private readonly string _rewardedID = "a670b96811ca143e";
 #endif
 
         public event Action RewardedVideoLoaded;

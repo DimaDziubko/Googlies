@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _Game.UI._EvolveScreen.Scripts;
+using System;
 
 namespace _Game.UI._TravelScreen.Scripts
 {
@@ -8,11 +9,7 @@ namespace _Game.UI._TravelScreen.Scripts
         bool CanTravel { get;}
         string GetTravelConditionHint();
         string GetTravelInfo();
-        void OnTravelButtonClicked();
+        void OnTravelButtonClicked(EvolveScreen evolveScreen);
         string GetTravelText();
-        void OnScreenOpen();
-        void OnScreenClosed();
-        void OnScreenDisposed();
-        void OnScreenActiveChanged(bool isActive);
     }
 }

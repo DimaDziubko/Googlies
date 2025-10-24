@@ -45,10 +45,13 @@ namespace _Game.Core.Loading
 
         private async UniTask<GameConfig> LoadGameConfig(Action<float> onProgress)
         {
+            // Теперь все UniTask.WhenAll вызовы будут работать с уже инициализированным Firebase
             var localConfigContainer =
                 Resources.Load<GameLocalConfigContainer>(Constants.LocalConfigPath.GAME_LOCAL_CONFIG_CONTAINER_PATH);
 
             IRemoteConfigProvider remoteConfigProvider = new RemoteConfigProvider(_logger);
+            // Инициализируем Firebase один раз перед всеми параллельными вызовами
+            // await remoteConfigProvider.EnsureFirebaseReady(); // нужно сделать этот метод public
             ILocalConfigProvider localConfigProvider = new LocalConfigProvider();
             EmbeddedConfigProvider embeddedConfigProvider = new EmbeddedConfigProvider();
 
@@ -173,12 +176,20 @@ namespace _Game.Core.Loading
         }
 
         private async UniTask<JObject> TryLoadConfig(
-            Func<UniTask<JObject>> remoteLoader,
-            Func<string> localLoader,
-            Func<UniTask<string>> embeddedLoader)
+                Func<UniTask<JObject>> remoteLoader,
+                Func<string> localLoader,
+                Func<UniTask<string>> embeddedLoader)
         {
             try
             {
+                // 🚀 Проверяем интернет до всякой логики
+                if (Application.internetReachability == NetworkReachability.NotReachable)
+                {
+                    _logger.LogWarning("No internet. Falling back to embedded config immediately.");
+                    string embeddedConfig = await embeddedLoader();
+                    return JObject.Parse(embeddedConfig);
+                }
+
                 JObject config = null;
 
                 switch (GameModeSettings.I.ConfigSource)

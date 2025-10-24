@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Weapon_18
   m_EditorClassIdentifier: 
   Id: 18
-  WeaponType: 6
+  WeaponType: 4
   ProjectileKey: HimarsMissile
+  WeaponName: Laser sword
   IsMuzzle: 0
   MuzzleKey: '-'
   IsExplosion: 0
@@ -24,11 +25,11 @@ MonoBehaviour:
   TrajectoryWarpFactor: 0.3
   SplashRadius: 0.6
   SplashDamageRatio: 0.3
-  trajectoryType: 1
+  trajectoryType: 0
   ProjectileImpactType: 2
   AttackSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
-    Clip: {fileID: 8300000, guid: a66c1f1a70de29d498d097b7f136d9cb, type: 3}
+    Clip: {fileID: 8300000, guid: f272c51109e9c0741a636d12b8f8159c, type: 3}
     Loop: 0
     PlayOnAwake: 0
     FrequentSound: 1
@@ -131,5 +132,9 @@ MonoBehaviour:
       _max: 45
     AimSmoothTime: 0.1
   ImpulseStrength: 0
-  AllyLaserColors: []
-  HostileLaserColors: []
+  AllyLaserColors:
+  - {r: 0, g: 0.7539096, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.1580646, a: 1}
+  HostileLaserColors:
+  - {r: 0.84797406, g: 0.06132078, b: 1, a: 1}
+  - {r: 0.91549075, g: 0.9622642, b: 0.44028127, a: 1}

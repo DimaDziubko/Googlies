@@ -10,6 +10,7 @@ namespace _Game.Gameplay._Weapon.Scripts
     {
         public WeaponType WeaponType { get;}
         public string ProjectileKey { get;}
+        public string WeaponName { get; }
         public int WeaponId { get;}
         public float ProjectileSpeed { get;}
         public float TrajectoryWarpFactor { get;}

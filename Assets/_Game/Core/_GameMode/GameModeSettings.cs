@@ -58,6 +58,8 @@ namespace _Game.Core._GameMode
             {
                 Destroy(gameObject);
             }
+
+            Application.targetFrameRate = 60;
         }
 
         private void InitializeConfig()
@@ -152,7 +154,7 @@ namespace _Game.Core._GameMode
 
         private EnvironmentType DetermineActiveEnvironment()
         {
-            return _environmentConfig?.GetActiveEnvironment() ?? GetFallbackEnvironmentType();
+            return _environmentConfig.GetActiveEnvironment();// ?? GetFallbackEnvironmentType();
         }
 
         private EnvironmentType GetFallbackEnvironmentType()
@@ -170,11 +172,11 @@ namespace _Game.Core._GameMode
         {
             if (_currentConfig == null) return;
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-            Debug.unityLogger.logEnabled = true;
-#else
-            Debug.unityLogger.logEnabled = false;
-#endif
+//#if UNITY_EDITOR || DEVELOPMENT_BUILD
+//            Debug.unityLogger.logEnabled = true;
+//#else
+//            Debug.unityLogger.logEnabled = false;
+//#endif
         }
 
         [Button("Reload Config")]

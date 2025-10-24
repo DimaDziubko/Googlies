@@ -84,7 +84,7 @@ namespace _Game.Core.Installers.Core
             BindUpgradesScreenProvider();
 
             BindGameResultPopupProvider();
-            BindTimelineInfoScreenProvider();
+            //BindTimelineInfoScreenProvider();
 
             BindGameRateScreenProvider();
             BindRateGameChecker();
@@ -278,11 +278,6 @@ namespace _Game.Core.Installers.Core
         private void BindGameResultPopupProvider() =>
             Container
                 .BindInterfacesTo<BattleResultPopupProvider>()
-                .AsSingle();
-
-        private void BindTimelineInfoScreenProvider() =>
-            Container
-                .BindInterfacesAndSelfTo<TimelineInfoScreenProvider>()
                 .AsSingle();
 
         private void BindRateGameChecker() =>

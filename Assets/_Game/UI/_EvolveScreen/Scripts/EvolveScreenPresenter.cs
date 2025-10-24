@@ -45,7 +45,6 @@ namespace _Game.UI._EvolveScreen.Scripts
         private readonly IUserContainer _userContainer;
         private readonly IAgeNavigator _ageNavigator;
         private readonly IMiniShopProvider _miniShopProvider;
-        private readonly ITimelineInfoScreenProvider _timelineInfoProvider;
         private readonly IAudioService _audioService;
         private readonly IUINotifier _uiNotifier;
         private readonly IMyLogger _logger;
@@ -73,7 +72,6 @@ namespace _Game.UI._EvolveScreen.Scripts
             IGameInitializer gameInitializer,
             IAgeNavigator ageNavigator,
             IMiniShopProvider miniShopProvider,
-            ITimelineInfoScreenProvider timelineInfoProvider,
             IAudioService audioService,
             AgeIconContainer ageIconContainer,
             CurrencyBank bank
@@ -86,7 +84,6 @@ namespace _Game.UI._EvolveScreen.Scripts
             _gameInitializer = gameInitializer;
             _ageNavigator = ageNavigator;
             _miniShopProvider = miniShopProvider;
-            _timelineInfoProvider = timelineInfoProvider;
             _audioService = audioService;
             _ageIconContainer = ageIconContainer;
             gameInitializer.OnPostInitialization += Init;
@@ -205,15 +202,6 @@ namespace _Game.UI._EvolveScreen.Scripts
             return nextAgeConfig.Name;
         }
 
-        public async void OnEvolveClicked()
-        {
-            _audioService.PlayButtonSound();
-
-            var screen = await _timelineInfoProvider.Load();
-            var isExited = await screen.Value.ShowScreenWithTransitionAnimation();
-            if (isExited) _timelineInfoProvider.Dispose();
-        }
-
         public void OnEvolveClicked(EvolveScreen evolveScreen)
         {
             _audioService.PlayButtonSound();
@@ -234,13 +222,6 @@ namespace _Game.UI._EvolveScreen.Scripts
         public bool CanEvolve() =>
             IsNextAgeAffordable() || TimelineState.MaxBattle > TimelineState.AgeId;
 
-        public async void OnInfoClicked()
-        {
-            _audioService.PlayButtonSound();
-            var screen = await _timelineInfoProvider.Load();
-            //var isExited = await screen.Value.ShowScreen();
-            // if (isExited) _timelineInfoProvider.Dispose();
-        }
 
         //Debug
         [Button]

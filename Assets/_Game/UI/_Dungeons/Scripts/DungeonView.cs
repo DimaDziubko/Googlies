@@ -23,14 +23,14 @@ namespace _Game.UI._Dungeons.Scripts
         [SerializeField, Required] private TMP_Text _difficulty;
 
         [Space, Header("Playable Panel")]
-        [SerializeField, Required] private Button _previousDifficultyBtn;
-        [SerializeField, Required] private Button _nextDifficultyBtn;
+        [SerializeField, Required] private ThemedButton _previousDifficultyBtn;
+        [SerializeField, Required] private ThemedButton _nextDifficultyBtn;
         [SerializeField, Required] private AmountView _rewardAmountView;
         [SerializeField, Required] private ThemedButton _enterButton;
         [SerializeField, Required] private AmountView _costAmountView;
 
-        internal Button PreviousDifficultyBtn => _previousDifficultyBtn;
-        internal Button NextDifficultyBtn => _nextDifficultyBtn;
+        internal ThemedButton PreviousDifficultyBtn => _previousDifficultyBtn;
+        internal ThemedButton NextDifficultyBtn => _nextDifficultyBtn;
 
         internal AmountView RewardAmountView => _rewardAmountView;
         internal AmountView CostAmountView => _costAmountView;

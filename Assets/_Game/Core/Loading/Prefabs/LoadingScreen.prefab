@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -141.6}
-  m_SizeDelta: {x: -4, y: 57.0975}
+  m_AnchoredPosition: {x: 0, y: -120}
+  m_SizeDelta: {x: -4, y: 76.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4293078875412868541
 CanvasRenderer:
@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4289111718
-  m_fontColor: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
-  m_fontSizeBase: 42
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -335,8 +335,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 520, y: 195}
+  m_AnchoredPosition: {x: 0, y: 39.221813}
+  m_SizeDelta: {x: 540, y: 215}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2467465012849151617
 CanvasRenderer:
@@ -602,7 +602,6 @@ GameObject:
   - component: {fileID: 5372131062089628169}
   - component: {fileID: 5372131062089628171}
   - component: {fileID: 5372131062089628168}
-  - component: {fileID: 8126908137752479691}
   m_Layer: 5
   m_Name: SimpleScreen
   m_TagString: Untagged
@@ -622,8 +621,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7967071531654416010}
   - {fileID: 4421398657428237504}
+  - {fileID: 7967071531654416010}
   m_Father: {fileID: 5372131061062514116}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -652,7 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18431373, g: 0.20392157, b: 0.3254902, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -669,23 +668,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8126908137752479691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5372131062089628174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44e5162ee87061045ba821e0dfb969d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Theme::Unity.Theme.Binders.ImageColorBinder
-  data:
-    colorGuid: d0c3d138-42eb-4a5b-acb5-fd8c7b452aa2
-    overrideAlpha: 0
-    alpha: 1
-  image: {fileID: 5372131062089628168}
 --- !u!1 &6325767712224456824
 GameObject:
   m_ObjectHideFlags: 0

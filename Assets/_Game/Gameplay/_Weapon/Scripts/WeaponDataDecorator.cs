@@ -17,6 +17,7 @@ namespace _Game.Gameplay._Weapon.Scripts
 
         public WeaponType WeaponType => _weaponData.WeaponType;
         public string ProjectileKey => _weaponData.ProjectileKey;
+        public string WeaponName => _weaponData.WeaponName;
         public int WeaponId => _weaponData.WeaponId;
         public float ProjectileSpeed => _weaponData.ProjectileSpeed;
         public float TrajectoryWarpFactor => _weaponData.TrajectoryWarpFactor;
@@ -41,5 +42,6 @@ namespace _Game.Gameplay._Weapon.Scripts
         public float ImpulseStrength => _weaponData.ImpulseStrength;
 
         public Color Color => _weaponData.Color;
+
     }
 }

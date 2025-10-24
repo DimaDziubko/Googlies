@@ -104,6 +104,7 @@ namespace _Game.UI._TimelineInfoPresenter
                     .Build();
 
                 model.SetLocked(ageIndex > NextAge);
+                model.SetGained(ageIndex > CurrentAge);
                 _items.Add(model);
                 ageIndex++;
             }
@@ -115,7 +116,8 @@ namespace _Game.UI._TimelineInfoPresenter
 
             foreach (var item in _items)
             {
-                item.SetLocked(ageIndex > CurrentAge);
+                item.SetLocked(ageIndex > NextAge);
+                item.SetGained(ageIndex > CurrentAge);
                 ageIndex++;
             }
         }
