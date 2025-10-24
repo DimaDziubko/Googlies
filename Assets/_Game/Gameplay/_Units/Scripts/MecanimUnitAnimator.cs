@@ -56,7 +56,7 @@ namespace _Game.Gameplay._Units.Scripts
             DefaultSpeed = _animator.speed;
         }
 
-        public override void SetAttackSpeed(float attackPerSecond)
+        public override void SetAttackPerSecond(float attackPerSecond)
         {
             _attackPerSecond = attackPerSecond;
         }

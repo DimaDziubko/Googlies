@@ -29,7 +29,7 @@ namespace _Game.Gameplay._Units.Scripts
             IRandomService random)
         {
             _animator.Initialize(logger);
-            _animator.SetAttackSpeed(unitData.AttackPerSecond);
+            _animator.SetAttackPerSecond(unitData.AttackPerSecond);
             
             base.Construct(logger, targetRegistry, unitData, faction, random);
         }

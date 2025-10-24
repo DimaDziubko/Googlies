@@ -49,8 +49,8 @@ namespace _Game.Gameplay._Units.Scripts
             _primaryAnimator.Initialize(logger);
             _secondaryAnimator.Initialize(logger);
             
-            _primaryAnimator.SetAttackSpeed(unitData.AttackPerSecond);
-            _secondaryAnimator.SetAttackSpeed(unitData.AttackPerSecond);
+            _primaryAnimator.SetAttackPerSecond(unitData.AttackPerSecond);
+            _secondaryAnimator.SetAttackPerSecond(unitData.AttackPerSecond);
         }
         
         public override void Initialize(

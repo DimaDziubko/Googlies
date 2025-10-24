@@ -15,7 +15,7 @@ namespace _Game.Gameplay._Units.Scripts
         }
 
         protected abstract void OnInitialize();
-        public abstract void SetAttackSpeed(float attackPerSecond);
+        public abstract void SetAttackPerSecond(float attackPerSecond);
         public abstract void GameUpdate(float deltaTime);
         public abstract void LateGameUpdate(float deltaTime);
         public abstract void ResetPose();

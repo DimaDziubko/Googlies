@@ -111,13 +111,7 @@ namespace _Game.Gameplay._Units.Scripts._Animation
             _additiveTrackPlayer = new AnimationTrackPlayer(_skeletonAnimation);
         }
 
-        public override void SetAttackSpeed(float attackPerSecond)
-        {
-            _attackPerSecond = attackPerSecond;
-            if (_topTrackPlayer == null) return;
-            float requiredTimeScale = _topTrackPlayer.GetCurrentTrackDuration() / (1 / _attackPerSecond);
-            _topTrackPlayer.SetTimeScale(requiredTimeScale);
-        }
+        public override void SetAttackPerSecond(float attackPerSecond) => _attackPerSecond = attackPerSecond;
 
         public override void GameUpdate(float deltaTime) =>
             _skeletonAnimation.Update(deltaTime);
@@ -163,11 +157,19 @@ namespace _Game.Gameplay._Units.Scripts._Animation
                 (_topLayerAnimationState == AnimationState.Attack && !_topTrackPlayer.IsPlaying))
             {
                 _topTrackPlayer.Play(SelectRandomAttack(), COMBAT_LAYER);
+                SetAttackSpeed(_attackPerSecond);
             }
 
             _topLayerAnimationState = AnimationState.Attack;
         }
 
+        private void SetAttackSpeed(float attackPerSecond)
+        {
+            if(_topTrackPlayer == null) return;
+            float requiredTimeScale = _topTrackPlayer.GetCurrentTrackDuration() / (1 / attackPerSecond);
+            _topTrackPlayer.SetTimeScale(requiredTimeScale);
+        }
+        
         private AnimationReferenceAsset SelectRandomAttack()
         {
             int randomIndex = UnityEngine.Random.Range(0, _attacks.Length);
@@ -233,10 +235,7 @@ namespace _Game.Gameplay._Units.Scripts._Animation
             }
         }
 
-        public override void SetTarget(Transform targetTransform)
-        {
-            //if (_isAiming) _additiveTrackPlayer.Play(_aimingIn, ADDITIVE_LAYER);
-        }
+        public override void SetTarget(Transform targetTransform) { }
 
         public override void StopAttack()
         {

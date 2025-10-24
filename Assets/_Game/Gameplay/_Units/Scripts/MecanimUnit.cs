@@ -27,7 +27,7 @@ namespace _Game.Gameplay._Units.Scripts
             base.Construct(logger, targetRegistry, unitData, faction, random);
             
             _animator.Initialize(logger);
-            _animator.SetAttackSpeed(unitData.AttackPerSecond);
+            _animator.SetAttackPerSecond(unitData.AttackPerSecond);
         }
 
         public override void Initialize(IShootProxy shootProxy, IVFXProxy vFXProxy, float speedFactor,
