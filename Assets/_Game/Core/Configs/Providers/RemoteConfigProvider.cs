@@ -314,7 +314,7 @@ namespace _Game.Core.Configs.Providers
                     return await LoadFallbackConfig(configKey);
                 }
 
-                _logger.Log($"{configKey} loaded from remote config");
+                _logger.Log($"{configKey} loaded from remote config value : {configString}");
                 return JObject.Parse(configString);
             }
             catch (Exception e)

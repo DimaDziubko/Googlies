@@ -364,7 +364,6 @@ GameObject:
   - component: {fileID: 4576748872594093300}
   - component: {fileID: 8602638247553472520}
   - component: {fileID: 7798189921104716109}
-  - component: {fileID: 5248184638612721749}
   m_Layer: 5
   m_Name: DoubleCoinAdsBtn
   m_TagString: Untagged
@@ -415,14 +414,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.99215686, g: 0.8039216, b: 0.050980393, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -210725172, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+  m_Sprite: {fileID: -1052617231, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -478,9 +477,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: -876264539, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+    m_PressedSprite: {fileID: -437274292, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: -210725172, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+    m_DisabledSprite: {fileID: 1055348953, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -505,28 +504,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pressWarp: 0.9
---- !u!114 &5248184638612721749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443694781113917184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576051ea85e5447aa2bb7cb2de874151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    colorGuid: 8727c1e6-63c3-4d39-9cd9-a9a8bfa49747
-    overrideAlpha: 0
-    alpha: 1
-  _image: {fileID: 1967478051124824842}
-  _button: {fileID: 8602638247553472520}
-  _nonInteractableColorData:
-    colorGuid: 795f4ccb-76aa-45f4-8cd4-61f2ffd79155
-    overrideAlpha: 0
-    alpha: 1
 --- !u!1 &2317234005995599581
 GameObject:
   m_ObjectHideFlags: 0
