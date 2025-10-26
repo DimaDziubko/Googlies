@@ -25,6 +25,7 @@ namespace _Game.Core.Configs.Build
         //public bool EnableAnalytics = true;
         public bool IsTestAds;
 
+        public bool LogEnabled = false;
     }
 
     public enum EnvironmentType

@@ -15,6 +15,7 @@ MonoBehaviour:
   Id: 38
   WeaponType: 2
   ProjectileKey: Fireball_0
+  WeaponName: 
   IsMuzzle: 0
   MuzzleKey: '-'
   IsExplosion: 0
@@ -28,7 +29,7 @@ MonoBehaviour:
   ProjectileImpactType: 1
   AttackSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
-    Clip: {fileID: 8300000, guid: 83dc85d1450e6634f82baf29b5c50f96, type: 3}
+    Clip: {fileID: 0}
     Loop: 0
     PlayOnAwake: 0
     FrequentSound: 1
@@ -51,7 +52,7 @@ MonoBehaviour:
     RolloffMode: 0
   ProjectileSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
-    Clip: {fileID: 8300000, guid: bcbe1bb5e17092d419bc472815c5ec10, type: 3}
+    Clip: {fileID: 0}
     Loop: 0
     PlayOnAwake: 0
     FrequentSound: 1
@@ -130,5 +131,6 @@ MonoBehaviour:
       _min: -45
       _max: 45
     AimSmoothTime: 0.1
+  ImpulseStrength: 0
   AllyLaserColors: []
   HostileLaserColors: []

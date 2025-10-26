@@ -959,6 +959,7 @@ MonoBehaviour:
       _max: 45
     AimSmoothTime: 0.1
   _locomotionBaseSpeed: 0.1
+  _animationFolderPath: Assets/_Game/Bundles/Timeline_1/Units/Spine/Warrior_6
 --- !u!1 &7981016921808215162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,6 +1132,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7712184145994318557}
     - target: {fileID: 3550503916258392969, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
+      propertyPath: _dissolveTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550503916258392969, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: _meshRenderers.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1196,7 +1201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5562371957400219991, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: m_Name
-      value: Warrior_1
+      value: Warrior_2
       objectReference: {fileID: 0}
     - target: {fileID: 7190744794244711595, guid: 718725c58cb9e9140879e28391d16a25, type: 3}
       propertyPath: m_AnchorMax.x

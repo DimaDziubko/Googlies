@@ -117,11 +117,14 @@ namespace _Game.UI._StartBattleScreen.Scripts
 
         void IStartBattleScreenPresenter.OnScreenClosed()
         {
-            _isOpened = false;
-            Screen.EvolveTutorialStep.CancelStep();
-            _tutorialManager.UnRegister(Screen.EvolveTutorialStep);
-            Unsubscribe();
-            ScreenClosed?.Invoke(this);
+            if (Screen.OrNull() != null)
+            {
+                _isOpened = false;
+                Screen.EvolveTutorialStep.CancelStep();
+                _tutorialManager.UnRegister(Screen.EvolveTutorialStep);
+                Unsubscribe();
+                ScreenClosed?.Invoke(this);
+            }
         }
 
         void IStartBattleScreenPresenter.OnScreenDispose()
@@ -135,6 +138,11 @@ namespace _Game.UI._StartBattleScreen.Scripts
         void IStartBattleScreenPresenter.OnActiveChanged(bool isActive)
         {
             ActiveChanged?.Invoke(this, isActive);
+
+            if(isActive)
+                ShowEvolveStep();
+            else
+                CancelEvolveStep();
         }
 
         private void Subscribe()

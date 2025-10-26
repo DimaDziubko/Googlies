@@ -488,11 +488,11 @@ RectTransform:
   - {fileID: 352573422937047891}
   m_Father: {fileID: 1901438347651273167}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 28.1, y: 45.9}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -29.7}
   m_SizeDelta: {x: 120, y: 45}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &7121667498082615427
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38431373, g: 0.42352942, b: 0.6392157, a: 1}
+  m_Color: {r: 0.22352941, g: 0.25490198, b: 0.43137255, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -693,7 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    colorGuid: 85073cef-fc8f-4f71-a626-a1f006c926f6
+    colorGuid: 910164bc-51b0-4f0b-aa4b-e2ec5ff388bc
     overrideAlpha: 0
     alpha: 1
   image: {fileID: 6149408873069826843}

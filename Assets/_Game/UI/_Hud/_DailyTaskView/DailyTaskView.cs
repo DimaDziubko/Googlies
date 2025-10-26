@@ -26,6 +26,10 @@ namespace _Game.UI._Hud._DailyTaskView
         [SerializeField] private Slider _progressBar;
 
         [SerializeField] private TutorialStep _dailyTaskStep;
+        [Space]
+        [SerializeField] private Image _outlineImage;
+        [SerializeField] private Color _normalOutlineColor;
+        [SerializeField] private Color _disabledOutlineColor;
 
         public TutorialStep DailyTaskStep => _dailyTaskStep;
 
@@ -33,16 +37,23 @@ namespace _Game.UI._Hud._DailyTaskView
         public AmountView RewardView => _rewardView;
         public void PlayNotification() => _animator.PlayNotificationAnimation();
         public void StopNotification() => _animator.StopNotificationAnimation();
-        public void SetInteractable(bool isInteractable) => _button.SetInteractable(isInteractable);
+        public void SetInteractable(bool isInteractable)
+        {
+            _button.SetInteractable(isInteractable);
+            ChangeOutlineByInteractable(isInteractable);
+        }
         public void SetProgress(string progress) => _progress.text = progress;
         public void SetProgress(float progress) => _progressBar.value = progress;
         public void SetTaskLaybel(string task) => _taskLaybel.text = task;
         public void SetDailyInfo(string info) => _dailyInfo.text = info;
-
         public void Hide() => gameObject.SetActive(false);
         public void PlayHide(Action callback) => _animator.PlayDisappearAnimation(callback);
         public void PlayRefresh(Action callback) => _animator.PlayRefreshAnimation(callback);
 
         public void Cleanup() => _animator.Cleanup();
+        private void ChangeOutlineByInteractable(bool isInteractable)
+        {
+            _outlineImage.color = isInteractable ? _normalOutlineColor : _disabledOutlineColor;
+        }
     }
 }

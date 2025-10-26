@@ -176,11 +176,8 @@ namespace _Game.Core._GameMode
         {
             if (_currentConfig == null) return;
 
-//#if UNITY_EDITOR || DEVELOPMENT_BUILD
-//            Debug.unityLogger.logEnabled = true;
-//#else
-//            Debug.unityLogger.logEnabled = false;
-//#endif
+            Debug.unityLogger.logEnabled = _currentConfig.LogEnabled;
+
         }
 
         [Button("Reload Config")]

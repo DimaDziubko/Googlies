@@ -736,7 +736,7 @@ GameObject:
   - component: {fileID: 8139159196310926882}
   - component: {fileID: 7975478400787654135}
   - component: {fileID: 5785676917039263949}
-  - component: {fileID: 6150485835845518385}
+  - component: {fileID: 4646712898473614937}
   m_Layer: 5
   m_Name: FoodBoostBtn
   m_TagString: Untagged
@@ -865,7 +865,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6150485835845518385
+--- !u!114 &4646712898473614937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -874,10 +874,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3978577326371235282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7aa1063a98a68468159743ad49eb99, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e105f574280494cab5bcee3843a4f0c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Game.UI.Common.Scripts.ButtonPressAnimation
-  _pressWarp: 0.9
+  m_EditorClassIdentifier: Assembly-CSharp::_Game.UI.Common.Scripts.NewButtonPressAnimation
+  _contentTransform: {fileID: 1772472835317413217}
+  _pressOffset: 10
+  _animationDuration: 0.1
 --- !u!1 &4898773695609010313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,7 +1127,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 907775959, guid: 9ceb87a36f0873447b95f30ebe11cddf, type: 3}
+  m_Sprite: {fileID: -1728843945, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1708,7 +1710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 999
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2c56ed31c72e0a04a9d3ec7463f50f10, type: 2}
   m_sharedMaterial: {fileID: -3575464266372703095, guid: 2c56ed31c72e0a04a9d3ec7463f50f10, type: 2}
@@ -1735,7 +1737,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.4
+  m_fontSize: 50
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1

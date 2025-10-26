@@ -570,8 +570,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10.97, y: 0}
-  m_SizeDelta: {x: -10.97, y: -0.010323}
+  m_AnchoredPosition: {x: 1.72, y: 0}
+  m_SizeDelta: {x: -1.72, y: -0.01}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &554737015
 MonoBehaviour:
@@ -892,7 +892,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &809986722
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3611,7 +3611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: -197.94}
+  m_AnchoredPosition: {x: -20, y: -197.93994}
   m_SizeDelta: {x: 730, y: 252.06}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &3383943928043843170
@@ -5114,6 +5114,9 @@ MonoBehaviour:
   _rewardView: {fileID: 1214257011}
   _progressBar: {fileID: 554737016}
   _dailyTaskStep: {fileID: 1682967750}
+  _outlineImage: {fileID: 515934417}
+  _normalOutlineColor: {r: 0.58431375, g: 0.36078432, b: 0.019607844, a: 1}
+  _disabledOutlineColor: {r: 0.5058824, g: 0.5529412, b: 0.80784315, a: 1}
 --- !u!114 &7256472393017144960
 MonoBehaviour:
   m_ObjectHideFlags: 0
