@@ -56,14 +56,14 @@ namespace _Game.UI._BoostPopup
 
         public async UniTask<bool> Show(BoostSource mainSource, BoostSource subSource)
         {
-            if (mainSource != BoostSource.None)
-            {
-                InitBoostContainer(mainSource);
-            }
-
             if (subSource != BoostSource.None)
             {
                 InitBoostContainer(subSource);
+            }
+
+            if (mainSource != BoostSource.None)
+            {
+                InitBoostContainer(mainSource);
             }
 
             _animation.PlayShow(OnShowComplete);
@@ -77,21 +77,21 @@ namespace _Game.UI._BoostPopup
 
         private void InitBoostContainer(BoostSource source)
         {
-            //BoostInfoContainer panel = _boostInfoContainerListView.SpawnElement();
-            //panel.SetName(source.ToName());
-
             if (source != BoostSource.Total)
-                return;
+            {
+                var panel = _boostInfoContainerListView.SpawnElement();
+                panel.SetName(source.ToName());
+            }
 
             IEnumerable<BoostModel> boosts = _popupPresenter.GetBoosts(source);
 
             if (boosts != null)
             {
-                //var boostsToShow = boosts.Where(x =>
-                //    (x.Value > 1) ||
-                //    (x.Type == BoostType.AllUnitDamage || x.Type == BoostType.AllUnitHealth)); 
+                var boostsToShow = boosts.Where(x =>
+                    (x.Value > 1) ||
+                    (x.Type == BoostType.AllUnitDamage || x.Type == BoostType.AllUnitHealth));
 
-                foreach (var boost in boosts)
+                foreach (var boost in boostsToShow)
                 {
                     var view = _boostInfoContainerListView.BoostInfoListView.SpawnElement();
                     var presenter = _factory.Create(boost, view);

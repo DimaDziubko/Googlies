@@ -12,6 +12,10 @@ namespace _Game.Core._GameMode
         Embedded
     }
 
+    /// <summary>
+    /// Game Mode Settings Manager. Manages environment and build configurations. Configs via scriptable objects and INI file.
+    /// TODO : Ini file not working properly on build. Fix it later. Need put into resources.
+    /// </summary>
     public class GameModeSettings : MonoBehaviour
     {
         // Константа с путем к INI файлу

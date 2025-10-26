@@ -1,9 +1,10 @@
+using _Game.UI._Shop.Scripts.Common;
 using TMPro;
 using UnityEngine;
 
 namespace _Game.UI._BoostPopup
 {
-    public class BoostInfoContainer : MonoBehaviour
+    public class BoostInfoContainer : ListView<BoostInfoTextItem>
     {
         [SerializeField] private TMP_Text _boostInfoPanelNameLabel;
         [SerializeField] private BoostInfoListView _boostInfoListView;

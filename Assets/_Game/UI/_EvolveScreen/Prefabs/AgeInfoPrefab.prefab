@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2000-2024
+  m_text: 80000 BC - 20000 BC
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2c56ed31c72e0a04a9d3ec7463f50f10, type: 2}
   m_sharedMaterial: {fileID: -3575464266372703095, guid: 2c56ed31c72e0a04a9d3ec7463f50f10, type: 2}
@@ -92,17 +92,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 34.44
+  m_fontSizeBase: 34.44
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -5
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -780,10 +780,6 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1196775519641278906, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1196775519641278906, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
       objectReference: {fileID: 0}
@@ -858,58 +854,6 @@ PrefabInstance:
     - target: {fileID: 2467351353977256434, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
       propertyPath: m_Name
       value: AgeMarker
-      objectReference: {fileID: 0}
-    - target: {fileID: 2827938143159406501, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2827938143159406501, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 1350232855, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
-    - target: {fileID: 2827938143159406501, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: m_Color.b
-      value: 0.050980393
-      objectReference: {fileID: 0}
-    - target: {fileID: 2827938143159406501, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: m_Color.g
-      value: 0.8039216
-      objectReference: {fileID: 0}
-    - target: {fileID: 2827938143159406501, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: m_Color.r
-      value: 0.99215686
-      objectReference: {fileID: 0}
-    - target: {fileID: 3316128189537669083, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: data.colorGuid
-      value: d0c3d138-42eb-4a5b-acb5-fd8c7b452aa2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3744321373069199508, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: _loopCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3744321373069199508, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: _animationFade
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4821852863916927563, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: data.colorGuid
-      value: 8727c1e6-63c3-4d39-9cd9-a9a8bfa49747
-      objectReference: {fileID: 0}
-    - target: {fileID: 5524249840898852128, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 1350232855, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
-    - target: {fileID: 5524249840898852128, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: m_Color.b
-      value: 0.3254902
-      objectReference: {fileID: 0}
-    - target: {fileID: 5524249840898852128, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: m_Color.g
-      value: 0.20392157
-      objectReference: {fileID: 0}
-    - target: {fileID: 5524249840898852128, guid: 41114c58fb5d19943ac3d3d20ef553d1, type: 3}
-      propertyPath: m_Color.r
-      value: 0.18431373
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
