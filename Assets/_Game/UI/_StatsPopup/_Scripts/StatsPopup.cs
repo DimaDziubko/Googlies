@@ -88,8 +88,8 @@ namespace _Game.UI._StatsPopup._Scripts
 
         private void UpdateButtons()
         {
-            _previousStatsButton.gameObject.SetActive(_statsPopupPresenter.CanMovePrevious(_typeToShow));
-            _nextStatsButton.gameObject.SetActive(_statsPopupPresenter.CanMoveNext(_typeToShow));
+            _previousStatsButton.SetInteractable(_statsPopupPresenter.CanMovePrevious(_typeToShow));
+            _nextStatsButton.SetInteractable(_statsPopupPresenter.CanMoveNext(_typeToShow));
         }
 
         private void UpdateView(UnitType type)
