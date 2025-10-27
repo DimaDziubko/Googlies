@@ -68,7 +68,7 @@ namespace _Game.Core.Services.Analytics
                 switch (serviceConsent.templateId)
                 {
                     case "fHczTMzX8": // AppLovin
-                        MaxSdk.SetHasUserConsent(serviceConsent.status);
+                        //MaxSdk.SetHasUserConsent(serviceConsent.status);
                         Debug.Log("MaxSdk SetHasUserConsent " + serviceConsent.status);
                         break;
 

@@ -29,10 +29,10 @@ namespace _Game.Core.Ads.ApplovinMaxAds
         public event Action RewardedVideoLoaded;
         public event Action InterstitialVideoLoaded;
         public event Action<int> OnCountAds;
-        public event Action<string, MaxSdkBase.AdInfo> OnAdRevenuePaidEvent;
-        public event Action<string, MaxSdkBase.AdInfo, Placement> OnAdRevenueWPlacementEvent;
-        public event Action<AdType, Placement, MaxSdkBase.AdInfo, AdStatus, int> OnAdImpressionStatus;
-        public event Action<AdType, Placement, MaxSdkBase.AdInfo, int> OnAdImpressionCustom;
+        //public event Action<string, MaxSdkBase.AdInfo> OnAdRevenuePaidEvent;
+        //public event Action<string, MaxSdkBase.AdInfo, Placement> OnAdRevenueWPlacementEvent;
+        //public event Action<AdType, Placement, MaxSdkBase.AdInfo, AdStatus, int> OnAdImpressionStatus;
+        //public event Action<AdType, Placement, MaxSdkBase.AdInfo, int> OnAdImpressionCustom;
 
         private Action _onVideoCompleted;
         private Placement _placement;
@@ -72,19 +72,19 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         public void Init()
         {
-            MaxSdkCallbacks.OnSdkInitializedEvent += sdkConfiguration =>
-            {
-                InitializeRewardedAds();
-                InitializeInterstitialAds();
-            };
-            Debug.Log("MaxSdk.InitializeSdk");
+            //MaxSdkCallbacks.OnSdkInitializedEvent += sdkConfiguration =>
+            //{
+            //    InitializeRewardedAds();
+            //    InitializeInterstitialAds();
+            //};
+            //Debug.Log("MaxSdk.InitializeSdk");
 
-            MaxSdk.InitializeSdk();
+            //MaxSdk.InitializeSdk();
 
-            LoadAndShowCmpFlow();
+            //LoadAndShowCmpFlow();
 
-            Subscribe();
-            Debug.Log("MaxSdk.Done");
+            //Subscribe();
+            //Debug.Log("MaxSdk.Done");
         }
 
         void IDisposable.Dispose()
@@ -94,22 +94,24 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         public bool IsAdReady(AdType type)
         {
+            return true;
+
 #if UNITY_EDITOR
             //Mock
             //return false;
             return true;
 #endif
-            switch (type)
-            {
-                case AdType.Rewarded:
-                    return MaxSdk.IsRewardedAdReady(_rewardedID);
+            //switch (type)
+            //{
+            //    case AdType.Rewarded:
+            //        return MaxSdk.IsRewardedAdReady(_rewardedID);
 
-                case AdType.Interstitial:
-                    return MaxSdk.IsInterstitialReady(_interstitialID);
+            //    case AdType.Interstitial:
+            //        return MaxSdk.IsInterstitialReady(_interstitialID);
 
-                default:
-                    return false;
-            }
+            //    default:
+            //        return false;
+            //}
         }
 
         public void ShowInterstitialVideo(Placement placement)
@@ -121,7 +123,7 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
                 var delay = _adsConfigRepository.GetConfig().InterstitialDelay;
                 StartCountdown(delay);
-                MaxSdk.ShowInterstitial(_interstitialID);
+                //MaxSdk.ShowInterstitial(_interstitialID);
                 _userContainer.State.AdsStatistics.AddWatchedAd();
                 OnCountAds?.Invoke(_userContainer.State.AdsStatistics.AdsReviewed);
                 _userContainer.State.AdsWeeklyWatchState.AddWatchedAd(DateTime.UtcNow);
@@ -141,7 +143,7 @@ namespace _Game.Core.Ads.ApplovinMaxAds
                 _placement = placement;
                 var delay = _adsConfigRepository.GetConfig().RewardInterstitialDelay;
                 StartCountdown(delay);
-                MaxSdk.ShowRewardedAd(_rewardedID);
+                //MaxSdk.ShowRewardedAd(_rewardedID);
                 _userContainer.State.AdsStatistics.AddWatchedAd();
                 _userContainer.State.AdsWeeklyWatchState.AddWatchedAd(DateTime.UtcNow);
                 OnCountAds?.Invoke(_userContainer.State.AdsStatistics.AdsReviewed);
@@ -155,44 +157,44 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         private void LoadAndShowCmpFlow()
         {
-            var cmpService = MaxSdk.CmpService;
+            //var cmpService = MaxSdk.CmpService;
 
-            cmpService.ShowCmpForExistingUser(error =>
-            {
-                if (null == error)
-                {
-                    // The CMP alert was shown successfully.
-                }
-            });
+            //cmpService.ShowCmpForExistingUser(error =>
+            //{
+            //    if (null == error)
+            //    {
+            //        // The CMP alert was shown successfully.
+            //    }
+            //});
         }
 
         private void Subscribe()
         {
-            if (GameModeSettings.I.IsTestAds)
-            {
-                MaxSdkCallbacks.OnSdkInitializedEvent += sdkConfiguration =>
-                {
-                    MaxSdk.ShowMediationDebugger();
-                };
-            }
+            //if (GameModeSettings.I.IsTestAds)
+            //{
+            //    MaxSdkCallbacks.OnSdkInitializedEvent += sdkConfiguration =>
+            //    {
+            //        MaxSdk.ShowMediationDebugger();
+            //    };
+            //}
         }
 
         private void Unsubscribe()
         {
-            MaxSdkCallbacks.Rewarded.OnAdLoadedEvent -= OnRewardedAdLoadedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent -= OnRewardedAdFailedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent -= OnRewardedAdFailedToDisplayEvent;
-            MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent -= OnRewardedAdDisplayedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdClickedEvent -= OnRewardedAdClickedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdHiddenEvent -= OnRewardedAdDismissedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent -= OnRewardedAdReceivedRewardEvent;
-            MaxSdkCallbacks.Rewarded.OnAdRevenuePaidEvent -= OnRevenuePaid;
+            //MaxSdkCallbacks.Rewarded.OnAdLoadedEvent -= OnRewardedAdLoadedEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent -= OnRewardedAdFailedEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent -= OnRewardedAdFailedToDisplayEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent -= OnRewardedAdDisplayedEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdClickedEvent -= OnRewardedAdClickedEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdHiddenEvent -= OnRewardedAdDismissedEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent -= OnRewardedAdReceivedRewardEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdRevenuePaidEvent -= OnRevenuePaid;
 
-            MaxSdkCallbacks.Interstitial.OnAdLoadedEvent -= OnInterstitialLoadedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent -= OnInterstitialFailedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent -= InterstitialFailedToDisplayEvent;
-            MaxSdkCallbacks.Interstitial.OnAdHiddenEvent -= OnInterstitialDismissedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent -= OnRevenuePaid;
+            //MaxSdkCallbacks.Interstitial.OnAdLoadedEvent -= OnInterstitialLoadedEvent;
+            //MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent -= OnInterstitialFailedEvent;
+            //MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent -= InterstitialFailedToDisplayEvent;
+            //MaxSdkCallbacks.Interstitial.OnAdHiddenEvent -= OnInterstitialDismissedEvent;
+            //MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent -= OnRevenuePaid;
         }
 
         private void StartCountdown(float delay)
@@ -232,89 +234,89 @@ namespace _Game.Core.Ads.ApplovinMaxAds
             await loadFunc();
         }
 
-        private void OnRevenuePaid(string arg1, MaxSdkBase.AdInfo arg2)
-        {
-            OnAdRevenuePaidEvent?.Invoke(arg1, arg2);
-            OnAdRevenueWPlacementEvent?.Invoke(arg1, arg2, _placement);
-        }
+        //private void OnRevenuePaid(string arg1, MaxSdkBase.AdInfo arg2)
+        //{
+        //    OnAdRevenuePaidEvent?.Invoke(arg1, arg2);
+        //    OnAdRevenueWPlacementEvent?.Invoke(arg1, arg2, _placement);
+        //}
 
         #region Rewarded Ad Methods
 
         private async void InitializeRewardedAds()
         {
             // Attach callbacks
-            MaxSdkCallbacks.Rewarded.OnAdLoadedEvent += OnRewardedAdLoadedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent += OnRewardedAdFailedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent += OnRewardedAdFailedToDisplayEvent;
-            MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent += OnRewardedAdDisplayedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdClickedEvent += OnRewardedAdClickedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdHiddenEvent += OnRewardedAdDismissedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent += OnRewardedAdReceivedRewardEvent;
-            MaxSdkCallbacks.Rewarded.OnAdRevenuePaidEvent += OnRevenuePaid;
+            //MaxSdkCallbacks.Rewarded.OnAdLoadedEvent += OnRewardedAdLoadedEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent += OnRewardedAdFailedEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent += OnRewardedAdFailedToDisplayEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent += OnRewardedAdDisplayedEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdClickedEvent += OnRewardedAdClickedEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdHiddenEvent += OnRewardedAdDismissedEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent += OnRewardedAdReceivedRewardEvent;
+            //MaxSdkCallbacks.Rewarded.OnAdRevenuePaidEvent += OnRevenuePaid;
 
             await LoadRewardedAd();
         }
 
         public async UniTask LoadRewardedAd()
         {
-            MaxSdk.LoadRewardedAd(_rewardedID);
+            //MaxSdk.LoadRewardedAd(_rewardedID);
             _logger.Log("Rewarded ad loading...", DebugStatus.Success);
             await UniTask.CompletedTask;
         }
 
-        private void OnRewardedAdLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
-        {
-            _logger.Log("Rewarded ad loaded", DebugStatus.Success);
-            RewardedVideoLoaded?.Invoke();
-            _rewardedRetryAttempt = 0;
-        }
+        //private void OnRewardedAdLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        //{
+        //    _logger.Log("Rewarded ad loaded", DebugStatus.Success);
+        //    RewardedVideoLoaded?.Invoke();
+        //    _rewardedRetryAttempt = 0;
+        //}
 
-        private async void OnRewardedAdFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
-        {
-            _rewardedRetryAttempt++;
-            double retryDelay = Math.Pow(2, Math.Min(6, _rewardedRetryAttempt));
+        //private async void OnRewardedAdFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
+        //{
+        //    _rewardedRetryAttempt++;
+        //    double retryDelay = Math.Pow(2, Math.Min(6, _rewardedRetryAttempt));
 
-            _logger.Log("Rewarded ad failed to load with error code: " + errorInfo.Code);
+        //    _logger.Log("Rewarded ad failed to load with error code: " + errorInfo.Code);
 
-            await RetryLoadWithDelay(LoadRewardedAd, retryDelay);
-        }
+        //    await RetryLoadWithDelay(LoadRewardedAd, retryDelay);
+        //}
 
-        private async void OnRewardedAdFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo,
-            MaxSdkBase.AdInfo adInfo)
-        {
-            _logger.Log("Rewarded ad failed to display with error code: " + errorInfo.Code);
-            await LoadRewardedAd();
-        }
+        //private async void OnRewardedAdFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo,
+        //    MaxSdkBase.AdInfo adInfo)
+        //{
+        //    _logger.Log("Rewarded ad failed to display with error code: " + errorInfo.Code);
+        //    await LoadRewardedAd();
+        //}
 
-        private void OnRewardedAdDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
-        {
-            _logger.Log("Rewarded ad displayed");
-            OnAdImpressionStatus?.Invoke(AdType.Rewarded, _placement, adInfo, AdStatus.Show, _userContainer.State.AdsStatistics.AdsReviewed);
-        }
+        //private void OnRewardedAdDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        //{
+        //    _logger.Log("Rewarded ad displayed");
+        //    //OnAdImpressionStatus?.Invoke(AdType.Rewarded, _placement, adInfo, AdStatus.Show, _userContainer.State.AdsStatistics.AdsReviewed);
+        //}
 
-        private void OnRewardedAdClickedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
-        {
-            _logger.Log("Rewarded ad clicked");
-            OnAdImpressionStatus?.Invoke(AdType.Rewarded, _placement, adInfo, AdStatus.Click, _userContainer.State.AdsStatistics.AdsReviewed);
-        }
+        //private void OnRewardedAdClickedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        //{
+        //    _logger.Log("Rewarded ad clicked");
+        //    //OnAdImpressionStatus?.Invoke(AdType.Rewarded, _placement, adInfo, AdStatus.Click, _userContainer.State.AdsStatistics.AdsReviewed);
+        //}
 
-        private async void OnRewardedAdDismissedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
-        {
-            _logger.Log("Rewarded ad dismissed");
-            OnAdImpressionStatus?.Invoke(AdType.Rewarded, _placement, adInfo, AdStatus.Close, _userContainer.State.AdsStatistics.AdsReviewed);
-            _gameManager.SetPaused(false);
-            await LoadRewardedAd();
-        }
+        //private async void OnRewardedAdDismissedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        //{
+        //    _logger.Log("Rewarded ad dismissed");
+        //    //OnAdImpressionStatus?.Invoke(AdType.Rewarded, _placement, adInfo, AdStatus.Close, _userContainer.State.AdsStatistics.AdsReviewed);
+        //    _gameManager.SetPaused(false);
+        //    await LoadRewardedAd();
+        //}
 
-        private void OnRewardedAdReceivedRewardEvent(string adUnitId, MaxSdk.Reward reward, MaxSdkBase.AdInfo adInfo)
-        {
-            _logger.Log("Rewarded ad received reward");
-            _onVideoCompleted?.Invoke();
-            _gameManager.SetPaused(false);
-            OnAdImpressionStatus?.Invoke(AdType.Rewarded, _placement, adInfo, AdStatus.Complete, _userContainer.State.AdsStatistics.AdsReviewed);
+        //private void OnRewardedAdReceivedRewardEvent(string adUnitId, MaxSdk.Reward reward, MaxSdkBase.AdInfo adInfo)
+        //{
+        //    _logger.Log("Rewarded ad received reward");
+        //    _onVideoCompleted?.Invoke();
+        //    _gameManager.SetPaused(false);
+        //    //OnAdImpressionStatus?.Invoke(AdType.Rewarded, _placement, adInfo, AdStatus.Complete, _userContainer.State.AdsStatistics.AdsReviewed);
 
-            OnAdImpressionCustom?.Invoke(AdType.Rewarded, _placement, adInfo, _userContainer.State.AdsStatistics.AdsReviewed);
-        }
+        //    //OnAdImpressionCustom?.Invoke(AdType.Rewarded, _placement, adInfo, _userContainer.State.AdsStatistics.AdsReviewed);
+        //}
 
         #endregion
 
@@ -324,53 +326,53 @@ namespace _Game.Core.Ads.ApplovinMaxAds
         private async void InitializeInterstitialAds()
         {
             // Attach callbacks
-            MaxSdkCallbacks.Interstitial.OnAdLoadedEvent += OnInterstitialLoadedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += OnInterstitialFailedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += InterstitialFailedToDisplayEvent;
-            MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnInterstitialDismissedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent += OnRevenuePaid;
+            //MaxSdkCallbacks.Interstitial.OnAdLoadedEvent += OnInterstitialLoadedEvent;
+            //MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += OnInterstitialFailedEvent;
+            //MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += InterstitialFailedToDisplayEvent;
+            //MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnInterstitialDismissedEvent;
+            //MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent += OnRevenuePaid;
 
             await LoadInterstitial();
         }
 
         private async UniTask LoadInterstitial()
         {
-            MaxSdk.LoadInterstitial(_interstitialID);
+            //MaxSdk.LoadInterstitial(_interstitialID);
             _logger.Log("Interstitial AD Loading...");
             await UniTask.CompletedTask;
         }
 
-        private void OnInterstitialLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
-        {
-            _logger.Log("Interstitial loaded", DebugStatus.Success);
+        //private void OnInterstitialLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        //{
+        //    _logger.Log("Interstitial loaded", DebugStatus.Success);
 
-            InterstitialVideoLoaded?.Invoke();
+        //    InterstitialVideoLoaded?.Invoke();
 
-            _interstitialRetryAttempt = 0;
-        }
+        //    _interstitialRetryAttempt = 0;
+        //}
 
-        private async void OnInterstitialFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
-        {
-            _interstitialRetryAttempt++;
-            double retryDelay = Math.Pow(2, Math.Min(6, _interstitialRetryAttempt));
+        //private async void OnInterstitialFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
+        //{
+        //    _interstitialRetryAttempt++;
+        //    double retryDelay = Math.Pow(2, Math.Min(6, _interstitialRetryAttempt));
 
-            _logger.Log("Interstitial failed to load with error code: " + errorInfo.Code);
+        //    _logger.Log("Interstitial failed to load with error code: " + errorInfo.Code);
 
-            await RetryLoadWithDelay(LoadInterstitial, retryDelay);
-        }
+        //    await RetryLoadWithDelay(LoadInterstitial, retryDelay);
+        //}
 
-        private async void InterstitialFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo,
-            MaxSdkBase.AdInfo adInfo)
-        {
-            _logger.Log("Interstitial failed to display with error code: " + errorInfo.Code);
-            await LoadInterstitial();
-        }
+        //private async void InterstitialFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo,
+        //    MaxSdkBase.AdInfo adInfo)
+        //{
+        //    _logger.Log("Interstitial failed to display with error code: " + errorInfo.Code);
+        //    await LoadInterstitial();
+        //}
 
-        private async void OnInterstitialDismissedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
-        {
-            _logger.Log("Interstitial dismissed");
-            await LoadInterstitial();
-        }
+        //private async void OnInterstitialDismissedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        //{
+        //    _logger.Log("Interstitial dismissed");
+        //    await LoadInterstitial();
+        //}
 
         #endregion
     }

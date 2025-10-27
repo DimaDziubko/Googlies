@@ -55,26 +55,26 @@ namespace _Game.Core.Services.Analytics
 
             AppsFlyer.startSDK();
 
-            _iAdsService.OnAdRevenuePaidEvent += OnAdRevenuePaidEvent;
+            //_iAdsService.OnAdRevenuePaidEvent += OnAdRevenuePaidEvent;
             Debug.Log($"Apps Flyer Inited");
         }
 
         void IDisposable.Dispose()
         {
             //_settings.UnsubscribeDeepLink();
-            _iAdsService.OnAdRevenuePaidEvent -= OnAdRevenuePaidEvent;
+            //_iAdsService.OnAdRevenuePaidEvent -= OnAdRevenuePaidEvent;
         }
 
-        private void OnAdRevenuePaidEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
-        {
-            Dictionary<string, string> additionalParams = new Dictionary<string, string>();
-            additionalParams.Add(AdRevenueScheme.COUNTRY, MaxSdk.GetSdkConfiguration().CountryCode);
-            additionalParams.Add(AdRevenueScheme.AD_UNIT, adInfo.AdUnitIdentifier);
-            additionalParams.Add(AdRevenueScheme.AD_TYPE, adInfo.AdFormat);
-            additionalParams.Add(AdRevenueScheme.PLACEMENT, adInfo.Placement);
-            var logRevenue = new AFAdRevenueData(adInfo.NetworkName, MediationNetwork.ApplovinMax, "USD", adInfo.Revenue);
-            AppsFlyer.logAdRevenue(logRevenue, additionalParams);
-        }
+        //private void OnAdRevenuePaidEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        //{
+        //    Dictionary<string, string> additionalParams = new Dictionary<string, string>();
+        //    additionalParams.Add(AdRevenueScheme.COUNTRY, MaxSdk.GetSdkConfiguration().CountryCode);
+        //    additionalParams.Add(AdRevenueScheme.AD_UNIT, adInfo.AdUnitIdentifier);
+        //    additionalParams.Add(AdRevenueScheme.AD_TYPE, adInfo.AdFormat);
+        //    additionalParams.Add(AdRevenueScheme.PLACEMENT, adInfo.Placement);
+        //    var logRevenue = new AFAdRevenueData(adInfo.NetworkName, MediationNetwork.ApplovinMax, "USD", adInfo.Revenue);
+        //    AppsFlyer.logAdRevenue(logRevenue, additionalParams);
+        //}
 
         public void DebugEvent(string eventName, Dictionary<string, string> eventParameters)
         {

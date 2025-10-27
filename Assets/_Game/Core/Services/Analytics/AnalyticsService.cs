@@ -164,7 +164,7 @@ namespace _Game.Core.Services.Analytics
             TimelineState.NextAgeOpened += SetUserDataEvolution;
 
             TimelineState.OpenedUnit += OnUnitOpened;
-            _adsService.OnAdRevenueWPlacementEvent += TrackAdImpression;
+            //_adsService.OnAdRevenueWPlacementEvent += TrackAdImpression;
             _adsService.OnCountAds += SetUserDataCountAds;
             BattleStatistics.CompletedBattlesCountChanged += OnCompletedBattleChanged;
 
@@ -172,7 +172,7 @@ namespace _Game.Core.Services.Analytics
 
             _iapService.Purchased += TrackProfitIap;
             _iapService.OnEventPurchasedDTD += TrackPurchase;
-            _adsService.OnAdImpressionCustom += SendCustomAdImpression;
+            //_adsService.OnAdImpressionCustom += SendCustomAdImpression;
 
             foreach (var pack in AdsGemsPackContainer.AdsGemsPacks.Values)
             {
@@ -214,7 +214,7 @@ namespace _Game.Core.Services.Analytics
             TimelineState.NextAgeOpened -= SetUserDataEvolution;
 
             TimelineState.OpenedUnit -= OnUnitOpened;
-            _adsService.OnAdRevenueWPlacementEvent -= TrackAdImpression;
+            //_adsService.OnAdRevenueWPlacementEvent -= TrackAdImpression;
             _adsService.OnCountAds -= SetUserDataCountAds;
             BattleStatistics.CompletedBattlesCountChanged -= OnCompletedBattleChanged;
 
@@ -222,7 +222,7 @@ namespace _Game.Core.Services.Analytics
 
             _iapService.Purchased -= TrackProfitIap;
             _iapService.OnEventPurchasedDTD -= TrackPurchase;
-            _adsService.OnAdImpressionCustom -= SendCustomAdImpression;
+            //_adsService.OnAdImpressionCustom -= SendCustomAdImpression;
 
             foreach (var pack in AdsGemsPackContainer.AdsGemsPacks.Values)
             {
@@ -418,51 +418,51 @@ namespace _Game.Core.Services.Analytics
             }
         }
 
-        private void TrackAdImpression(string adUnitID, MaxSdkBase.AdInfo adInfo, Placement placementType)
-        {
-            double revenue = adInfo.Revenue;
-            string countryCode = MaxSdk.GetSdkConfiguration().CountryCode;
-            string networkName = adInfo.NetworkName;
-            string adUnitIdentifier = adUnitID;
-            string placement = placementType.ToString();
-            string networkPlacement = adInfo.NetworkPlacement;
+        //private void TrackAdImpression(string adUnitID, MaxSdkBase.AdInfo adInfo, Placement placementType)
+        //{
+        //    double revenue = adInfo.Revenue;
+        //    string countryCode = MaxSdk.GetSdkConfiguration().CountryCode;
+        //    string networkName = adInfo.NetworkName;
+        //    string adUnitIdentifier = adUnitID;
+        //    string placement = placementType.ToString();
+        //    string networkPlacement = adInfo.NetworkPlacement;
 
-            _sender.AdImpression(networkName, revenue, placement, adUnitIdentifier);
-            _logger.Log("Log Data - AdImpression placement  " + placementType.ToString());
-        }
-        private void SendCustomAdImpression(AdType adType, Placement placement, MaxSdkBase.AdInfo info, int adsCount)
-        {
-            var parameters = new DTDCustomEventParameters();
-            parameters.Add("TimelineID", (TimelineState.TimelineId + 1).ToString());
-            parameters.Add("AgeID", (TimelineState.AgeId + 1).ToString());
-            parameters.Add("BattleID", (TimelineState.MaxBattle + 1).ToString());
-            parameters.Add("Level", TimelineState.Level.ToString());
-            parameters.Add("Revenue", info.Revenue);
-            parameters.Add("Network", info.NetworkName);
-            parameters.Add("Placemment", placement.ToString());
-            //parameters.Add("adCount", adsCount.ToString());
-            //parameters.Add("type", adType.ToString());
+        //    _sender.AdImpression(networkName, revenue, placement, adUnitIdentifier);
+        //    _logger.Log("Log Data - AdImpression placement  " + placementType.ToString());
+        //}
+        //private void SendCustomAdImpression(AdType adType, Placement placement, MaxSdkBase.AdInfo info, int adsCount)
+        //{
+        //    var parameters = new DTDCustomEventParameters();
+        //    parameters.Add("TimelineID", (TimelineState.TimelineId + 1).ToString());
+        //    parameters.Add("AgeID", (TimelineState.AgeId + 1).ToString());
+        //    parameters.Add("BattleID", (TimelineState.MaxBattle + 1).ToString());
+        //    parameters.Add("Level", TimelineState.Level.ToString());
+        //    parameters.Add("Revenue", info.Revenue);
+        //    parameters.Add("Network", info.NetworkName);
+        //    parameters.Add("Placemment", placement.ToString());
+        //    //parameters.Add("adCount", adsCount.ToString());
+        //    //parameters.Add("type", adType.ToString());
 
-            if (TimelineState.TimelineId < Constants.FeatureThresholds.DUNGEONS_TIMELINE_THRESHOLD && Dungeons.Dungeons.ToList().Count == 0)
-            {
-                parameters.Add("DungeonTimeline", 0);
-                parameters.Add("DungeonLevel", 0);
-                parameters.Add("DungeonBattle", 0);
-            }
-            else
-            {
-                int levelPerStage = 10;
-                var ratsRush = Dungeons.Dungeons.ToList()[0];
-                var stage = (ratsRush.Level - 1) / levelPerStage + 1;
-                int subLevel = (ratsRush.Level - 1) % levelPerStage + 1;
+        //    if (TimelineState.TimelineId < Constants.FeatureThresholds.DUNGEONS_TIMELINE_THRESHOLD && Dungeons.Dungeons.ToList().Count == 0)
+        //    {
+        //        parameters.Add("DungeonTimeline", 0);
+        //        parameters.Add("DungeonLevel", 0);
+        //        parameters.Add("DungeonBattle", 0);
+        //    }
+        //    else
+        //    {
+        //        int levelPerStage = 10;
+        //        var ratsRush = Dungeons.Dungeons.ToList()[0];
+        //        var stage = (ratsRush.Level - 1) / levelPerStage + 1;
+        //        int subLevel = (ratsRush.Level - 1) % levelPerStage + 1;
 
-                parameters.Add("DungeonTimeline", stage);
-                parameters.Add("DungeonBattle", subLevel);
-                parameters.Add("DungeonLevel", ratsRush.Level);
-            }
+        //        parameters.Add("DungeonTimeline", stage);
+        //        parameters.Add("DungeonBattle", subLevel);
+        //        parameters.Add("DungeonLevel", ratsRush.Level);
+        //    }
 
-            _sender.CustomEvent("custom_ad_impression", parameters);
-        }
+        //    _sender.CustomEvent("custom_ad_impression", parameters);
+        //}
 
         private void TrackProfitIap(Product product)
         {

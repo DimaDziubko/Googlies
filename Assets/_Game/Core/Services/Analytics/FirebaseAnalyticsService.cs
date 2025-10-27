@@ -69,7 +69,7 @@ namespace _Game.Core.Services.Analytics
                     }
                 });
 
-                InnerInit();
+                //InnerInit();
                 SetUniqID();
 
                 _isFirebaseInitialized = true;
@@ -93,36 +93,36 @@ namespace _Game.Core.Services.Analytics
             Firebase.Messaging.FirebaseMessaging.SubscribeAsync("/topics/TestTopic");
         }
 
-        private void InnerInit() => _adsService.OnAdRevenuePaidEvent += LogAdPurchase;
+        //private void InnerInit() => _adsService.OnAdRevenuePaidEvent += LogAdPurchase;
 
-        private void LogAdPurchase(string adUnitId, MaxSdkBase.AdInfo adInfo)
-        {
-            double revenue = adInfo.Revenue;
-            if (revenue > 0)
-            {
-                string countryCode = MaxSdk.GetSdkConfiguration()
-                    .CountryCode; // "US" for the United States, etc - Note: Do not confuse this with currency code which is "USD" in most cases!
-                string
-                    networkName =
-                        adInfo.NetworkName; // Display name of the network that showed the ad (e.g. "AdColony")
-                string adUnitIdentifier = adInfo.AdUnitIdentifier; // The MAX Ad Unit ID
-                string placement = adInfo.Placement; // The placement this ad's postbacks are tied to
-                string networkPlacement =
-                    adInfo.NetworkPlacement; // The placement ID from the network that showed the ad
+        //private void LogAdPurchase(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        //{
+        //    double revenue = adInfo.Revenue;
+        //    if (revenue > 0)
+        //    {
+        //        string countryCode = MaxSdk.GetSdkConfiguration()
+        //            .CountryCode; // "US" for the United States, etc - Note: Do not confuse this with currency code which is "USD" in most cases!
+        //        string
+        //            networkName =
+        //                adInfo.NetworkName; // Display name of the network that showed the ad (e.g. "AdColony")
+        //        string adUnitIdentifier = adInfo.AdUnitIdentifier; // The MAX Ad Unit ID
+        //        string placement = adInfo.Placement; // The placement this ad's postbacks are tied to
+        //        string networkPlacement =
+        //            adInfo.NetworkPlacement; // The placement ID from the network that showed the ad
 
-                var impressionParameters = new[]
-                {
-                    new Firebase.Analytics.Parameter("ad_platform", "AppLovin"),
-                    new Firebase.Analytics.Parameter("ad_source", adInfo.NetworkName),
-                    new Firebase.Analytics.Parameter("ad_unit_name", adInfo.AdUnitIdentifier),
-                    new Firebase.Analytics.Parameter("ad_format", adInfo.AdFormat),
-                    new Firebase.Analytics.Parameter("value", revenue),
-                    new Firebase.Analytics.Parameter("currency", "USD"), // All AppLovin revenue is sent in USD
-                };
+        //        var impressionParameters = new[]
+        //        {
+        //            new Firebase.Analytics.Parameter("ad_platform", "AppLovin"),
+        //            new Firebase.Analytics.Parameter("ad_source", adInfo.NetworkName),
+        //            new Firebase.Analytics.Parameter("ad_unit_name", adInfo.AdUnitIdentifier),
+        //            new Firebase.Analytics.Parameter("ad_format", adInfo.AdFormat),
+        //            new Firebase.Analytics.Parameter("value", revenue),
+        //            new Firebase.Analytics.Parameter("currency", "USD"), // All AppLovin revenue is sent in USD
+        //        };
 
-                Firebase.Analytics.FirebaseAnalytics.LogEvent("ad_impression", impressionParameters);
-            }
-        }
+        //        Firebase.Analytics.FirebaseAnalytics.LogEvent("ad_impression", impressionParameters);
+        //    }
+        //}
 
         private async void SetUniqID()
         {
@@ -146,7 +146,7 @@ namespace _Game.Core.Services.Analytics
         private void Unsubscribe()
         {
             BattleStatistics.CompletedBattlesCountChanged -= OnCompletedBattleChanged;
-            _adsService.OnAdRevenuePaidEvent -= LogAdPurchase;
+            //_adsService.OnAdRevenuePaidEvent -= LogAdPurchase;
             FirebaseMessaging.TokenReceived -= OnTokenReceived;
             FirebaseMessaging.MessageReceived -= OnMessageReceived;
         }
