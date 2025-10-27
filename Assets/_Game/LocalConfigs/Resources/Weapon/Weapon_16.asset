@@ -29,7 +29,7 @@ MonoBehaviour:
   ProjectileImpactType: 0
   AttackSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
-    Clip: {fileID: 8300000, guid: 79c12b71865151b4bb1fa99538149437, type: 3}
+    Clip: {fileID: 8300000, guid: f272c51109e9c0741a636d12b8f8159c, type: 3}
     Loop: 0
     PlayOnAwake: 0
     FrequentSound: 1
@@ -76,13 +76,13 @@ MonoBehaviour:
   PlayerDamageMultiplier: 1
   EnemyDamageMultiplier: 1
   FBConfigId: '-'
-  IsWeaponEnableSfx: 0
+  IsWeaponEnableSfx: 1
   WeaponEnableSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
-    Clip: {fileID: 0}
+    Clip: {fileID: 8300000, guid: 79c12b71865151b4bb1fa99538149437, type: 3}
     Loop: 0
     PlayOnAwake: 0
-    FrequentSound: 0
+    FrequentSound: 1
     Mute: 0
     BypassEffects: 0
     BypassListenerEffects: 0
@@ -134,5 +134,10 @@ MonoBehaviour:
   ImpulseStrength: 0
   AllyLaserColors:
   - {r: 0.36602938, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.9568628, b: 1, a: 1}
+  - {r: 0.94117653, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.98823535, a: 1}
   HostileLaserColors:
   - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.8941177, a: 1}
+  - {r: 1, g: 0.3019608, b: 0, a: 1}
