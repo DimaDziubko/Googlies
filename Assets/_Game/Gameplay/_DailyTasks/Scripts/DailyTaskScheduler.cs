@@ -58,6 +58,8 @@ namespace _Game.Gameplay._DailyTasks.Scripts
 
             TryToStartNewDailyTask();
             SchedulePushNotification();
+
+            _notificationService.SendTestNotification(100); // Пуш через 10 секунд
         }
 
         private void SchedulePushNotification()

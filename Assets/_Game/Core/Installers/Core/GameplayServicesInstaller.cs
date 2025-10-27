@@ -303,9 +303,9 @@ namespace _Game.Core.Installers.Core
         }
         
         private void BindNotificationService() =>
-            Container.Bind<NotificationService>()
-                .AsSingle();
-        
+            Container.BindInterfacesAndSelfTo<NotificationService>().AsSingle().NonLazy();
+
+
         private void BindSpeedBoostService() =>
             Container
                 .BindInterfacesAndSelfTo<SpeedBoostService>()

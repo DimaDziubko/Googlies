@@ -1,139 +1,162 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-#if UNITY_ANDROID
-//using Unity.Notifications.Android;
-#elif UNITY_IOS
-// using Unity.Notifications.iOS;
+#if UNITY_ANDROID && !UNITY_EDITOR
+using Unity.Notifications.Android;
+#elif UNITY_IOS && !UNITY_EDITOR
+using Unity.Notifications.iOS;
 #endif
 using UnityEngine;
+using Zenject;
 
 namespace _Game.Core.Notifications
 {
-    public class NotificationService : IDisposable //TODO
+    [UnityEngine.Scripting.Preserve]
+    public class NotificationService : IInitializable, IDisposable
     {
-        private const string ID_DAILYTASK = "daily_task";
-        private const int ID = 123;
+        private const string CHANNEL_ID_DAILY_TASK = "daily_task_channel";
+        private const string CHANNEL_NAME = "Daily Tasks";
+        private const int NOTIFICATION_ID_DAILY = 123;
+        private const int NOTIFICATION_ID_TEST = 999;
 
         public NotificationService()
         {
+            Debug.Log("[NotificationService] Constructor called.");
             CreateChannelDailyTask();
+        }
+
+        public void Initialize()
+        {
+            Debug.Log("[NotificationService] Initializing...");
+            //CreateChannelDailyTask();
+        }
+
+        private void CreateChannelDailyTask()
+        {
+#if UNITY_ANDROID && !UNITY_EDITOR
+            try
+            {
+                AndroidNotificationCenter.Initialize();
+
+                var channel = new AndroidNotificationChannel()
+                {
+                    Id = CHANNEL_ID_DAILY_TASK,
+                    Name = CHANNEL_NAME,
+                    Importance = Importance.High,
+                    Description = "Notifications for daily tasks",
+                };
+                AndroidNotificationCenter.RegisterNotificationChannel(channel);
+                Debug.Log($"[NotificationService] ✅ Android channel '{CHANNEL_NAME}' created successfully.");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[NotificationService] ❌ Failed to create Android channel: {e.Message}");
+            }
+#elif UNITY_IOS && !UNITY_EDITOR
+            Debug.Log("[NotificationService] iOS doesn't require channels.");
+#else
+            Debug.Log("[NotificationService] Running in Editor - notifications disabled.");
+#endif
         }
 
         private void CancelDailyNotification()
         {
-#if UNITY_ANDROID
-            //if (AndroidNotificationCenter.CheckScheduledNotificationStatus(ID) == NotificationStatus.Scheduled)
-            //{
-            //    AndroidNotificationCenter.CancelScheduledNotification(ID);
-            //}
-#elif UNITY_IOS
-            // iOSNotificationCenter.RemoveScheduledNotification(ID_DAILYTASK);
+#if UNITY_ANDROID && !UNITY_EDITOR
+            AndroidNotificationCenter.CancelScheduledNotification(NOTIFICATION_ID_DAILY);
+#elif UNITY_IOS && !UNITY_EDITOR
+            iOSNotificationCenter.RemoveScheduledNotification("daily_task_notification");
 #endif
         }
 
         public void SendDailyTaskAvailableNotification(DateTime fireTime)
         {
-#if UNITY_ANDROID
-            CancelDailyNotification();
-            //AndroidNotificationCenter.CancelAllNotifications();
-            //var notification = new AndroidNotification()
-            //{
-            //    Title = "Don’t miss out!",
-            //    Text = "You have new daily tasks available!",
-            //    FireTime = fireTime,
-            //    SmallIcon = "icon_small",
-            //    LargeIcon = "icon_big",
-            //};
-            //AndroidNotificationCenter.SendNotificationWithExplicitID(notification, ID_DAILYTASK, ID);
+#if UNITY_ANDROID && !UNITY_EDITOR
+            try
+            {
+                CancelDailyNotification();
+                var notification = new AndroidNotification()
+                {
+                    Title = "Don't miss out!",
+                    Text = "You have new daily tasks available!",
+                    FireTime = fireTime,
+                    SmallIcon = "icon_small",
+                    LargeIcon = "icon_big",
+                };
 
-#elif UNITY_IOS
-            CancelDailyNotification();
-            TimeSpan timeSpan = fireTime - DateTime.UtcNow;
-            if (timeSpan.TotalSeconds < 1) return;
-            // var notification = new iOSNotification()
-            // {
-            //     Identifier = "daily_task_notification",
-            //     Title = "Don`t miss out!",
-            //     Body = "You have new daily tasks available!",
-            //     ShowInForeground = true,
-            //     ForegroundPresentationOption = (PresentationOption.Alert | PresentationOption.Sound),
-            //     CategoryIdentifier = "daily_task_category",
-            //     ThreadIdentifier = "game_notifications",
-            //     Trigger = new iOSNotificationTimeIntervalTrigger()
-            //     {
-            //         TimeInterval = timeSpan,
-            //         Repeats = false
-            //     }
-            // };
-            // iOSNotificationCenter.ScheduleNotification(notification);
-            Debug.Log($"[iOS Notification] Scheduling notification with TimeInterval: {timeSpan}.");
+                AndroidNotificationCenter.SendNotificationWithExplicitID(
+                    notification,
+                    CHANNEL_ID_DAILY_TASK,
+                    NOTIFICATION_ID_DAILY
+                );
+
+                Debug.Log($"[NotificationService] 📅 Daily notification scheduled for {fireTime}.");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[NotificationService] ❌ Failed to send daily notification: {e.Message}");
+            }
 #endif
         }
 
-        private void CreateChannelDailyTask()
+        public void SendTestNotification(int delaySeconds = 10)
         {
-#if UNITY_ANDROID
-            //var channel = new AndroidNotificationChannel()
-            //{
-            //    Id = ID_DAILYTASK,
-            //    Name = "Daily Task",
-            //    Importance = Importance.Default,
-            //    Description = "Generic notifications",
-            //};
-            //AndroidNotificationCenter.RegisterNotificationChannel(channel);
-#elif UNITY_IOS
-            // For iOS, Channels are not required, but we need to handle permissions
+#if UNITY_ANDROID && !UNITY_EDITOR
+            try
+            {
+                AndroidNotificationCenter.Initialize();
+                AndroidNotificationCenter.CancelScheduledNotification(NOTIFICATION_ID_TEST);
+
+                var notification = new AndroidNotification()
+                {
+                    Title = "🔥 Test Notification",
+                    Text = $"Yo! This is a test push sent {delaySeconds} seconds ago! Mur mur 😺",
+                    FireTime = DateTime.Now.AddSeconds(delaySeconds),
+                    SmallIcon = "icon_small",
+                    LargeIcon = "icon_big",
+                };
+
+                AndroidNotificationCenter.SendNotificationWithExplicitID(
+                    notification,
+                    CHANNEL_ID_DAILY_TASK,
+                    NOTIFICATION_ID_TEST
+                );
+
+                Debug.Log($"[NotificationService] ✅ Test notification scheduled for {delaySeconds}s!");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[NotificationService] ❌ Failed to send test notification: {e.Message}");
+            }
 #endif
         }
 
         public async UniTask RequestIOSNotificationPermissions()
         {
-#if UNITY_IOS
+#if UNITY_IOS && !UNITY_EDITOR
             await RequestAuthorization();
+#else
+            await UniTask.CompletedTask;
 #endif
         }
 
-#if UNITY_IOS
+#if UNITY_IOS && !UNITY_EDITOR
         private async UniTask RequestAuthorization()
         {
-            // var authorizationOption = AuthorizationOption.Alert | AuthorizationOption.Badge;
-
-            // using (var req = new AuthorizationRequest(authorizationOption, true))
-            // {
-            //     try
-            //     {
-            //         // Asynchronously wait until the request is finished
-            //         await UniTask.WaitUntil(() => req.IsFinished);
-
-            //         // Build the result string
-            //         string res = "\n RequestAuthorization:";
-            //         res += "\n finished: " + req.IsFinished;
-            //         res += "\n granted :  " + req.Granted;
-            //         res += "\n error:  " + req.Error;
-            //         res += "\n deviceToken:  " + req.DeviceToken;
-            //         Debug.Log(res);
-
-            //         // You can handle the result here
-            //         if (req.Granted)
-            //         {
-            //             // Permission granted
-            //             // Schedule notifications or proceed accordingly
-            //         }
-            //         else
-            //         {
-            //             // Permission denied
-            //             // Handle the denial
-            //         }
-            //     }
-            //     catch (Exception ex)
-            //     {
-            //         Debug.LogError($"Error during authorization request: {ex.Message}");
-            //     }
-            // }
+            try
+            {
+                var authorizationOption = AuthorizationOption.Alert | AuthorizationOption.Badge | AuthorizationOption.Sound;
+                using (var req = new AuthorizationRequest(authorizationOption, true))
+                {
+                    await UniTask.WaitUntil(() => req.IsCompleted);
+                    Debug.Log($"[NotificationService] iOS Authorization Granted: {req.Granted}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[NotificationService] iOS Auth error: {ex.Message}");
+            }
         }
 #endif
-        public void Dispose()
-        {
-        }
+
+        public void Dispose() => Debug.Log("[NotificationService] Disposed.");
     }
 }
