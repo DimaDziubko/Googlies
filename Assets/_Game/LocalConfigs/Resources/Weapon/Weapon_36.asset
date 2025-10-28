@@ -29,7 +29,7 @@ MonoBehaviour:
   ProjectileImpactType: 0
   AttackSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
-    Clip: {fileID: 8300000, guid: 6e0bcc7317fe10f4daed341df1a6030c, type: 3}
+    Clip: {fileID: 8300000, guid: b770548cc4de35944a1131f5d6dbc550, type: 3}
     Loop: 0
     PlayOnAwake: 0
     FrequentSound: 1
@@ -52,7 +52,7 @@ MonoBehaviour:
     RolloffMode: 0
   ProjectileSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
-    Clip: {fileID: 0}
+    Clip: {fileID: 8300000, guid: aa66f043685a31e4bb90d0b6128bc3e1, type: 3}
     Loop: 0
     PlayOnAwake: 0
     FrequentSound: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   PlayerDamageMultiplier: 1
   EnemyDamageMultiplier: 1
   FBConfigId: '-'
-  IsWeaponEnableSfx: 1
+  IsWeaponEnableSfx: 0
   WeaponEnableSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
     Clip: {fileID: 8300000, guid: 79c12b71865151b4bb1fa99538149437, type: 3}

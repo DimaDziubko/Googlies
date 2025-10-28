@@ -991,7 +991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RenderShadows: 0
-  m_RequiresDepthTextureOption: 2
+  m_RequiresDepthTextureOption: 0
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 1
   m_Cameras: []
@@ -1001,7 +1001,7 @@ MonoBehaviour:
     m_Bits: 32
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -2000,14 +2000,30 @@ PrefabInstance:
       propertyPath: far clip plane
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1288956683769495856, guid: c7db65b4661a66e4f8e6db3f504f7c84, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4194071
+      objectReference: {fileID: 0}
     - target: {fileID: 1288956683769495858, guid: c7db65b4661a66e4f8e6db3f504f7c84, type: 3}
       propertyPath: m_Cameras.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1288956683769495858, guid: c7db65b4661a66e4f8e6db3f504f7c84, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288956683769495858, guid: c7db65b4661a66e4f8e6db3f504f7c84, type: 3}
       propertyPath: 'm_Cameras.Array.data[0]'
       value: 
       objectReference: {fileID: 8916525346690072693}
+    - target: {fileID: 1288956683769495858, guid: c7db65b4661a66e4f8e6db3f504f7c84, type: 3}
+      propertyPath: m_RequiresDepthTextureOption
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288956683769495858, guid: c7db65b4661a66e4f8e6db3f504f7c84, type: 3}
+      propertyPath: m_RequiresOpaqueTextureOption
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1288956683769495859, guid: c7db65b4661a66e4f8e6db3f504f7c84, type: 3}
       propertyPath: m_RootOrder
       value: 0

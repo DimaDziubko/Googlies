@@ -20,13 +20,13 @@ namespace _Game.UI.Common.Scripts
         [SerializeField, Required] private Button _button;
         [SerializeField, Required] private PinView _pinView;
         [SerializeField, Required] private Image _changableImage;
-        [SerializeField, Required] private ImageColorBinder _imageColorBinder;
+        //[SerializeField, Required] private ImageColorBinder _imageColorBinder;
         [SerializeField, Required] private Sprite _inactiveSprite;
         [SerializeField, Required] private Sprite _activeSprite;
 
-        [Title("First - Highlited/ Second - UNHighlighted")]
-        [SerializeField] private ColorBinderData _highlightedColorBinder;
-        [SerializeField] private ColorBinderData _unHighlightedColorBinder;
+        //[Title("First - Highlited/ Second - UNHighlighted")]
+        //[SerializeField] private ColorBinderData _highlightedColorBinder;
+        //[SerializeField] private ColorBinderData _unHighlightedColorBinder;
 
         public PinView Pin => _pinView;
 
@@ -40,10 +40,10 @@ namespace _Game.UI.Common.Scripts
         {
             _changableImage.sprite = _activeSprite;
 
-            if (_highlightedColorBinder != null)
-            {
-                _imageColorBinder.SetColorByName(_highlightedColorBinder.ColorName);
-            }
+            //if (_highlightedColorBinder != null)
+            //{
+            //    _imageColorBinder.SetColorByName(_highlightedColorBinder.ColorName);
+            //}
 
             SetInteractable(false);
         }
@@ -52,10 +52,10 @@ namespace _Game.UI.Common.Scripts
         {
             _changableImage.sprite = _inactiveSprite;
 
-            if (_unHighlightedColorBinder != null)
-            {
-                _imageColorBinder.SetColorByName(_unHighlightedColorBinder.ColorName);
-            }
+            //if (_unHighlightedColorBinder != null)
+            //{
+            //    _imageColorBinder.SetColorByName(_unHighlightedColorBinder.ColorName);
+            //}
 
             SetInteractable(true);
         }

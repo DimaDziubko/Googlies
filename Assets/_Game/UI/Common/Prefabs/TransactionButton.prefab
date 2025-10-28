@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 8786151788669996346}
   - component: {fileID: 769899933031127515}
   - component: {fileID: 6039683021644994378}
-  - component: {fileID: 9136890184315329649}
+  - component: {fileID: 7254579144906630337}
   m_Layer: 5
   m_Name: TransactionButton
   m_TagString: Untagged
@@ -416,7 +416,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: -437274292, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 1055348953, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
+    m_DisabledSprite: {fileID: -1648304081, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -445,7 +445,7 @@ MonoBehaviour:
   _button: {fileID: 769899933031127515}
   _moneyPanel: {fileID: 5421473843308809956}
   _isHoldable: 0
---- !u!114 &9136890184315329649
+--- !u!114 &7254579144906630337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -454,7 +454,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9057834989758634897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7aa1063a98a68468159743ad49eb99, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e105f574280494cab5bcee3843a4f0c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  _pressWarp: 0.9
+  m_EditorClassIdentifier: Assembly-CSharp::_Game.UI.Common.Scripts.NewButtonPressAnimation
+  _contentTransform: {fileID: 4256352704178367350}
+  _pressOffset: 10
+  _animationDuration: 0.1

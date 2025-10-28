@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5040110084332943448}
   - component: {fileID: 4667291619957827847}
   - component: {fileID: 635967987250191447}
-  - component: {fileID: 6593253291694072001}
   - component: {fileID: 4190568173898985566}
   m_Layer: 5
   m_Name: TodoButton
@@ -65,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38431373, g: 0.42352942, b: 0.6392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -154,34 +153,8 @@ MonoBehaviour:
   _button: {fileID: 5040110084332943448}
   _pinView: {fileID: 5535187563816985616}
   _changableImage: {fileID: 4108545767573043159}
-  _imageColorBinder: {fileID: 6593253291694072001}
   _inactiveSprite: {fileID: -330291397, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   _activeSprite: {fileID: -2104683419, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
-  _highlightedColorBinder:
-    colorGuid: 85073cef-fc8f-4f71-a626-a1f006c926f6
-    overrideAlpha: 0
-    alpha: 1
-  _unHighlightedColorBinder:
-    colorGuid: 85073cef-fc8f-4f71-a626-a1f006c926f6
-    overrideAlpha: 0
-    alpha: 1
---- !u!114 &6593253291694072001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462620253724822160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44e5162ee87061045ba821e0dfb969d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    colorGuid: 795f4ccb-76aa-45f4-8cd4-61f2ffd79155
-    overrideAlpha: 0
-    alpha: 1
-  image: {fileID: 4108545767573043159}
 --- !u!114 &4190568173898985566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +189,6 @@ GameObject:
   - component: {fileID: 2449227670527370190}
   - component: {fileID: 4956516268246091533}
   - component: {fileID: 5875310954958524508}
-  - component: {fileID: 4697003826157980570}
   - component: {fileID: 1979827543535567860}
   m_Layer: 5
   m_Name: SkillsButton
@@ -268,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38431373, g: 0.42352942, b: 0.6392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -357,34 +329,8 @@ MonoBehaviour:
   _button: {fileID: 2449227670527370190}
   _pinView: {fileID: 7991288846983193139}
   _changableImage: {fileID: 1428446738493965588}
-  _imageColorBinder: {fileID: 4697003826157980570}
   _inactiveSprite: {fileID: -330291397, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   _activeSprite: {fileID: -2104683419, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
-  _highlightedColorBinder:
-    colorGuid: 8727c1e6-63c3-4d39-9cd9-a9a8bfa49747
-    overrideAlpha: 0
-    alpha: 1
-  _unHighlightedColorBinder:
-    colorGuid: 795f4ccb-76aa-45f4-8cd4-61f2ffd79155
-    overrideAlpha: 0
-    alpha: 1
---- !u!114 &4697003826157980570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2109657244226423317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44e5162ee87061045ba821e0dfb969d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    colorGuid: 795f4ccb-76aa-45f4-8cd4-61f2ffd79155
-    overrideAlpha: 0
-    alpha: 1
-  image: {fileID: 1428446738493965588}
 --- !u!114 &1979827543535567860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -885,7 +831,6 @@ GameObject:
   - component: {fileID: 2943066313852074862}
   - component: {fileID: 1453238211154168086}
   - component: {fileID: 8695065704764236082}
-  - component: {fileID: 4085709982193064440}
   - component: {fileID: 8685424380294950114}
   m_Layer: 5
   m_Name: CardsButton
@@ -936,7 +881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38431373, g: 0.42352942, b: 0.6392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -1025,34 +970,8 @@ MonoBehaviour:
   _button: {fileID: 2943066313852074862}
   _pinView: {fileID: 8302198872497399715}
   _changableImage: {fileID: 5750356547682372851}
-  _imageColorBinder: {fileID: 4085709982193064440}
   _inactiveSprite: {fileID: -330291397, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   _activeSprite: {fileID: -2104683419, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
-  _highlightedColorBinder:
-    colorGuid: 8727c1e6-63c3-4d39-9cd9-a9a8bfa49747
-    overrideAlpha: 0
-    alpha: 1
-  _unHighlightedColorBinder:
-    colorGuid: 795f4ccb-76aa-45f4-8cd4-61f2ffd79155
-    overrideAlpha: 0
-    alpha: 1
---- !u!114 &4085709982193064440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6503911436817643249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44e5162ee87061045ba821e0dfb969d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    colorGuid: 795f4ccb-76aa-45f4-8cd4-61f2ffd79155
-    overrideAlpha: 0
-    alpha: 1
-  image: {fileID: 5750356547682372851}
 --- !u!114 &8685424380294950114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1087,7 +1006,6 @@ GameObject:
   - component: {fileID: 8438226899466220172}
   - component: {fileID: 1535398766115390781}
   - component: {fileID: 3290368675697956895}
-  - component: {fileID: 5970702808138776442}
   - component: {fileID: 5691329432151529549}
   m_Layer: 5
   m_Name: TodoButton
@@ -1138,7 +1056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38431373, g: 0.42352942, b: 0.6392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -1227,34 +1145,8 @@ MonoBehaviour:
   _button: {fileID: 8438226899466220172}
   _pinView: {fileID: 652913523971523929}
   _changableImage: {fileID: 8453037314338839023}
-  _imageColorBinder: {fileID: 5970702808138776442}
   _inactiveSprite: {fileID: -330291397, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
   _activeSprite: {fileID: -2104683419, guid: fd622819c05dbbe42883f3a9124accae, type: 3}
-  _highlightedColorBinder:
-    colorGuid: 8727c1e6-63c3-4d39-9cd9-a9a8bfa49747
-    overrideAlpha: 0
-    alpha: 1
-  _unHighlightedColorBinder:
-    colorGuid: 85073cef-fc8f-4f71-a626-a1f006c926f6
-    overrideAlpha: 0
-    alpha: 1
---- !u!114 &5970702808138776442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6619739625305401308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44e5162ee87061045ba821e0dfb969d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    colorGuid: 795f4ccb-76aa-45f4-8cd4-61f2ffd79155
-    overrideAlpha: 0
-    alpha: 1
-  image: {fileID: 8453037314338839023}
 --- !u!114 &5691329432151529549
 MonoBehaviour:
   m_ObjectHideFlags: 0
