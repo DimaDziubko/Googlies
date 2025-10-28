@@ -10,7 +10,6 @@ using _Game.Core.Services.Audio;
 using _Game.Core.Services.UserContainer;
 using _Game.Core.UserState._State;
 using _Game.UI._Shop._MiniShop.Scripts;
-using _Game.UI._TimelineInfoScreen.Scripts;
 using _Game.UI._UpgradesScreen.Scripts;
 using _Game.UI.Common.Scripts;
 using _Game.UI.Global;
@@ -21,25 +20,21 @@ using UnityEngine;
 namespace _Game.UI._EvolveScreen.Scripts
 {
     public class EvolveScreenPresenter :
+        IEvolveScreen,
+        IGameScreenEvents<IEvolveScreen>,
         IEvolveScreenPresenter,
+        IGameScreenListener<ITravelScreen>,
         IDisposable
     {
-        private bool _isReviewed;
-
-        [ShowInInspector, ReadOnly]
-        public bool IsReviewed
-        {
-            get => _isReviewed && _screenStateAggregator.IsReviewed;
-            private set => _isReviewed = value;
-        }
-
-        [ShowInInspector, ReadOnly]
-        public bool NeedAttention => IsNextAgeAffordable() || _screenStateAggregator.NeedAttention;
-
-        public string Info => "Evolution";
-
         public event Action StateChanged;
         public event Action ButtonStateChanged;
+
+        public event Action<IEvolveScreen> ScreenOpened;
+        public event Action<IEvolveScreen> InfoChanged;
+        public event Action<IEvolveScreen> RequiresAttention;
+        public event Action<IEvolveScreen> ScreenClosed;
+        public event Action<IEvolveScreen, bool> ActiveChanged;
+        public event Action<IEvolveScreen> ScreenDisposed;
 
         private readonly IGameInitializer _gameInitializer;
         private readonly IUserContainer _userContainer;
@@ -65,6 +60,21 @@ namespace _Game.UI._EvolveScreen.Scripts
         private readonly CurrencyBank _bank;
 
 
+        private bool _isReviewed;
+
+        [ShowInInspector, ReadOnly]
+        public bool IsReviewed
+        {
+            get => _isReviewed && _screenStateAggregator.IsReviewed;
+            private set => _isReviewed = value;
+        }
+
+        [ShowInInspector, ReadOnly]
+        public bool NeedAttention => IsNextAgeAffordable() || _screenStateAggregator.NeedAttention;
+
+        public string Info => "Evolution";
+
+
         public EvolveScreenPresenter(
             IUserContainer userContainer,
             IConfigRepository configRepository,
@@ -74,7 +84,8 @@ namespace _Game.UI._EvolveScreen.Scripts
             IMiniShopProvider miniShopProvider,
             IAudioService audioService,
             AgeIconContainer ageIconContainer,
-            CurrencyBank bank
+            CurrencyBank bank,
+            IUINotifier uINotifier
             )
         {
             _bank = bank;
@@ -86,9 +97,12 @@ namespace _Game.UI._EvolveScreen.Scripts
             _miniShopProvider = miniShopProvider;
             _audioService = audioService;
             _ageIconContainer = ageIconContainer;
+            _uiNotifier = uINotifier;
             gameInitializer.OnPostInitialization += Init;
 
             _screenStateAggregator = new ScreenStateAggregator();
+
+            _uiNotifier.RegisterScreen(this, this);
         }
 
         private async void Init()
@@ -106,6 +120,7 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         void IDisposable.Dispose()
         {
+            _uiNotifier.UnregisterScreen(this);
             TimelineState.NextAgeOpened -= OnAgeChanged;
             _gameInitializer.OnPostInitialization -= Init;
             Cell.OnStateChanged -= OnCurrenciesStateChanged;
@@ -115,19 +130,23 @@ namespace _Game.UI._EvolveScreen.Scripts
         void IEvolveScreenPresenter.OnScreenOpen()
         {
             IsReviewed = true;
+            ScreenOpened?.Invoke(this);
         }
 
         void IEvolveScreenPresenter.OnScreenClosed()
         {
+            ScreenClosed?.Invoke(this);
         }
 
         void IEvolveScreenPresenter.OnScreenDisposed()
         {
             _logger.Log("EVOLVE SCREEN DISPOSED", DebugStatus.Info);
+            ScreenDisposed?.Invoke(this);
         }
 
         void IEvolveScreenPresenter.OnScreenActiveChanged(bool isActive)
         {
+            ActiveChanged?.Invoke(this, isActive);
         }
 
         public Sprite GetCurrencyIcon() =>
@@ -137,7 +156,7 @@ namespace _Game.UI._EvolveScreen.Scripts
         {
             if (NeedAttention)
             {
-                //RequiresAttention?.Invoke(this);
+                RequiresAttention?.Invoke(this);
             }
             _logger.Log("EVOLVE SCREEN NEED ATTENTION", DebugStatus.Warning);
         }
@@ -230,14 +249,33 @@ namespace _Game.UI._EvolveScreen.Scripts
             OnCurrenciesAdded(0);
         }
 
+        void IGameScreenListener<ITravelScreen>.OnScreenOpened(ITravelScreen screen) => UpdateState(screen);
+        void IGameScreenListener<ITravelScreen>.OnInfoChanged(ITravelScreen screen) { }
+        void IGameScreenListener<ITravelScreen>.OnRequiresAttention(ITravelScreen screen) => UpdateState(screen);
+        void IGameScreenListener<ITravelScreen>.OnScreenClosed(ITravelScreen screen) { }
+        void IGameScreenListener<ITravelScreen>.OnScreenActiveChanged(ITravelScreen screen, bool isActive) { }
+        void IGameScreenListener<ITravelScreen>.OnScreenDisposed(ITravelScreen screen) { }
 
         private void UpdateState(IGameScreen screen)
         {
             if (_screenStateAggregator.UpdateState(screen))
             {
-                //RequiresAttention?.Invoke(this);
+                RequiresAttention?.Invoke(this);
             }
         }
+        //void IGameScreenListener<IMenuScreen>.OnScreenOpened(IMenuScreen screen)
+        //{
+        //    if (NeedAttention)
+        //    {
+        //        IsReviewed = false;
+        //        RequiresAttention?.Invoke(this);
+        //    }
+        //}
 
+        //void IGameScreenListener<IMenuScreen>.OnInfoChanged(IMenuScreen screen) { }
+        //void IGameScreenListener<IMenuScreen>.OnRequiresAttention(IMenuScreen screen) { }
+        //void IGameScreenListener<IMenuScreen>.OnScreenClosed(IMenuScreen screen) { }
+        //void IGameScreenListener<IMenuScreen>.OnScreenActiveChanged(IMenuScreen screen, bool isActive) { }
+        //void IGameScreenListener<IMenuScreen>.OnScreenDisposed(IMenuScreen screen) { }
     }
 }

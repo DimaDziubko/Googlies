@@ -6,19 +6,25 @@ using _Game.Core.Navigation.Timeline;
 using _Game.Core.Services._Camera;
 using _Game.Core.Services.Audio;
 using _Game.UI._EvolveScreen.Scripts;
-using _Game.UI._TimelineInfoScreen.Scripts;
+using _Game.UI.Common.Scripts;
 using _Game.UI.Global;
 using _Game.Utils.Disposable;
-using Cysharp.Threading.Tasks;
 using System;
-using UnityEngine;
 
 namespace _Game.UI._TravelScreen.Scripts
 {
     public class TravelScreenPresenter :
         ITravelScreenPresenter,
+        ITravelScreen,
+        IGameScreenEvents<ITravelScreen>,
         IDisposable
     {
+        public event Action<ITravelScreen> ScreenOpened;
+        public event Action<ITravelScreen> InfoChanged;
+        public event Action<ITravelScreen> RequiresAttention;
+        public event Action<ITravelScreen> ScreenClosed;
+        public event Action<ITravelScreen, bool> ActiveChanged;
+        public event Action<ITravelScreen> ScreenDisposed;
 
         public event Action StateChanged;
         public bool IsReviewed { get; private set; }
@@ -123,6 +129,26 @@ namespace _Game.UI._TravelScreen.Scripts
                 : "<color=red>Travel</color>";
             return text;
         }
+
+        void ITravelScreenPresenter.OnScreenOpen()
+        {
+            IsReviewed = true;
+            ScreenOpened?.Invoke(this);
+        }
+
+        void ITravelScreenPresenter.OnScreenClosed()
+        {
+            ScreenClosed?.Invoke(this);
+        }
+
+        void ITravelScreenPresenter.OnScreenDisposed()
+        {
+            _logger.Log("TRAVEL SCREEN DISPOSED", DebugStatus.Info);
+            ScreenDisposed?.Invoke(this);
+        }
+
+        void ITravelScreenPresenter.OnScreenActiveChanged(bool isActive) =>
+            ActiveChanged?.Invoke(this, isActive);
     }
 
 }

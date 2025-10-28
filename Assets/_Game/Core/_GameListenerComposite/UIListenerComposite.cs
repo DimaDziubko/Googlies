@@ -16,11 +16,11 @@ namespace _Game.Core._GameListenerComposite
         IGameScreenListener<IUpgradesScreen>,
         IGameScreenListener<ICardsScreen>,
         IGameScreenListener<ISkillsScreen>,
-        IGameScreenListener<IUpgradeUnitsScreen>,
         IGameScreenListener<IGeneralCardsScreen>,
         IGameScreenListener<ITravelScreen>,
         IGameScreenListener<IMenuScreen>,
-        IGameScreenListener<IDungeonScreen>
+        IGameScreenListener<IDungeonScreen>,
+        IGameScreenListener<IEvolveScreen>
     {
         [ShowInInspector] [Inject] private IUINotifier _uiNotifier;
 
@@ -119,15 +119,7 @@ namespace _Game.Core._GameListenerComposite
         void IGameScreenListener<ICardsScreen>.OnScreenClosed(ICardsScreen screen) => NotifyListeners(screen, false);
         void IGameScreenListener<ICardsScreen>.OnScreenActiveChanged(ICardsScreen screen, bool isActive) => NotifyActiveChanged(screen, isActive);
         void IGameScreenListener<ICardsScreen>.OnScreenDisposed(ICardsScreen screen) => NotifyDisposed(screen);
- 
-
-        void IGameScreenListener<IUpgradeUnitsScreen>.OnScreenOpened(IUpgradeUnitsScreen screen) => NotifyListeners(screen, true);
-        void IGameScreenListener<IUpgradeUnitsScreen>.OnInfoChanged(IUpgradeUnitsScreen screen) => NotifyInfoChanged(screen);
-        void IGameScreenListener<IUpgradeUnitsScreen>.OnRequiresAttention(IUpgradeUnitsScreen screen) => NotifyRequiresAttention(screen);
-        void IGameScreenListener<IUpgradeUnitsScreen>.OnScreenClosed(IUpgradeUnitsScreen screen) => NotifyListeners(screen, false);
-        void IGameScreenListener<IUpgradeUnitsScreen>.OnScreenActiveChanged(IUpgradeUnitsScreen screen, bool isActive) => NotifyActiveChanged(screen, isActive);
-        void IGameScreenListener<IUpgradeUnitsScreen>.OnScreenDisposed(IUpgradeUnitsScreen screen) => NotifyDisposed(screen);
-    
+   
 
         void IGameScreenListener<IGeneralCardsScreen>.OnScreenOpened(IGeneralCardsScreen screen) => NotifyListeners(screen, true);
         void IGameScreenListener<IGeneralCardsScreen>.OnInfoChanged(IGeneralCardsScreen screen) => NotifyInfoChanged(screen);
@@ -166,5 +158,14 @@ namespace _Game.Core._GameListenerComposite
         void IGameScreenListener<IDungeonScreen>.OnScreenClosed(IDungeonScreen screen) => NotifyListeners(screen, false);
         void IGameScreenListener<IDungeonScreen>.OnScreenActiveChanged(IDungeonScreen screen, bool isActive) => NotifyActiveChanged(screen, isActive);
         void IGameScreenListener<IDungeonScreen>.OnScreenDisposed(IDungeonScreen screen) => NotifyDisposed(screen);
+
+
+        void IGameScreenListener<IEvolveScreen>.OnScreenOpened(IEvolveScreen screen) => NotifyListeners(screen, true);
+        void IGameScreenListener<IEvolveScreen>.OnInfoChanged(IEvolveScreen screen) => NotifyInfoChanged(screen);
+        void IGameScreenListener<IEvolveScreen>.OnRequiresAttention(IEvolveScreen screen) => NotifyRequiresAttention(screen);
+        void IGameScreenListener<IEvolveScreen>.OnScreenClosed(IEvolveScreen screen) => NotifyListeners(screen, false);
+        void IGameScreenListener<IEvolveScreen>.OnScreenActiveChanged(IEvolveScreen screen, bool isActive) => NotifyActiveChanged(screen, isActive);
+        void IGameScreenListener<IEvolveScreen>.OnScreenDisposed(IEvolveScreen screen) => NotifyDisposed(screen);
+
     }
 }

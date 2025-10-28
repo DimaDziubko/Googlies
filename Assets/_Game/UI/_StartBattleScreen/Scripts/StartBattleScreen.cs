@@ -3,6 +3,7 @@ using _Game.Core._Logger;
 using _Game.Gameplay._Tutorial.Scripts;
 using _Game.LiveopsCore;
 using _Game.LiveopsCore._Enums;
+using _Game.UI.Pin.Scripts;
 using _Game.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -42,10 +43,11 @@ namespace _Game.UI._StartBattleScreen.Scripts
 
         [SerializeField] private Canvas _canvas;
 
-        [SerializeField] private Button _startBattleButton;
-        [SerializeField] private Button _evolutionButton;
-        [SerializeField] private Button _nextBattleButton;
-        [SerializeField] private Button _previousBattleButton;
+        [SerializeField, Required] private Button _startBattleButton;
+        [SerializeField, Required] private Button _evolutionButton;
+        [SerializeField, Required] private PinView _evolutionPin;
+        [SerializeField, Required] private Button _nextBattleButton;
+        [SerializeField, Required] private Button _previousBattleButton;
 
         [SerializeField, Required] private GameEventPanel _leftGameEventPanel;
         [SerializeField, Required] private GameEventPanel _rightGameEventPanel;
@@ -55,6 +57,7 @@ namespace _Game.UI._StartBattleScreen.Scripts
 
         public CheatPanel CheatPanel => _cheatPanel;
 
+        public PinView EvolutionPin => _evolutionPin;
 
         public GameEventPanel GetGameEventPanel(GameEventPanelType type)
         {

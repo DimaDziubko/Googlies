@@ -6,11 +6,6 @@
         bool NeedAttention { get; }
     }
 
-    public interface IUpgradeUnitsScreen : IGameScreen
-    {
-        
-    }
-    
     public interface IDungeonScreen : IGameScreenWithInfo
     {
         
@@ -24,6 +19,11 @@
     public interface IGeneralCardsScreen : IGameScreen
     {
         
+    }
+
+    public interface IEvolveScreen : IGameScreen
+    {
+
     }
 
     public interface IGameScreenWithInfo : IGameScreen

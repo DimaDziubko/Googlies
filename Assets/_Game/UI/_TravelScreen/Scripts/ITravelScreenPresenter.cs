@@ -11,5 +11,9 @@ namespace _Game.UI._TravelScreen.Scripts
         string GetTravelInfo();
         void OnTravelButtonClicked(EvolveScreen evolveScreen);
         string GetTravelText();
+        void OnScreenOpen();
+        void OnScreenClosed();
+        void OnScreenDisposed();
+        void OnScreenActiveChanged(bool isActive);
     }
 }

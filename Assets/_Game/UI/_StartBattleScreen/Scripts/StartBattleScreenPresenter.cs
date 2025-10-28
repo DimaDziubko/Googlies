@@ -139,7 +139,7 @@ namespace _Game.UI._StartBattleScreen.Scripts
         {
             ActiveChanged?.Invoke(this, isActive);
 
-            if(isActive)
+            if (isActive)
                 ShowEvolveStep();
             else
                 CancelEvolveStep();
@@ -147,6 +147,8 @@ namespace _Game.UI._StartBattleScreen.Scripts
 
         private void Subscribe()
         {
+            _uiNotifier.RegisterPin(typeof(IEvolveScreen), Screen.EvolutionPin);
+
             _timelineNavigator.TimelineChanged += OnTimelineChanged;
             _ageNavigator.AgeChanged += OnAgeChanged;
             _battleNavigator.BattleChanged += OnBattleChanged;
@@ -179,6 +181,7 @@ namespace _Game.UI._StartBattleScreen.Scripts
 
         private void Unsubscribe()
         {
+            _uiNotifier.UnregisterPin(typeof(IEvolveScreen));
             _timelineNavigator.TimelineChanged -= OnTimelineChanged;
             _ageNavigator.AgeChanged -= OnAgeChanged;
             _battleNavigator.BattleChanged -= OnBattleChanged;
