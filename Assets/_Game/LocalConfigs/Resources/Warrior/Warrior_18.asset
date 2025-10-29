@@ -17,7 +17,7 @@ MonoBehaviour:
   UnitLayerType: 0
   Health: 3640
   Speed: 0.25
-  Name: Himars
+  Name: Cyber Warden
   PlayerIconAtlas:
     m_AssetGUID: 8dfd4d7f94591a74fb7187dc80f8212d
     m_SubObjectName: 
@@ -36,12 +36,12 @@ MonoBehaviour:
   EnemyKey: Warrior_18
   ZombieKey: Warrior_10
   Price: 13100000
-  FoodPrice: 30
+  FoodPrice: 18
   CoinsPerKill: 655360
   PlayerHealthMultiplier: 1
   EnemyHealthMultiplier: 1
-  AttackPerSecond: 0.2
-  AttackDistance: 1.5
+  AttackPerSecond: 0.5
+  AttackDistance: 0.25
   DefaultAttackDistance: 0.14
   IsPushable: 1
   WarriorPositionSettings:
@@ -71,4 +71,4 @@ MonoBehaviour:
       Rotation: {x: -0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
   WeaponId: 18
-  FBConfigId: 
+  FBConfigId: '-'

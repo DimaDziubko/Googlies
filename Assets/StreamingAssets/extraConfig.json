@@ -8,18 +8,18 @@
   "BattleSpeedConfigs": [
     {
       "Id": 0,
-      "SpeedFactor": 1,
-      "Duration": 0
+      "SpeedFactor": 1.0,
+      "Duration": 0.0
     },
     {
       "Id": 1,
       "SpeedFactor": 1.5,
-      "Duration": 300
+      "Duration": 300.0
     },
     {
       "Id": 2,
-      "SpeedFactor": 2,
-      "Duration": 0
+      "SpeedFactor": 2.0,
+      "Duration": 0.0
     }
   ],
   "ShopConfig": {
@@ -28,9 +28,9 @@
         "Id": 1,
         "MajorIconKey": "GemsPack_0",
         "MinorIconKey": "Currencies[Gem]",
-        "Quantity": 1000,
-        "IAP_ID": "com.thearmyevolution.gemspack_1",
-        "IAP_ID_IOS": "com.evolution.army.gemspack_1",
+        "Quantity": 1000.0,
+        "IAP_ID": "com.thearmyevolution.gemspack_1_test",
+        "IAP_ID_IOS": "com.army.gemspack_1_test",
         "MaxPurchaseCount": -1,
         "ShopItemViewId": 100,
         "ProductType": 0
@@ -39,9 +39,9 @@
         "Id": 2,
         "MajorIconKey": "GemsPack_1",
         "MinorIconKey": "Currencies[Gem]",
-        "Quantity": 3050,
-        "IAP_ID": "com.thearmyevolution.gemspack_2",
-        "IAP_ID_IOS": "com.evolution.army.gemspack_2",
+        "Quantity": 3050.0,
+        "IAP_ID": "com.thearmyevolution.gemspack_2_test",
+        "IAP_ID_IOS": "com.army.gemspack_2_test",
         "MaxPurchaseCount": -1,
         "ShopItemViewId": 100,
         "ProductType": 0
@@ -50,9 +50,9 @@
         "Id": 3,
         "MajorIconKey": "GemsPack_2",
         "MinorIconKey": "Currencies[Gem]",
-        "Quantity": 9500,
-        "IAP_ID": "com.thearmyevolution.gemspack_3",
-        "IAP_ID_IOS": "com.evolution.army.gemspack_3",
+        "Quantity": 9500.0,
+        "IAP_ID": "com.thearmyevolution.gemspack_3_test",
+        "IAP_ID_IOS": "com.army.gemspack_3_test",
         "MaxPurchaseCount": -1,
         "ShopItemViewId": 100,
         "ProductType": 0
@@ -66,10 +66,10 @@
         "Price": 50,
         "QuantityExponential": {
           "Id": 2,
-          "A": 1,
+          "A": 1.0,
           "B": 4.5251,
           "C": 0.0498,
-          "D": 0
+          "D": 0.0
         },
         "CurrencyIconKey": "Currencies[Gem]",
         "IGP_ID": "coins_1",
@@ -79,33 +79,33 @@
         "LinearFunctions": [
           {
             "Id": 0,
-            "A": 8,
-            "B": 73
+            "A": 8.0,
+            "B": 73.0
           },
           {
             "Id": 2,
-            "A": 40,
-            "B": 353
+            "A": 40.0,
+            "B": 353.0
           },
           {
             "Id": 4,
-            "A": 200,
-            "B": 1760
+            "A": 200.0,
+            "B": 1760.0
           },
           {
             "Id": 6,
-            "A": 1100,
-            "B": 10200
+            "A": 1100.0,
+            "B": 10200.0
           },
           {
             "Id": 8,
-            "A": 7150,
-            "B": 64400
+            "A": 7150.0,
+            "B": 64400.0
           },
           {
             "Id": 10,
-            "A": 50050,
-            "B": 451000
+            "A": 50050.0,
+            "B": 451000.0
           }
         ]
       },
@@ -116,10 +116,10 @@
         "Price": 300,
         "QuantityExponential": {
           "Id": 3,
-          "A": 1,
+          "A": 1.0,
           "B": 6.4583,
           "C": 0.047,
-          "D": 0
+          "D": 0.0
         },
         "CurrencyIconKey": "Currencies[Gem]",
         "IGP_ID": "coins_2",
@@ -129,33 +129,33 @@
         "LinearFunctions": [
           {
             "Id": 1,
-            "A": 54,
-            "B": 488
+            "A": 54.0,
+            "B": 488.0
           },
           {
             "Id": 3,
-            "A": 270,
-            "B": 2360
+            "A": 270.0,
+            "B": 2360.0
           },
           {
             "Id": 5,
-            "A": 1350,
-            "B": 11800
+            "A": 1350.0,
+            "B": 11800.0
           },
           {
             "Id": 7,
-            "A": 7425,
-            "B": 68700
+            "A": 7425.0,
+            "B": 68700.0
           },
           {
             "Id": 9,
-            "A": 48263,
-            "B": 431000
+            "A": 48263.0,
+            "B": 431000.0
           },
           {
             "Id": 11,
-            "A": 337838,
-            "B": 3020000
+            "A": 337838.0,
+            "B": 3020000.0
           }
         ]
       }
@@ -168,7 +168,7 @@
         "BattleSpeed": {
           "Id": 1,
           "SpeedFactor": 1.5,
-          "Duration": 300
+          "Duration": 300.0
         },
         "IAP_ID": "speedx1",
         "IAP_ID_IOS": "com.thearmyevolution.speedx1",
@@ -183,8 +183,8 @@
         "Description": "Game speed forever",
         "BattleSpeed": {
           "Id": 2,
-          "SpeedFactor": 2,
-          "Duration": 0
+          "SpeedFactor": 2.0,
+          "Duration": 0.0
         },
         "IAP_ID": "speedx2",
         "IAP_ID_IOS": "com.thearmyevolution.speedx2",
@@ -210,7 +210,7 @@
           {
             "Id": 1,
             "IconKey": "Currencies[Gem]",
-            "Quantity": 500,
+            "Quantity": 500.0,
             "CurrencyType": 1
           }
         ],
@@ -232,7 +232,7 @@
           {
             "Id": 2,
             "IconKey": "Currencies[Gem]",
-            "Quantity": 3500,
+            "Quantity": 3500.0,
             "CurrencyType": 1
           }
         ],
@@ -245,7 +245,7 @@
       {
         "Id": 1,
         "DailyGemsPackCount": 2,
-        "RecoverTimeMinutes": 1440,
+        "RecoverTimeMinutes": 1440.0,
         "MajorIconKey": "GemsPack_3",
         "MinorIconKey": "Currencies[Gem]",
         "AdIconKey": "UI[AdsIcon]",
@@ -256,74 +256,98 @@
     "Products": [
       {
         "Id": 1,
-        "IAP_ID": "com.thearmyevolution.gemspack_1",
+        "IAP_ID": "com.battle.evolution.gemspack_1",
         "IAP_ID_IOS": "com.evolution.army.gemspack_1",
         "ProductType": 0
       },
       {
         "Id": 2,
-        "IAP_ID": "com.thearmyevolution.gemspack_2",
+        "IAP_ID": "com.battle.evolution.gemspack_2",
         "IAP_ID_IOS": "com.evolution.army.gemspack_2",
         "ProductType": 0
       },
       {
         "Id": 3,
-        "IAP_ID": "com.thearmyevolution.gemspack_3",
+        "IAP_ID": "com.battle.evolution.gemspack_3",
         "IAP_ID_IOS": "com.evolution.army.gemspack_3",
         "ProductType": 0
       },
       {
         "Id": 4,
-        "IAP_ID": "com.thearmyevolution.profit1",
+        "IAP_ID": "com.battle.evolution.profit1",
         "IAP_ID_IOS": "com.evolution.army.profit1",
         "ProductType": 1
       },
       {
         "Id": 5,
-        "IAP_ID": "com.thearmyevolution.profit2",
+        "IAP_ID": "com.battle.evolution.profit2",
         "IAP_ID_IOS": "com.evolution.army.profit2",
         "ProductType": 1
       },
       {
         "Id": 6,
-        "IAP_ID": "com.army.leaderpass",
-        "IAP_ID_IOS": "com.army.leaderpass",
+        "IAP_ID": "com.e.army.leaderpass",
+        "IAP_ID_IOS": "com.e.army.leaderpass",
         "ProductType": 0
       },
       {
         "Id": 7,
-        "IAP_ID": "com.army.warriors.fund",
-        "IAP_ID_IOS": "com.army.warriors.fund",
+        "IAP_ID": "com.e.army.warriors.fund",
+        "IAP_ID_IOS": "com.e.army.warriors.fund",
         "ProductType": 0
       },
       {
         "Id": 8,
-        "IAP_ID": "com.army.classic_offer_1",
-        "IAP_ID_IOS": "com.army.classic_offer_1",
+        "IAP_ID": "com.e.army.classic_offer_1",
+        "IAP_ID_IOS": "com.e.army.classic_offer_1",
         "ProductType": 0
       },
       {
         "Id": 9,
-        "IAP_ID": "com.army.classic_offer_2",
-        "IAP_ID_IOS": "com.army.classic_offer_2",
+        "IAP_ID": "com.e.army.classic_offer_2",
+        "IAP_ID_IOS": "com.e.army.classic_offer_2",
         "ProductType": 0
       },
       {
         "Id": 10,
-        "IAP_ID": "com.army.classic_offer_3",
-        "IAP_ID_IOS": "com.army.classic_offer_3",
+        "IAP_ID": "com.e.army.classic_offer_3",
+        "IAP_ID_IOS": "com.e.army.classic_offer_3",
         "ProductType": 0
       },
       {
         "Id": 11,
-        "IAP_ID": "com.army.classic_offer_4",
-        "IAP_ID_IOS": "com.army.classic_offer_4",
+        "IAP_ID": "com.e.army.classic_offer_4",
+        "IAP_ID_IOS": "com.e.army.classic_offer_4",
         "ProductType": 0
       },
       {
         "Id": 12,
-        "IAP_ID": "com.army.warriors.fund",
-        "IAP_ID_IOS": "com.army.warriors.fund",
+        "IAP_ID": "com.army.gemspack_1_test",
+        "IAP_ID_IOS": "com.army.gemspack_1_test",
+        "ProductType": 0
+      },
+      {
+        "Id": 13,
+        "IAP_ID": "com.army.gemspack_2_test",
+        "IAP_ID_IOS": "com.army.gemspack_2_test",
+        "ProductType": 0
+      },
+      {
+        "Id": 14,
+        "IAP_ID": "com.army.gemspack_3_test",
+        "IAP_ID_IOS": "com.army.gemspack_3_test",
+        "ProductType": 0
+      },
+      {
+        "Id": 15,
+        "IAP_ID": "classic_offer_t1",
+        "IAP_ID_IOS": "classic_offer_t1",
+        "ProductType": 0
+      },
+      {
+        "Id": 16,
+        "IAP_ID": "classic_offer_t2",
+        "IAP_ID_IOS": "classic_offer_t2",
         "ProductType": 0
       }
     ]
@@ -331,8 +355,8 @@
   "AdsConfig": {
     "Id": 0,
     "IsInterstitialActive": false,
-    "InterstitialDelay": 60,
-    "RewardInterstitialDelay": 240,
+    "InterstitialDelay": 60.0,
+    "RewardInterstitialDelay": 240.0,
     "InterstitialBattleTreshold": 5
   },
   "GeneralDailyTaskConfig": {
@@ -346,8 +370,8 @@
         "LinearFunctions": [
           {
             "Id": 13,
-            "A": 0,
-            "B": 5
+            "A": 0.0,
+            "B": 5.0
           }
         ],
         "DropChance": 9,
@@ -361,7 +385,7 @@
           {
             "Id": 42,
             "A": 0.5,
-            "B": 2
+            "B": 2.0
           }
         ],
         "DropChance": 9,
@@ -375,7 +399,7 @@
           {
             "Id": 15,
             "A": 0.6,
-            "B": 4
+            "B": 4.0
           }
         ],
         "DropChance": 9,
@@ -389,7 +413,7 @@
           {
             "Id": 16,
             "A": 0.15,
-            "B": 3
+            "B": 3.0
           }
         ],
         "DropChance": 9,
@@ -403,7 +427,7 @@
           {
             "Id": 17,
             "A": 0.15,
-            "B": 1
+            "B": 1.0
           }
         ],
         "DropChance": 9,
@@ -417,7 +441,7 @@
           {
             "Id": 43,
             "A": 0.5,
-            "B": 2
+            "B": 2.0
           }
         ],
         "DropChance": 9,
@@ -431,7 +455,7 @@
           {
             "Id": 15,
             "A": 0.6,
-            "B": 4
+            "B": 4.0
           }
         ],
         "DropChance": 9,
@@ -445,7 +469,7 @@
           {
             "Id": 16,
             "A": 0.15,
-            "B": 3
+            "B": 3.0
           }
         ],
         "DropChance": 9,
@@ -459,7 +483,7 @@
           {
             "Id": 17,
             "A": 0.15,
-            "B": 1
+            "B": 1.0
           }
         ],
         "DropChance": 9,
@@ -472,33 +496,33 @@
         "LinearFunctions": [
           {
             "Id": 0,
-            "A": 8,
-            "B": 73
+            "A": 8.0,
+            "B": 73.0
           },
           {
             "Id": 2,
-            "A": 40,
-            "B": 353
+            "A": 40.0,
+            "B": 353.0
           },
           {
             "Id": 4,
-            "A": 200,
-            "B": 1760
+            "A": 200.0,
+            "B": 1760.0
           },
           {
             "Id": 6,
-            "A": 1100,
-            "B": 10200
+            "A": 1100.0,
+            "B": 10200.0
           },
           {
             "Id": 8,
-            "A": 7150,
-            "B": 64400
+            "A": 7150.0,
+            "B": 64400.0
           },
           {
             "Id": 10,
-            "A": 50050,
-            "B": 451000
+            "A": 50050.0,
+            "B": 451000.0
           }
         ],
         "DropChance": 9,
@@ -511,8 +535,8 @@
         "LinearFunctions": [
           {
             "Id": 14,
-            "A": 5,
-            "B": 42
+            "A": 5.0,
+            "B": 42.0
           }
         ],
         "DropChance": 9,

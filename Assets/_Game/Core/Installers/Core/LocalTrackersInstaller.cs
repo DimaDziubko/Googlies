@@ -1,4 +1,5 @@
-﻿using _Game.Core.Services.Analytics;
+﻿using _Game.Core._EngagementTrackers;
+using _Game.Core.Services.Analytics;
 using Zenject;
 
 namespace _Game.Core.Installers.Core
@@ -7,9 +8,12 @@ namespace _Game.Core.Installers.Core
     {
         public override void InstallBindings()
         {
-            Container.Bind<LocalWaveTraker>()
-            .AsSingle()
-            .NonLazy();
+            BindAFLevelProgressTrackerService();
         }
+
+        private void BindAFLevelProgressTrackerService() =>
+            Container
+           .BindInterfacesAndSelfTo<AFLevelProgressTracker>()
+           .AsSingle();
     }
 }

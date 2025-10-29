@@ -25,6 +25,10 @@ namespace _Game.Core.Services.Analytics
             _userContainer = userContainer;
             _logger = logger;
 
+        }
+
+        public void Initialize()
+        {
             TimelineState.OnTrackWave += OnTrackWaveEvent;
         }
 
@@ -37,6 +41,7 @@ namespace _Game.Core.Services.Analytics
         {
             TimelineState.TrackWave(wave);
         }
+
         private void OnTrackWaveEvent(int currentWave)
         {
             var parameters = new DTDCustomEventParameters();

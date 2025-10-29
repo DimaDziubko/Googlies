@@ -15,9 +15,9 @@ MonoBehaviour:
   Id: 17
   Type: 1
   UnitLayerType: 1
-  Health: 1450
+  Health: 486
   Speed: 0.25
-  Name: Javelin
+  Name: Sniper
   PlayerIconAtlas:
     m_AssetGUID: 8dfd4d7f94591a74fb7187dc80f8212d
     m_SubObjectName: 
@@ -36,12 +36,12 @@ MonoBehaviour:
   EnemyKey: Warrior_17
   ZombieKey: Warrior_10
   Price: 4910000
-  FoodPrice: 22
+  FoodPrice: 14
   CoinsPerKill: 524288
   PlayerHealthMultiplier: 1
   EnemyHealthMultiplier: 1
-  AttackPerSecond: 1
-  AttackDistance: 1
+  AttackPerSecond: 0.85
+  AttackDistance: 1.7
   DefaultAttackDistance: 0.14
   IsPushable: 1
   WarriorPositionSettings:
@@ -71,4 +71,4 @@ MonoBehaviour:
       Rotation: {x: -0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
   WeaponId: 17
-  FBConfigId: 
+  FBConfigId: '-'

@@ -50,57 +50,57 @@ namespace _Game.Core.Services._Balancy
 
         void IInitializable.Initialize()
         {
-            var perfTimer = new PerfTimer(_logger, "Balancy initialization");
-            perfTimer.Start();
+//            var perfTimer = new PerfTimer(_logger, "Balancy initialization");
+//            perfTimer.Start();
             
-            Main.Init(new AppConfig
-            {
-                ApiGameId = _settings.GameID,
-                PublicKey = _settings.PublicKey,
-                Environment = _settings.Environment,
-                AutoLogin = true,
-                OfflineMode = false,
-#if UNITY_ANDROID
-                Platform = Constants.Platform.AndroidGooglePlay,
-#elif UNITY_IOS
-                Platform = Constants.Platform.IosAppStore,
-#endif
-                PreInit = PreInitType.None,
-                OnInitProgress = progress =>
-                {
-                    _logger.Log($"***=> STATUS {progress.Status}", DebugStatus.Info);
-                    switch (progress.Status)
-                    {
-                        case BalancyInitStatus.PreInitFromResourcesOrCache:
-                            break;
-                        case BalancyInitStatus.PreInitLocalProfile:
-                            break;
-                        case BalancyInitStatus.DictionariesReady:
-                            break;
-                        case BalancyInitStatus.Finished:
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                },
-                UpdateType = UpdateType.FullUpdate,
-                UpdatePeriod = 300,
-                OnContentUpdateCallback = updateResponse =>
-                {
-                    _logger.Log("Content Updated " + updateResponse.AffectedDictionaries.Length,
-                        DebugStatus.Success);
-                },
-                OnReadyCallback = response =>
-                {
-                    _logger.Log($"Balancy Init Complete: {response.Success}, deploy version = {response.DeployVersion}",
-                        DebugStatus.Success);
+//            Main.Init(new AppConfig
+//            {
+//                ApiGameId = _settings.GameID,
+//                PublicKey = _settings.PublicKey,
+//                Environment = _settings.Environment,
+//                AutoLogin = true,
+//                OfflineMode = false,
+//#if UNITY_ANDROID
+//                Platform = Constants.Platform.AndroidGooglePlay,
+//#elif UNITY_IOS
+//                Platform = Constants.Platform.IosAppStore,
+//#endif
+//                PreInit = PreInitType.None,
+//                OnInitProgress = progress =>
+//                {
+//                    _logger.Log($"***=> STATUS {progress.Status}", DebugStatus.Info);
+//                    switch (progress.Status)
+//                    {
+//                        case BalancyInitStatus.PreInitFromResourcesOrCache:
+//                            break;
+//                        case BalancyInitStatus.PreInitLocalProfile:
+//                            break;
+//                        case BalancyInitStatus.DictionariesReady:
+//                            break;
+//                        case BalancyInitStatus.Finished:
+//                            break;
+//                        default:
+//                            throw new ArgumentOutOfRangeException();
+//                    }
+//                },
+//                UpdateType = UpdateType.FullUpdate,
+//                UpdatePeriod = 300,
+//                OnContentUpdateCallback = updateResponse =>
+//                {
+//                    _logger.Log("Content Updated " + updateResponse.AffectedDictionaries.Length,
+//                        DebugStatus.Success);
+//                },
+//                OnReadyCallback = response =>
+//                {
+//                    _logger.Log($"Balancy Init Complete: {response.Success}, deploy version = {response.DeployVersion}",
+//                        DebugStatus.Success);
                     
-                    _isInitialized = true;
-                    Initialized?.Invoke();
+//                    _isInitialized = true;
+//                    Initialized?.Invoke();
 
-                    perfTimer.Stop();
-                }
-            });
+//                    perfTimer.Stop();
+//                }
+//            });
         }
 
         public void LoadProfile()

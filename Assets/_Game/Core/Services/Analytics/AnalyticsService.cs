@@ -69,6 +69,7 @@ namespace _Game.Core.Services.Analytics
         private readonly SkillsTracker _skillsTracker;
         private readonly IAnalyticsEventSender _sender;
         private readonly FbConfigTracker _fbConfigTracker;
+        private readonly LocalWaveTraker _wavesTracker;
 
         public AnalyticsService(
             DTDObjectSettings settings,
@@ -113,11 +114,14 @@ namespace _Game.Core.Services.Analytics
             _skillsTracker = new SkillsTracker(userContainer, skillService, featureUnlockSystem, config, logger, sender);
             _cardsTracker = new CardsTracker(userContainer, productBuyer, sender);
             _fbConfigTracker = new FbConfigTracker(sender, config);
+            _wavesTracker = new LocalWaveTraker(logger, userContainer);
         }
+
         void IInitializable.Initialize()
         {
             Initialize();
         }
+
         private void Initialize()
         {
             var config = new DTDAnalyticsConfiguration
@@ -139,6 +143,8 @@ namespace _Game.Core.Services.Analytics
 
             if (GameModeSettings.I.IsCheatEnabled)
                 DTDUserCard.SetTester(true);
+
+            //  DTDPurchases.StartAutoTracking();
         }
 
         private void InitializeAnalytics(DTDPlatform platform, DTDAnalyticsConfiguration config)
@@ -146,7 +152,7 @@ namespace _Game.Core.Services.Analytics
             var targetCredential = _settings.Credentials.FirstOrDefault(item => item.Platform == platform);
 
             DTDAnalytics.Initialize(targetCredential.Key, config);
-           // DTDPurchases.StartAutoTracking();
+            //DTDPurchases.StartAutoTracking();
         }
 
         private void Subscribe()
@@ -191,6 +197,7 @@ namespace _Game.Core.Services.Analytics
             _cardsTracker.Initialize();
             _skillsTracker.Initialize();
             _fbConfigTracker.Initialize();
+            _wavesTracker.Initialize();
         }
 
         public void Dispose()
@@ -202,6 +209,7 @@ namespace _Game.Core.Services.Analytics
             _cardsTracker.Dispose();
             _skillsTracker.Dispose();
             _fbConfigTracker.Dispose();
+            _wavesTracker.Dispose();
 
             TimelineState.NextBattleOpened -= OnBattleCompleted;
             TimelineState.LastBattleWon -= OnBattleCompleted;
@@ -265,16 +273,7 @@ namespace _Game.Core.Services.Analytics
             _sender.CustomEvent("IAPpurchase", parameters);
             _sender.RealCurrencyPayment(orderId, price, productId, currencyCode);
         }
-        private void TrackInGamePurchase(IGPDto dto)
-        {
-            if (dto.Resources != null)
-            {
-                DTDAnalytics.VirtualCurrencyPayment(dto.PurchaseId, dto.PurchaseType, dto.PurchaseAmount, dto.Resources);
-                return;
-            }
 
-            DTDAnalytics.VirtualCurrencyPayment(dto.PurchaseId, dto.PurchaseType, dto.PurchaseAmount, dto.PurchasePrice, dto.PurchaseCurrency);
-        }
         public void SendRateUs(string parameter)
         {
             var parameters = new DTDCustomEventParameters();
