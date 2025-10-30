@@ -44,107 +44,144 @@ namespace _Game.Core.Services.IAP
         public IAPProvider(
             IMyLogger logger,
             IConfigRepository configRepository,
-            IUserContainer userContainer)
+            IUserContainer userContainer
+            )
         {
             _userContainer = userContainer;
             _logger = logger;
             _shopConfigRepository = configRepository.ShopConfigRepository;
+
+            _logger.Log("[IAPProvider] Constructor called", DebugStatus.Info);
         }
 
         public void Initialize(IIAPService iapService)
         {
+            _logger.Log("[IAPProvider] Initialize started", DebugStatus.Info);
             _iapService = iapService;
 
             AllProducts = new Dictionary<string, Product>();
-            
+
             InitProducts();
         }
 
         private void InitProducts()
         {
+            _logger.Log("[IAPProvider] InitProducts started", DebugStatus.Info);
+
             if (IsBuilderReady)
             {
-                _logger.Log("OnProductsRefreshed: Builder is already ready, skipping rebuild.", DebugStatus.Info);
+                _logger.Log("[IAPProvider] Builder is already ready, skipping rebuild.", DebugStatus.Info);
                 return;
             }
 
             IEnumerable<ProductWrapper> products = _shopConfigRepository.GetProductKeys();
 
+            // Логируем список продуктов
+            int productCount = 0;
+            _logger.Log("[IAPProvider] Products list:", DebugStatus.Info);
+            foreach (var product in products)
+            {
+                productCount++;
+                _logger.Log($"[IAPProvider] Product #{productCount}: ID={product.GetProductKey()}, Type={product.ProductType}", DebugStatus.Info);
+            }
+            _logger.Log($"[IAPProvider] Total products to initialize: {productCount}", DebugStatus.Info);
+
+            if (productCount == 0)
+            {
+                _logger.LogWarning("[IAPProvider] No products found to initialize!");
+                return;
+            }
+
             try
             {
+                _logger.Log("[IAPProvider] Creating ConfigurationBuilder", DebugStatus.Info);
                 ConfigurationBuilder builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
+                // Повторно проходим по продуктам для добавления в builder
+                products = _shopConfigRepository.GetProductKeys();
                 foreach (var product in products)
                 {
                     builder.AddProduct(product.GetProductKey(), product.ProductType);
                 }
 
                 IsBuilderReady = true;
+                _logger.Log("[IAPProvider] Starting UnityPurchasing.Initialize", DebugStatus.Info);
                 UnityPurchasing.Initialize(this, builder);
-                _logger.Log("OnProductsRefreshed: UnityPurchasing initialization started.", DebugStatus.Success);
+                _logger.Log("[IAPProvider] UnityPurchasing initialization started.", DebugStatus.Success);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"OnProductsRefreshed: Exception during build - {ex}.");
+                _logger.LogError($"[IAPProvider] Exception during InitProducts: {ex.GetType().Name} - {ex.Message}\nStackTrace: {ex.StackTrace}");
             }
         }
 
-        public void StartPurchase(string productId) =>
+        public void StartPurchase(string productId)
+        {
+            _logger.Log($"[IAPProvider] StartPurchase called for: {productId}", DebugStatus.Info);
             _controller.InitiatePurchase(productId);
+        }
 
         void IStoreListener.OnInitialized(IStoreController controller, IExtensionProvider extensions)
         {
+            _logger.Log("[IAPProvider] OnInitialized callback received", DebugStatus.Success);
             _controller = controller;
             _extensions = extensions;
 
+            _logger.Log($"[IAPProvider] Loading {_controller.products.all.Length} products", DebugStatus.Info);
             foreach (Product product in _controller.products.all)
             {
-                _logger.Log($"[IAP] Загрузился продукт: {product.definition.id}");
+                _logger.Log($"[IAPProvider] Loaded product: {product.definition.id}, Available: {product.availableToPurchase}", DebugStatus.Info);
                 AllProducts.Add(product.definition.id, product);
             }
 
-            _logger.Log("UnityPurchasing initialization success");
+            _logger.Log("[IAPProvider] UnityPurchasing initialization success", DebugStatus.Success);
 
             OnInitialized?.Invoke();
         }
 
-        public void OnInitializeFailed(InitializationFailureReason error) =>
-            _logger.LogError($"UnityPurchasing initialization failed {error}");
+        public void OnInitializeFailed(InitializationFailureReason error)
+        {
+            _logger.LogError($"[IAPProvider] UnityPurchasing initialization failed: {error}");
+        }
 
-        public void OnInitializeFailed(InitializationFailureReason error, string message) =>
-            _logger.LogError($"UnityPurchasing initialization failed {error}, {message}");
+        public void OnInitializeFailed(InitializationFailureReason error, string message)
+        {
+            _logger.LogError($"[IAPProvider] UnityPurchasing initialization failed: {error}, Message: {message}");
+        }
 
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
         {
+            _logger.Log("[IAPProvider] ProcessPurchase started", DebugStatus.Info);
+
             if (purchaseEvent == null || purchaseEvent.purchasedProduct == null || purchaseEvent.purchasedProduct.definition == null)
             {
-                _logger.LogError("Invalid purchase event or product.");
+                _logger.LogError("[IAPProvider] Invalid purchase event or product.");
                 return PurchaseProcessingResult.Complete;
             }
 
             if (string.IsNullOrEmpty(purchaseEvent.purchasedProduct.definition.id))
             {
-                _logger.LogError("Product definition ID is null or empty.");
+                _logger.LogError("[IAPProvider] Product definition ID is null or empty.");
                 return PurchaseProcessingResult.Complete;
             }
 
-            _logger.Log($"UnityPurchasing ProcessPurchase success {purchaseEvent.purchasedProduct.definition.id}", DebugStatus.Success);
+            _logger.Log($"[IAPProvider] ProcessPurchase success for: {purchaseEvent.purchasedProduct.definition.id}", DebugStatus.Success);
 
             _productTryToPurchase = purchaseEvent.purchasedProduct;
 
             bool validPurchase = ValidatePurchase(purchaseEvent);
 
-            _logger.Log($"Is purchase valid {validPurchase}", DebugStatus.Info);
+            _logger.Log($"[IAPProvider] Purchase validation result: {validPurchase}", DebugStatus.Info);
 
             if (validPurchase)
             {
+                _logger.Log($"[IAPProvider] Adding pending purchase: {purchaseEvent.purchasedProduct.definition.id}", DebugStatus.Info);
                 _userContainer.PurchaseStateHandler.AddPendingPurchase(purchaseEvent.purchasedProduct.definition.id);
-                ProcessByteBrewTracking();
                 ProcessDev2DevTracking();
             }
             else
             {
-                Debug.LogWarning("Purchase validation failed.");
+                _logger.LogWarning("[IAPProvider] Purchase validation failed.");
             }
 
             return _iapService.ProcessPurchase(purchaseEvent);
@@ -152,25 +189,30 @@ namespace _Game.Core.Services.IAP
 
         private bool ValidatePurchase(PurchaseEventArgs purchaseEvent)
         {
+            _logger.Log("[IAPProvider] ValidatePurchase started", DebugStatus.Info);
             bool validPurchase = false;
             bool isValidID = false;
 
 #if !UNITY_EDITOR
+    _logger.Log("[IAPProvider] Platform validation (non-editor)", DebugStatus.Info);
     var validator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), Application.identifier);
     try
     {
         if (string.IsNullOrEmpty(_productTryToPurchase.receipt))
         {
-            Debug.LogError("Product receipt is null or empty.");
+            _logger.LogError("[IAPProvider] Product receipt is null or empty.");
         }
         else
         {
+            _logger.Log("[IAPProvider] Validating receipt", DebugStatus.Info);
             var validationResults = validator.Validate(_productTryToPurchase.receipt);
             foreach (var receipt in validationResults)
             {
+                _logger.Log($"[IAPProvider] Checking receipt for productID: {receipt.productID}", DebugStatus.Info);
                 if (purchaseEvent.purchasedProduct.definition.storeSpecificId.Equals(receipt.productID))
                 {
                     isValidID = true;
+                    _logger.Log($"[IAPProvider] Receipt validated for: {receipt.productID}", DebugStatus.Success);
                     break;
                 }
             }
@@ -180,102 +222,86 @@ namespace _Game.Core.Services.IAP
     }
     catch (IAPSecurityException ex)
     {
-        Debug.LogError("Receipt validation failed: " + ex.Message);
+        _logger.LogError($"[IAPProvider] Receipt validation failed: {ex.Message}");
     }
 #endif
 
 #if UNITY_EDITOR
+            _logger.Log("[IAPProvider] Editor mode - skipping validation", DebugStatus.Info);
             validPurchase = isValidID = true;
 #endif
 
+            _logger.Log($"[IAPProvider] Final validation: validPurchase={validPurchase}, isValidID={isValidID}", DebugStatus.Info);
             return validPurchase && isValidID;
-        }
-
-        private void ProcessByteBrewTracking()
-        {
-            try
-            {
-                string receipt = _productTryToPurchase.receipt;
-                string currency = _productTryToPurchase.metadata.isoCurrencyCode;
-                int amount = (int)_productTryToPurchase.metadata.localizedPrice;
-                string productID = _productTryToPurchase.definition.storeSpecificId;
-
-                var receiptWrapper = MiniJson.JsonDecode(receipt) as Dictionary<string, object>;
-                if (receiptWrapper != null && receiptWrapper.TryGetValue("Payload", out var payload))
-                {
-#if UNITY_ANDROID
-                    var payloadData = MiniJson.JsonDecode(payload.ToString()) as Dictionary<string, object>;
-#endif
-#if UNITY_IOS
-                    // ByteBrew.ValidateiOSInAppPurchaseEvent("Apple App Store", currency, amount, productID, "IapShop", payload.ToString(),
-                    //     purchaseResultData =>
-                    //     {
-                    //         Debug.Log($"ByteBrew Purchase Valid: {purchaseResultData.isValid}, Message: {purchaseResultData.message}");
-                    //     });
-#endif
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError("Exception during ByteBrew tracking: " + ex);
-            }
         }
 
         private void ProcessDev2DevTracking()
         {
+            _logger.Log("[IAPProvider] ProcessDev2DevTracking started", DebugStatus.Info);
             try
             {
                 var product = _productTryToPurchase;
                 string receipt = product.receipt;
 
                 string productID = product.definition.storeSpecificId;
+                _logger.Log($"[IAPProvider] Dev2Dev tracking for: {productID}", DebugStatus.Info);
 #if UNITY_ANDROID
-
+                _logger.Log("[IAPProvider] Android - starting Dev2Dev verification", DebugStatus.Info);
                 DTDAntiCheat.VerifyPayment(IAPGoogleKeyHandler.I.PublicGoogleKey, receipt, result =>
                 {
-                    //result.ReceiptStatus == DTDReceiptVerificationStatus.ReceiptInternalError ||
-                    //result.ReceiptStatus == DTDReceiptVerificationStatus.ReceiptServerError ||
+                    _logger.Log($"[IAPProvider] Dev2Dev callback: Status={result.ReceiptStatus}, Result={result.VerificationResult}", DebugStatus.Info);
+
                     if (result.ReceiptStatus == DTDReceiptVerificationStatus.ReceiptValid ||
                         result.ReceiptStatus == DTDReceiptVerificationStatus.ReceiptSandbox)
                     {
-                        _logger.Log($"Dev2Dev AntiCheat: Purchase verified. VerificationResult {result.VerificationResult} ReceiptStatus {result.ReceiptStatus} ");
-                        //TODO: Check
+                        _logger.Log($"[IAPProvider] Dev2Dev AntiCheat: Purchase verified. VerificationResult {result.VerificationResult} ReceiptStatus {result.ReceiptStatus} ", DebugStatus.Success);
                         _iapService.OnEventPurchasedDTDInvoke(product);
                         if (result.ReceiptStatus == DTDReceiptVerificationStatus.ReceiptSandbox)
+                        {
+                            _logger.Log("[IAPProvider] Sandbox purchase detected - setting tester flag", DebugStatus.Info);
                             DTDUserCard.SetTester(true);
+                        }
                     }
                     else
                     {
-                        _logger.LogWarning($"Dev2Dev AntiCheat: Invalid purchase. Status: {result.ReceiptStatus} result {result}");
+                        _logger.LogWarning($"[IAPProvider] Dev2Dev AntiCheat: Invalid purchase. Status: {result.ReceiptStatus} result {result}");
                     }
                 });
 #endif
 #if UNITY_IOS
+                _logger.Log("[IAPProvider] iOS - starting Dev2Dev verification", DebugStatus.Info);
                 DTDAntiCheat.VerifyPayment(receipt, result =>
                 {
+                    _logger.Log($"[IAPProvider] Dev2Dev callback: Status={result.ReceiptStatus}, Result={result.VerificationResult}", DebugStatus.Info);
+                    
                     if (result.ReceiptStatus == DTDReceiptVerificationStatus.ReceiptValid ||
                             result.ReceiptStatus == DTDReceiptVerificationStatus.ReceiptSandbox)
                     {
-                        _logger.Log($"Dev2Dev AntiCheat: Purchase verified. VerificationResult {result.VerificationResult} ReceiptStatus {result.ReceiptStatus} ");
+                        _logger.Log($"[IAPProvider] Dev2Dev AntiCheat: Purchase verified. VerificationResult {result.VerificationResult} ReceiptStatus {result.ReceiptStatus} ", DebugStatus.Success);
                         //_iapService.OnEventPurchasedDTDInvoke(product);
                         if (result.ReceiptStatus == DTDReceiptVerificationStatus.ReceiptSandbox)
+                        {
+                            _logger.Log("[IAPProvider] Sandbox purchase detected - setting tester flag", DebugStatus.Info);
                             DTDUserCard.SetTester(true);
+                        }
                     }
                     else
                     {
-                        _logger.LogWarning($"Dev2Dev AntiCheat: Invalid purchase. Status: {result.ReceiptStatus} result {result}");
+                        _logger.LogWarning($"[IAPProvider] Dev2Dev AntiCheat: Invalid purchase. Status: {result.ReceiptStatus} result {result}");
                     }
                 });
 #endif
             }
             catch (Exception ex)
             {
-                Debug.LogError("Exception during Dev2Dev tracking: " + ex);
+                _logger.LogError($"[IAPProvider] Exception during Dev2Dev tracking: {ex.GetType().Name} - {ex.Message}\nStackTrace: {ex.StackTrace}");
             }
         }
 
-        public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason) =>
-            _logger.LogError($"Product {product.definition.id} purchase failed, PurchaseFailureReason {failureReason} transaction id {product.transactionID}");
+        public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
+        {
+            _logger.LogError($"[IAPProvider] Product {product.definition.id} purchase failed, PurchaseFailureReason {failureReason} transaction id {product.transactionID}");
+        }
 
         void IGameScreenListener<IShopScreen>.OnScreenOpened(IShopScreen screen) { }
         void IGameScreenListener<IShopScreen>.OnInfoChanged(IShopScreen screen) { }
