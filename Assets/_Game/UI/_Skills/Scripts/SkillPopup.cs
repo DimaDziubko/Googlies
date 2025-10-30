@@ -230,9 +230,9 @@ namespace _Game.UI._Skills.Scripts
 
             _equipButton.SetInteractable(true);
             _removeButton.SetInteractable(true);
+            _ascendButton.SetInteractable(true);
 
             _upgradeButton.SetInteractable(_skillPopupPresenter.IsReadyForUpgrade);
-            _ascendButton.SetInteractable(true);
         }
 
         public async UniTask<bool> ShowDetailsAndAwaitForExit()
