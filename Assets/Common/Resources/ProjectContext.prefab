@@ -487,10 +487,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad1d844e12ed35a4a831489480ccef7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _environmentIniFile: {fileID: 4900000, guid: 56acdbcfd402642418c4ccd98d3e1c43, type: 3}
   devConfig: {fileID: 11400000, guid: 2ec9a0de88a96c641b51cdf856971ce8, type: 2}
   stageConfig: {fileID: 11400000, guid: d1f6cd3641f5ccc43a08eefd2c8798cb, type: 2}
   prodConfig: {fileID: 11400000, guid: d9587e68d44b4ee46b8413c6c0b80dec, type: 2}
-  useEnvironmentOverride: 1
+  useEnvironmentOverride: 0
   environmentOverride: 1
   _detectedEnvironment: 1
   _configFilePath: Assets/_Game/LocalConfigs/environment.ini

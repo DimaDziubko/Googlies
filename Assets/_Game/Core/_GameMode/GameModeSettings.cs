@@ -18,9 +18,8 @@ namespace _Game.Core._GameMode
     /// </summary>
     public class GameModeSettings : MonoBehaviour
     {
-        // Константа с путем к INI файлу
-        private const string ENVIRONMENT_CONFIG_PATH = "Assets/_Game/LocalConfigs/environment.ini";
-
+        [SerializeField] private TextAsset _environmentIniFile;
+        [Space]
         [Header("Config Assets")]
         [SerializeField] private BuildConfig devConfig;
         [SerializeField] private BuildConfig stageConfig;
@@ -34,7 +33,6 @@ namespace _Game.Core._GameMode
         [Header("Runtime Info")]
         [SerializeField, ReadOnly] private EnvironmentType _detectedEnvironment;
         [SerializeField, ReadOnly] private EnvironmentConfig _environmentConfig;
-        [SerializeField, ReadOnly] private string _configFilePath = ENVIRONMENT_CONFIG_PATH;
 
         private BuildConfig _currentConfig;
 
@@ -97,50 +95,26 @@ namespace _Game.Core._GameMode
                 _environmentConfig = CreateConfigForEnvironment(environmentOverride);
                 return;
             }
+            string configContent = _environmentIniFile.text;
 
-            try
+            if (string.IsNullOrEmpty(configContent))
             {
-                // Проверяем существование файла
-                if (!System.IO.File.Exists(ENVIRONMENT_CONFIG_PATH))
-                {
-                    Debug.LogError($"Environment config file not found at: {ENVIRONMENT_CONFIG_PATH}");
-                    _environmentConfig = CreateFallbackConfig();
-                    return;
-                }
-
-                // Читаем содержимое файла
-                string configContent = System.IO.File.ReadAllText(ENVIRONMENT_CONFIG_PATH);
-
-                if (string.IsNullOrEmpty(configContent))
-                {
-                    Debug.LogError("Environment config file is empty!");
-                    _environmentConfig = CreateFallbackConfig();
-                    return;
-                }
-
-                Debug.Log($"Loading environment config from: {ENVIRONMENT_CONFIG_PATH}");
-                Debug.Log($"Config content preview: {configContent.Substring(0, Mathf.Min(100, configContent.Length))}");
-
-                // Парсим конфиг
-                _environmentConfig = EnvironmentConfigParser.Parse(configContent);
-
-                if (!_environmentConfig.IsValid())
-                {
-                    Debug.LogWarning("Invalid environment config. Using fallback.");
-                    _environmentConfig = CreateFallbackConfig();
-                }
-                else
-                {
-                    Debug.Log($"Successfully loaded config. Active environment: {_environmentConfig.GetActiveEnvironment()}");
-                }
+                Debug.LogError("Environment config is empty!");
+                _environmentConfig = CreateFallbackConfig();
+                return;
             }
-            catch (System.Exception e)
+
+            Debug.Log($"Loaded environment.ini from Resources, length = {configContent.Length}");
+
+            _environmentConfig = EnvironmentConfigParser.Parse(configContent);
+
+            if (!_environmentConfig.IsValid())
             {
-                Debug.LogError($"Error reading environment config: {e.Message}");
-                Debug.LogError($"Stack trace: {e.StackTrace}");
+                Debug.LogWarning("Invalid environment config. Using fallback.");
                 _environmentConfig = CreateFallbackConfig();
             }
         }
+
 
         private EnvironmentConfig CreateConfigForEnvironment(EnvironmentType envType)
         {
@@ -158,7 +132,7 @@ namespace _Game.Core._GameMode
 
         private EnvironmentType DetermineActiveEnvironment()
         {
-            return _environmentConfig.GetActiveEnvironment();// ?? GetFallbackEnvironmentType();
+            return _environmentConfig.GetActiveEnvironment();
         }
 
         private EnvironmentType GetFallbackEnvironmentType()
@@ -184,30 +158,6 @@ namespace _Game.Core._GameMode
         private void ReloadConfig()
         {
             InitializeConfig();
-        }
-
-        [Button("Test INI File")]
-        private void TestIniFile()
-        {
-            if (System.IO.File.Exists(ENVIRONMENT_CONFIG_PATH))
-            {
-                string content = System.IO.File.ReadAllText(ENVIRONMENT_CONFIG_PATH);
-                Debug.Log($"INI file content:\n{content}");
-
-                try
-                {
-                    var testConfig = EnvironmentConfigParser.Parse(content);
-                    Debug.Log($"Parse successful! Active environment: {testConfig.GetActiveEnvironment()} (ID: {(int)testConfig.GetActiveEnvironment()})");
-                }
-                catch (System.Exception e)
-                {
-                    Debug.LogError($"Parse failed: {e.Message}");
-                }
-            }
-            else
-            {
-                Debug.LogError($"File not found: {ENVIRONMENT_CONFIG_PATH}");
-            }
         }
 
         public bool IsDevelopment() => _detectedEnvironment == EnvironmentType.Development;

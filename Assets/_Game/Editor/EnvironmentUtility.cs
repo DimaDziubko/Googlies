@@ -12,7 +12,7 @@ namespace _Game.Editor
     public class EnvironmentUtility
     {
         const string LOCAL_CONFIGS_PATH = "Assets/_Game/LocalConfigs";
-        const string ENV_FILE_NAME = "environment.ini";
+        const string ENV_FILE_NAME = "environment.ini.bytes";
 
         [MenuItem("Tools/Environment/Create Development")]
         static void CreateDev() => CreateEnvironmentConfig(EnvironmentType.Development);
