@@ -16,11 +16,9 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 {
     public class MaxAdsService : IAdsService, IDisposable
     {
-
 #if UNITY_IOS
         private readonly string _interstitialID = "15f35bbfd0f966ff";
         private readonly string _rewardedID = "d1fd0c994dee3e7d";
-
 #elif UNITY_ANDROID
         private readonly string _interstitialID = "a1e8dd54aafa9d07";
         private readonly string _rewardedID = "a670b96811ca143e";
@@ -51,6 +49,11 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         private SynchronizedCountdownTimer _countdownTimer;
 
+        // Флаги для отслеживания подписок
+        private bool _isRewardedSubscribed;
+        private bool _isInterstitialSubscribed;
+        private bool _isSdkInitSubscribed;
+
         public bool CanShowInterstitial =>
             _adsConfigRepository.GetConfig().IsInterstitialActive &&
             (Purchases.BoughtIAPs?.Find(x => x.Count > 0) == null) &&
@@ -72,19 +75,26 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         public void Init()
         {
-            MaxSdkCallbacks.OnSdkInitializedEvent += sdkConfiguration =>
+            // Подписываемся на инициализацию SDK только один раз
+            if (!_isSdkInitSubscribed)
             {
-                InitializeRewardedAds();
-                InitializeInterstitialAds();
-            };
+                MaxSdkCallbacks.OnSdkInitializedEvent += OnSdkInitialized;
+                _isSdkInitSubscribed = true;
+                _logger.Log("MaxSdk callbacks subscribed");
+            }
+
             Debug.Log("MaxSdk.InitializeSdk");
-
             MaxSdk.InitializeSdk();
-
             LoadAndShowCmpFlow();
-
             Subscribe();
             Debug.Log("MaxSdk.Done");
+        }
+
+        private void OnSdkInitialized(MaxSdkBase.SdkConfiguration sdkConfiguration)
+        {
+            _logger.Log("MaxSdk initialized, setting up ads");
+            InitializeRewardedAds();
+            InitializeInterstitialAds();
         }
 
         void IDisposable.Dispose()
@@ -95,18 +105,14 @@ namespace _Game.Core.Ads.ApplovinMaxAds
         public bool IsAdReady(AdType type)
         {
 #if UNITY_EDITOR
-            //Mock
-            //return false;
             return true;
 #endif
             switch (type)
             {
                 case AdType.Rewarded:
                     return MaxSdk.IsRewardedAdReady(_rewardedID);
-
                 case AdType.Interstitial:
                     return MaxSdk.IsInterstitialReady(_interstitialID);
-
                 default:
                     return false;
             }
@@ -156,7 +162,6 @@ namespace _Game.Core.Ads.ApplovinMaxAds
         private void LoadAndShowCmpFlow()
         {
             var cmpService = MaxSdk.CmpService;
-
             cmpService.ShowCmpForExistingUser(error =>
             {
                 if (null == error)
@@ -179,20 +184,37 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         private void Unsubscribe()
         {
-            MaxSdkCallbacks.Rewarded.OnAdLoadedEvent -= OnRewardedAdLoadedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent -= OnRewardedAdFailedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent -= OnRewardedAdFailedToDisplayEvent;
-            MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent -= OnRewardedAdDisplayedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdClickedEvent -= OnRewardedAdClickedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdHiddenEvent -= OnRewardedAdDismissedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent -= OnRewardedAdReceivedRewardEvent;
-            MaxSdkCallbacks.Rewarded.OnAdRevenuePaidEvent -= OnRevenuePaid;
+            // Отписываемся от SDK инициализации
+            if (_isSdkInitSubscribed)
+            {
+                MaxSdkCallbacks.OnSdkInitializedEvent -= OnSdkInitialized;
+                _isSdkInitSubscribed = false;
+            }
 
-            MaxSdkCallbacks.Interstitial.OnAdLoadedEvent -= OnInterstitialLoadedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent -= OnInterstitialFailedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent -= InterstitialFailedToDisplayEvent;
-            MaxSdkCallbacks.Interstitial.OnAdHiddenEvent -= OnInterstitialDismissedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent -= OnRevenuePaid;
+            // Отписываемся от Rewarded
+            if (_isRewardedSubscribed)
+            {
+                MaxSdkCallbacks.Rewarded.OnAdLoadedEvent -= OnRewardedAdLoadedEvent;
+                MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent -= OnRewardedAdFailedEvent;
+                MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent -= OnRewardedAdFailedToDisplayEvent;
+                MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent -= OnRewardedAdDisplayedEvent;
+                MaxSdkCallbacks.Rewarded.OnAdClickedEvent -= OnRewardedAdClickedEvent;
+                MaxSdkCallbacks.Rewarded.OnAdHiddenEvent -= OnRewardedAdDismissedEvent;
+                MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent -= OnRewardedAdReceivedRewardEvent;
+                MaxSdkCallbacks.Rewarded.OnAdRevenuePaidEvent -= OnRevenuePaid;
+                _isRewardedSubscribed = false;
+            }
+
+            // Отписываемся от Interstitial
+            if (_isInterstitialSubscribed)
+            {
+                MaxSdkCallbacks.Interstitial.OnAdLoadedEvent -= OnInterstitialLoadedEvent;
+                MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent -= OnInterstitialFailedEvent;
+                MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent -= InterstitialFailedToDisplayEvent;
+                MaxSdkCallbacks.Interstitial.OnAdHiddenEvent -= OnInterstitialDismissedEvent;
+                MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent -= OnRevenuePaid;
+                _isInterstitialSubscribed = false;
+            }
         }
 
         private void StartCountdown(float delay)
@@ -205,7 +227,6 @@ namespace _Game.Core.Ads.ApplovinMaxAds
                 IsTimeForInterstitial = false;
             }
 
-
             if (_countdownTimer == null)
             {
                 _countdownTimer = new SynchronizedCountdownTimer(delay);
@@ -213,7 +234,6 @@ namespace _Game.Core.Ads.ApplovinMaxAds
             }
 
             _countdownTimer.Start();
-
             _logger.Log($"INTERSTITIAL READY: {IsTimeForInterstitial}!", DebugStatus.Warning);
         }
 
@@ -242,15 +262,20 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         private async void InitializeRewardedAds()
         {
-            // Attach callbacks
-            MaxSdkCallbacks.Rewarded.OnAdLoadedEvent += OnRewardedAdLoadedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent += OnRewardedAdFailedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent += OnRewardedAdFailedToDisplayEvent;
-            MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent += OnRewardedAdDisplayedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdClickedEvent += OnRewardedAdClickedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdHiddenEvent += OnRewardedAdDismissedEvent;
-            MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent += OnRewardedAdReceivedRewardEvent;
-            MaxSdkCallbacks.Rewarded.OnAdRevenuePaidEvent += OnRevenuePaid;
+            // Подписываемся только если еще не подписаны
+            if (!_isRewardedSubscribed)
+            {
+                MaxSdkCallbacks.Rewarded.OnAdLoadedEvent += OnRewardedAdLoadedEvent;
+                MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent += OnRewardedAdFailedEvent;
+                MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent += OnRewardedAdFailedToDisplayEvent;
+                MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent += OnRewardedAdDisplayedEvent;
+                MaxSdkCallbacks.Rewarded.OnAdClickedEvent += OnRewardedAdClickedEvent;
+                MaxSdkCallbacks.Rewarded.OnAdHiddenEvent += OnRewardedAdDismissedEvent;
+                MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent += OnRewardedAdReceivedRewardEvent;
+                MaxSdkCallbacks.Rewarded.OnAdRevenuePaidEvent += OnRevenuePaid;
+                _isRewardedSubscribed = true;
+                _logger.Log("Rewarded ad callbacks subscribed");
+            }
 
             await LoadRewardedAd();
         }
@@ -273,9 +298,7 @@ namespace _Game.Core.Ads.ApplovinMaxAds
         {
             _rewardedRetryAttempt++;
             double retryDelay = Math.Pow(2, Math.Min(6, _rewardedRetryAttempt));
-
             _logger.Log("Rewarded ad failed to load with error code: " + errorInfo.Code);
-
             await RetryLoadWithDelay(LoadRewardedAd, retryDelay);
         }
 
@@ -312,23 +335,26 @@ namespace _Game.Core.Ads.ApplovinMaxAds
             _onVideoCompleted?.Invoke();
             _gameManager.SetPaused(false);
             OnAdImpressionStatus?.Invoke(AdType.Rewarded, _placement, adInfo, AdStatus.Complete, _userContainer.State.AdsStatistics.AdsReviewed);
-
             OnAdImpressionCustom?.Invoke(AdType.Rewarded, _placement, adInfo, _userContainer.State.AdsStatistics.AdsReviewed);
         }
 
         #endregion
 
-
         #region Interstitial Ad Methods
 
         private async void InitializeInterstitialAds()
         {
-            // Attach callbacks
-            MaxSdkCallbacks.Interstitial.OnAdLoadedEvent += OnInterstitialLoadedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += OnInterstitialFailedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += InterstitialFailedToDisplayEvent;
-            MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnInterstitialDismissedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent += OnRevenuePaid;
+            // Подписываемся только если еще не подписаны
+            if (!_isInterstitialSubscribed)
+            {
+                MaxSdkCallbacks.Interstitial.OnAdLoadedEvent += OnInterstitialLoadedEvent;
+                MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += OnInterstitialFailedEvent;
+                MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += InterstitialFailedToDisplayEvent;
+                MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnInterstitialDismissedEvent;
+                MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent += OnRevenuePaid;
+                _isInterstitialSubscribed = true;
+                _logger.Log("Interstitial ad callbacks subscribed");
+            }
 
             await LoadInterstitial();
         }
@@ -343,9 +369,7 @@ namespace _Game.Core.Ads.ApplovinMaxAds
         private void OnInterstitialLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
         {
             _logger.Log("Interstitial loaded", DebugStatus.Success);
-
             InterstitialVideoLoaded?.Invoke();
-
             _interstitialRetryAttempt = 0;
         }
 
@@ -353,9 +377,7 @@ namespace _Game.Core.Ads.ApplovinMaxAds
         {
             _interstitialRetryAttempt++;
             double retryDelay = Math.Pow(2, Math.Min(6, _interstitialRetryAttempt));
-
             _logger.Log("Interstitial failed to load with error code: " + errorInfo.Code);
-
             await RetryLoadWithDelay(LoadInterstitial, retryDelay);
         }
 

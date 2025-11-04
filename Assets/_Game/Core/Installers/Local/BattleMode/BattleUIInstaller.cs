@@ -54,7 +54,7 @@ namespace _Game.Core.Installers.Local.BattleMode
             BindBattleResultPopupPresenter();
             BindBattleResultPopupProvider();
 
-            BindWalletSynchronizer();
+            //BindWalletSynchronizer();
         }
 
         private void BindWalletSynchronizer() => 

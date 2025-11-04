@@ -12,9 +12,9 @@ namespace _Game.UI._BattleResultPopup.Scripts
     {
         public event Action StateChanged;
         public event Action RewardVideoComplete;
-        
+
         private readonly IAdsService _adsService;
-        
+
         private readonly TemporaryCurrencyBank _temporaryBank;
 
         public BattleResultPopupPresenter(
@@ -25,18 +25,18 @@ namespace _Game.UI._BattleResultPopup.Scripts
             _temporaryBank = temporaryBank;
         }
 
-        void IInitializable.Initialize() => 
+        void IInitializable.Initialize() =>
             _adsService.InterstitialVideoLoaded += OnInterstitialVideoLoaded;
 
-        void IDisposable.Dispose() => 
+        void IDisposable.Dispose() =>
             _adsService.InterstitialVideoLoaded -= OnInterstitialVideoLoaded;
 
-        private void OnInterstitialVideoLoaded() => 
+        private void OnInterstitialVideoLoaded() =>
             StateChanged?.Invoke();
 
         public void TryToShowInterstitial()
         {
-            if (_adsService.IsAdReady(AdType.Interstitial)) 
+            if (_adsService.IsAdReady(AdType.Interstitial))
                 _adsService.ShowInterstitialVideo(Placement.X2);
         }
 
@@ -45,6 +45,7 @@ namespace _Game.UI._BattleResultPopup.Scripts
 
         public void OnDoubleCoinsClicked()
         {
+            UnityEngine.Debug.Log("[BattleResultPopupPresenter] OnDoubleCoinsClicked");
             if (_adsService.IsAdReady(AdType.Rewarded))
             {
                 _adsService.ShowRewardedVideo(OnVideoCompleted, Placement.X2);
@@ -53,16 +54,19 @@ namespace _Game.UI._BattleResultPopup.Scripts
 
         private void OnVideoCompleted()
         {
-            foreach (var cell in _temporaryBank)
-            {
-                cell.Add(cell.Amount);
-            }
-            
+            _temporaryBank.FirstOrDefault(cell => cell.Type == CurrencyType.Coins)?.Add(
+                _temporaryBank.FirstOrDefault(cell => cell.Type == CurrencyType.Coins)?.Amount ?? 0);
+            //foreach (var cell in _temporaryBank)
+            //{
+            //    cell.Add(cell.Amount);
+            //}
+
+            UnityEngine.Debug.Log("[BattleResultPopupPresenter] OnVideoCompleted");
             RewardVideoComplete?.Invoke();
         }
 
-        public TemporaryCurrencyBank GetAdditionalRewards() => 
+        public TemporaryCurrencyBank GetAdditionalRewards() =>
             _temporaryBank;
-        
+
     }
 }
