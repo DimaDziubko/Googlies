@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 46
   Type: 0
+  UnitLayerType: 0
   Health: 162
   Speed: 0.25
   Name: Gold digger
@@ -21,16 +22,18 @@ MonoBehaviour:
     m_AssetGUID: f4a8422306271364aa04250f54ae3b83
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   EnemyIconAtlas:
     m_AssetGUID: f4b2c89d267bba746ae4fdf2e73c373e
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   PlayerIconName: 0
   EnemyIconName: 0
-  PlayerKey: Unit_45
-  EnemyKey: Unit_45
+  PlayerKey: Warrior_46
+  EnemyKey: Warrior_46
   ZombieKey: Unit_45
   Price: 0
   FoodPrice: 6
@@ -39,6 +42,8 @@ MonoBehaviour:
   EnemyHealthMultiplier: 1
   AttackPerSecond: 0.8
   AttackDistance: 0.17
+  DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.452, z: -0.070737384}
@@ -66,3 +71,4 @@ MonoBehaviour:
       Rotation: {x: -0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
   WeaponId: 46
+  FBConfigId: '-'

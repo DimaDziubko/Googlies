@@ -22,25 +22,28 @@ MonoBehaviour:
     m_AssetGUID: f4a8422306271364aa04250f54ae3b83
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   EnemyIconAtlas:
     m_AssetGUID: f4b2c89d267bba746ae4fdf2e73c373e
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   PlayerIconName: 2
   EnemyIconName: 2
-  PlayerKey: Unit_47
-  EnemyKey: Unit_47
+  PlayerKey: Warrior_48
+  EnemyKey: Warrior_48
   ZombieKey: Unit_45
   Price: 204000
   FoodPrice: 14
   CoinsPerKill: 10240
   PlayerHealthMultiplier: 1
   EnemyHealthMultiplier: 1
-  AttackPerSecond: 0.32
-  AttackDistance: 1.7
+  AttackPerSecond: 0.3
+  AttackDistance: 1.4
   DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.452, z: -0.070737384}
@@ -68,4 +71,4 @@ MonoBehaviour:
       Rotation: {x: -0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
   WeaponId: 48
-  FBConfigId: 
+  FBConfigId: '-'

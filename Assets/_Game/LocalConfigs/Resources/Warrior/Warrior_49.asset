@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 49
   Type: 0
+  UnitLayerType: 0
   Health: 486
   Speed: 0.25
   Name: Pr. Moody
@@ -21,16 +22,18 @@ MonoBehaviour:
     m_AssetGUID: 9b3d6e37e79e42c42adab0bedc43615f
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   EnemyIconAtlas:
     m_AssetGUID: 7018c66ce9f26d94ca1365c0450da116
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   PlayerIconName: 0
   EnemyIconName: 0
-  PlayerKey: Unit_48
-  EnemyKey: Unit_48
+  PlayerKey: Warrior_49
+  EnemyKey: Warrior_49
   ZombieKey: Unit_45
   Price: 0
   FoodPrice: 7
@@ -39,6 +42,8 @@ MonoBehaviour:
   EnemyHealthMultiplier: 1
   AttackPerSecond: 0.6
   AttackDistance: 1
+  DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.452, z: -0.070737384}
@@ -66,3 +71,4 @@ MonoBehaviour:
       Rotation: {x: -0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
   WeaponId: 49
+  FBConfigId: '-'

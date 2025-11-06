@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 40
   Type: 0
+  UnitLayerType: 0
   Health: 18
   Speed: 0.25
   Name: Legionnare
@@ -21,16 +22,18 @@ MonoBehaviour:
     m_AssetGUID: 5f2eeae97b24b5c4e8a92db2715c472e
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   EnemyIconAtlas:
     m_AssetGUID: 7663850e22406ee41b3ba3827c7b001a
     m_SubObjectName: 
     m_SubObjectType: 
+    m_SubObjectGUID: 
     m_EditorAssetChanged: 1
   PlayerIconName: 0
   EnemyIconName: 0
-  PlayerKey: Unit_39
-  EnemyKey: Unit_39
+  PlayerKey: Warrior_40
+  EnemyKey: Warrior_40
   ZombieKey: Unit_39
   Price: 0
   FoodPrice: 4
@@ -39,6 +42,8 @@ MonoBehaviour:
   EnemyHealthMultiplier: 1
   AttackPerSecond: 0.87
   AttackDistance: 0.16
+  DefaultAttackDistance: 0.14
+  IsPushable: 1
   WarriorPositionSettings:
     HealthBarSettings:
       Position: {x: 0, y: 0.439, z: -0.070737384}
@@ -66,3 +71,4 @@ MonoBehaviour:
       Rotation: {x: -0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
   WeaponId: 40
+  FBConfigId: '-'

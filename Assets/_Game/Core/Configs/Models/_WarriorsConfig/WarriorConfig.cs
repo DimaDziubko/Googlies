@@ -199,6 +199,11 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Warrior_33", "Warrior_34", "Warrior_35",
                 "Warrior_36", "Warrior_37", "Warrior_38",
                 "Warrior_39", "Warrior_40", "Warrior_41",
+                "Warrior_42", "Warrior_43", "Warrior_44",
+                "Warrior_45", "Warrior_46", "Warrior_47",
+                "Warrior_48", "Warrior_49", "Warrior_50",
+                "Warrior_51", "Warrior_52", "Warrior_53",
+                "Warrior_54",
             };
         }
 
@@ -220,6 +225,11 @@ namespace _Game.Core.Configs.Models._WarriorsConfig
                 "Warrior_33", "Warrior_34", "Warrior_35",
                 "Warrior_36", "Warrior_37", "Warrior_38",
                 "Warrior_39", "Warrior_40", "Warrior_41",
+                "Warrior_42", "Warrior_43", "Warrior_44",
+                "Warrior_45", "Warrior_46", "Warrior_47",
+                "Warrior_48", "Warrior_49", "Warrior_50",
+                "Warrior_51", "Warrior_52", "Warrior_53",
+                "Warrior_54",
             };
         }
 
