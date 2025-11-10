@@ -10,6 +10,7 @@ using _Game.Utils.Timers;
 using Assets._Game.Core.UserState;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 using UnityEngine;
 
 namespace _Game.Core.Ads.ApplovinMaxAds
@@ -51,6 +52,8 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         private SynchronizedCountdownTimer _countdownTimer;
 
+        private CancellationTokenSource _interstitialCts;
+
         public bool CanShowInterstitial =>
             _adsConfigRepository.GetConfig().IsInterstitialActive &&
             (Purchases.BoughtIAPs?.Find(x => x.Count > 0) == null) &&
@@ -85,6 +88,8 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
             Subscribe();
             Debug.Log("MaxSdk.Done");
+
+            OnInterstitialAdTimerOut();
         }
 
         void IDisposable.Dispose()
@@ -118,10 +123,12 @@ namespace _Game.Core.Ads.ApplovinMaxAds
             if (IsTimeForInterstitial && CanShowInterstitial)
             {
                 _logger.Log("Inter_ Can Show Ready");
+                _placement = placement;
 
                 var delay = _adsConfigRepository.GetConfig().InterstitialDelay;
-                StartCountdown(delay);
                 MaxSdk.ShowInterstitial(_interstitialID);
+                StartCountdown(delay);
+
                 _userContainer.State.AdsStatistics.AddWatchedAd();
                 OnCountAds?.Invoke(_userContainer.State.AdsStatistics.AdsReviewed);
                 _userContainer.State.AdsWeeklyWatchState.AddWatchedAd(DateTime.UtcNow);
@@ -195,27 +202,65 @@ namespace _Game.Core.Ads.ApplovinMaxAds
             MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent -= OnRevenuePaid;
         }
 
-        private void StartCountdown(float delay)
+        private void StartCountdown(float delaySeconds)
         {
-            _logger.Log($"START INTERSTITIAL COUNTDOWN! {delay}", DebugStatus.Warning);
+            _logger.Log($"[Ad] START INTERSTITIAL COUNTDOWN: {delaySeconds} ");
 
-            if (_countdownTimer != null)
-            {
-                _countdownTimer.Stop();
-                IsTimeForInterstitial = false;
-            }
+            //     
+            IsTimeForInterstitial = false;
 
+            //   ,  
+            _interstitialCts?.Cancel();
+            _interstitialCts = new CancellationTokenSource();
 
-            if (_countdownTimer == null)
-            {
-                _countdownTimer = new SynchronizedCountdownTimer(delay);
-                _countdownTimer.TimerStop += OnInterstitialAdTimerOut;
-            }
-
-            _countdownTimer.Start();
-
-            _logger.Log($"INTERSTITIAL READY: {IsTimeForInterstitial}!", DebugStatus.Warning);
+            //   
+            _ = RunInterstitialCountdownAsync(delaySeconds, _interstitialCts.Token);
         }
+
+        private async UniTask RunInterstitialCountdownAsync(float delaySeconds, CancellationToken token)
+        {
+            float elapsed = 0f;
+            float interval = 0.1f;
+
+            while (elapsed < delaySeconds)
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(interval), cancellationToken: token);
+
+                if (token.IsCancellationRequested)
+                    return;
+
+                if (Application.isFocused)
+                {
+                    elapsed += interval;
+                }
+            }
+
+            IsTimeForInterstitial = true;
+            _logger.Log($"[Ad] INTERSTITIAL READY: {IsTimeForInterstitial}");
+        }
+
+
+        //private void StartCountdown(float delay)
+        //{
+        //    _logger.Log($"START INTERSTITIAL COUNTDOWN! {delay}", DebugStatus.Warning);
+
+        //    if (_countdownTimer != null)
+        //    {
+        //        _countdownTimer.Stop();
+        //        IsTimeForInterstitial = false;
+        //    }
+
+
+        //    if (_countdownTimer == null)
+        //    {
+        //        _countdownTimer = new SynchronizedCountdownTimer(delay);
+        //        _countdownTimer.TimerStop += OnInterstitialAdTimerOut;
+        //    }
+
+        //    _countdownTimer.Start();
+
+        //    _logger.Log($"INTERSTITIAL READY: {IsTimeForInterstitial}!", DebugStatus.Warning);
+        //}
 
         private bool IsInternetConnected() =>
             Application.internetReachability != NetworkReachability.NotReachable;
