@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using _Game.Core.Boosts;
+﻿using _Game.Core.Boosts;
 using _Game.Core.Services.Audio;
 using _Game.Gameplay._Boosts.Scripts;
 using _Game.UI.Common.Scripts;
 using _Game.Utils.Extensions;
 using Cysharp.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,14 +57,22 @@ namespace _Game.UI._BoostPopup
 
         public async UniTask<bool> Show(BoostSource mainSource, BoostSource subSource)
         {
-            if (subSource != BoostSource.None)
-            {
-                InitBoostContainer(subSource);
-            }
+            //if (subSource != BoostSource.None)
+            //{
+            //    InitBoostContainer(subSource);
+            //}
 
-            if (mainSource != BoostSource.None)
+            //if (mainSource != BoostSource.None)
+            //{
+            //    InitBoostContainer(mainSource);
+            //}
+
+            foreach (BoostSource source in Enum.GetValues(typeof(BoostSource)))
             {
-                InitBoostContainer(mainSource);
+                if (source == BoostSource.None)
+                    continue;
+
+                InitBoostContainer(source);
             }
 
             _animation.PlayShow(OnShowComplete);

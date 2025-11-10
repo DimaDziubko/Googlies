@@ -18,6 +18,7 @@ using _Game.Utils.Extensions;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -86,7 +87,8 @@ namespace _Game.UI._EvolveScreen.Scripts
             IAgeNavigator ageNavigator,
             IFeatureUnlockSystem featureUnlockSystem,
             ITravelScreenPresenter travelScreenPresenter,
-            IUserContainer userContainer)
+            IUserContainer userContainer
+            )
         {
             _canvas.worldCamera = cameraService.UICameraOverlay;
             _presenter = evolveScreenPresenter;
@@ -101,6 +103,13 @@ namespace _Game.UI._EvolveScreen.Scripts
 
             _travelScreen.Construct(travelScreenPresenter, config, featureUnlockSystem, this);
             _canvas.enabled = false;
+
+            TimelineState.NextAgeOpened += TimelineStateChanged;
+        }
+
+        private void TimelineStateChanged()
+        {
+            Show();
         }
 
         public void Show()
@@ -246,6 +255,7 @@ namespace _Game.UI._EvolveScreen.Scripts
             if (_adsService.IsAdReady(AdType.Interstitial))
                 _adsService.ShowInterstitialVideo(Placement.Evolution);
 
+            _evolveButton.SetInteractable(false);
             _evolveButton.gameObject.SetActive(true);
             _closeButton.interactable = true;
         }
@@ -391,6 +401,7 @@ namespace _Game.UI._EvolveScreen.Scripts
 
         public void Dispose()
         {
+            TimelineState.NextAgeOpened -= TimelineStateChanged;
             OnExit();
             _presenter.OnScreenDisposed();
         }

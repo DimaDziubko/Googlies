@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 38
   WeaponType: 2
-  ProjectileKey: Fireball_0
+  ProjectileKey: Spear_1
   WeaponName: 
   IsMuzzle: 0
   MuzzleKey: '-'
@@ -29,7 +29,7 @@ MonoBehaviour:
   ProjectileImpactType: 1
   AttackSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
-    Clip: {fileID: 0}
+    Clip: {fileID: 8300000, guid: f7fb688facaa9d14f8be1fcefb034434, type: 3}
     Loop: 0
     PlayOnAwake: 0
     FrequentSound: 1
@@ -52,7 +52,7 @@ MonoBehaviour:
     RolloffMode: 0
   ProjectileSfx:
     AudioMixerGroup: {fileID: 1224378660055227196, guid: a900eeaac6c5b8449b86bfe8690bd157, type: 2}
-    Clip: {fileID: 0}
+    Clip: {fileID: 8300000, guid: cc1cc14ac0805324c8765e148b53cbf3, type: 3}
     Loop: 0
     PlayOnAwake: 0
     FrequentSound: 1

@@ -14,10 +14,7 @@ namespace _Game.UI._EvolutionScreen
     public class EvolutionPresenter : IDisposable
     {
         private readonly IEvolveScreenProvider _provider;
-        private readonly ITravelScreenProvider _travelProvider;
-        private readonly IUserContainer _userContainer;
         private readonly IMyLogger _logger;
-        private readonly IConfigRepository _config;
 
         private Disposable<EvolveScreen> _evolveScreen;
 

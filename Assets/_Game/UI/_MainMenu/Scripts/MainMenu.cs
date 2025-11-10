@@ -80,7 +80,7 @@ namespace _Game.UI._MainMenu.Scripts
                 _tutorialManager.Register(Screen.CardsTutorialStep);
                 _tutorialManager.Register(Screen.UpgradeTutorialStep);
                 _tutorialManager.Register(Screen.SkillsTutorialStep);
-                
+
                 if (IsUpgradesUnlocked) Screen.UpgradeTutorialStep.ShowStep(0.5f);
                 if (IsCardsUnlocked) Screen.CardsTutorialStep.ShowStep(0.5f);
                 if (IsSkillsUnlocked) Screen.SkillsTutorialStep.ShowStep(0.5f);
@@ -352,8 +352,11 @@ namespace _Game.UI._MainMenu.Scripts
             HideCurtain();
         }
 
-        private void OnUpgradeButtonClick() => EnterMenuUpgradesState();
-
+        private void OnUpgradeButtonClick()
+        {
+            PlayButtonSound();
+            EnterMenuUpgradesState();
+        }
 
         private void EnterMenuUpgradesState()
         {
@@ -409,7 +412,7 @@ namespace _Game.UI._MainMenu.Scripts
 
         public void SetButtonHighlighted(MenuButtonType buttonType, bool isHighLighted)
         {
-            if(Screen.OrNull() == null) return;
+            if (Screen.OrNull() == null) return;
             Screen.SetButtonHighlighted(buttonType, isHighLighted);
         }
     }
