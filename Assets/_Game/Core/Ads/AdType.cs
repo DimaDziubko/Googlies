@@ -3,6 +3,7 @@
     public enum AdType
     {
         Rewarded,
-        Interstitial
+        Interstitial,
+        Banner
     }
 }

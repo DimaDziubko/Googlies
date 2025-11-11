@@ -1,6 +1,7 @@
 ﻿using _Game.Common;
 using _Game.Core._GameMode;
 using _Game.Core._Logger;
+using _Game.Core.Ads.UI;
 using _Game.Core.Configs.Repositories;
 using _Game.Core.Services.UserContainer;
 using _Game.Core.UserState._State;
@@ -25,6 +26,7 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 #elif UNITY_ANDROID
         private readonly string _interstitialID = "a1e8dd54aafa9d07";
         private readonly string _rewardedID = "a670b96811ca143e";
+        private readonly string _bannerID = "89ed5d753c7f862a";
 #endif
 
         public event Action RewardedVideoLoaded;
@@ -34,23 +36,27 @@ namespace _Game.Core.Ads.ApplovinMaxAds
         public event Action<string, MaxSdkBase.AdInfo, Placement> OnAdRevenueWPlacementEvent;
         public event Action<AdType, Placement, MaxSdkBase.AdInfo, AdStatus, int> OnAdImpressionStatus;
         public event Action<AdType, Placement, MaxSdkBase.AdInfo, int> OnAdImpressionCustom;
+        public event Action<bool, float> OnBannerVisibilityChanged; // bool: visible, float: height in pixels
 
-        private Action _onVideoCompleted;
-        private Placement _placement;
         private readonly IMyLogger _logger;
         private readonly IAdsConfigRepository _adsConfigRepository;
         private readonly IUserContainer _userContainer;
         private readonly IGameManager _gameManager;
+        private readonly BannerSafeAreaService _bannerSafeAreaService;
+
+        private Action _onVideoCompleted;
+        private Placement _placement;
 
         private IBattleStatisticsReadonly BattleStatistics => _userContainer.State.BattleStatistics;
         private IPurchaseDataStateReadonly Purchases => _userContainer.State.PurchaseDataState;
 
         private bool IsTimeForInterstitial { get; set; }
 
+        private BannerPosition _bannerPosition = BannerPosition.Bottom;
+        private int _bannerRetryAttempt = 0;
+
         private int _rewardedRetryAttempt;
         private int _interstitialRetryAttempt;
-
-        private SynchronizedCountdownTimer _countdownTimer;
 
         private CancellationTokenSource _interstitialCts;
 
@@ -64,21 +70,27 @@ namespace _Game.Core.Ads.ApplovinMaxAds
             IMyLogger logger,
             IUserContainer userContainer,
             IConfigRepository configRepository,
-            IGameManager gameManager
+            IGameManager gameManager,
+            BannerSafeAreaService bannerSafeAreaService
         )
         {
             _logger = logger;
             _adsConfigRepository = configRepository.AdsConfigRepository;
             _userContainer = userContainer;
             _gameManager = gameManager;
+            _bannerSafeAreaService = bannerSafeAreaService;
         }
 
         public void Init()
         {
             MaxSdkCallbacks.OnSdkInitializedEvent += sdkConfiguration =>
             {
+                Debug.Log("MaxSdk.OnSdkInitializedEvent");
                 InitializeRewardedAds();
                 InitializeInterstitialAds();
+                InitializeBannerAds();
+
+                ShowBanner();
             };
             Debug.Log("MaxSdk.InitializeSdk");
 
@@ -200,6 +212,13 @@ namespace _Game.Core.Ads.ApplovinMaxAds
             MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent -= InterstitialFailedToDisplayEvent;
             MaxSdkCallbacks.Interstitial.OnAdHiddenEvent -= OnInterstitialDismissedEvent;
             MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent -= OnRevenuePaid;
+
+            MaxSdkCallbacks.Banner.OnAdLoadedEvent -= OnBannerAdLoadedEvent;
+            MaxSdkCallbacks.Banner.OnAdLoadFailedEvent -= OnBannerAdLoadFailedEvent;
+            MaxSdkCallbacks.Banner.OnAdClickedEvent -= OnBannerAdClickedEvent;
+            MaxSdkCallbacks.Banner.OnAdRevenuePaidEvent -= OnRevenuePaid;
+            MaxSdkCallbacks.Banner.OnAdExpandedEvent -= OnBannerAdExpandedEvent;
+            MaxSdkCallbacks.Banner.OnAdCollapsedEvent -= OnBannerAdCollapsedEvent;
         }
 
         private void StartCountdown(float delaySeconds)
@@ -238,29 +257,6 @@ namespace _Game.Core.Ads.ApplovinMaxAds
             IsTimeForInterstitial = true;
             _logger.Log($"[Ad] INTERSTITIAL READY: {IsTimeForInterstitial}");
         }
-
-
-        //private void StartCountdown(float delay)
-        //{
-        //    _logger.Log($"START INTERSTITIAL COUNTDOWN! {delay}", DebugStatus.Warning);
-
-        //    if (_countdownTimer != null)
-        //    {
-        //        _countdownTimer.Stop();
-        //        IsTimeForInterstitial = false;
-        //    }
-
-
-        //    if (_countdownTimer == null)
-        //    {
-        //        _countdownTimer = new SynchronizedCountdownTimer(delay);
-        //        _countdownTimer.TimerStop += OnInterstitialAdTimerOut;
-        //    }
-
-        //    _countdownTimer.Start();
-
-        //    _logger.Log($"INTERSTITIAL READY: {IsTimeForInterstitial}!", DebugStatus.Warning);
-        //}
 
         private bool IsInternetConnected() =>
             Application.internetReachability != NetworkReachability.NotReachable;
@@ -415,6 +411,139 @@ namespace _Game.Core.Ads.ApplovinMaxAds
         {
             _logger.Log("Interstitial dismissed");
             await LoadInterstitial();
+        }
+
+        #endregion
+
+        #region Banner Ad Methods
+
+        private void InitializeBannerAds()
+        {
+            // Attach callbacks
+            MaxSdkCallbacks.Banner.OnAdLoadedEvent += OnBannerAdLoadedEvent;
+            MaxSdkCallbacks.Banner.OnAdLoadFailedEvent += OnBannerAdLoadFailedEvent;
+            MaxSdkCallbacks.Banner.OnAdClickedEvent += OnBannerAdClickedEvent;
+            MaxSdkCallbacks.Banner.OnAdRevenuePaidEvent += OnRevenuePaid;
+            MaxSdkCallbacks.Banner.OnAdExpandedEvent += OnBannerAdExpandedEvent;
+            MaxSdkCallbacks.Banner.OnAdCollapsedEvent += OnBannerAdCollapsedEvent;
+
+            MaxSdk.CreateBanner(_bannerID, MaxSdkBase.BannerPosition.BottomCenter);
+            MaxSdk.SetBannerBackgroundColor(_bannerID, Color.black);
+
+            // СРАЗУ устанавливаем высоту баннера в сервис, даже если баннер еще не показан
+            // Это позволит UI поднять элементы еще до показа баннера
+            float bannerHeight = GetBannerHeightInPixels();
+            _bannerSafeAreaService.SetBannerHeight(bannerHeight);
+
+            _logger.Log($"Banner ad initialization started, height: {bannerHeight}px", DebugStatus.Success);
+        }
+
+        public void ShowBanner()
+        {
+            if (!IsInternetConnected())
+            {
+                _logger.Log("No internet connection for banner", DebugStatus.Warning);
+                return;
+            }
+
+            MaxSdk.ShowBanner(_bannerID);
+            _logger.Log("Banner ad shown", DebugStatus.Success);
+
+            // Обновляем safe area (на случай если баннер был скрыт)
+            UpdateBannerSafeArea(true);
+        }
+
+        public void HideBanner()
+        {
+            MaxSdk.HideBanner(_bannerID);
+            _logger.Log("Banner ad hidden", DebugStatus.Success);
+
+            // Очищаем safe area
+            UpdateBannerSafeArea(false);
+        }
+
+        public void DestroyBanner()
+        {
+            MaxSdk.DestroyBanner(_bannerID);
+            _logger.Log("Banner ad destroyed", DebugStatus.Success);
+
+            // Restore UI position
+            UpdateBannerSafeArea(false);
+        }
+
+        private void UpdateBannerSafeArea(bool isVisible)
+        {
+            if (isVisible)
+            {
+                float bannerHeight = GetBannerHeightInPixels();
+                _bannerSafeAreaService.SetBannerHeight(bannerHeight);
+                Debug.Log($"[AdsService] Banner offset SET: {bannerHeight}px");
+            }
+            else
+            {
+                _bannerSafeAreaService.ClearBannerHeight();
+                Debug.Log($"[AdsService] Banner offset CLEARED");
+            }
+        }
+
+        private float GetBannerHeightInPixels()
+        {
+            // Получаем высоту из MaxSdk
+            float bannerHeightDp = MaxSdkUtils.GetAdaptiveBannerHeight();
+
+            // Fallback если не получилось
+            if (bannerHeightDp <= 0)
+            {
+                bannerHeightDp = MaxSdkUtils.IsTablet() ? 90f : 50f;
+            }
+
+            // Конвертируем DP в пиксели
+            float dpi = Screen.dpi > 0 ? Screen.dpi : 160f;
+            float bannerHeightPixels = bannerHeightDp * (dpi / 160f);
+
+            Debug.Log($"[AdsService] Banner height calculated: {bannerHeightPixels}px (DP: {bannerHeightDp}, DPI: {dpi})");
+
+            return bannerHeightPixels;
+        }
+
+        private void OnBannerAdLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        {
+            _logger.Log("Banner ad loaded", DebugStatus.Success);
+            _bannerRetryAttempt = 0;
+
+            OnAdImpressionStatus?.Invoke(AdType.Banner, Placement.X2, adInfo, AdStatus.Load,
+                _userContainer.State.AdsStatistics.AdsReviewed);
+        }
+
+        private async void OnBannerAdLoadFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
+        {
+            _bannerRetryAttempt++;
+            double retryDelay = Math.Pow(2, Math.Min(6, _bannerRetryAttempt));
+
+            _logger.Log($"Banner ad failed to load with error code: {errorInfo.Code}", DebugStatus.Warning);
+
+            await UniTask.Delay(TimeSpan.FromSeconds(retryDelay));
+
+            // Banner auto-retries on CreateBanner, so just log
+            _logger.Log($"Banner will retry automatically in {retryDelay}s");
+        }
+
+        private void OnBannerAdClickedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        {
+            _logger.Log("Banner ad clicked", DebugStatus.Success);
+
+            OnAdImpressionStatus?.Invoke(AdType.Banner, Placement.X2, adInfo, AdStatus.Click,
+                _userContainer.State.AdsStatistics.AdsReviewed);
+        }
+
+        private void OnBannerAdExpandedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        {
+            _logger.Log("Banner ad expanded", DebugStatus.Success);
+        }
+
+        private void OnBannerAdCollapsedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
+        {
+            _logger.Log("Banner ad collapsed", DebugStatus.Success);
         }
 
         #endregion

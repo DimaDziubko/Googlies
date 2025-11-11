@@ -1,4 +1,5 @@
-﻿using _Game.Core.Boosts;
+﻿using _Game.Core.Ads.UI;
+using _Game.Core.Boosts;
 using _Game.Core.Data;
 using _Game.Core.LoadingScreen;
 using _Game.Core.Navigation.Timeline;
@@ -41,6 +42,15 @@ namespace _Game.Core.Installers.Core
 
         public override void InstallBindings()
         {
+            // Регистрируем Signal
+            SignalBusInstaller.Install(Container);
+            Container.DeclareSignal<BannerSafeAreaChangedSignal>();
+
+            // Регистрируем сервисы
+            Container.BindInterfacesAndSelfTo<BannerSafeAreaService>()
+                .AsSingle()
+                .NonLazy();
+
             BindMainMenuStateFactory();
             BindMainMenu();
             BindMainMenuProvider();

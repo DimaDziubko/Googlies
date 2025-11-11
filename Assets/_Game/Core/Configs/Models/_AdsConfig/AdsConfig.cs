@@ -7,5 +7,7 @@
         public float InterstitialDelay;
         public float RewardInterstitialDelay;
         public int InterstitialBattleTreshold;
+        public bool IsBannerActive;
+        public bool IsOfferRemoveAdsActive;
     }
 }

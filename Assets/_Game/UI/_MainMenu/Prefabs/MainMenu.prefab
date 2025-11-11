@@ -32,11 +32,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8280471575231645109}
-  - {fileID: 1814862364867945180}
-  - {fileID: 3254896520101395680}
-  - {fileID: 2962713086970261400}
-  - {fileID: 8126395013535363087}
+  - {fileID: 7781537783328610491}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -127,19 +123,71 @@ MonoBehaviour:
   _cardsButton: {fileID: 1229077714073303957}
   _shopButton: {fileID: 5248353028820739074}
   _upgradesTutorialStep: {fileID: 2072757843379149704}
-  _evolveTutorialStep: {fileID: 0}
   _cardsTutorialStep: {fileID: 3527739707188983011}
   _skillsTutorialStep: {fileID: 5009859447535186203}
   _skillAttractorWrapper: {fileID: 2794131218534466913}
   _highlightedBtnScale: {x: 1.6, y: 1}
   _normalButtonSize: {x: 0, y: 216}
+--- !u!1 &1832070139889127919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7781537783328610491}
+  - component: {fileID: 1892327585044817499}
+  m_Layer: 5
+  m_Name: BannerSafeArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7781537783328610491
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832070139889127919}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8280471575231645109}
+  - {fileID: 1814862364867945180}
+  - {fileID: 3254896520101395680}
+  - {fileID: 2962713086970261400}
+  - {fileID: 8126395013535363087}
+  m_Father: {fileID: 5906523230924860663}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1892327585044817499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832070139889127919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7f5256666d98b4d9ab8762e642d00b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Game.Core.Ads.UI.UIBannerSafeArea
 --- !u!1001 &1750168071704432327
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5906523230924860663}
+    m_TransformParent: {fileID: 7781537783328610491}
     m_Modifications:
     - target: {fileID: 2903263632490982145, guid: 95e5ddbd9e6f6bf43b0385c621ccce8a, type: 3}
       propertyPath: m_Color.b
@@ -329,7 +377,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5906523230924860663}
+    m_TransformParent: {fileID: 7781537783328610491}
     m_Modifications:
     - target: {fileID: 2903263632490982145, guid: 7ca27b6001d8d1a46b847554d2bc8224, type: 3}
       propertyPath: m_Color.b
@@ -478,7 +526,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5906523230924860663}
+    m_TransformParent: {fileID: 7781537783328610491}
     m_Modifications:
     - target: {fileID: 2903263632490982145, guid: acfadc5757e756d4d831925edfc58468, type: 3}
       propertyPath: m_Color.b
@@ -646,7 +694,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5906523230924860663}
+    m_TransformParent: {fileID: 7781537783328610491}
     m_Modifications:
     - target: {fileID: 2903263632490982145, guid: 4ea3c9472aa7a8945b8dc52c047aee94, type: 3}
       propertyPath: m_Color.b
@@ -795,7 +843,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5906523230924860663}
+    m_TransformParent: {fileID: 7781537783328610491}
     m_Modifications:
     - target: {fileID: 2903263632490982145, guid: 16244771abe5e9741b1ae36e7e3d2497, type: 3}
       propertyPath: m_Color.b
