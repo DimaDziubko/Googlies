@@ -29,7 +29,7 @@
         "MajorIconKey": "GemsPack_0",
         "MinorIconKey": "Currencies[Gem]",
         "Quantity": 1000.0,
-        "IAP_ID": "com.thearmyevolution.gemspack_1_test",
+        "IAP_ID": "com.battle.evolution.gemspack_1",
         "IAP_ID_IOS": "com.army.gemspack_1_test",
         "MaxPurchaseCount": -1,
         "ShopItemViewId": 100,
@@ -40,7 +40,7 @@
         "MajorIconKey": "GemsPack_1",
         "MinorIconKey": "Currencies[Gem]",
         "Quantity": 3050.0,
-        "IAP_ID": "com.thearmyevolution.gemspack_2_test",
+        "IAP_ID": "com.battle.evolution.gemspack_2",
         "IAP_ID_IOS": "com.army.gemspack_2_test",
         "MaxPurchaseCount": -1,
         "ShopItemViewId": 100,
@@ -51,7 +51,7 @@
         "MajorIconKey": "GemsPack_2",
         "MinorIconKey": "Currencies[Gem]",
         "Quantity": 9500.0,
-        "IAP_ID": "com.thearmyevolution.gemspack_3_test",
+        "IAP_ID": "com.battle.evolution.gemspack_3",
         "IAP_ID_IOS": "com.army.gemspack_3_test",
         "MaxPurchaseCount": -1,
         "ShopItemViewId": 100,
@@ -200,7 +200,7 @@
         "MajorIconKey": "ProfitIcon_1",
         "MinorIconKey": "Currencies[Coin]",
         "Name": "Gold Reserves Bundle",
-        "IAP_ID": "com.thearmyevolution.profit1",
+        "IAP_ID": "com.battle.evolution.profit1",
         "IAP_ID_IOS": "com.evolution.army.profit1",
         "MaxPurchaseCount": 1,
         "ShopItemViewId": 300,
@@ -222,7 +222,7 @@
         "MajorIconKey": "ProfitIcon_1",
         "MinorIconKey": "Currencies[Coin]",
         "Name": "Tactical Bundle",
-        "IAP_ID": "com.thearmyevolution.profit2",
+        "IAP_ID": "com.battle.evolution.profit2",
         "IAP_ID_IOS": "com.evolution.army.profit2",
         "MaxPurchaseCount": 1,
         "ShopItemViewId": 300,
@@ -357,7 +357,9 @@
     "IsInterstitialActive": true,
     "InterstitialDelay": 180.0,
     "RewardInterstitialDelay": 180.0,
-    "InterstitialBattleTreshold": 8
+    "InterstitialBattleTreshold": 8,
+    "IsBannerActive": true,
+    "IsOfferRemoveAdsActive": true
   },
   "GeneralDailyTaskConfig": {
     "Id": 0,
@@ -1075,7 +1077,7 @@
   },
   "FeatureSettings": {
     "IsDungeonsUnlocked": true,
-    "IsSkillsUnlocked": true,
+    "IsSkillsUnlocked": false,
     "FBConfigID": "Test"
   },
   "SkillExtraConfig": {
