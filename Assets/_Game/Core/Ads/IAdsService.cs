@@ -17,5 +17,6 @@ namespace _Game.Core.Ads
         void ShowInterstitialVideo(Placement placement);
         event Action<AdType, Placement, MaxSdkBase.AdInfo, AdStatus, int> OnAdImpressionStatus;
         event Action<AdType, Placement, MaxSdkBase.AdInfo, int> OnAdImpressionCustom;
+        void ShowBanner();
     }
 }

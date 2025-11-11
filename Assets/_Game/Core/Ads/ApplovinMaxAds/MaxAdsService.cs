@@ -1,5 +1,4 @@
-﻿using _Game.Common;
-using _Game.Core._GameMode;
+﻿using _Game.Core._GameMode;
 using _Game.Core._Logger;
 using _Game.Core.Ads.UI;
 using _Game.Core.Configs.Repositories;
@@ -7,8 +6,6 @@ using _Game.Core.Services.UserContainer;
 using _Game.Core.UserState._State;
 using _Game.Gameplay.BattleLauncher;
 using _Game.Gameplay.Common;
-using _Game.Utils.Timers;
-using Assets._Game.Core.UserState;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
@@ -62,9 +59,13 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         public bool CanShowInterstitial =>
             _adsConfigRepository.GetConfig().IsInterstitialActive &&
-            (Purchases.BoughtIAPs?.Find(x => x.Count > 0) == null) &&
+            //(Purchases.BoughtIAPs?.Find(x => x.Count > 0) == null) &&
             IsInternetConnected() &&
             BattleStatistics.BattlesCompleted > _adsConfigRepository.GetConfig().InterstitialBattleTreshold;
+
+        public bool CanShowBanner =>
+            _adsConfigRepository.GetConfig().IsBannerActive &&
+            IsInternetConnected();
 
         public MaxAdsService(
             IMyLogger logger,
@@ -89,9 +90,8 @@ namespace _Game.Core.Ads.ApplovinMaxAds
                 InitializeRewardedAds();
                 InitializeInterstitialAds();
                 InitializeBannerAds();
-
-                ShowBanner();
             };
+
             Debug.Log("MaxSdk.InitializeSdk");
 
             MaxSdk.InitializeSdk();
@@ -440,9 +440,9 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         public void ShowBanner()
         {
-            if (!IsInternetConnected())
+            if (!CanShowBanner)
             {
-                _logger.Log("No internet connection for banner", DebugStatus.Warning);
+                _logger.Log("cant show banner", DebugStatus.Warning);
                 return;
             }
 
@@ -488,20 +488,39 @@ namespace _Game.Core.Ads.ApplovinMaxAds
 
         private float GetBannerHeightInPixels()
         {
-            // Получаем высоту из MaxSdk
-            float bannerHeightDp = MaxSdkUtils.GetAdaptiveBannerHeight();
+            float bannerHeightDp = 50f;
 
-            // Fallback если не получилось
-            if (bannerHeightDp <= 0)
+            Debug.Log($"[AdsService] ===== GET BANNER HEIGHT =====");
+            Debug.Log($"[AdsService] Screen: {Screen.width}x{Screen.height}");
+            Debug.Log($"[AdsService] Screen.dpi: {Screen.dpi}");
+
+            float screenDensity;
+
+            // Проверяем что DPI адекватный (для мобильных устройств DPI > 120)
+            if (Screen.dpi > 120)
             {
-                bannerHeightDp = MaxSdkUtils.IsTablet() ? 90f : 50f;
+                screenDensity = Screen.dpi / 160f;
+                Debug.Log($"[AdsService] Using Screen.dpi density: {screenDensity}");
+            }
+            else
+            {
+                // DPI слишком низкий (эмулятор/редактор) - вычисляем по разрешению
+                if (Screen.height >= 1920)
+                    screenDensity = 3.0f; // xxhdpi (Full HD)
+                else if (Screen.height >= 1280)
+                    screenDensity = 2.0f; // xhdpi (HD)
+                else if (Screen.height >= 960)
+                    screenDensity = 1.5f; // hdpi
+                else
+                    screenDensity = 1.0f; // mdpi
+
+                Debug.Log($"[AdsService] DPI too low ({Screen.dpi}), using fallback density: {screenDensity} for resolution {Screen.height}px");
             }
 
-            // Конвертируем DP в пиксели
-            float dpi = Screen.dpi > 0 ? Screen.dpi : 160f;
-            float bannerHeightPixels = bannerHeightDp * (dpi / 160f);
+            float bannerHeightPixels = bannerHeightDp * screenDensity;
 
-            Debug.Log($"[AdsService] Banner height calculated: {bannerHeightPixels}px (DP: {bannerHeightDp}, DPI: {dpi})");
+            Debug.Log($"[AdsService] Calculation: {bannerHeightDp} DP * {screenDensity} density = {bannerHeightPixels} pixels");
+            Debug.Log($"[AdsService] ================================");
 
             return bannerHeightPixels;
         }

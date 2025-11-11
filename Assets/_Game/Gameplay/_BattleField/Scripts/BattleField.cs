@@ -1,6 +1,7 @@
 using System;
 using _Game.Core._DataProviders._BaseDataProvider;
 using _Game.Core._Logger;
+using _Game.Core.Ads;
 using _Game.Core.Configs.Models._WarriorsConfig;
 using _Game.Core.Factory;
 using _Game.Core.Services._Camera;
@@ -84,7 +85,8 @@ namespace _Game.Gameplay._BattleField.Scripts
             IBattleSpeedManager speedManager,
             BattleFieldSettings battleFieldSettings,
             IUserContainer userContainer,
-            IMyLogger logger
+            IMyLogger logger,
+            IAdsService adsService
         )
         {
             _logger = logger;
@@ -152,6 +154,8 @@ namespace _Game.Gameplay._BattleField.Scripts
             _battleFieldSettings = battleFieldSettings;
 
             battleTriggersManager.Register(this);
+
+            adsService.ShowBanner();
         }
 
         public void Init()

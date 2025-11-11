@@ -70,6 +70,7 @@ PlayerSettings:
   androidStartInFullscreen: 1
   androidRenderOutsideSafeArea: 1
   androidUseSwappy: 1
+  androidDisplayOptions: 1
   androidBlitType: 0
   androidResizeableActivity: 0
   androidDefaultWindowWidth: 1920
@@ -142,7 +143,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 1.1.0
+  bundleVersion: 1.1.1
   preloadedAssets:
   - {fileID: 11400000, guid: 4a93342a7c735614a94a383398f7b387, type: 2}
   metroInputSource: 0
@@ -175,7 +176,7 @@ PlayerSettings:
     iPhone: 167
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 150
+  AndroidBundleVersionCode: 151
   AndroidMinSdkVersion: 26
   AndroidTargetSdkVersion: 35
   AndroidPreferredInstallLocation: 1
@@ -944,3 +945,4 @@ PlayerSettings:
   androidVulkanDenyFilterList: []
   androidVulkanAllowFilterList: []
   androidVulkanDeviceFilterListAsset: {fileID: 0}
+  d3d12DeviceFilterListAsset: {fileID: 0}
